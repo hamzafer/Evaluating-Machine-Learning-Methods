@@ -1,8 +1,10 @@
 import numpy as np
 
+
 def d50():
     # Default D50 reference white in XYZ
     return np.array([96.422, 100.0, 82.521])
+
 
 def lab2xyz(Lab, XYZn=None):
     """
@@ -38,8 +40,10 @@ def lab2xyz(Lab, XYZn=None):
 
     return XYZ
 
+
 def print_hi(name):
     print(f'Hi, {name}')  # Greeting message
+
 
 # Test the lab2xyz function
 if __name__ == '__main__':
