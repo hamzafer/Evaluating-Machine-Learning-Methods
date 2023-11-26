@@ -9,11 +9,7 @@ from input.input import get_dataset
 from utils.save_results import save_results_to_excel
 from utils.xyz2lab import xyz2lab
 
-# Assume dummy CMY and XYZ data
-# Let's generate dummy data with 1617 samples
-# For the inputs (CMY), we use random numbers to simulate the colorant values
-# For the outputs (XYZ), we'll use random numbers to simulate the device measurements
-np.random.seed(0)  # For reproducibility
+# Get the CMY and XYZ data
 cmy_data = get_dataset('PC10', 'CMY')
 xyz_data = get_dataset('PC10', 'XYZ')
 
