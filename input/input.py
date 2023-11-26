@@ -3,7 +3,7 @@ import pandas as pd
 
 def get_dataset(dataset_code, subset_type):
     # Define dataset paths
-    # TODO : Change the paths to your own cuz its absolute
+    # TODO : Change the paths to your own cuz its absolute - was having trouble with relative paths - if you know how to fix it, please do
     datasets = {
         'PC10': '/Users/stan/PycharmProjects/ColorProject/cleaned/APTEC_PC10_CardBoard_2023_v1.csv',
         'PC11': '/Users/stan/PycharmProjects/ColorProject/cleaned/APTEC_PC11_CCNB_2023_v1.csv'
