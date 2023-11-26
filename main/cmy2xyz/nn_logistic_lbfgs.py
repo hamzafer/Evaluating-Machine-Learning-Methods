@@ -6,6 +6,7 @@ from sklearn.neural_network import MLPRegressor
 from input.input import get_dataset
 from utils.save_results import save_results_to_excel
 from utils.xyz2lab import xyz2lab
+from visual.plot_loss import plot_loss
 from visual.vis_lab import visualize_lab_values
 
 
@@ -81,6 +82,9 @@ for index, config in enumerate(configurations):
 
     # Visualize the predicted vs true LAB values
     visualize_lab_values(output_test_lab, output_pred_lab)
+    if config['solver'] in ['sgd', 'adam']:
+        loss_values = mlp.loss_curve_
+        losses = plot_loss(loss_values)
 
 # Print all results
 print("All Results:")
