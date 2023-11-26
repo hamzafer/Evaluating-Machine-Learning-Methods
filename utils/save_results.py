@@ -1,5 +1,4 @@
 import os
-import pandas as pd
 
 
 def save_results_to_excel(results, results_dir='results', script_name=None):
