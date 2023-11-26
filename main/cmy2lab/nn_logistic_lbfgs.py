@@ -94,6 +94,7 @@ print(best_result)
 
 # Generate a generic Excel filename based on the Python script name
 script_name = os.path.splitext(os.path.basename(__file__))[0]
+# TODO : Change the paths to your own cuz its absolute
 excel_filename = f'/Users/stan/PycharmProjects/ColorProject/results/{script_name}_results.xlsx'
 
 # Save results to the Excel file
