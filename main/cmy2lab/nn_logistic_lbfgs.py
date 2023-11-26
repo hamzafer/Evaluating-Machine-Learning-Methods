@@ -1,15 +1,21 @@
+import os
+
 import numpy as np
+import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
 
 from input.input import get_dataset
 from utils.xyz2lab import xyz2lab
+from visual.vis_lab import visualize_lab_values
 
 
 # Normalize the data to be in the range [0, 1]
 def normalize_data(data):
     return (data - np.min(data, axis=0)) / (np.max(data, axis=0) - np.min(data, axis=0))
 
+
+results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', 'Max Error'])
 
 # Assuming `input_cmy` is your CMY data and `output_xyz` is your XYZ data as numpy arrays
 # Dummy data for demonstration; replace these with your actual data
@@ -24,25 +30,73 @@ output_xyz_norm = normalize_data(output_xyz)
 input_train, input_test, output_train, output_test = train_test_split(input_cmy_norm, output_xyz_norm, test_size=0.1,
                                                                       random_state=42)
 
-# Create the neural network model
-mlp = MLPRegressor(hidden_layer_sizes=(6,), activation='logistic', solver='lbfgs', max_iter=1000, random_state=42)
+configurations = [
+    {'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000},
+    {'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 1000},
+    {'hidden_layer_sizes': (6,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000},
+    {'hidden_layer_sizes': (6,), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 1000},
+    {'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200},
+    {'hidden_layer_sizes': (50, 30, 10), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 500},
+    {'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200},
+    {'hidden_layer_sizes': (20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 300},
+    {'hidden_layer_sizes': (30, 20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 400},
+    {'hidden_layer_sizes': (20,), 'activation': 'tanh', 'solver': 'adam', 'max_iter': 200},
+    {'hidden_layer_sizes': (20,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 200},
+    {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'sgd', 'max_iter': 500},
+    {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 200},
+    {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}
+]
 
-# Train the neural network
-mlp.fit(input_train, output_train)
+# Loop over each configuration
+for index, config in enumerate(configurations):
+    mlp = MLPRegressor(
+        hidden_layer_sizes=config['hidden_layer_sizes'],
+        activation=config['activation'],
+        solver=config['solver'],
+        max_iter=config['max_iter'],
+        random_state=42
+    )
+    # Train the neural network
+    mlp.fit(input_train, output_train)
 
-# Predict the output from the test input
-output_pred = mlp.predict(input_test)
+    # Predict the output from the test input
+    output_pred = mlp.predict(input_test)
 
-# Convert predicted XYZ to LAB
-output_pred_lab = xyz2lab(output_pred)
+    # Convert predicted XYZ to LAB
+    output_pred_lab = xyz2lab(output_pred)
 
-xyz_data = output_test[['XYZ_X', 'XYZ_Y', 'XYZ_Z']].values
-# Convert true XYZ to LAB for the test set
-output_test_lab = xyz2lab(xyz_data)
+    xyz_data = output_test[['XYZ_X', 'XYZ_Y', 'XYZ_Z']].values
+    # Convert true XYZ to LAB for the test set
+    output_test_lab = xyz2lab(xyz_data)
 
-# Calculate the Euclidean distance (error) between the predicted and true LAB values
-errors = np.sqrt(np.sum((output_pred_lab - output_test_lab) ** 2, axis=1))
+    # Calculate the Euclidean distance (error) between the predicted and true LAB values
+    errors = np.sqrt(np.sum((output_pred_lab - output_test_lab) ** 2, axis=1))
 
-# Output the mean Euclidean error
-mean_error = np.mean(errors)
-print(f"Mean Euclidean error: {mean_error}")
+    # Output the mean Euclidean error
+    mean_error = np.mean(errors)
+    median_error = np.median(errors)
+    max_error = np.max(errors)
+
+    # Add results to DataFrame
+    results.loc[index] = [str(config), mean_error, median_error, max_error]
+
+    # Visualize the predicted vs true LAB values
+    visualize_lab_values(output_test_lab, output_pred_lab)
+
+# Print all results
+print("All Results:")
+print(results)
+
+# Identify the best configuration based on the lowest mean error
+best_result = results.loc[results['Mean Error'].idxmin()]
+print("\nBest Configuration:")
+print(best_result)
+
+# Generate a generic Excel filename based on the Python script name
+script_name = os.path.splitext(os.path.basename(__file__))[0]
+excel_filename = f'/Users/stan/PycharmProjects/ColorProject/results/{script_name}_results.xlsx'
+
+# Save results to the Excel file
+results.to_excel(excel_filename, index=False)
+
+print(f"Results saved to '{excel_filename}'")
