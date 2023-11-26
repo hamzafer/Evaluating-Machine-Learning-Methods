@@ -41,13 +41,8 @@ def lab2xyz(Lab, XYZn=None):
     return XYZ
 
 
-def print_hi(name):
-    print(f'Hi, {name}')  # Greeting message
-
-
 # Test the lab2xyz function
 if __name__ == '__main__':
-    print_hi('PyCharm')
 
     # Example LAB values
     Lab_values = np.array([[48.02, 72.76, 7.22]])
