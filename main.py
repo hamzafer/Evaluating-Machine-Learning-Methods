@@ -5,7 +5,7 @@ from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 
 # Load the data
-df = pd.read_csv('APTEC_PC10_CardBoard_2023_v1.csv')
+df = pd.read_csv('cleaned/APTEC_PC10_CardBoard_2023_v1.csv')
 
 # Select the CMYK columns as training data
 training_data = df[['CMYK_C', 'CMYK_M', 'CMYK_Y']].values
@@ -20,7 +20,7 @@ target_data_normalized = scaler.fit_transform(target_data)
 
 # Define the neural network structure
 model = Sequential()
-model.add(Dense(6, input_dim=4, activation='sigmoid'))  # 4 input dimensions for CMYK, 6 units in the hidden layer
+model.add(Dense(6, input_dim=3, activation='sigmoid'))  # 3 input dimensions for CMY, 6 units in the hidden layer
 model.add(Dense(3, activation='sigmoid'))  # 3 output dimensions for LAB
 
 # Compile the model
