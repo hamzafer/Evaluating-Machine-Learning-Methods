@@ -44,10 +44,14 @@ errors = np.linalg.norm(lab_pred - lab_test, axis=1)
 
 # Output the mean Euclidean error
 mean_error = np.mean(errors)
+median_error = np.median(errors)
+max_error = np.max(errors)
 print('Mean Euclidean error:', mean_error)
+print('Median Euclidean error:', median_error)
+print('Max Euclidean error:', max_error)
 
-results = pd.DataFrame(columns=['Mean Euclidean error'])
-results.loc[0] = [mean_error]
+results = pd.DataFrame(columns=['Mean Euclidean error', 'Median Euclidean error', 'Max Euclidean error'])
+results.loc[0] = [mean_error, median_error, max_error]
 # Use the new function to save the results
 excel_file_path = save_results_to_excel(results, script_name=__file__)
 
