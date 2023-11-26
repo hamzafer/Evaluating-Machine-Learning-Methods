@@ -6,6 +6,7 @@ from sklearn.neural_network import MLPRegressor
 
 from input.input import get_dataset
 from utils.save_results import save_results_to_excel
+from utils.xyz2lab import xyz2lab
 from visual.vis_lab import visualize_lab_values
 
 
@@ -16,17 +17,17 @@ def normalize_data(data):
 
 results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', 'Max Error'])
 
-# Assuming `input_cmy` is your CMY data and `output_lab` is your lab data as numpy arrays
+# Assuming `input_cmy` is your CMY data and `output_lab` is your XYZ data as numpy arrays
 # Dummy data for demonstration; replace these with your actual data
 input_cmy = get_dataset('PC10', 'CMY')
-output_lab = get_dataset('PC10', 'LAB')
+output_xyz = get_dataset('PC10', 'XYZ')
 
 # Normalize the data
 input_cmy_norm = normalize_data(input_cmy)
-output_lab_norm = normalize_data(output_lab)
+output_xyz_norm = normalize_data(output_xyz)
 
 # Split the dataset into training and testing sets (90% train, 10% test)
-input_train, input_test, output_train, output_test = train_test_split(input_cmy_norm, output_lab_norm, test_size=0.1,
+input_train, input_test, output_train, output_test = train_test_split(input_cmy_norm, output_xyz_norm, test_size=0.1,
                                                                       random_state=42)
 
 # Adding Random Forest configurations to try
@@ -60,10 +61,14 @@ for index, config in enumerate(configurations):
     # Predict the output from the test input
     output_pred_norm = model.predict(input_test)
 
-    lab_data = output_test[['LAB_L', 'LAB_A', 'LAB_B']].values
+    # Convert predicted XYZ to LAB
+    output_pred_lab = xyz2lab(output_pred_norm)  # Replace with your actual conversion after denormalization
 
+    xyz_data = output_test[['XYZ_X', 'XYZ_Y', 'XYZ_Z']].values
+    # Convert true XYZ to LAB for the test set
+    output_test_lab = xyz2lab(xyz_data)
     # Calculate the Euclidean distance (error) between the predicted and true LAB values
-    errors = np.sqrt(np.sum((output_pred_norm - lab_data) ** 2, axis=1))
+    errors = np.sqrt(np.sum((output_pred_lab - output_test_lab) ** 2, axis=1))
 
     # Output the mean Euclidean error
     mean_error = np.mean(errors)
@@ -74,7 +79,7 @@ for index, config in enumerate(configurations):
     results.loc[index] = [str(config), mean_error, median_error, max_error]
 
     # Visualize the predicted vs true LAB values
-    visualize_lab_values(lab_data, output_pred_norm)
+    visualize_lab_values(output_test_lab, output_pred_lab)
 
 
 # Print all results
