@@ -1,12 +1,11 @@
-from sklearn.ensemble import RandomForestRegressor
-import os
-
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
 
 from input.input import get_dataset
+from utils.save_results import save_results_to_excel
 from utils.xyz2lab import xyz2lab
 from visual.vis_lab import visualize_lab_values
 
@@ -92,12 +91,7 @@ best_result = results.loc[results['Mean Error'].idxmin()]
 print("\nBest Configuration:")
 print(best_result)
 
-# Generate a generic Excel filename based on the Python script name
-script_name = os.path.splitext(os.path.basename(__file__))[0]
-# TODO : Change the paths to your own cuz its absolute
-excel_filename = f'/Users/stan/PycharmProjects/ColorProject/results/{script_name}_results.xlsx'
+# Use the new function to save the results
+excel_file_path = save_results_to_excel(results, script_name=__file__)
 
-# Save results to the Excel file
-results.to_excel(excel_filename, index=False)
-
-print(f"Results saved to '{excel_filename}'")
+print(f"Results saved to '{excel_file_path}'")
