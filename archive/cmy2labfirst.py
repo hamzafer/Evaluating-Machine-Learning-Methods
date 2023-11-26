@@ -1,8 +1,8 @@
-import pandas as pd
-from keras.models import Sequential
-from keras.layers import Dense
-from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
+import pandas as pd
+from keras.layers import Dense
+from keras.models import Sequential
+from sklearn.preprocessing import MinMaxScaler
 
 # Load the data
 df = pd.read_csv('cleaned/APTEC_PC10_CardBoard_2023_v1.csv')
