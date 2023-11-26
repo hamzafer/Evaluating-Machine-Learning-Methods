@@ -86,16 +86,18 @@ for index, config in enumerate(configurations):
         loss_values = mlp.loss_curve_
         losses = plot_loss(loss_values)
 
-# Print all results
-print("All Results:")
-print(results)
 
 # Identify the best configuration based on the lowest mean error
 best_result = results.loc[results['Mean Error'].idxmin()]
-print("\nBest Configuration:")
-print(best_result)
+# Add the best configuration as a new row or a separate section in the DataFrame
+best_result_df = pd.DataFrame([best_result], index=['Best Configuration'])
+final_results = pd.concat([results, best_result_df])
 
-# Use the new function to save the results
-excel_file_path = save_results_to_excel(results, script_name=__file__)
+# Print all results and the best configuration
+print("All Results:")
+print(final_results)
+
+# Use the updated function to save the results, now including the best configuration
+excel_file_path = save_results_to_excel(final_results, script_name=__file__)
 
 print(f"Results saved to '{excel_file_path}'")
