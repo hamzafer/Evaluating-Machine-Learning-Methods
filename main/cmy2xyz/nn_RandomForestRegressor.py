@@ -43,17 +43,8 @@ config_errors = {}
 # Train and evaluate each configuration, which now includes Random Forest
 for index, config in enumerate(configurations):
     # Check if the model is a neural network or random forest
-    if config.get('model', None) == RandomForestRegressor:
-        model = config['model'](n_estimators=config['n_estimators'], max_depth=config['max_depth'],
-                                random_state=config['random_state'])
-    else:
-        model = MLPRegressor(
-            hidden_layer_sizes=config.get('hidden_layer_sizes', ()),
-            activation=config.get('activation', 'relu'),
-            solver=config.get('solver', 'adam'),
-            max_iter=config.get('max_iter', 200),
-            random_state=42
-        )
+    model = config['model'](n_estimators=config['n_estimators'], max_depth=config['max_depth'],
+                            random_state=config['random_state'])
 
     # Train the model
     model.fit(input_train, output_train)
