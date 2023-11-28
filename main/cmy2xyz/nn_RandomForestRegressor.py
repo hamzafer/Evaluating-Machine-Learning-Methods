@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
 
 from input.input import get_dataset
-from utils.save_results import save_results_to_excel
+from utils.save_results import save_results_to_CSV
 from utils.xyz2lab import xyz2lab
 from visual.vis_lab import visualize_lab_values
 
@@ -84,6 +84,6 @@ print("All Results:")
 print(final_results)
 
 # Use the updated function to save the results, now including the best configuration
-excel_file_path = save_results_to_excel(final_results, script_name=__file__)
+csv_file_path = save_results_to_CSV(final_results, script_name=__file__)
 
-print(f"Results saved to '{excel_file_path}'")
+print(f"Results saved to '{csv_file_path}'")
