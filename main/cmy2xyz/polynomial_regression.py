@@ -6,7 +6,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import MinMaxScaler, PolynomialFeatures
 
 from input.input import get_dataset
-from utils.save_results import save_results_to_excel
+from utils.save_results import save_results_to_CSV
 from utils.xyz2lab import xyz2lab
 
 # Get the CMY and XYZ data
@@ -48,6 +48,6 @@ print('Max Euclidean error:', max_error)
 results = pd.DataFrame(columns=['Mean Euclidean error', 'Median Euclidean error', 'Max Euclidean error'])
 results.loc[0] = [mean_error, median_error, max_error]
 # Use the new function to save the results
-excel_file_path = save_results_to_excel(results, script_name=__file__)
+csv_file_path = save_results_to_CSV(results, script_name=__file__)
 
-print(f"Results saved to '{excel_file_path}'")
+print(f"Results saved to '{csv_file_path}'")
