@@ -2,18 +2,13 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
+from sklearn.preprocessing import MinMaxScaler
 
 from input.input import get_dataset
 from utils.save_results import save_results_to_CSV
 from utils.xyz2lab import xyz2lab
 from visual.plot_loss import plot_loss
 from visual.vis_lab import visualize_lab_values
-
-
-# Normalize the data to be in the range [0, 1]
-def normalize_data(data):
-    return (data - np.min(data, axis=0)) / (np.max(data, axis=0) - np.min(data, axis=0))
-
 
 results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', 'Max Error'])
 
@@ -22,9 +17,10 @@ results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', '
 input_cmy = get_dataset('PC10', 'CMY')
 output_xyz = get_dataset('PC10', 'XYZ')
 
-# Normalize the data
-input_cmy_norm = normalize_data(input_cmy)
-output_xyz_norm = normalize_data(output_xyz)
+# Normalize the data to the range [0, 1]
+scaler = MinMaxScaler()
+input_cmy_norm = scaler.fit_transform(input_cmy)
+output_xyz_norm = scaler.fit_transform(output_xyz)
 
 # Split the dataset into training and testing sets (90% train, 10% test)
 input_train, input_test, output_train, output_test = train_test_split(input_cmy_norm, output_xyz_norm, test_size=0.1,
@@ -43,7 +39,7 @@ configurations = [
     {'hidden_layer_sizes': (20,), 'activation': 'tanh', 'solver': 'adam', 'max_iter': 200},
     {'hidden_layer_sizes': (20,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 200},
     {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'sgd', 'max_iter': 500},
-    {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 200},
+    {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 1000},
     {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}
 ]
 
@@ -65,9 +61,9 @@ for index, config in enumerate(configurations):
     # Convert predicted XYZ to LAB
     output_pred_lab = xyz2lab(output_pred)
 
-    xyz_data = output_test[['XYZ_X', 'XYZ_Y', 'XYZ_Z']].values
+    # xyz_data = output_test[['XYZ_X', 'XYZ_Y', 'XYZ_Z']].values
     # Convert true XYZ to LAB for the test set
-    output_test_lab = xyz2lab(xyz_data)
+    output_test_lab = xyz2lab(output_test)
 
     # Calculate the Euclidean distance (error) between the predicted and true LAB values
     errors = np.sqrt(np.sum((output_pred_lab - output_test_lab) ** 2, axis=1))
