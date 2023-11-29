@@ -47,10 +47,11 @@ def process(dataset_name, input_type, output_type, degree, visualize=False):
     print('Median Euclidean error:', median_error)
     print('Max Euclidean error:', max_error)
 
-    results = pd.DataFrame(columns=['Mean Euclidean error', 'Median Euclidean error', 'Max Euclidean error'])
-    results.loc[0] = [mean_error, median_error, max_error]
+    # Create the results DataFrame
+    results = pd.DataFrame(columns=['Polynomial Degree', 'Mean Euclidean Error', 'Median Euclidean Error', 'Max Euclidean Error'])
+    results.loc[0] = [degree, mean_error, median_error, max_error]
 
-    # Use the updated function to save the results, now including the best configuration
-    csv_file_path = save_results_to_CSV(results, dataset_name, __file__, f"degree_{degree}")
+    # Save results
+    csv_file_path = save_results_to_CSV(results, dataset_name, script_name=__file__)
 
     print(f"Results saved to '{csv_file_path}'")
