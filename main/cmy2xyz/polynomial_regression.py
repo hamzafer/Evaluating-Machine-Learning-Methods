@@ -52,6 +52,6 @@ def process(dataset_name, input_type, output_type, degree, visualize=False):
     results.loc[0] = [degree, mean_error, median_error, max_error]
 
     # Save results
-    csv_file_path = save_results_to_CSV(results, dataset_name, script_name=__file__)
+    csv_file_path = save_results_to_CSV(results, dataset_name, script_name=__file__, append=True)
 
     print(f"Results saved to '{csv_file_path}'")
