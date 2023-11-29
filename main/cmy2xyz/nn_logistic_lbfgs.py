@@ -10,90 +10,91 @@ from utils.xyz2lab import xyz2lab
 from visual.plot_loss import plot_loss
 from visual.vis_lab import visualize_lab_values
 
-results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', 'Max Error'])
 
-# Assuming `input_cmy` is your CMY data and `output_lab` is your XYZ data as numpy arrays
-# Dummy data for demonstration; replace these with your actual data
-input_cmy = get_dataset('PC10', 'CMY')
-output_xyz = get_dataset('PC10', 'XYZ')
+def process(dataset_name, input_type, output_type, visualize=False):
+    results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', 'Max Error'])
 
-# Normalize the data to the range [0, 1]
-scaler = MinMaxScaler()
-input_cmy_norm = scaler.fit_transform(input_cmy)
-output_xyz_norm = scaler.fit_transform(output_xyz)
+    input_data = get_dataset(dataset_name, input_type)
+    output_data = get_dataset(dataset_name, output_type)
 
-# Split the dataset into training and testing sets (90% train, 10% test)
-input_train, input_test, output_train, output_test = train_test_split(input_cmy_norm, output_xyz_norm, test_size=0.1,
-                                                                      random_state=42)
+    # Normalize the data to the range [0, 1]
+    scaler = MinMaxScaler()
+    input_cmy_norm = scaler.fit_transform(input_data)
+    output_xyz_norm = scaler.fit_transform(output_data)
 
-configurations = [
-    {'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000},
-    {'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 1000},
-    {'hidden_layer_sizes': (6,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000},
-    {'hidden_layer_sizes': (6,), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 1000},
-    {'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200},
-    {'hidden_layer_sizes': (50, 30, 10), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 500},
-    {'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200},
-    {'hidden_layer_sizes': (20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 300},
-    {'hidden_layer_sizes': (30, 20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 400},
-    {'hidden_layer_sizes': (20,), 'activation': 'tanh', 'solver': 'adam', 'max_iter': 200},
-    {'hidden_layer_sizes': (20,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 200},
-    {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'sgd', 'max_iter': 500},
-    {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 1000},
-    {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}
-]
+    # Split the dataset into training and testing sets (90% train, 10% test)
+    input_train, input_test, output_train, output_test = train_test_split(input_cmy_norm, output_xyz_norm,
+                                                                          test_size=0.1,
+                                                                          random_state=42)
 
-# Loop over each configuration
-for index, config in enumerate(configurations):
-    mlp = MLPRegressor(
-        hidden_layer_sizes=config['hidden_layer_sizes'],
-        activation=config['activation'],
-        solver=config['solver'],
-        max_iter=config['max_iter'],
-        random_state=42
-    )
-    # Train the neural network
-    mlp.fit(input_train, output_train)
+    configurations = [
+        {'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000},
+        {'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 1000},
+        {'hidden_layer_sizes': (6,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000},
+        {'hidden_layer_sizes': (6,), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 1000},
+        {'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200},
+        {'hidden_layer_sizes': (50, 30, 10), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 500},
+        {'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200},
+        {'hidden_layer_sizes': (20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 300},
+        {'hidden_layer_sizes': (30, 20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 400},
+        {'hidden_layer_sizes': (20,), 'activation': 'tanh', 'solver': 'adam', 'max_iter': 200},
+        {'hidden_layer_sizes': (20,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 200},
+        {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'sgd', 'max_iter': 500},
+        {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 1000},
+        {'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}
+    ]
 
-    # Predict the output from the test input
-    output_pred = mlp.predict(input_test)
+    # Loop over each configuration
+    for index, config in enumerate(configurations):
+        mlp = MLPRegressor(
+            hidden_layer_sizes=config['hidden_layer_sizes'],
+            activation=config['activation'],
+            solver=config['solver'],
+            max_iter=config['max_iter'],
+            random_state=42
+        )
+        # Train the neural network
+        mlp.fit(input_train, output_train)
 
-    # Convert predicted XYZ to LAB
-    output_pred_lab = xyz2lab(output_pred)
+        # Predict the output from the test input
+        output_pred = mlp.predict(input_test)
 
-    # xyz_data = output_test[['XYZ_X', 'XYZ_Y', 'XYZ_Z']].values
-    # Convert true XYZ to LAB for the test set
-    output_test_lab = xyz2lab(output_test)
+        # Convert predicted XYZ to LAB
+        output_pred_lab = xyz2lab(output_pred)
 
-    # Calculate the Euclidean distance (error) between the predicted and true LAB values
-    errors = np.sqrt(np.sum((output_pred_lab - output_test_lab) ** 2, axis=1))
+        # Convert true XYZ to LAB for the test set
+        output_test_lab = xyz2lab(output_test)
 
-    # Output the mean Euclidean error
-    mean_error = np.mean(errors)
-    median_error = np.median(errors)
-    max_error = np.max(errors)
+        # Calculate the Euclidean distance (error) between the predicted and true LAB values
+        errors = np.sqrt(np.sum((output_pred_lab - output_test_lab) ** 2, axis=1))
 
-    # Add results to DataFrame
-    results.loc[index] = [str(config), mean_error, median_error, max_error]
+        # Output the mean Euclidean error
+        mean_error = np.mean(errors)
+        median_error = np.median(errors)
+        max_error = np.max(errors)
 
-    # Visualize the predicted vs true LAB values
-    visualize_lab_values(output_test_lab, output_pred_lab)
-    if config['solver'] in ['sgd', 'adam']:
-        loss_values = mlp.loss_curve_
-        losses = plot_loss(loss_values)
+        # Add results to DataFrame
+        results.loc[index] = [str(config), mean_error, median_error, max_error]
 
+        if visualize:
+            # Visualize the predicted vs true LAB values
+            visualize_lab_values(output_test_lab, output_pred_lab)
+            if config['solver'] in ['sgd', 'adam']:
+                loss_values = mlp.loss_curve_
+                losses = plot_loss(loss_values)
 
-# Identify the best configuration based on the lowest mean error
-best_result = results.loc[results['Mean Error'].idxmin()]
-# Add the best configuration as a new row or a separate section in the DataFrame
-best_result_df = pd.DataFrame([best_result], index=['Best Configuration'])
-final_results = pd.concat([results, best_result_df])
+    # Identify the best configuration based on the lowest mean error
+    best_result = results.loc[results['Mean Error'].idxmin()]
 
-# Print all results and the best configuration
-print("All Results:")
-print(final_results)
+    # Add the best configuration as a new row or a separate section in the DataFrame
+    best_result_df = pd.DataFrame([best_result], index=['Best Configuration'])
+    final_results = pd.concat([results, best_result_df])
 
-# Use the updated function to save the results, now including the best configuration
-csv_file_path = save_results_to_CSV(final_results, script_name=__file__)
+    # Print all results and the best configuration
+    print("All Results:")
+    print(final_results)
 
-print(f"Results saved to '{csv_file_path}'")
+    # Use the updated function to save the results, now including the best configuration
+    csv_file_path = save_results_to_CSV(final_results, dataset_name, script_name=__file__)
+
+    print(f"Results saved to '{csv_file_path}'")
