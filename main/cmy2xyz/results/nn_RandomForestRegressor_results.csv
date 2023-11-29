@@ -1,0 +1,7 @@
+Configuration,Mean Error,Median Error,Max Error
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 10, 'max_depth': 5, 'random_state': 42}",1.7379972235397028,1.4881144349347863,5.44656816682537
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 50, 'max_depth': 5, 'random_state': 42}",1.7247718660902698,1.4354979971440456,5.068091521358242
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 100, 'max_depth': 10, 'random_state': 42}",1.4609659390451177,1.053186516938557,5.258858495214626
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 200, 'max_depth': 15, 'random_state': 42}",1.4638184668657714,1.025056145128342,5.280529197070793
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 300, 'max_depth': 20, 'random_state': 42}",1.4696282190053827,1.024631831168196,5.2459530229542235
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 100, 'max_depth': 10, 'random_state': 42}",1.4609659390451177,1.053186516938557,5.258858495214626
