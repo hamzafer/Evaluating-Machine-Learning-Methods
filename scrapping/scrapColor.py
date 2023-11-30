@@ -4,6 +4,7 @@ from io import StringIO
 import pandas as pd
 import requests
 
+from preprocess.preprocess import convert_lab_to_xyz
 from utils.lab2xyz import lab2xyz
 
 
@@ -44,11 +45,7 @@ def download_and_convert_to_csv(file_name, base_url='https://color.org/chardata/
         data_df = pd.DataFrame(data, columns=fields)
 
         # Convert LAB to XYZ
-        lab_data = data_df[['LAB_L', 'LAB_A', 'LAB_B']].apply(pd.to_numeric, errors='coerce')
-        xyz_data = lab2xyz(lab_data.values)
-        data_df['XYZ_X'] = xyz_data[:, 0]
-        data_df['XYZ_Y'] = xyz_data[:, 1]
-        data_df['XYZ_Z'] = xyz_data[:, 2]
+        data_df = convert_lab_to_xyz(data_df)
 
         # Define the cleaned directory
         cleaned_dir = '../cleaned'
