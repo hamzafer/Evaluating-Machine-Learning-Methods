@@ -5,7 +5,6 @@ import pandas as pd
 import requests
 
 from preprocess.preprocess import convert_lab_to_xyz
-from utils.lab2xyz import lab2xyz
 
 
 def download_and_convert_to_csv(file_name, base_url='https://color.org/chardata/'):
