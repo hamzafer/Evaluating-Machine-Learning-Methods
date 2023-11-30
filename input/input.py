@@ -1,12 +1,22 @@
+import os
+
 import pandas as pd
 
 
 def get_dataset(dataset_code, subset_type):
-    # Define dataset paths
-    # TODO : Change the paths to your own cuz its absolute - was having trouble with relative paths - if you know how to fix it, please do
+    # Get the absolute path of the current script
+    current_script_path = os.path.abspath(__file__)
+
+    # Get the directory containing the current script
+    current_dir = os.path.dirname(current_script_path)
+
+    # Define the relative path to the cleaned directory from the current script
+    cleaned_dir = os.path.join(current_dir, '..', 'cleaned')
+
+    # Define dataset paths using the cleaned directory
     datasets = {
-        'PC10': '/Users/stan/PycharmProjects/ColorProject/cleaned/APTEC_PC10_CardBoard_2023_v1.csv',
-        'PC11': '/Users/stan/PycharmProjects/ColorProject/cleaned/APTEC_PC11_CCNB_2023_v1.csv'
+        'PC10': os.path.join(cleaned_dir, 'APTEC_PC10_CardBoard_2023_v1.csv'),
+        'PC11': os.path.join(cleaned_dir, 'APTEC_PC11_CCNB_2023_v1.csv'),
     }
 
     # Check if the dataset code is valid
@@ -29,7 +39,6 @@ def get_dataset(dataset_code, subset_type):
         return data[columns[subset_type]]
     else:
         raise ValueError("Invalid subset type. Choose from 'CMY', 'CMYK', 'LAB', 'XYZ'.")
-
 
 # Example usage
 # dataset1 = get_dataset('PC10', 'LAB')
