@@ -1,47 +1,43 @@
+from io import StringIO
+
+import pandas as pd
 import requests
-import csv
+
+from utils.lab2xyz import lab2xyz
 
 
-def download_file(file_name, base_url='https://color.org/chardata/'):
-    # Construct the URL for the file
+def download_and_convert_to_csv(file_name, base_url='https://color.org/chardata/'):
     file_url = f"{base_url}{file_name}"
-
-    # Send a request to the URL
     response = requests.get(file_url)
 
-    # Check if the request was successful
     if response.status_code == 200:
-        content = response.content.decode('utf-8')
+        # Use StringIO to treat the string content as a file
+        content = StringIO(response.content.decode('utf-8'))
+        df = pd.read_csv(content, delimiter="\t")
 
-        # Pre-process the content to extract fields and data
-        lines = content.splitlines()
-        fields_section = False
-        data_section = False
-        fields = []
-        data = []
-        for line in lines:
-            if 'BEGIN_DATA_FORMAT' in line:
-                fields_section = True
-            elif 'END_DATA_FORMAT' in line:
-                fields_section = False
-            elif fields_section and 'SAMPLE_ID' in line:
-                fields = line.strip().split('\t')
-            elif 'BEGIN_DATA' in line:
-                data_section = True
-            elif 'END_DATA' in line:
-                data_section = False
-            elif data_section:
-                data.append(line.strip().split('\t'))
+        # Assuming the data format and data sections are labeled in the file
+        data_format = df[df.iloc[:, 0] == "BEGIN_DATA_FORMAT"].index[0] + 1
+        data_start = df[df.iloc[:, 0] == "BEGIN_DATA"].index[0] + 1
+        data_end = df[df.iloc[:, 0] == "END_DATA"].index[0]
 
-        # Write the fields and data to a CSV file
+        # Extract fields and data
+        fields = df.iloc[data_format].values.tolist()
+        data = df.iloc[data_start:data_end].values.tolist()
+
+        # Create a new dataframe with the correct fields
+        data_df = pd.DataFrame(data, columns=fields)
+
+        # Convert LAB to XYZ
+        lab_data = data_df[['LAB_L', 'LAB_A', 'LAB_B']].apply(pd.to_numeric, errors='coerce')
+        xyz_data = lab2xyz(lab_data.values)
+        data_df['XYZ_X'] = xyz_data[:, 0]
+        data_df['XYZ_Y'] = xyz_data[:, 1]
+        data_df['XYZ_Z'] = xyz_data[:, 2]
+
+        # Save to CSV
         csv_file_name = file_name.replace('.txt', '.csv')
-        with open(csv_file_name, 'w', newline='') as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(fields)
-            for entry in data:
-                csvwriter.writerow(entry)
+        data_df.to_csv(csv_file_name, index=False)
 
-        print(f'Download and conversion to CSV complete: {csv_file_name}')
         return csv_file_name
     else:
         print(f'Failed to download the file. Status code: {response.status_code}')
@@ -50,8 +46,7 @@ def download_file(file_name, base_url='https://color.org/chardata/'):
 
 # Replace 'file_name' with the actual file name you wish to download
 file_name = 'APTEC_PC10_CardBoard_2023_v1.txt'
-csv_file = download_file(file_name)
+csv_file = download_and_convert_to_csv(file_name)
 
 if csv_file:
-    # If file was downloaded and converted successfully, you can now use the CSV file
-    print(f'CSV file is ready for use: {csv_file}')
+    print(f'CSV file with XYZ data is ready for use: {csv_file}')
