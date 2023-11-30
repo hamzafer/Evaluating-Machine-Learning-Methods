@@ -1,0 +1,4 @@
+Configuration,Mean Error,Median Error,Max Error
+"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 1.0, 'random_state': 42}",2.0847512222353832,1.982857855929847,6.421843942309165
+"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 0.5, 'random_state': 42}",2.083987044417966,1.9825590194373612,6.410278182661375
+"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 0.5, 'random_state': 42}",2.083987044417966,1.9825590194373612,6.410278182661375
