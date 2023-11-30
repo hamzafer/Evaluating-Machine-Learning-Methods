@@ -1,0 +1,3 @@
+Configuration,Mean Error,Median Error,Max Error
+"{'model': 'PCR', 'n_components': 3}",2.1210967953272335,1.9798763126778567,6.584910770065288
+"{'model': 'PCR', 'n_components': 3}",2.1210967953272335,1.9798763126778567,6.584910770065288
