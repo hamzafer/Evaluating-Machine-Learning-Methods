@@ -1,3 +1,4 @@
+import os
 from io import StringIO
 
 import pandas as pd
@@ -34,8 +35,13 @@ def download_and_convert_to_csv(file_name, base_url='https://color.org/chardata/
         data_df['XYZ_Y'] = xyz_data[:, 1]
         data_df['XYZ_Z'] = xyz_data[:, 2]
 
-        # Save to CSV
-        csv_file_name = file_name.replace('.txt', '.csv')
+        # Define the cleaned directory
+        cleaned_dir = '../cleaned'
+        if not os.path.exists(cleaned_dir):
+            os.makedirs(cleaned_dir)
+
+        # Save to CSV in the cleaned directory
+        csv_file_name = os.path.join(cleaned_dir, file_name.replace('.txt', '.csv'))
         data_df.to_csv(csv_file_name, index=False)
 
         return csv_file_name
