@@ -1,0 +1,4 @@
+Configuration,Mean Error,Median Error,Max Error
+"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 1.0, 'random_state': 42}",3.9658081409677814,3.4629996034065176,10.102334769518166
+"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 0.5, 'random_state': 42}",3.9658081409677814,3.4629996034065176,10.102334769518166
+"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 1.0, 'random_state': 42}",3.9658081409677814,3.4629996034065176,10.102334769518166
