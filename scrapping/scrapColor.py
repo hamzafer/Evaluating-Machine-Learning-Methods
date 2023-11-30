@@ -8,10 +8,25 @@ from utils.lab2xyz import lab2xyz
 
 
 def download_and_convert_to_csv(file_name, base_url='https://color.org/chardata/'):
+    # Define the data directory
+    data_dir = '../data'
+
+    # Ensure the data directory exists
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
+
+    # Define the path where the original file will be saved
+    original_file_path = os.path.join(data_dir, file_name)
+
     file_url = f"{base_url}{file_name}"
     response = requests.get(file_url)
 
     if response.status_code == 200:
+        # Save the original file
+        with open(original_file_path, 'wb') as file:
+            file.write(response.content)
+        print(f'Original file saved at: {original_file_path}')
+
         # Use StringIO to treat the string content as a file
         content = StringIO(response.content.decode('utf-8'))
         df = pd.read_csv(content, delimiter="\t")
@@ -51,7 +66,7 @@ def download_and_convert_to_csv(file_name, base_url='https://color.org/chardata/
 
 
 # Replace 'file_name' with the actual file name you wish to download
-file_name = 'APTEC_PC10_CardBoard_2023_v1.txt'
+file_name = 'APTEC_PC11_CCNB_2023_v1.txt'
 csv_file = download_and_convert_to_csv(file_name)
 
 if csv_file:
