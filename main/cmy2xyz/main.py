@@ -15,8 +15,8 @@ from polynomial_regression import process as polynomial_regression
 
 # Constants
 # DATASET_NAME = 'PC10'
-# DATASET_NAME = 'PC11'
-DATASET_NAME = 'FOGRA'
+DATASET_NAME = 'PC11'
+# DATASET_NAME = 'FOGRA'
 INPUT_TYPE = 'CMY'
 OUTPUT_TYPE = 'XYZ'
 
