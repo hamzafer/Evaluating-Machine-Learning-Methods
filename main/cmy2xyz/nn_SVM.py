@@ -6,6 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVR
 
 from input.input import get_dataset
+from utils.calcError import error
 from utils.save_results import save_results_to_CSV
 from utils.xyz2lab import xyz2lab
 from visual.vis_lab import visualize_lab_values
@@ -36,7 +37,8 @@ def process(dataset_name, input_type, output_type, visualize=False):
     # Train and evaluate each configuration, which now includes Random Forest
     for index, config in enumerate(configurations):
         # Train the model
-        model = MultiOutputRegressor(SVR(kernel=config['kernel'], C=config['C'], gamma=config['gamma'], epsilon=config['epsilon']))
+        model = MultiOutputRegressor(
+            SVR(kernel=config['kernel'], C=config['C'], gamma=config['gamma'], epsilon=config['epsilon']))
         model.fit(input_train, output_train)
 
         # Predict the output from the test input
@@ -48,8 +50,8 @@ def process(dataset_name, input_type, output_type, visualize=False):
         # Convert true XYZ to LAB for the test set
         output_test_lab = xyz2lab(output_test)
 
-        # Calculate the Euclidean distance (error) between the predicted and true LAB values
-        errors = np.sqrt(np.sum((output_pred_lab - output_test_lab) ** 2, axis=1))
+        # Calculate the error between the predicted and true LAB values
+        errors = error(output_pred_lab, output_test_lab)
 
         # Output the mean Euclidean error
         mean_error = np.mean(errors)

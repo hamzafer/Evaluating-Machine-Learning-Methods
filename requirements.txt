@@ -7,3 +7,5 @@ tensorflow
 openpyxl
 pygam
 requests
+colour-science
+colour
