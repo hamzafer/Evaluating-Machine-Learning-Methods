@@ -28,9 +28,10 @@ def merge_and_append_csv_files(base_path, file_names, output_file):
     print(f'Appended data saved to {output_file}')
 
 
+DATASET_NAME = 'PC11'
 # Define the base path where the CSV files are located
 # Adjust the base_path according to where the CSV files are located relative to the mergeFiles.py script
-base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'main', 'cmy2xyz', 'results', 'FOGRA'))
+base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'main', 'cmy2xyz', 'results', DATASET_NAME))
 
 # List of CSV file names
 file_names = [
@@ -51,7 +52,7 @@ file_names = [
 ]
 
 # Output file name
-output_file = os.path.join(base_path, 'appended_results.csv')
+output_file = os.path.join(base_path, f"{DATASET_NAME}_append_results.csv")
 
 # Call the function to merge and append CSV files
 merge_and_append_csv_files(base_path, file_names, output_file)
