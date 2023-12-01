@@ -1,0 +1,63 @@
+Configuration,Mean Error,Median Error,Max Error,Algorithm
+"{'model': <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>, 'random_state': 42}",1.29455660996,1.0076281778,4.74389810637,Bayesian
+"{'model': <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>, 'random_state': 42}",1.29455660996,1.0076281778,4.74389810637,Bayesian
+"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': None, 'min_samples_split': 2, 'random_state': 42}",1.57389808546,1.39338948767,4.67868795725,DecisionTree
+"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': 10, 'min_samples_split': 5, 'random_state': 42}",1.61144424172,1.35931878539,4.86375905325,DecisionTree
+"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': None, 'min_samples_split': 2, 'random_state': 42}",1.57389808546,1.39338948767,4.67868795725,DecisionTree
+"{'model': <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>, 'hidden_layer_sizes': (100,), 'activation': 'relu', 'solver': 'adam', 'random_state': 42}",1.74265857262,1.66807230647,4.71160630372,DeepLearning
+"{'model': <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>, 'hidden_layer_sizes': (50, 50), 'activation': 'tanh', 'solver': 'sgd', 'random_state': 42}",2.4445946646,2.29178742035,5.85553754622,DeepLearning
+"{'model': <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>, 'hidden_layer_sizes': (100,), 'activation': 'relu', 'solver': 'adam', 'random_state': 42}",1.74265857262,1.66807230647,4.71160630372,DeepLearning
+"{'model': <class 'sklearn.linear_model._coordinate_descent.ElasticNet'>, 'alpha': 1.0, 'l1_ratio': 0.5, 'random_state': 42}",3.98967901351,3.89896203936,8.70345553257,Elastic
+"{'model': <class 'sklearn.linear_model._coordinate_descent.ElasticNet'>, 'alpha': 0.5, 'l1_ratio': 0.7, 'random_state': 42}",3.98967901351,3.89896203936,8.70345553257,Elastic
+"{'model': <class 'sklearn.linear_model._coordinate_descent.ElasticNet'>, 'alpha': 1.0, 'l1_ratio': 0.5, 'random_state': 42}",3.98967901351,3.89896203936,8.70345553257,Elastic
+"{'model': <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>, 'n_estimators': 100, 'learning_rate': 0.1, 'max_depth': 3, 'random_state': 42}",1.33292392561,1.1545625556,4.31797188726,GradientBoost
+"{'model': <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>, 'n_estimators': 200, 'learning_rate': 0.05, 'max_depth': 5, 'random_state': 42}",1.32545412412,1.05555451353,4.53956169955,GradientBoost
+"{'model': <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>, 'n_estimators': 200, 'learning_rate': 0.05, 'max_depth': 5, 'random_state': 42}",1.32545412412,1.05555451353,4.53956169955,GradientBoost
+"{'model': <class 'sklearn.neighbors._regression.KNeighborsRegressor'>, 'n_neighbors': 5, 'weights': 'uniform'}",1.28589504486,1.05278501051,5.44127128659,k_Nearest
+"{'model': <class 'sklearn.neighbors._regression.KNeighborsRegressor'>, 'n_neighbors': 10, 'weights': 'distance'}",1.37277965641,1.07065796317,4.56559012204,k_Nearest
+"{'model': <class 'sklearn.neighbors._regression.KNeighborsRegressor'>, 'n_neighbors': 5, 'weights': 'uniform'}",1.28589504486,1.05278501051,5.44127128659,k_Nearest
+"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 1.0, 'random_state': 42}",3.98967901351,3.89896203936,8.70345553257,Lasso
+"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 0.5, 'random_state': 42}",3.98967901351,3.89896203936,8.70345553257,Lasso
+"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 1.0, 'random_state': 42}",3.98967901351,3.89896203936,8.70345553257,Lasso
+"{'model': 'PCR', 'n_components': 3}",1.91625724261,1.72335240317,5.09980207965,PCR
+"{'model': 'PCR', 'n_components': 3}",1.91625724261,1.72335240317,5.09980207965,PCR
+"{'model': <class 'sklearn.cross_decomposition._pls.PLSRegression'>, 'n_components': 2}",3.19357288697,2.85544504086,8.81720743129,PLSRegression
+"{'model': <class 'sklearn.cross_decomposition._pls.PLSRegression'>, 'n_components': 3}",1.9135757438,1.7272991234,5.08000470773,PLSRegression
+"{'model': <class 'sklearn.cross_decomposition._pls.PLSRegression'>, 'n_components': 3}",1.9135757438,1.7272991234,5.08000470773,PLSRegression
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 10, 'max_depth': 5, 'random_state': 42}",1.69672866784,1.50955532793,4.20574249588,RandomForestRegressor
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 50, 'max_depth': 5, 'random_state': 42}",1.66326103183,1.50998218987,4.10596290996,RandomForestRegressor
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 100, 'max_depth': 10, 'random_state': 42}",1.36176111056,1.07200161005,4.45108930054,RandomForestRegressor
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 200, 'max_depth': 15, 'random_state': 42}",1.35778806443,1.02909546124,4.51642848588,RandomForestRegressor
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 300, 'max_depth': 20, 'random_state': 42}",1.36389411691,1.02794356312,4.56949738068,RandomForestRegressor
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 200, 'max_depth': 15, 'random_state': 42}",1.35778806443,1.02909546124,4.51642848588,RandomForestRegressor
+"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 1.0, 'random_state': 42}",1.91625724261,1.72335240317,5.09980207965,RidgeRegression
+"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 0.5, 'random_state': 42}",1.91490001249,1.72335859644,5.08993358075,RidgeRegression
+"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 0.5, 'random_state': 42}",1.91490001249,1.72335859644,5.08993358075,RidgeRegression
+"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000}",1.5146493264,1.33544540414,5.37183476994,SimpleMLP
+"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 1000}",5.5195870787,5.13910651313,10.9026096686,SimpleMLP
+"{'hidden_layer_sizes': (6,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}",3.8931872856,3.72425884901,9.22429182646,SimpleMLP
+"{'hidden_layer_sizes': (6,), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 1000}",4.69633046956,4.34950240403,10.2989052235,SimpleMLP
+"{'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200}",2.58764961367,2.07756286756,8.30620520835,SimpleMLP
+"{'hidden_layer_sizes': (50, 30, 10), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 500}",2.56213539749,2.46175126172,6.46910599917,SimpleMLP
+"{'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200}",2.58764961367,2.07756286756,8.30620520835,SimpleMLP
+"{'hidden_layer_sizes': (20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 300}",2.43649230842,2.24098011954,6.78851107514,SimpleMLP
+"{'hidden_layer_sizes': (30, 20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 400}",2.00222985144,1.83210087393,5.50427761921,SimpleMLP
+"{'hidden_layer_sizes': (20,), 'activation': 'tanh', 'solver': 'adam', 'max_iter': 200}",1.93395811058,1.71663115763,5.13047726114,SimpleMLP
+"{'hidden_layer_sizes': (20,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 200}",5.41458413866,5.27958699068,11.423116827,SimpleMLP
+"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'sgd', 'max_iter': 500}",3.76581263132,3.44347960639,9.92970612795,SimpleMLP
+"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 1000}",1.51670837694,1.4303798065,4.6707060163,SimpleMLP
+"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}",3.16331394468,3.03511113871,9.74552847677,SimpleMLP
+"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000}",1.5146493264,1.33544540414,5.37183476994,SimpleMLP
+"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'rbf', 'C': 1.0, 'gamma': 'scale', 'epsilon': 0.1}",1.4577662552,0.948389257474,5.93474998971,SVM
+"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'linear', 'C': 0.1, 'gamma': 'auto', 'epsilon': 0.2}",2.44856883578,2.18964706751,5.92923713824,SVM
+"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'rbf', 'C': 1.0, 'gamma': 'scale', 'epsilon': 0.1}",1.4577662552,0.948389257474,5.93474998971,SVM
+1.0,1.9135757438,1.7272991234,5.08000470773,regression
+2.0,1.53122809601,1.36323333597,4.92371829908,regression
+3.0,1.35521576378,1.18857562093,4.82621793142,regression
+4.0,1.37268885739,1.19065551069,4.50788005445,regression
+5.0,1.32511060374,1.17274203776,4.40191836626,regression
+6.0,1.32079956229,1.06783265939,4.48652232331,regression
+7.0,1.26473983114,1.02819271867,4.49857731933,regression
+8.0,1.24668189004,1.04642117232,4.23372293457,regression
+9.0,1.27040094167,0.979107743791,4.21554700768,regression
+10.0,1.32415876939,1.08871980251,4.49195291988,regression

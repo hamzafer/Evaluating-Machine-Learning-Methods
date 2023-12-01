@@ -8,11 +8,15 @@ def merge_and_append_csv_files(base_path, file_names, output_file):
 
     # Loop through the list of CSV files
     for file_name in file_names:
+        # Extract the algorithm name from the file name
+        algorithm_name = file_name.replace('_results.csv', '').replace('nn_', '').replace('polynomial_', '')
         # Construct the full file path
         file_path = os.path.join(base_path, file_name)
         # Read the CSV file
         try:
             data = pd.read_csv(file_path)
+            # Insert a new column with the algorithm name
+            data['Algorithm'] = algorithm_name
             # Append to the appended DataFrame
             appended_data = pd.concat([appended_data, data], ignore_index=True)
         except FileNotFoundError as e:
@@ -26,7 +30,7 @@ def merge_and_append_csv_files(base_path, file_names, output_file):
 
 # Define the base path where the CSV files are located
 # Adjust the base_path according to where the CSV files are located relative to the mergeFiles.py script
-base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'main', 'cmy2xyz', 'results', 'PC10'))
+base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'main', 'cmy2xyz', 'results', 'FOGRA'))
 
 # List of CSV file names
 file_names = [
