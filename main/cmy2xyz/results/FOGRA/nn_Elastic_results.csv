@@ -1,0 +1,4 @@
+Configuration,Mean Error,Median Error,Max Error
+"{'model': <class 'sklearn.linear_model._coordinate_descent.ElasticNet'>, 'alpha': 1.0, 'l1_ratio': 0.5, 'random_state': 42}",4.03745447945,3.38846615423,12.6136531359
+"{'model': <class 'sklearn.linear_model._coordinate_descent.ElasticNet'>, 'alpha': 0.5, 'l1_ratio': 0.7, 'random_state': 42}",4.03745447945,3.38846615423,12.6136531359
+"{'model': <class 'sklearn.linear_model._coordinate_descent.ElasticNet'>, 'alpha': 1.0, 'l1_ratio': 0.5, 'random_state': 42}",4.03745447945,3.38846615423,12.6136531359

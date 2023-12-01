@@ -17,6 +17,7 @@ def get_dataset(dataset_code, subset_type):
     datasets = {
         'PC10': os.path.join(cleaned_dir, 'APTEC_PC10_CardBoard_2023_v1.csv'),
         'PC11': os.path.join(cleaned_dir, 'APTEC_PC11_CCNB_2023_v1.csv'),
+        'FOGRA': os.path.join(cleaned_dir, 'FOGRA51.csv'),
     }
 
     # Check if the dataset code is valid

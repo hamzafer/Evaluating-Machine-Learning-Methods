@@ -1,3 +1,4 @@
+import colour
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -6,6 +7,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import MinMaxScaler, PolynomialFeatures
 
 from input.input import get_dataset
+from utils.calcError import error
 from utils.save_results import save_results_to_CSV
 from utils.xyz2lab import xyz2lab
 
@@ -37,7 +39,8 @@ def process(dataset_name, input_type, output_type, degree, visualize=False):
     lab_test = xyz2lab(xyz_test)
 
     # Calculate the Euclidean error between the predicted and actual Lab values
-    errors = np.linalg.norm(lab_pred - lab_test, axis=1)
+    # errors = np.linalg.norm(lab_pred - lab_test, axis=1) # CIE 1976
+    errors = error(lab_pred, lab_test)
 
     # Output the mean Euclidean error
     mean_error = np.mean(errors)

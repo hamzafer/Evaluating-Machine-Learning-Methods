@@ -7,6 +7,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import MinMaxScaler
 
 from input.input import get_dataset
+from utils.calcError import error
 from utils.save_results import save_results_to_CSV
 from utils.xyz2lab import xyz2lab
 from visual.vis_lab import visualize_lab_values
@@ -29,7 +30,7 @@ def process(dataset_name, input_type, output_type, visualize=False):
                                                                           random_state=42)
 
     # PCR configurations
-    configurations = [{'model': 'PCR', 'n_components': 3},]
+    configurations = [{'model': 'PCR', 'n_components': 3}, ]
 
     # Train and evaluate each configuration, which now includes Random Forest
     for index, config in enumerate(configurations):
@@ -47,8 +48,8 @@ def process(dataset_name, input_type, output_type, visualize=False):
         # Convert true XYZ to LAB for the test set
         output_test_lab = xyz2lab(output_test)
 
-        # Calculate the Euclidean distance (error) between the predicted and true LAB values
-        errors = np.sqrt(np.sum((output_pred_lab - output_test_lab) ** 2, axis=1))
+        # Calculate the error between the predicted and true LAB values
+        errors = error(output_pred_lab, output_test_lab)
 
         # Output the mean Euclidean error
         mean_error = np.mean(errors)
