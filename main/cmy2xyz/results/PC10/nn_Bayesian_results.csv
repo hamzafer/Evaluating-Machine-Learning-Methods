@@ -1,3 +1,3 @@
 Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>, 'random_state': 42}",1.4457733190198,1.0742546949708829,5.965637632190798
-"{'model': <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>, 'random_state': 42}",1.4457733190198,1.0742546949708829,5.965637632190798
+"{'model': <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>, 'random_state': 42}",1.27206705183,0.980019680803,4.76094943286
+"{'model': <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>, 'random_state': 42}",1.27206705183,0.980019680803,4.76094943286

@@ -1,4 +1,4 @@
 Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>, 'n_estimators': 100, 'learning_rate': 0.1, 'max_depth': 3, 'random_state': 42}",1.415858609442807,1.1434588441158433,4.657709758492135
-"{'model': <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>, 'n_estimators': 200, 'learning_rate': 0.05, 'max_depth': 5, 'random_state': 42}",1.4276565860439312,1.0244586589564408,5.133257537488984
-"{'model': <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>, 'n_estimators': 100, 'learning_rate': 0.1, 'max_depth': 3, 'random_state': 42}",1.415858609442807,1.1434588441158433,4.657709758492135
+"{'model': <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>, 'n_estimators': 100, 'learning_rate': 0.1, 'max_depth': 3, 'random_state': 42}",1.33292392561,1.1545625556,4.31797188726
+"{'model': <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>, 'n_estimators': 200, 'learning_rate': 0.05, 'max_depth': 5, 'random_state': 42}",1.32545412412,1.05555451353,4.53956169955
+"{'model': <class 'sklearn.ensemble._gb.GradientBoostingRegressor'>, 'n_estimators': 200, 'learning_rate': 0.05, 'max_depth': 5, 'random_state': 42}",1.32545412412,1.05555451353,4.53956169955

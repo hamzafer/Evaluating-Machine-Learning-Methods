@@ -1,16 +1,16 @@
 Configuration,Mean Error,Median Error,Max Error
-"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000}",1.6465143583788482,1.3887226486399376,5.8649806558447475
-"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 1000}",4.8702543579348765,4.568052572335114,9.914589531931247
-"{'hidden_layer_sizes': (6,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}",3.843003707384251,3.7236412202002995,9.831057992058415
-"{'hidden_layer_sizes': (6,), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 1000}",4.312833769212229,4.274412554853546,9.586556866036661
-"{'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200}",2.4750544095486235,2.0355086262393134,8.187753865861959
-"{'hidden_layer_sizes': (50, 30, 10), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 500}",2.470322711060678,2.3160534188827384,6.9422144900800795
-"{'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200}",2.4750544095486235,2.0355086262393134,8.187753865861959
-"{'hidden_layer_sizes': (20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 300}",2.4173479319651223,2.227495711460449,7.144246951908412
-"{'hidden_layer_sizes': (30, 20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 400}",1.9496790750142676,1.6776376089455551,5.742813294631205
-"{'hidden_layer_sizes': (20,), 'activation': 'tanh', 'solver': 'adam', 'max_iter': 200}",2.0780469623017344,1.8868357030077705,6.32349495455799
-"{'hidden_layer_sizes': (20,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 200}",4.603096556765305,4.50576120694067,11.165095284713848
-"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'sgd', 'max_iter': 500}",3.5402446242042047,3.2658127782921174,9.665743741768404
-"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 1000}",1.7076855608317016,1.505308956762057,5.428855086916986
-"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}",2.6496607423215983,2.4802073371232023,8.132804157610394
-"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000}",1.6465143583788482,1.3887226486399376,5.8649806558447475
+"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000}",1.50967667645,1.32961475494,5.21046900149
+"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 1000}",5.46545252945,5.1112734734,10.9444583103
+"{'hidden_layer_sizes': (6,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}",3.82703863015,3.82228004996,8.77820044111
+"{'hidden_layer_sizes': (6,), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 1000}",4.71771557706,4.27353330672,10.8485993291
+"{'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200}",2.55604462901,1.99365512048,8.69101511473
+"{'hidden_layer_sizes': (50, 30, 10), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 500}",2.52709041968,2.43855088864,6.13878759686
+"{'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200}",2.55604462901,1.99365512048,8.69101511473
+"{'hidden_layer_sizes': (20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 300}",2.39742294804,2.24696463347,6.42546625346
+"{'hidden_layer_sizes': (30, 20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 400}",1.9034345232,1.66356610919,4.83599577704
+"{'hidden_layer_sizes': (20,), 'activation': 'tanh', 'solver': 'adam', 'max_iter': 200}",1.91224160165,1.76566794327,4.93209002063
+"{'hidden_layer_sizes': (20,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 200}",5.28664266199,5.16661679848,10.7412274466
+"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'sgd', 'max_iter': 500}",3.74930595954,3.39437793465,9.85934160486
+"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 1000}",1.58052667712,1.43502747494,4.92259518125
+"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}",2.75142448329,2.5451421833,8.1267747799
+"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000}",1.50967667645,1.32961475494,5.21046900149

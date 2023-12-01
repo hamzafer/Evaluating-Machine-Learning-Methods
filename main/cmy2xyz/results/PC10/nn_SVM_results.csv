@@ -1,4 +1,4 @@
 Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'rbf', 'C': 1.0, 'gamma': 'scale', 'epsilon': 0.1}",1.6187607757603082,1.1300213846871627,6.912156465025103
-"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'linear', 'C': 0.1, 'gamma': 'auto', 'epsilon': 0.2}",2.458200674688571,2.1828980095473973,6.941233200462606
-"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'rbf', 'C': 1.0, 'gamma': 'scale', 'epsilon': 0.1}",1.6187607757603082,1.1300213846871627,6.912156465025103
+"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'rbf', 'C': 1.0, 'gamma': 'scale', 'epsilon': 0.1}",1.44147110538,0.961309135209,6.10609654595
+"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'linear', 'C': 0.1, 'gamma': 'auto', 'epsilon': 0.2}",2.37524011763,2.14904674549,5.94950926295
+"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'rbf', 'C': 1.0, 'gamma': 'scale', 'epsilon': 0.1}",1.44147110538,0.961309135209,6.10609654595
