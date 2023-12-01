@@ -1,7 +1,7 @@
 Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 10, 'max_depth': 5, 'random_state': 42}",1.82548509564,1.55672094895,5.88372354648
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 50, 'max_depth': 5, 'random_state': 42}",1.82972295144,1.55186396517,5.86847150708
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 100, 'max_depth': 10, 'random_state': 42}",1.47161469711,1.10808862909,5.52218615027
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 200, 'max_depth': 15, 'random_state': 42}",1.46805953338,1.10425605675,5.75739282787
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 300, 'max_depth': 20, 'random_state': 42}",1.46688898679,1.0862059277,5.7752561906
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 300, 'max_depth': 20, 'random_state': 42}",1.46688898679,1.0862059277,5.7752561906
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 10, 'max_depth': 5, 'random_state': 42}",1.72185488589,1.59765933205,6.23110596441
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 50, 'max_depth': 5, 'random_state': 42}",1.73101792175,1.58069546648,6.11792908015
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 100, 'max_depth': 10, 'random_state': 42}",1.32593069775,1.04666703071,6.02531907801
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 200, 'max_depth': 15, 'random_state': 42}",1.31704337602,1.00751271424,5.93369523925
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 300, 'max_depth': 20, 'random_state': 42}",1.31615621504,1.00596004895,5.87304501196
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 300, 'max_depth': 20, 'random_state': 42}",1.31615621504,1.00596004895,5.87304501196

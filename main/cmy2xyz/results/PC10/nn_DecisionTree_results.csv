@@ -1,4 +1,4 @@
 Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': None, 'min_samples_split': 2, 'random_state': 42}",1.670220968985474,1.2970121021802035,5.460141623397177
-"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': 10, 'min_samples_split': 5, 'random_state': 42}",1.6967879485749446,1.3750669688775807,5.796513660710718
-"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': None, 'min_samples_split': 2, 'random_state': 42}",1.670220968985474,1.2970121021802035,5.460141623397177
+"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': None, 'min_samples_split': 2, 'random_state': 42}",1.54032116002,1.37492894447,4.72511922093
+"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': 10, 'min_samples_split': 5, 'random_state': 42}",1.56207144885,1.33962145407,4.72511922093
+"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': None, 'min_samples_split': 2, 'random_state': 42}",1.54032116002,1.37492894447,4.72511922093
