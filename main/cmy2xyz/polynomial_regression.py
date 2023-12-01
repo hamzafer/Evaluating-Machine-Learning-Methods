@@ -50,7 +50,7 @@ def process(dataset_name, input_type, output_type, degree, visualize=False):
     print('Max error:', max_error)
 
     # Create the results DataFrame
-    results = pd.DataFrame(columns=['Polynomial Degree', 'Mean Error', 'Median Error', 'Max Error'])
+    results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', 'Max Error'])
     results.loc[0] = [degree, mean_error, median_error, max_error]
 
     # Save results
