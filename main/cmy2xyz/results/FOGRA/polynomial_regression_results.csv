@@ -1,4 +1,4 @@
-Polynomial Degree,Mean Euclidean Error,Median Euclidean Error,Max Euclidean Error
+Configuration,Mean Error,Median Error,Max Error
 1.0,1.77984443604,1.55793533645,5.23898523492
 2.0,1.36926248357,1.08910151301,6.47096390737
 3.0,1.28431445709,1.00721731621,6.62687759772
