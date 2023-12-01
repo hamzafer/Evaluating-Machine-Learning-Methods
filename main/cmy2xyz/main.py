@@ -10,13 +10,13 @@ from nn_RandomForestRegressor import process as nn_RandomForestRegressor
 from nn_RidgeRegression import process as nn_RidgeRegression
 from nn_SVM import process as nn_SVM
 from nn_k_Nearest import process as nn_k_Nearest
-from nn_logistic_lbfgs import process as nn_logistic_lbfgs
+from nn_SimpleMLP import process as nn_logistic_lbfgs
 from polynomial_regression import process as polynomial_regression
 
 # Constants
-# DATASET_NAME = 'PC10'
+DATASET_NAME = 'PC10'
 # DATASET_NAME = 'PC11'
-DATASET_NAME = 'FOGRA'
+# DATASET_NAME = 'FOGRA'
 INPUT_TYPE = 'CMY'
 OUTPUT_TYPE = 'XYZ'
 
