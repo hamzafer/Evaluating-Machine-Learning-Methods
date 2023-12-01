@@ -56,7 +56,7 @@ def process(dataset_name, input_type, output_type, visualize=False):
         # Calculate the error between the predicted and true LAB values
         errors = error(output_pred_lab, output_test_lab)
 
-        # Output the mean Euclidean error
+        # Output the mean error
         mean_error = np.mean(errors)
         median_error = np.median(errors)
         max_error = np.max(errors)

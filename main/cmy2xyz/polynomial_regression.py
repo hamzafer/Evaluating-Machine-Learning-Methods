@@ -37,20 +37,20 @@ def process(dataset_name, input_type, output_type, degree, visualize=False):
     lab_pred = xyz2lab(xyz_pred)
     lab_test = xyz2lab(xyz_test)
 
-    # Calculate the Euclidean error between the predicted and actual Lab values
+    # Calculate the error between the predicted and actual Lab values
     # errors = np.linalg.norm(lab_pred - lab_test, axis=1) # CIE 1976
     errors = error(lab_pred, lab_test)
 
-    # Output the mean Euclidean error
+    # Output the mean error
     mean_error = np.mean(errors)
     median_error = np.median(errors)
     max_error = np.max(errors)
-    print('Mean Euclidean error:', mean_error)
-    print('Median Euclidean error:', median_error)
-    print('Max Euclidean error:', max_error)
+    print('Mean error:', mean_error)
+    print('Median error:', median_error)
+    print('Max error:', max_error)
 
     # Create the results DataFrame
-    results = pd.DataFrame(columns=['Polynomial Degree', 'Mean Euclidean Error', 'Median Euclidean Error', 'Max Euclidean Error'])
+    results = pd.DataFrame(columns=['Polynomial Degree', 'Mean Error', 'Median Error', 'Max Error'])
     results.loc[0] = [degree, mean_error, median_error, max_error]
 
     # Save results
