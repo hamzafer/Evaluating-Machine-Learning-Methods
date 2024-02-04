@@ -16,8 +16,8 @@ This project investigates the effectiveness of various machine learning models i
 ## Results
 Machine learning models demonstrated varying degrees of improvement in error metrics over polynomial regression. However, the improvements were relatively modest, suggesting that the benefits of machine learning must be carefully balanced against their complexity.
 <img width="905" alt="image" src="https://github.com/hamzafer/ColorProject/assets/45764331/66fc77f5-97fe-408a-941e-d314d541cdf5">
-<img width="806" alt="image" src="https://github.com/hamzafer/ColorProject/assets/45764331/2de89479-f5ad-4705-bc8a-4a95c2ac8b1f">
-<img width="815" alt="image" src="https://github.com/hamzafer/ColorProject/assets/45764331/ee480a9b-51db-42f6-948e-0a9479b18612">
+<img width="905" alt="image" src="https://github.com/hamzafer/ColorProject/assets/45764331/2de89479-f5ad-4705-bc8a-4a95c2ac8b1f">
+<img width="905" alt="image" src="https://github.com/hamzafer/ColorProject/assets/45764331/ee480a9b-51db-42f6-948e-0a9479b18612">
 
 ## Conclusion
 The study highlights the potential of machine learning in enhancing color prediction accuracy in printing processes. Future research could further explore the transition from 3-channel LAB to 4-channel CMYK data for more comprehensive color mapping.
