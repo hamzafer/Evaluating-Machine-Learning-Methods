@@ -1,12 +1,8 @@
 # Evaluating Machine Learning Methods
 
-## Ongoing Work and Future Directions
+## Publication
 
-Currently working on making the project's findings more accessible and impactful within the academic and professional communities. There are two main directions which the Professor Phill and I are working on:
-
-1. **ICC Website Publication:** We are in discussions to potentially publish our project on the International Color Consortium (ICC) website. This would involve a detailed exposition of our methodologies, tailored for software developers involved in profile construction using regression-based methods. The final decision will be made following the upcoming ICC meetings, which will consider the project's fit for the 'Information on Profiles' section.
-
-2. **Conference Publication:** We are also considering submitting our work for presentation at a prestigious conference, such as the Color and Imaging Conference (CCIW) in Milan. This would require a thorough review of existing literature to highlight the novel aspects of our work, possibly focusing on our comprehensive comparison of machine learning methods or the introduction of a new method showing significant improvements over traditional approaches. Depending on the outcomes of our initial submission to the ICC, we may prioritize conference publication to ensure the novelty and impact of our research are fully recognized.
+Our research has been accepted for presentation at the **[16th Congress of the International Colour Association (AIC 2025)](https://www.aic2025.org/)**, taking place October 19-24, 2025, in Taipei, Taiwan. The conference theme "Color for the Future" aligns perfectly with our investigation into modern machine learning approaches for color prediction in printing processes.
 
 ## Introduction
 This project investigates the effectiveness of various machine learning models in predicting XYZ color values from CMY input data, compared to traditional polynomial regression methods. Utilizing datasets such as FOGRA51, APTEC(PC10), and APTEC(PC11), the research explores the accuracy of machine learning techniques including Gradient Boosting and Random Forest.
@@ -50,4 +46,3 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 ## Acknowledgments
 Thanks to all the datasets providers and the open-source community for making this research possible.
-
