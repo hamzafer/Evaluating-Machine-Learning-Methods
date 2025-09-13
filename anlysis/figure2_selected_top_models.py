@@ -9,7 +9,7 @@ DATASETS = ['PC10', 'PC11', 'FOGRA']
 OUT_DIR = 'figures'
 
 
-# Selected top models; we will aggregate from append files using run-mean
+# Selected top models; support 'best' and 'run-mean' aggregations
 TOP_MODELS = [
     'Gradient Boosting',
     'Bayesian (Gaussian Process)',
@@ -23,6 +23,13 @@ DISPLAY_TO_APPEND_KEY = {
     'k-NN': 'k_Nearest',
 }
 
+# Mapping to results filenames for 'best' aggregation
+DISPLAY_TO_RESULTS_FILE = {
+    'Gradient Boosting': 'nn_GradientBoost_results.csv',
+    'Bayesian (Gaussian Process)': 'nn_Bayesian_results.csv',
+    'k-NN': 'nn_k_Nearest_results.csv',
+}
+
 
 def run_mean_from_append(path: str, algo_key: str) -> float:
     """Average of 'Mean Error' across runs for the given algorithm in append file."""
@@ -33,6 +40,14 @@ def run_mean_from_append(path: str, algo_key: str) -> float:
     if sub.empty:
         return float('nan')
     return float(sub['Mean Error'].mean())
+
+def best_mean_from_csv(path: str) -> float:
+    if not os.path.exists(path):
+        return float('nan')
+    df = pd.read_csv(path)
+    if 'Mean Error' not in df.columns:
+        return float('nan')
+    return float(df['Mean Error'].min())
 
 def run_std_from_append(path: str, algo_key: str) -> float:
     if not os.path.exists(path):
@@ -53,16 +68,21 @@ def mean_for_poly_degree(path: str, degree: int) -> float:
     return float(row.iloc[0]['Mean Error'])
 
 
-def build_summary(poly_degree: int = 3) -> pd.DataFrame:
+def build_summary(poly_degree: int = 3, aggregate: str = 'best') -> pd.DataFrame:
     rows = []
 
-    # Three selected ML models: run-mean across append results per dataset
+    # Three selected ML models
     for display_name in TOP_MODELS:
         row = {'Algorithm': display_name}
         for ds in DATASETS:
-            append_path = os.path.join(BASE_RESULTS_DIR, ds, f"{ds}_append_results.csv")
-            algo_key = DISPLAY_TO_APPEND_KEY.get(display_name, display_name)
-            row[ds] = run_mean_from_append(append_path, algo_key)
+            if aggregate == 'run-mean':
+                append_path = os.path.join(BASE_RESULTS_DIR, ds, f"{ds}_append_results.csv")
+                algo_key = DISPLAY_TO_APPEND_KEY.get(display_name, display_name)
+                row[ds] = run_mean_from_append(append_path, algo_key)
+            else:  # 'best'
+                res_file = DISPLAY_TO_RESULTS_FILE[display_name]
+                csv_path = os.path.join(BASE_RESULTS_DIR, ds, res_file)
+                row[ds] = best_mean_from_csv(csv_path)
         rows.append(row)
 
     # Polynomial Regression (3rd order)
@@ -145,9 +165,10 @@ def main():
     parser.add_argument('--no-labels', action='store_true', help='Disable bar value labels.')
     parser.add_argument('--poly-degree', type=int, default=3, help='Polynomial degree to compare (default 3).')
     parser.add_argument('--error-bars', action='store_true', help='Add error bars (std across runs in append files).')
+    parser.add_argument('--aggregate', choices=['best', 'run-mean'], default='best', help="Aggregation: 'best' uses min Mean Error per model; 'run-mean' averages Mean Error across runs (append files).")
     args = parser.parse_args()
 
-    df = build_summary(poly_degree=args.poly_degree)
+    df = build_summary(poly_degree=args.poly_degree, aggregate=args.aggregate)
 
     # Save CSV
     csv_path = os.path.join(OUT_DIR, 'Figure2_Selected_Top_Models_Mean_DeltaE.csv')
