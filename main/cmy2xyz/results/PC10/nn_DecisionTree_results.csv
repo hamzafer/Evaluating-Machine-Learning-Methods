@@ -1,4 +1,4 @@
-Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': None, 'min_samples_split': 2, 'random_state': 42}",1.54032116002,1.37492894447,4.72511922093
-"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': 10, 'min_samples_split': 5, 'random_state': 42}",1.56207144885,1.33962145407,4.72511922093
-"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': None, 'min_samples_split': 2, 'random_state': 42}",1.54032116002,1.37492894447,4.72511922093
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': None, 'min_samples_split': 2, 'random_state': 42}",1.54032116002,1.37492894447,4.72511922093,3.61069057259,1.07937465836
+"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': 10, 'min_samples_split': 5, 'random_state': 42}",1.56207144885,1.33962145407,4.72511922093,3.65989354343,1.08411884014
+"{'model': <class 'sklearn.tree._classes.DecisionTreeRegressor'>, 'max_depth': None, 'min_samples_split': 2, 'random_state': 42}",1.54032116002,1.37492894447,4.72511922093,3.61069057259,1.07937465836
