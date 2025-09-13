@@ -1,0 +1,2 @@
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+Ridge(random_state=42),1.88953172319,1.65790838342,6.41645533421,4.19838689504,1.24548816625

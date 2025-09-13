@@ -1,0 +1,5 @@
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+"MultiOutputRegressor(estimator=GradientBoostingRegressor(learning_rate=0.05,
+                                                         max_depth=5,
+                                                         n_estimators=200,
+                                                         random_state=42))",1.49014456819,1.1770006974,6.58094819549,3.74315944944,1.16196250291

@@ -1,0 +1,2 @@
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+MultiOutputRegressor(estimator=DecisionTreeRegressor(random_state=42)),1.84346273978,1.35522481858,15.2979514727,4.21052232172,1.89951569096
