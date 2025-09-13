@@ -1,4 +1,4 @@
-Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'rbf', 'C': 1.0, 'gamma': 'scale', 'epsilon': 0.1}",1.4577662552,0.948389257474,5.93474998971
-"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'linear', 'C': 0.1, 'gamma': 'auto', 'epsilon': 0.2}",2.44856883578,2.18964706751,5.92923713824
-"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'rbf', 'C': 1.0, 'gamma': 'scale', 'epsilon': 0.1}",1.4577662552,0.948389257474,5.93474998971
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'rbf', 'C': 1.0, 'gamma': 'scale', 'epsilon': 0.1}",1.46172586739,0.954625854074,5.94246614826,4.31679564843,1.20515314125
+"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'linear', 'C': 0.1, 'gamma': 'auto', 'epsilon': 0.2}",2.44856883578,2.18964706751,5.92923713824,4.80207133729,1.28116739722
+"{'model': <class 'sklearn.svm._classes.SVR'>, 'kernel': 'rbf', 'C': 1.0, 'gamma': 'scale', 'epsilon': 0.1}",1.46172586739,0.954625854074,5.94246614826,4.31679564843,1.20515314125

@@ -1,4 +1,4 @@
-Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 1.0, 'random_state': 42}",3.91143990806,3.74237730796,10.0910458178
-"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 0.5, 'random_state': 42}",3.91143990806,3.74237730796,10.0910458178
-"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 1.0, 'random_state': 42}",3.91143990806,3.74237730796,10.0910458178
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 1.0, 'random_state': 42}",3.91143990806,3.74237730796,10.0910458178,7.94144292377,1.92236164699
+"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 0.5, 'random_state': 42}",3.91143990806,3.74237730796,10.0910458178,7.94144292377,1.92236164699
+"{'model': <class 'sklearn.linear_model._coordinate_descent.Lasso'>, 'alpha': 1.0, 'random_state': 42}",3.91143990806,3.74237730796,10.0910458178,7.94144292377,1.92236164699

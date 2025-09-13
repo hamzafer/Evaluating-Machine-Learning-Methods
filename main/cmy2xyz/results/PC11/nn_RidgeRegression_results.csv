@@ -1,4 +1,4 @@
-Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 1.0, 'random_state': 42}",1.91625724261,1.72335240317,5.09980207965
-"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 0.5, 'random_state': 42}",1.91490001249,1.72335859644,5.08993358075
-"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 0.5, 'random_state': 42}",1.91490001249,1.72335859644,5.08993358075
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 1.0, 'random_state': 42}",1.91625724261,1.72335240317,5.09980207965,4.03572353385,1.11003791118
+"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 0.5, 'random_state': 42}",1.91490001249,1.72335859644,5.08993358075,4.03220478581,1.1109787233
+"{'model': <class 'sklearn.linear_model._ridge.Ridge'>, 'alpha': 0.5, 'random_state': 42}",1.91490001249,1.72335859644,5.08993358075,4.03220478581,1.1109787233
