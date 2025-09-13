@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 PC10_DIR = os.path.join('main', 'cmy2xyz', 'results', 'PC10')
 APPEND_CSV = os.path.join(PC10_DIR, 'PC10_append_results.csv')
 POLY_CSV = os.path.join(PC10_DIR, 'polynomial_regression_results.csv')
-OUT_DIR = os.path.join('figures')
+OUT_DIR = os.path.join('figures', 'pc10')
 
 
 # Mapping from repo algorithm keys to display names used in the paper table
