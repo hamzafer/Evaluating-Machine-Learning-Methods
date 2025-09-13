@@ -1,5 +1,6 @@
 import os
 import math
+from matplotlib.lines import Line2D
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -161,8 +162,9 @@ def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sor
     }
 
     fig, ax = plt.subplots(figsize=(16, 7))
-    # Thicker error bars for visibility
-    err_kw = dict(elinewidth=1.2, capthick=1.2, ecolor='black', alpha=0.95)
+    # Thicker, grey error bars for visibility
+    err_color = '#666666'
+    err_kw = dict(elinewidth=1.4, capthick=1.4, ecolor=err_color, alpha=0.95)
     # Optional error bars via run-std from append files when aggregate=='run-mean'
     yerr_pc10 = yerr_pc11 = yerr_fogra = None
     if error_bars and aggregate == 'run-mean':
@@ -181,9 +183,9 @@ def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sor
                     target.append(std)
 
     # Bars ordered as PC10 (left), PC11 (center), FOGRA (right)
-    ax.bar([i - width for i in x], df['PC10'], yerr=yerr_pc10, width=width, label='PC10', color=colors['PC10'], edgecolor='black', linewidth=0.3, capsize=4, error_kw=err_kw)
-    ax.bar(x, df['PC11'], yerr=yerr_pc11, width=width, label='PC11', color=colors['PC11'], edgecolor='black', linewidth=0.3, capsize=4, error_kw=err_kw)
-    ax.bar([i + width for i in x], df['FOGRA'], yerr=yerr_fogra, width=width, label='FOGRA51', color=colors['FOGRA'], edgecolor='black', linewidth=0.3, capsize=4, error_kw=err_kw)
+    ax.bar([i - width for i in x], df['PC10'], yerr=yerr_pc10, width=width, label='PC10', color=colors['PC10'], edgecolor='#4d4d4d', linewidth=0.3, capsize=4, error_kw=err_kw)
+    ax.bar(x, df['PC11'], yerr=yerr_pc11, width=width, label='PC11', color=colors['PC11'], edgecolor='#4d4d4d', linewidth=0.3, capsize=4, error_kw=err_kw)
+    ax.bar([i + width for i in x], df['FOGRA'], yerr=yerr_fogra, width=width, label='FOGRA51', color=colors['FOGRA'], edgecolor='#4d4d4d', linewidth=0.3, capsize=4, error_kw=err_kw)
 
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=45, ha='right')
@@ -194,7 +196,12 @@ def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sor
     ymax = float(pd.concat([df['PC10'], df['PC11'], df['FOGRA']]).max())
     ax.set_ylim(0, ymax * 1.18)
     ax.margins(x=0.06)
-    ax.legend(ncols=1, frameon=True, loc='upper left', bbox_to_anchor=(0.01, 0.98),
+    # Compose legend with an explicit error bar meaning
+    handles, labels = ax.get_legend_handles_labels()
+    if error_bars and aggregate == 'run-mean':
+        eb_label = {'sd': '±SD across runs', 'sem': '±SEM across runs', 'ci95': '±95% CI across runs'}.get(error_type, 'Error bars')
+        handles.append(Line2D([0], [0], color=err_color, lw=1.4, label=eb_label))
+    ax.legend(handles=handles, ncols=1, frameon=True, loc='upper left', bbox_to_anchor=(0.01, 0.98),
               fontsize=10, fancybox=True, framealpha=0.95)
     # Subtle horizontal grid only
     ax.grid(axis='y', linestyle='--', alpha=0.35)
