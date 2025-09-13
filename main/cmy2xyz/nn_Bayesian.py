@@ -12,7 +12,7 @@ from visual.vis_lab import visualize_lab_values
 
 
 def process(dataset_name, input_type, output_type, visualize=False):
-    results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', 'Max Error'])
+    results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', 'Max Error', 'P95 Error', 'Std Dev'])
 
     input_data = get_dataset(dataset_name, input_type)
     output_data = get_dataset(dataset_name, output_type)
@@ -49,13 +49,15 @@ def process(dataset_name, input_type, output_type, visualize=False):
         # Calculate the error between the predicted and true LAB values
         errors = error(output_pred_lab, output_test_lab)
 
-        # Output the mean error
+        # Aggregate error statistics
         mean_error = np.mean(errors)
         median_error = np.median(errors)
         max_error = np.max(errors)
+        p95_error = np.percentile(errors, 95)
+        std_error = np.std(errors, ddof=1)
 
         # Add results to DataFrame
-        results.loc[index] = [str(config), mean_error, median_error, max_error]
+        results.loc[index] = [str(config), mean_error, median_error, max_error, p95_error, std_error]
 
         if visualize:
             # Visualize the predicted vs true LAB values

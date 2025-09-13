@@ -38,22 +38,24 @@ def process(dataset_name, input_type, output_type, degree, visualize=False):
     lab_test = xyz2lab(xyz_test)
 
     # Calculate the error between the predicted and actual Lab values
-    # errors = np.linalg.norm(lab_pred - lab_test, axis=1) # CIE 1976
     errors = error(lab_pred, lab_test)
 
-    # Output the mean error
+    # Aggregate error statistics
     mean_error = np.mean(errors)
     median_error = np.median(errors)
     max_error = np.max(errors)
+    p95_error = np.percentile(errors, 95)
+    std_error = np.std(errors, ddof=1)
     print('Mean error:', mean_error)
     print('Median error:', median_error)
     print('Max error:', max_error)
 
     # Create the results DataFrame
-    results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', 'Max Error'])
-    results.loc[0] = [degree, mean_error, median_error, max_error]
+    results = pd.DataFrame(columns=['Configuration', 'Mean Error', 'Median Error', 'Max Error', 'P95 Error', 'Std Dev'])
+    results.loc[0] = [degree, mean_error, median_error, max_error, p95_error, std_error]
 
-    # Save results
-    csv_file_path = save_results_to_CSV(results, dataset_name, script_name=__file__, append=True)
+    # Save results: start a fresh file at degree 1, then append for others
+    append_flag = False if degree == 1 else True
+    csv_file_path = save_results_to_CSV(results, dataset_name, script_name=__file__, append=append_flag)
 
     print(f"Results saved to '{csv_file_path}'")
