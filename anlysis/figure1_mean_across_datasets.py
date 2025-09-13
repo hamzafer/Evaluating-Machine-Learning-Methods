@@ -199,8 +199,8 @@ def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sor
     # Compose legend with an explicit error bar meaning
     handles, labels = ax.get_legend_handles_labels()
     if error_bars and aggregate == 'run-mean':
-        eb_label = {'sd': '±SD across runs', 'sem': '±SEM across runs', 'ci95': '±95% CI across runs'}.get(error_type, 'Error bars')
-        handles.append(Line2D([0], [0], color=err_color, lw=1.4, label=eb_label))
+        # Show full name only, per request
+        handles.append(Line2D([0], [0], color=err_color, lw=1.4, label='Standard Error of the Mean'))
     ax.legend(handles=handles, ncols=1, frameon=True, loc='upper left', bbox_to_anchor=(0.01, 0.98),
               fontsize=10, fancybox=True, framealpha=0.95)
     # Subtle horizontal grid only
