@@ -80,6 +80,17 @@ def run_mean_from_append(path: str, algo_key: str) -> float:
         return float('nan')
     return float(sub['Mean Error'].mean())
 
+def run_std_from_append(path: str, algo_key: str) -> float:
+    """Standard deviation of 'Mean Error' across runs for the algorithm key.
+    If unavailable, returns NaN."""
+    if not os.path.exists(path):
+        return float('nan')
+    df = pd.read_csv(path)
+    sub = df[df['Algorithm'] == algo_key]
+    if sub.empty:
+        return float('nan')
+    return float(sub['Mean Error'].std(ddof=1))
+
 
 def build_summary(poly_degree: int, aggregate: str = 'best') -> pd.DataFrame:
     rows = []
@@ -114,7 +125,7 @@ def build_summary(poly_degree: int, aggregate: str = 'best') -> pd.DataFrame:
     return df
 
 
-def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sort_by: str | None = None):
+def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sort_by: str | None = None, error_bars: bool = False, aggregate: str = 'best'):
     # Optional: rank algorithms by their overall average mean ΔE across datasets
     df = df.copy()
     title_suffix = ""
@@ -141,10 +152,20 @@ def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sor
     }
 
     fig, ax = plt.subplots(figsize=(16, 7))
+    # Optional error bars via run-std from append files when aggregate=='run-mean'
+    yerr_pc10 = yerr_pc11 = yerr_fogra = None
+    if error_bars and aggregate == 'run-mean':
+        yerr_pc10, yerr_pc11, yerr_fogra = [], [], []
+        for label in labels:
+            key = DISPLAY_TO_APPEND_KEY.get(label, label)
+            for ds, target in [('PC10', yerr_pc10), ('PC11', yerr_pc11), ('FOGRA', yerr_fogra)]:
+                append_path = os.path.join(BASE_RESULTS_DIR, ds, f"{ds}_append_results.csv")
+                target.append(run_std_from_append(append_path, key))
+
     # Bars ordered as PC10 (left), PC11 (center), FOGRA (right)
-    ax.bar([i - width for i in x], df['PC10'], width=width, label='PC10', color=colors['PC10'], edgecolor='black', linewidth=0.3)
-    ax.bar(x, df['PC11'], width=width, label='PC11', color=colors['PC11'], edgecolor='black', linewidth=0.3)
-    ax.bar([i + width for i in x], df['FOGRA'], width=width, label='FOGRA51', color=colors['FOGRA'], edgecolor='black', linewidth=0.3)
+    ax.bar([i - width for i in x], df['PC10'], yerr=yerr_pc10, width=width, label='PC10', color=colors['PC10'], edgecolor='black', linewidth=0.3, capsize=3)
+    ax.bar(x, df['PC11'], yerr=yerr_pc11, width=width, label='PC11', color=colors['PC11'], edgecolor='black', linewidth=0.3, capsize=3)
+    ax.bar([i + width for i in x], df['FOGRA'], yerr=yerr_fogra, width=width, label='FOGRA51', color=colors['FOGRA'], edgecolor='black', linewidth=0.3, capsize=3)
 
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=45, ha='right')
@@ -173,6 +194,7 @@ def main():
     parser.add_argument('--sort-by', choices=['PC11', 'PC10', 'FOGRA', 'overall'], default='overall', help='Column to sort by when --sort is used.')
     parser.add_argument('--poly-degree', type=int, default=3, help='Polynomial regression degree to report (e.g., 3).')
     parser.add_argument('--aggregate', choices=['best', 'run-mean'], default='best', help="Aggregation: 'best' uses min Mean Error per model; 'run-mean' averages Mean Error across runs (append files).")
+    parser.add_argument('--error-bars', action='store_true', help='Add error bars (std across runs in append files; only with --aggregate run-mean).')
     args = parser.parse_args()
     os.makedirs(OUT_DIR, exist_ok=True)
     df = build_summary(args.poly_degree, aggregate=args.aggregate)
@@ -183,7 +205,7 @@ def main():
     # Plot PNG
     png_path = os.path.join(OUT_DIR, 'Figure1_Mean_DeltaE_Across_Datasets.png')
     sort_by = None if args.sort_by == 'overall' else args.sort_by
-    save_grouped_bar(df, png_path, sort=args.sort, sort_by=sort_by)
+    save_grouped_bar(df, png_path, sort=args.sort, sort_by=sort_by, error_bars=args.error_bars, aggregate=args.aggregate)
     print(f"Wrote: {csv_path}\nWrote: {png_path}")
 
 

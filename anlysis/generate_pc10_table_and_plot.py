@@ -52,6 +52,8 @@ def load_pc10_summary():
             'Mean': float(best['Mean Error']),
             'Median': float(best['Median Error']),
             'Max': float(best['Max Error']),
+            'P95': float(best['P95 Error']) if 'P95 Error' in best else float('nan'),
+            'SD': float(best['Std Dev']) if 'Std Dev' in best else float('nan'),
             'order': ordered_keys.index(alg),
         })
 
@@ -67,17 +69,19 @@ def load_pc10_summary():
             'Mean': degree3['Mean Error'],
             'Median': degree3['Median Error'],
             'Max': degree3['Max Error'],
+            'P95': degree3['P95 Error'] if 'P95 Error' in degree3 else float('nan'),
+            'SD': degree3['Std Dev'] if 'Std Dev' in degree3 else float('nan'),
             'order': len(ordered_keys),
         }
     ])
 
     summary = pd.concat([
-        grouped[['Display', 'Mean', 'Median', 'Max', 'order']],
-        poly_row[['Display', 'Mean', 'Median', 'Max', 'order']]
+        grouped[['Display', 'Mean', 'Median', 'Max', 'P95', 'SD', 'order']],
+        poly_row[['Display', 'Mean', 'Median', 'Max', 'P95', 'SD', 'order']]
     ], ignore_index=True).sort_values('order').drop(columns=['order'])
 
     # Round for presentation
-    summary = summary.round({'Mean': 6, 'Median': 6, 'Max': 6})
+    summary = summary.round({'Mean': 6, 'Median': 6, 'Max': 6, 'P95': 6, 'SD': 6})
     return summary
 
 

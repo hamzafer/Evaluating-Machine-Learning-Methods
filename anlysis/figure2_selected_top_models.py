@@ -34,6 +34,15 @@ def run_mean_from_append(path: str, algo_key: str) -> float:
         return float('nan')
     return float(sub['Mean Error'].mean())
 
+def run_std_from_append(path: str, algo_key: str) -> float:
+    if not os.path.exists(path):
+        return float('nan')
+    df = pd.read_csv(path)
+    sub = df[df['Algorithm'] == algo_key]
+    if sub.empty:
+        return float('nan')
+    return float(sub['Mean Error'].std(ddof=1))
+
 
 def mean_for_poly_degree(path: str, degree: int) -> float:
     df = pd.read_csv(path)
@@ -70,7 +79,7 @@ def build_summary(poly_degree: int = 3) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def save_grouped_bar(df: pd.DataFrame, out_path: str, *, ylim_min: float | None = None, ylim_max: float | None = None, show_labels: bool = False):
+def save_grouped_bar(df: pd.DataFrame, out_path: str, *, ylim_min: float | None = None, ylim_max: float | None = None, show_labels: bool = False, error_bars: bool = False):
     labels = df['Algorithm'].tolist()
     x = list(range(len(labels)))
     width = 0.22
@@ -83,10 +92,20 @@ def save_grouped_bar(df: pd.DataFrame, out_path: str, *, ylim_min: float | None 
     }
 
     fig, ax = plt.subplots(figsize=(14, 6))
+    # Optional error bars from append std across runs
+    yerr_pc10 = yerr_pc11 = yerr_fogra = None
+    if error_bars:
+        yerr_pc10, yerr_pc11, yerr_fogra = [], [], []
+        for label in labels:
+            key = DISPLAY_TO_APPEND_KEY.get(label, label)
+            for ds, target in [('PC10', yerr_pc10), ('PC11', yerr_pc11), ('FOGRA', yerr_fogra)]:
+                append_path = os.path.join(BASE_RESULTS_DIR, ds, f"{ds}_append_results.csv")
+                target.append(run_std_from_append(append_path, key))
+
     # Bars: PC10 left, PC11 center, FOGRA right
-    bars_pc10 = ax.bar([i - width for i in x], df['PC10'], width=width, label='PC10', color=colors['PC10'], edgecolor='black', linewidth=0.3)
-    bars_pc11 = ax.bar(x, df['PC11'], width=width, label='PC11', color=colors['PC11'], edgecolor='black', linewidth=0.3)
-    bars_fogra = ax.bar([i + width for i in x], df['FOGRA'], width=width, label='FOGRA51', color=colors['FOGRA'], edgecolor='black', linewidth=0.3)
+    bars_pc10 = ax.bar([i - width for i in x], df['PC10'], yerr=yerr_pc10, width=width, label='PC10', color=colors['PC10'], edgecolor='black', linewidth=0.3, capsize=3)
+    bars_pc11 = ax.bar(x, df['PC11'], yerr=yerr_pc11, width=width, label='PC11', color=colors['PC11'], edgecolor='black', linewidth=0.3, capsize=3)
+    bars_fogra = ax.bar([i + width for i in x], df['FOGRA'], yerr=yerr_fogra, width=width, label='FOGRA51', color=colors['FOGRA'], edgecolor='black', linewidth=0.3, capsize=3)
 
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=0, ha='center')
@@ -125,6 +144,7 @@ def main():
     parser.add_argument('--ylim-max', type=float, default=1.5, help='Y-axis upper bound (default 1.5).')
     parser.add_argument('--no-labels', action='store_true', help='Disable bar value labels.')
     parser.add_argument('--poly-degree', type=int, default=3, help='Polynomial degree to compare (default 3).')
+    parser.add_argument('--error-bars', action='store_true', help='Add error bars (std across runs in append files).')
     args = parser.parse_args()
 
     df = build_summary(poly_degree=args.poly_degree)
@@ -135,7 +155,7 @@ def main():
 
     # Save PNG
     png_path = os.path.join(OUT_DIR, 'Figure2_Selected_Top_Models.png')
-    save_grouped_bar(df, png_path, ylim_min=args.ylim_min, ylim_max=args.ylim_max, show_labels=not args.no_labels)
+    save_grouped_bar(df, png_path, ylim_min=args.ylim_min, ylim_max=args.ylim_max, show_labels=not args.no_labels, error_bars=args.error_bars)
     print(f"Wrote: {csv_path}\nWrote: {png_path}")
 
 
