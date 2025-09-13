@@ -1,0 +1,2 @@
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+KNeighborsRegressor(),1.45165922993,1.11370907371,6.67854018887,3.35786436077,1.22968868256

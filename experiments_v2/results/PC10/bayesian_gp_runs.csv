@@ -1,0 +1,2 @@
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+MultiOutputRegressor(estimator=GaussianProcessRegressor(random_state=42)),1.44162731369,1.10080390612,7.16843273412,3.63741065885,1.2647552329

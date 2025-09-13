@@ -1,0 +1,2 @@
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+ElasticNet(random_state=42),3.69792227228,3.1906026406,10.0389489651,7.17873822999,1.96986581944

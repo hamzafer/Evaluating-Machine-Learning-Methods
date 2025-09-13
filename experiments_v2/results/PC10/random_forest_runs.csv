@@ -1,0 +1,2 @@
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+"RandomForestRegressor(max_depth=15, n_estimators=200, random_state=42)",1.40302264784,1.13997725306,6.53443121765,3.6176327931,1.15526224281

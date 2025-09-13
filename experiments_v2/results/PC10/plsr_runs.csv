@@ -1,0 +1,2 @@
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+PLSRegression(n_components=3),1.89022449752,1.66760988737,6.45119517286,4.19110667044,1.24808684391

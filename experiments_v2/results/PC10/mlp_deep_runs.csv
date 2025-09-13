@@ -1,0 +1,2 @@
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+"MLPRegressor(hidden_layer_sizes=(50, 30, 10), max_iter=500, random_state=42)",2.06112119396,1.8730796823,7.57530486788,4.23361074419,1.36376640216

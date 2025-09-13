@@ -1,0 +1,2 @@
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+MultiOutputRegressor(estimator=SVR()),1.65464991197,1.04733762154,8.45405036912,5.06030666628,1.51012038673
