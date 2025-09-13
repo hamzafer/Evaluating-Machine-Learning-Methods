@@ -3,3 +3,5 @@
 *.DS_Store
 figures/*.png
 figures/*.csv
+__pycache__/
+*.pyc
