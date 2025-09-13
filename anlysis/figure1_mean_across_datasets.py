@@ -161,6 +161,8 @@ def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sor
     }
 
     fig, ax = plt.subplots(figsize=(16, 7))
+    # Thicker error bars for visibility
+    err_kw = dict(elinewidth=1.2, capthick=1.2, ecolor='black', alpha=0.95)
     # Optional error bars via run-std from append files when aggregate=='run-mean'
     yerr_pc10 = yerr_pc11 = yerr_fogra = None
     if error_bars and aggregate == 'run-mean':
@@ -179,9 +181,9 @@ def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sor
                     target.append(std)
 
     # Bars ordered as PC10 (left), PC11 (center), FOGRA (right)
-    ax.bar([i - width for i in x], df['PC10'], yerr=yerr_pc10, width=width, label='PC10', color=colors['PC10'], edgecolor='black', linewidth=0.3, capsize=3)
-    ax.bar(x, df['PC11'], yerr=yerr_pc11, width=width, label='PC11', color=colors['PC11'], edgecolor='black', linewidth=0.3, capsize=3)
-    ax.bar([i + width for i in x], df['FOGRA'], yerr=yerr_fogra, width=width, label='FOGRA51', color=colors['FOGRA'], edgecolor='black', linewidth=0.3, capsize=3)
+    ax.bar([i - width for i in x], df['PC10'], yerr=yerr_pc10, width=width, label='PC10', color=colors['PC10'], edgecolor='black', linewidth=0.3, capsize=4, error_kw=err_kw)
+    ax.bar(x, df['PC11'], yerr=yerr_pc11, width=width, label='PC11', color=colors['PC11'], edgecolor='black', linewidth=0.3, capsize=4, error_kw=err_kw)
+    ax.bar([i + width for i in x], df['FOGRA'], yerr=yerr_fogra, width=width, label='FOGRA51', color=colors['FOGRA'], edgecolor='black', linewidth=0.3, capsize=4, error_kw=err_kw)
 
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=45, ha='right')
