@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 BASE_RESULTS_DIR = os.path.join('main', 'cmy2xyz', 'results')
 # Order datasets PC10 first for consistency
 DATASETS = ['PC10', 'PC11', 'FOGRA']
-OUT_DIR = 'figures'
+OUT_DIR = os.path.join('figures', 'figure2')
 
 
 # Selected top models; support 'best' and 'run-mean' aggregations

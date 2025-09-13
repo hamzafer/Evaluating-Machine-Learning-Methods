@@ -1,4 +1,5 @@
 import os
+import math
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -6,7 +7,7 @@ import matplotlib.pyplot as plt
 BASE_RESULTS_DIR = os.path.join('main', 'cmy2xyz', 'results')
 # Order for display and CSV: PC10, then PC11, then FOGRA
 DATASETS = ['PC10', 'PC11', 'FOGRA']
-OUT_DIR = 'figures'
+OUT_DIR = os.path.join('figures', 'figure1')
 
 
 # File names per algorithm and display names used in the plot
@@ -80,6 +81,14 @@ def run_mean_from_append(path: str, algo_key: str) -> float:
         return float('nan')
     return float(sub['Mean Error'].mean())
 
+def run_count_from_append(path: str, algo_key: str) -> int:
+    """Number of runs/configs available for the given algorithm key in append file."""
+    if not os.path.exists(path):
+        return 0
+    df = pd.read_csv(path)
+    sub = df[df['Algorithm'] == algo_key]
+    return int(len(sub)) if not sub.empty else 0
+
 def run_std_from_append(path: str, algo_key: str) -> float:
     """Standard deviation of 'Mean Error' across runs for the algorithm key.
     If unavailable, returns NaN."""
@@ -125,7 +134,7 @@ def build_summary(poly_degree: int, aggregate: str = 'best') -> pd.DataFrame:
     return df
 
 
-def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sort_by: str | None = None, error_bars: bool = False, aggregate: str = 'best'):
+def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sort_by: str | None = None, error_bars: bool = False, aggregate: str = 'best', error_type: str = 'sd'):
     # Optional: rank algorithms by their overall average mean ΔE across datasets
     df = df.copy()
     title_suffix = ""
@@ -160,7 +169,14 @@ def save_grouped_bar(df: pd.DataFrame, out_path: str, *, sort: bool = False, sor
             key = DISPLAY_TO_APPEND_KEY.get(label, label)
             for ds, target in [('PC10', yerr_pc10), ('PC11', yerr_pc11), ('FOGRA', yerr_fogra)]:
                 append_path = os.path.join(BASE_RESULTS_DIR, ds, f"{ds}_append_results.csv")
-                target.append(run_std_from_append(append_path, key))
+                std = run_std_from_append(append_path, key)
+                n = run_count_from_append(append_path, key)
+                if error_type == 'sem' and n > 0:
+                    target.append(std / math.sqrt(n))
+                elif error_type == 'ci95' and n > 0:
+                    target.append(1.96 * std / math.sqrt(n))
+                else:
+                    target.append(std)
 
     # Bars ordered as PC10 (left), PC11 (center), FOGRA (right)
     ax.bar([i - width for i in x], df['PC10'], yerr=yerr_pc10, width=width, label='PC10', color=colors['PC10'], edgecolor='black', linewidth=0.3, capsize=3)
@@ -194,6 +210,7 @@ def main():
     parser.add_argument('--sort-by', choices=['PC11', 'PC10', 'FOGRA', 'overall'], default='overall', help='Column to sort by when --sort is used.')
     parser.add_argument('--poly-degree', type=int, default=3, help='Polynomial regression degree to report (e.g., 3).')
     parser.add_argument('--aggregate', choices=['best', 'run-mean'], default='best', help="Aggregation: 'best' uses min Mean Error per model; 'run-mean' averages Mean Error across runs (append files).")
+    parser.add_argument('--error-type', choices=['sd', 'sem', 'ci95'], default='sd', help='Error bar type used when --error-bars and --aggregate run-mean (sd, sem, or ci95).')
     parser.add_argument('--error-bars', action='store_true', help='Add error bars (std across runs in append files; only with --aggregate run-mean).')
     args = parser.parse_args()
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -205,7 +222,7 @@ def main():
     # Plot PNG
     png_path = os.path.join(OUT_DIR, 'Figure1_Mean_DeltaE_Across_Datasets.png')
     sort_by = None if args.sort_by == 'overall' else args.sort_by
-    save_grouped_bar(df, png_path, sort=args.sort, sort_by=sort_by, error_bars=args.error_bars, aggregate=args.aggregate)
+    save_grouped_bar(df, png_path, sort=args.sort, sort_by=sort_by, error_bars=args.error_bars, aggregate=args.aggregate, error_type=args.error_type)
     print(f"Wrote: {csv_path}\nWrote: {png_path}")
 
 
