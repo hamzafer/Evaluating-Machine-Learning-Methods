@@ -1,3 +1,5 @@
+import os
+import sys
 from nn_Bayesian import process as nn_Bayesian
 from nn_DecisionTree import process as nn_DecisionTree
 from nn_DeepLearning import process as nn_DeepLearning
@@ -13,9 +15,13 @@ from nn_k_Nearest import process as nn_k_Nearest
 from nn_SimpleMLP import process as nn_logistic_lbfgs
 from polynomial_regression import process as polynomial_regression
 
-# Constants
-# Set target dataset here
-DATASET_NAME = 'PC10'
+# Dataset selection
+# Accept first CLI arg (PC10|PC11|FOGRA) or env var DATASET_NAME; default 'PC10'
+_arg_ds = sys.argv[1] if len(sys.argv) > 1 else None
+DATASET_NAME = (
+    _arg_ds if _arg_ds in {"PC10", "PC11", "FOGRA"}
+    else os.environ.get("DATASET_NAME", "PC10")
+)
 INPUT_TYPE = 'CMY'
 OUTPUT_TYPE = 'XYZ'
 

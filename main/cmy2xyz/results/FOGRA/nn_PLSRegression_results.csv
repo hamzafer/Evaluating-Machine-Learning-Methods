@@ -1,4 +1,4 @@
-Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.cross_decomposition._pls.PLSRegression'>, 'n_components': 2}",2.96249417449,2.59430272337,7.77268662574
-"{'model': <class 'sklearn.cross_decomposition._pls.PLSRegression'>, 'n_components': 3}",1.77984443604,1.55793533645,5.23898523492
-"{'model': <class 'sklearn.cross_decomposition._pls.PLSRegression'>, 'n_components': 3}",1.77984443604,1.55793533645,5.23898523492
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+"{'model': <class 'sklearn.cross_decomposition._pls.PLSRegression'>, 'n_components': 2}",2.96249417449,2.59430272337,7.77268662574,6.54638323633,1.62874027287
+"{'model': <class 'sklearn.cross_decomposition._pls.PLSRegression'>, 'n_components': 3}",1.77984443604,1.55793533645,5.23898523492,4.29039512561,1.1711211421
+"{'model': <class 'sklearn.cross_decomposition._pls.PLSRegression'>, 'n_components': 3}",1.77984443604,1.55793533645,5.23898523492,4.29039512561,1.1711211421

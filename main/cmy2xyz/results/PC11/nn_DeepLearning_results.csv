@@ -1,4 +1,4 @@
-Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>, 'hidden_layer_sizes': (100,), 'activation': 'relu', 'solver': 'adam', 'random_state': 42}",1.74265857262,1.66807230647,4.71160630372
-"{'model': <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>, 'hidden_layer_sizes': (50, 50), 'activation': 'tanh', 'solver': 'sgd', 'random_state': 42}",2.4445946646,2.29178742035,5.85553754622
-"{'model': <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>, 'hidden_layer_sizes': (100,), 'activation': 'relu', 'solver': 'adam', 'random_state': 42}",1.74265857262,1.66807230647,4.71160630372
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+"{'model': <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>, 'hidden_layer_sizes': (100,), 'activation': 'relu', 'solver': 'adam', 'random_state': 42}",1.74265857262,1.66807230647,4.71160630372,3.51712853842,1.00251180056
+"{'model': <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>, 'hidden_layer_sizes': (50, 50), 'activation': 'tanh', 'solver': 'sgd', 'random_state': 42}",2.4445946646,2.29178742035,5.85553754622,4.80512578426,1.38590261156
+"{'model': <class 'sklearn.neural_network._multilayer_perceptron.MLPRegressor'>, 'hidden_layer_sizes': (100,), 'activation': 'relu', 'solver': 'adam', 'random_state': 42}",1.74265857262,1.66807230647,4.71160630372,3.51712853842,1.00251180056

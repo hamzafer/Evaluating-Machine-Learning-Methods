@@ -1,7 +1,7 @@
-Configuration,Mean Error,Median Error,Max Error
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 10, 'max_depth': 5, 'random_state': 42}",1.72185488589,1.59765933205,6.23110596441
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 50, 'max_depth': 5, 'random_state': 42}",1.73101792175,1.58069546648,6.11792908015
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 100, 'max_depth': 10, 'random_state': 42}",1.32593069775,1.04666703071,6.02531907801
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 200, 'max_depth': 15, 'random_state': 42}",1.31704337602,1.00751271424,5.93369523925
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 300, 'max_depth': 20, 'random_state': 42}",1.31615621504,1.00596004895,5.87304501196
-"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 300, 'max_depth': 20, 'random_state': 42}",1.31615621504,1.00596004895,5.87304501196
+Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 10, 'max_depth': 5, 'random_state': 42}",1.72185488589,1.59765933205,6.23110596441,3.68400629901,1.06001745236
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 50, 'max_depth': 5, 'random_state': 42}",1.73101792175,1.58069546648,6.11792908015,3.63862650908,1.05112642759
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 100, 'max_depth': 10, 'random_state': 42}",1.32624675024,1.04666703071,6.02531907801,3.658636628,1.04738291493
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 200, 'max_depth': 15, 'random_state': 42}",1.31650084052,1.00751271424,5.93369523925,3.68305807196,1.05244698698
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 300, 'max_depth': 20, 'random_state': 42}",1.31567878672,1.00173334921,5.87304501196,3.73156510834,1.05334877119
+"{'model': <class 'sklearn.ensemble._forest.RandomForestRegressor'>, 'n_estimators': 300, 'max_depth': 20, 'random_state': 42}",1.31567878672,1.00173334921,5.87304501196,3.73156510834,1.05334877119
