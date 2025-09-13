@@ -161,7 +161,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description='Generate Figure 2: selected top models vs polynomial regression (3rd).')
     parser.add_argument('--ylim-min', type=float, default=1.2, help='Y-axis lower bound (default 1.2).')
-    parser.add_argument('--ylim-max', type=float, default=1.5, help='Y-axis upper bound (default 1.5).')
+    parser.add_argument('--ylim-max', type=float, default=1.4, help='Y-axis upper bound (default 1.4).')
     parser.add_argument('--no-labels', action='store_true', help='Disable bar value labels.')
     parser.add_argument('--poly-degree', type=int, default=3, help='Polynomial degree to compare (default 3).')
     parser.add_argument('--error-bars', action='store_true', help='Add error bars (std across runs in append files).')
