@@ -11,7 +11,7 @@ def get_dataset(dataset_code, subset_type):
     current_dir = os.path.dirname(current_script_path)
 
     # Define the relative path to the cleaned directory from the current script
-    cleaned_dir = os.path.join(current_dir, '..', 'cleaned')
+    cleaned_dir = os.path.join(current_dir, '..', 'data', 'cleaned')
 
     # Define dataset paths using the cleaned directory
     datasets = {
