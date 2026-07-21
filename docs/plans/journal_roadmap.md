@@ -88,7 +88,7 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 | APTEC PC10 (cardboard) | CMY(K) | Available |
 | APTEC PC11 (coated paper) | CMY(K) | Available |
 | FOGRA51 (reference) | CMY(K) | Available |
-| IFRA newsprint (wb/bb) | CMYK + spectral | Received 29 Mar 2026 (`data/new/Ifra-{wb,bb}.zip`); keep wb/bb separate — wb is the industry norm, bb has more runs |
+| IFRA newsprint (wb/bb) | CMYK + spectral | Received 29 Mar 2026 (`journal/data/raw/Ifra-{wb,bb}.zip`); keep wb/bb separate — wb is the industry norm, bb has more runs |
 | n>4 colorant datasets | CMYKOGV+ | Not yet received — Phil to ask Will (ex-Kodak) |
 | Potential new prints | n-colour | Depends on RIP control |
 
