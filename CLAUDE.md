@@ -12,13 +12,14 @@ ML methods for printer color characterization (CMY(K)→XYZ regression, evaluate
 
 - `main/cmy2xyz/` + `input/` + `utils/` = the **legacy AIC pipeline (v1)**. Its results are the published AIC numbers — keep as reference baseline, do not rebuild on it. Known flaw: ΔE00 computed on normalized XYZ.
 - An `experiments_v2/` pipeline existed briefly and was **deliberately deleted** (commit 3dbbc6e). Do not resurrect it: it was CMY-only (3-channel, hardcoded to the three CSV datasets) and its data paths are stale. The journal work gets a **fresh pipeline, built n-channel-generic** (a dataset declares its input channels: 3, 4, or 7 — one code path for all). Useful reference: its corrected-ΔE00 PC10 results are recoverable via `git show 636b056:experiments_v2/results/PC10/`.
+- `journal/` = the **new pipeline for the journal paper (v2)**, self-contained: `pipeline/` (n-channel-generic code), `llm/` (LLM-as-color-predictor track, separate since it calls an API rather than fitting a model), `data/raw/` + `data/processed/` (v2-only data — IFRA, future n>4 sets; the shared PC10/PC11/FOGRA51 CSVs stay in top-level `data/cleaned/`), `results/` (one subfolder per dataset), `figures/`.
 - AIC paper PDF + presentation: `../Reports/`.
 
 ## Data
 
 `data/cleaned/*.csv` — PC10, PC11, FOGRA51: 1,617 rows each, columns `SAMPLE_ID, CMYK_C/M/Y/K, LAB_L/A/B, XYZ_X/Y/Z`. Note: 799 rows have K>0; the AIC paper trained CMY-only by *dropping the K column but keeping those rows* (identical CMY → different XYZ in training). The fresh pipeline must handle K properly.
 
-`data/new/Ifra-{wb,bb}.zip` — IFRA 2005 newsprint: 43 press runs (13 white-backing + 30 black-backing — **keep wb/bb separate**, per Phil), ECI2002/CGATS format, 1,485 samples each, CMYK + 36-band spectral reflectance 380–730nm. Needs ingestion: parse (latin-1 encoding) + spectral→XYZ via colour-science (D50, 2° observer).
+`journal/data/raw/Ifra-{wb,bb}.zip` — IFRA 2005 newsprint: 43 press runs (13 white-backing + 30 black-backing — **keep wb/bb separate**, per Phil), ECI2002/CGATS format, 1,485 samples each, CMYK + 36-band spectral reflectance 380–730nm. Needs ingestion: parse (latin-1 encoding) + spectral→XYZ via colour-science (D50, 2° observer).
 
 n>4 (CMYKOGV) datasets: not yet received — waiting on Phil.
 

@@ -3,3 +3,7 @@
 *.DS_Store
 __pycache__/
 *.pyc
+
+# proprietary/unlicensed industry datasets (IFRA, future n>4 sets) — keep local only
+journal/data/raw/
+journal/data/processed/
