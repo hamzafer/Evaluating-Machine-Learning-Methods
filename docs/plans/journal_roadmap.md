@@ -4,12 +4,13 @@ Extended paper for MDPI Technologies special issue, building on the AIC 2025 con
 
 ## Target Journal
 
-- **Journal:** MDPI Technologies (Impact Factor 3.6, 5-yr IF 4.2)
+- **Journal:** MDPI Technologies (Impact Factor 3.6, 5-yr IF 4.2; Phil, Jul 2026: "impact factor >5")
 - **Special issue:** "AI-Driven Color Models for Imaging, Formulation, Appearance Measurement and Computer Vision"
 - **Guest editors:** Eric J.J. Kirchner, Stephen Westland
 - **Submission deadline:** 30 August 2026
 - **Open access APC:** ~$1250 (funding TBD)
 - **Special issue page:** https://www.mdpi.com/journal/technologies/special_issues/0O2229T6RE
+- **Follow-up talk:** ICC Expert Day, Gjøvik, 21 September 2026 — Hamza presents an outline (after the submission deadline; avoid disclosing too much before the article is published)
 
 ## Background
 
@@ -63,6 +64,14 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 
 8. **Colorimetric density as input domain** — alternative to raw CMYK values
 
+## Meeting Notes — 16 April 2026 (with Phil)
+
+- Benchmark against prior published results: the PhD work at https://scholar.google.com/citations?user=e19-J04AAAAJ&hl=en, and Kiran's Optics Express paper on n-colour.
+- Will (ex-Kodak) is the contact for the n>4 dataset — Phil to ask.
+- Lookup tables become inefficient at larger numbers of colorants (supports the ML-for-n>4 argument).
+- Claude/GPT-based approaches: check for overfitting — cross-fold validation; train on a proportion of the data and check errors on the rest.
+- AIC 2025 proceedings available at https://www.aic2025.org/.
+
 ## Writing Guidance (from Phil)
 
 - Give full details of methods including equations
@@ -79,8 +88,8 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 | APTEC PC10 (cardboard) | CMY(K) | Available |
 | APTEC PC11 (coated paper) | CMY(K) | Available |
 | FOGRA51 (reference) | CMY(K) | Available |
-| Newsprint (~200 targets) | ? | Phil to provide |
-| n>4 colorant datasets | CMYKOGV+ | Phil to provide |
+| IFRA newsprint (wb/bb) | CMYK + spectral | Received 29 Mar 2026 (`data/new/Ifra-{wb,bb}.zip`); keep wb/bb separate — wb is the industry norm, bb has more runs |
+| n>4 colorant datasets | CMYKOGV+ | Not yet received — Phil to ask Will (ex-Kodak) |
 | Potential new prints | n-colour | Depends on RIP control |
 
 ## Timeline
@@ -91,6 +100,9 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 | **May 2026** | Phil at NTNU — in-person collaboration, review progress, receive datasets |
 | **Jun–Jul 2026** | n>4 experiments, additional methods, write-up, generate figures |
 | **Aug 2026** | Final revisions, submit by Aug 30 |
+| **21 Sep 2026** | ICC Expert Day, Gjøvik — present outline of the work |
+
+**Status (21 Jul 2026):** Experiments not yet started — delayed by another journal paper's revision (done 15 Jul). Phil asked for a draft "soon as the deadline is not far off" (1 Jul) — ~5.5 weeks remain to the 30 Aug deadline, so the original Mar–Jul plan must now be compressed into Jul–Aug.
 
 ## Key Contacts
 
