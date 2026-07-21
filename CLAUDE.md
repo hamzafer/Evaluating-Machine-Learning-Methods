@@ -1,47 +1,36 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code in this repository.
 
-## Project Overview
+## Project
 
-Research repo for AIC 2025 paper and NTNU report (IMT4304_10033_Phil) evaluating 14 ML methods for **CMY → XYZ color space regression**. Accuracy is measured using CIEDE2000 (ΔE₀₀). Three datasets: APTEC PC10 (cardboard), APTEC PC11 (coated paper), FOGRA51 (reference standard).
+ML methods for printer color characterization (CMY(K)→XYZ regression, evaluated with CIEDE2000). Produced the AIC 2025 conference paper; now being extended into a journal paper.
 
-## Running the Pipeline
+**Current goal: MDPI Technologies special-issue paper. Submission deadline 30 Aug 2026.** Full plan: `docs/plans/journal_roadmap.md`. Core questions (Phil Green): (a) can ML match/beat classical methods for n≤4 inks, (b) can AI handle n>4 (CMYKOGV). Supporting: multi-printer generalization (newsprint), direct ΔE00 loss, LLM-as-color-predictor.
 
-```bash
-# From repo root, activate venv first
-source .venv/bin/activate
+## State of the repo (July 2026)
 
-# Run all 14 models on a dataset (PC10, PC11, or FOGRA)
-cd main/cmy2xyz && PYTHONPATH=../.. python3 main.py PC10
+- `main/cmy2xyz/` + `input/` + `utils/` = the **legacy AIC pipeline (v1)**. Its results are the published AIC numbers — keep as reference baseline, do not rebuild on it. Known flaw: ΔE00 computed on normalized XYZ.
+- An `experiments_v2/` pipeline existed briefly and was **deliberately deleted** (commit 3dbbc6e). Do not resurrect it: it was CMY-only (3-channel, hardcoded to the three CSV datasets) and its data paths are stale. The journal work gets a **fresh pipeline, built n-channel-generic** (a dataset declares its input channels: 3, 4, or 7 — one code path for all). Useful reference: its corrected-ΔE00 PC10 results are recoverable via `git show 636b056:experiments_v2/results/PC10/`.
+- AIC paper PDF + presentation: `../Reports/`.
 
-# Results save to main/cmy2xyz/results/{dataset}/
-# Merge per-model CSVs into a single file:
-PYTHONPATH=. python3 -c "from utils.mergeFiles import merge; merge('PC10')"
-```
+## Data
 
-**Important:** The pipeline must run from `main/cmy2xyz/` so result paths resolve correctly. `PYTHONPATH=../..` is needed for imports like `from input.input import get_dataset`.
+`data/cleaned/*.csv` — PC10, PC11, FOGRA51: 1,617 rows each, columns `SAMPLE_ID, CMYK_C/M/Y/K, LAB_L/A/B, XYZ_X/Y/Z`. Note: 799 rows have K>0; the AIC paper trained CMY-only by *dropping the K column but keeping those rows* (identical CMY → different XYZ in training). The fresh pipeline must handle K properly.
 
-## Architecture
+`data/new/Ifra-{wb,bb}.zip` — IFRA 2005 newsprint: 43 press runs (13 white-backing + 30 black-backing — **keep wb/bb separate**, per Phil), ECI2002/CGATS format, 1,485 samples each, CMYK + 36-band spectral reflectance 380–730nm. Needs ingestion: parse (latin-1 encoding) + spectral→XYZ via colour-science (D50, 2° observer).
 
-- **`main/cmy2xyz/main.py`** — Entry point. Calls all 14 model `process()` functions sequentially.
-- **`main/cmy2xyz/nn_*.py`** + **`polynomial_regression.py`** — Each model script tests multiple hyperparameter configs, picks the best, and saves results to CSV.
-- **`input/input.py`** — Dataset loading. Reads from `data/cleaned/*.csv`, returns column subsets (CMY, CMYK, LAB, XYZ).
-- **`utils/`** — Shared utilities: `xyz2lab.py` (XYZ→Lab, D50 white point), `calcError.py` (ΔE₀₀ via `colour-science`), `save_results.py`, `mergeFiles.py`.
-- **`analysis/`** — Scripts generating publication figures (Figure 1: all models bar chart, Figure 2: top models comparison, PC10 table).
-- **`figures/`** — Committed publication figures and summary CSVs.
-- **`data/`** — Raw `.txt` files and `cleaned/` CSVs (3 datasets).
+n>4 (CMYKOGV) datasets: not yet received — waiting on Phil.
 
-## Key Technical Details
+## Rules for the journal work
 
-- All models use **90/10 train/test split**, **MinMaxScaler** normalization, **random_state=42**.
-- ΔE₀₀ is computed on **normalized XYZ** (not denormalized) — this is how the paper reports results.
-- Each model script has identical boilerplate (load data, normalize, split, loop configs, compute errors, save). The pattern is consistent across all 13 `nn_*.py` files.
-- 6 of 14 models (Bayesian GP, Random Forest, SVM, SimpleMLP, k-NN, Polynomial) show minor float differences (~0.01–0.05 ΔE) across scikit-learn versions. 8 models reproduce identically.
+- ΔE00 always on **denormalized** XYZ (pred and truth → Lab D50 → `colour.difference.delta_E` CIE 2000).
+- Report **median, max, 95th percentile** (not mean/std — errors aren't normal). 2–3 decimals max.
+- Polynomial regression capped at 3rd order.
+- Fixed seeds, pinned dependency versions (sklearn version drift moves results ~0.01–0.05 ΔE).
+- Every experiment writes a results CSV; figures are generated from CSVs, never hand-made.
+- Results that look anomalous get investigated before they get reported.
 
-## Dependencies
+## Environment
 
-```bash
-pip install -r requirements.txt
-# Contains: numpy, pandas, matplotlib, scikit-learn, colour-science, seaborn
-```
+`.venv` is fragile (symlinks to system python). Prefer a fresh pinned env (uv) for new work. Installed stack: numpy, pandas, scikit-learn, matplotlib, seaborn, colour-science.
