@@ -281,3 +281,19 @@ instrument tolerance.
 - Spectral bands: 36, 380–730 nm @ 10 nm, present in every real file
 - LAB/XYZ: absent in wb (as expected); present in 20/25 real bb files (Group
   A); Lab-only (no XYZ) in 5/25 real bb files (Group B)
+
+## QUARANTINE NOTICE (1 Aug 2026) — bb runs unusable pending layout resolution
+
+The CMYK join from the wb chart table is provably WRONG for bb: patches sharing
+a joined recipe agree at median dE00 ~0.8-1.1 within wb runs, but 25-28 within
+bb runs (verified on 6 bb files, 28 duplicate pairs each) — i.e. the bb charts
+use a different ECI2002 patch layout than wb (visual vs random layout, most
+likely). All bb processed CSVs were therefore deleted; only the 13 wb runs are
+registered. The bb raw data remains in the zip. To rehabilitate bb we need the
+actual bb chart layout (ask Phil — he supplied the data), or a validated
+permutation recovery. Do NOT re-join bb against the wb table.
+
+Bonus finding: wb duplicate-recipe pairs give a GENUINE within-run
+print-repeatability floor for newsprint: median dE00 ~0.7-1.1 across wb runs —
+usable in the paper where the coated-paper datasets offered none (their
+duplicates are byte-identical copies).
