@@ -92,24 +92,17 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 | n>4 colorant datasets | CMYKOGV+ | Not yet received — Phil to ask Will (ex-Kodak) |
 | Potential new prints | n-colour | Depends on RIP control |
 
-## Status (1 Aug 2026) — what's DONE
+## Timeline
 
-- **AIC evaluation error found & corrected (Jul 2026).** v1 computed ΔE00 on normalized XYZ (~5× understatement). Verified 4 independent ways; Phil informed 23 Jul and agreed: **no AIC erratum; journal = new analysis; consider mentioning the error in the article.** Published state preserved at git tag `aic2025-published`; v1 at HEAD is corrected. Materials sent to Phil: `~/Desktop/AIC-correction-for-Phil/`.
-- **Journal pipeline built** (`journal/pipeline/`): n-channel-generic, 5-fold CV, per-fold scaling, ΔE00 on denormalized XYZ, XYZ→Lab roundtrip tripwire on every load.
-- **First results committed** (`journal/results/`, 6 variants × 14 models). Headlines: GP median ≈ 0.05–0.07 everywhere (needs grouped-split control before it's a paper claim); poly3 second at n=3 (0.28–0.37) but degrades ~3× at n=4 (0.82–0.94, max ≈ 30) while GP barely moves — first evidence for core question (b).
-- **Design rule (agreed):** CMY experiments → 818 K=0 rows; CMYK → all 1,617 rows with K as input; never drop a column while keeping its rows.
+| Period | Focus |
+|--------|-------|
+| **Mar–Apr 2026** | CMYK extension (data ready), LLM predictor experiments, set up n>4 framework |
+| **May 2026** | Phil at NTNU — in-person collaboration, review progress, receive datasets |
+| **Jun–Jul 2026** | n>4 experiments, additional methods, write-up, generate figures |
+| **Aug 2026** | Final revisions, submit by Aug 30 |
+| **21 Sep 2026** | ICC Expert Day, Gjøvik — present outline of the work |
 
-## Execution plan — 4 weeks to deadline (30 Aug)
-
-| Week | Work |
-|------|------|
-| **W1 (1–8 Aug)** | GP verification (grouped CV vs duplicate patches; compare to instrument repeatability ~0.2–0.3 ΔE00). IFRA ingestion (CGATS latin-1 parse, spectral→XYZ D50/2°, register as IFRA-wb/-bb) + first generalization runs (train-on-one-press-run→test-on-others; combined vs single training). **Reply to Phil: meeting + results table + chase n>4 data (Will, ex-Kodak).** |
-| **W2 (9–15 Aug)** | LLM-as-color-predictor track (`journal/llm/`): in-context patches → predict XYZ, same ΔE00 scoring, vs the 14 methods. Direct-ΔE00 loss where it can matter (MLP custom loss; Nelder-Mead on poly coefficients — also covers "other optimizers"). CMYKOGV run if data arrives (pipeline is n-generic; ingestion + one command). **n>4 data cutoff ~15 Aug:** if not in hand, reframe paper as n≤4 + newsprint generalization, n>4 as future work. |
-| **W3 (16–22 Aug)** | Writing takes over: full draft, all figures from results CSVs, correction paragraph + evaluation-pitfall section (tone per Phil). Experiments only to fill reviewer-visible gaps. |
-| **W4 (23–30 Aug)** | Phil review round, revisions, MDPI formatting, submit. Nothing new lands here. |
-| **21 Sep** | ICC Expert Day, Gjøvik — present outline. |
-
-**Cut list if time runs out** (per Phil): linearization preprocessing, colorimetric density domain, genetic algorithms.
+**Status (21 Jul 2026):** Experiments not yet started — delayed by another journal paper's revision (done 15 Jul). Phil asked for a draft "soon as the deadline is not far off" (1 Jul) — ~5.5 weeks remain to the 30 Aug deadline, so the original Mar–Jul plan must now be compressed into Jul–Aug.
 
 ## Key Contacts
 
