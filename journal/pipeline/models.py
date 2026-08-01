@@ -19,6 +19,8 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.svm import SVR
 from sklearn.tree import DecisionTreeRegressor
 
+from .de00_poly import DE00Polynomial
+
 SEED = 42
 
 
@@ -47,4 +49,6 @@ def registry() -> dict:
                                             max_iter=2000, random_state=SEED),
         'mlp_deep': lambda: MLPRegressor(hidden_layer_sizes=(64, 64, 64), solver='lbfgs',
                                          max_iter=2000, random_state=SEED),
+        'poly3_de00_nm': lambda: DE00Polynomial(method='Nelder-Mead', maxiter=2000),
+        'poly3_de00_powell': lambda: DE00Polynomial(method='Powell', maxiter=200),
     }
