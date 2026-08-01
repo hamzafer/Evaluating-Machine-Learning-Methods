@@ -76,12 +76,16 @@ methods against third-order polynomial regression for $n=3$ (CMY) inputs
 across three printer datasets, finding no consistent advantage for the
 learned models. That analysis is superseded here: its CIEDE2000 errors were
 computed on normalized rather than physical XYZ values, understating errors
-by roughly a factor of five. This paper reports corrected $n=3$ results,
-extends the comparison to $n=4$ (CMYK) inputs, \respending{n$>$4 (CMYKOGV)
-results, if the dataset lands in time}, and \respending{cross-printer /
-newsprint generalization and direct-$\Delta E_{00}$-loss results, if those
-experiments land in time}. \todonote{One-sentence headline finding once
-available.}
+by roughly a factor of five. This paper reports corrected $n=3$ and $n=4$
+(CMYK) results across three printer datasets; evaluates cross-printer
+generalization on 13 white-backing newsprint press runs under within-run,
+cross-run, and leave-one-run-out training conditions; tests whether refining
+the classical third-order polynomial's coefficients directly on
+$\Delta E_{00}$ (instead of least-squares on XYZ) improves worst-case
+accuracy; and benchmarks a frontier large language model (GPT-4o) as a
+direct color predictor against the full classical/ML model set.
+\respending{n$>$4 (CMYKOGV) results, if the dataset lands in time}.
+\todonote{One-sentence headline finding once available.}
 \end{abstract}
 
 \textbf{Keywords:} printer characterization; color management; CIEDE2000;
@@ -157,11 +161,20 @@ FOGRA51 & Reference (ISO 12647-2) & CMYK & 1{,}617 & Fogra Research Institute \c
 \end{tabular}
 \end{table}
 
-\todonote{Task 2/06: append IFRA newsprint (white-backing / black-backing, 43
-press runs, 1{,}485 samples each, 36-band spectral $\rightarrow$ XYZ via
-colour-science) once plan 03 lands, keeping wb and bb as separate rows per
-Phil's instruction. Append CMYKOGV ($n=7$) row if that dataset arrives from
-Phil/Will in time (plan 06).}
+A fourth dataset is used for the cross-printer generalization experiments of
+Section~\ref{sec:ifra}: IFRA 2005 newsprint, comprising 13 white-backing (wb)
+press runs, each with 1{,}485 CMYK samples measured as 36-band spectral
+reflectance (380--730\,nm) and converted to CIE XYZ under the D50 illuminant
+and 2\textdegree{} standard observer via the \texttt{colour-science} library.
+The complementary 30 black-backing (bb) runs are not used in this paper: a
+chart-layout mismatch between the wb and bb measurement files is still being
+resolved with the data provider. Per Phil's instruction, wb and bb are kept
+as separate conditions rather than pooled, so this exclusion is scoped to bb
+only and does not affect the wb results reported here.
+
+\todonote{Task 06: append a CMYKOGV ($n=7$) row to Table~\ref{tab:datasets}
+if that dataset arrives from Phil/Will in time. Append the 30 IFRA
+black-backing runs once the chart-layout mismatch is resolved.}
 
 \subsection{Models}
 \label{sec:models}
@@ -320,8 +333,50 @@ difference ($\Delta E_{00} \approx 1$).}
 \end{figure}
 
 \subsection{$n=4$ (CMYK) and the $n{=}3 \to n{=}4$ Comparison}
-\respending{Table: median/P95/max $\Delta E_{00}$ per model per dataset
-(*-CMYK). Source: \texttt{journal/results/\{PC10,PC11,FOGRA51\}-CMYK/summary.csv}.}
+
+Table~\ref{tab:n4} reports the same statistics for the $n=4$ (CMYK) condition,
+using the full 1{,}617-sample set (the 818 $K=0$ rows of Table~\ref{tab:n3}
+plus the 799 $K>0$ rows, with K retained as a fourth input rather than
+dropped -- see the Methods correction paragraph). Gaussian process regression remains the best-median model by a wide margin
+on all three datasets, and third-order polynomial regression remains second;
+the relative ordering of the remaining models is otherwise stable between
+$n=3$ and $n=4$ (SVM third, gradient boosting fourth, on all three
+datasets), but every model's absolute error grows, and by very different
+factors -- the subject of Figure~\ref{fig:n3vsn4}.
+
+\begin{table}[h]
+\centering
+\caption{Median, 95th-percentile, and maximum $\Delta E_{00}$ per model for
+the $n=4$ (CMYK) condition on the three printer datasets, all 1{,}617 samples
+(818 $K=0$ plus 799 $K>0$) each. Same protocol as Table~\ref{tab:n3}. Models
+are sorted by PC10 median. Source:
+\texttt{journal/results/\{PC10,PC11,FOGRA51\}-CMYK/summary.csv}.}
+\label{tab:n4}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccccccccc@{}}
+\toprule
+& \multicolumn{3}{c}{PC10} & \multicolumn{3}{c}{PC11} & \multicolumn{3}{c}{FOGRA51} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+Model & Median & P95 & Max & Median & P95 & Max & Median & P95 & Max \\
+\midrule
+Gaussian Process & 0.063 & 0.473 & 8.370 & 0.066 & 0.435 & 6.796 & 0.072 & 0.292 & 3.248 \\
+Polynomial (3rd order) & 0.944 & 8.154 & 32.059 & 0.868 & 7.724 & 32.223 & 0.822 & 6.643 & 28.377 \\
+SVM & 1.029 & 5.585 & 19.663 & 0.993 & 4.856 & 15.270 & 1.006 & 4.419 & 11.337 \\
+Gradient Boosting & 1.528 & 6.515 & 26.210 & 1.389 & 6.289 & 22.283 & 1.539 & 6.910 & 30.171 \\
+MLP (Deep) & 1.766 & 11.309 & 34.578 & 1.612 & 9.743 & 39.302 & 1.639 & 10.603 & 28.127 \\
+MLP (Shallow) & 1.986 & 11.103 & 29.006 & 1.847 & 9.657 & 25.770 & 1.955 & 9.976 & 28.828 \\
+k-NN & 2.233 & 5.806 & 13.515 & 2.135 & 5.523 & 12.148 & 2.151 & 5.917 & 20.065 \\
+Random Forest & 2.274 & 4.952 & 9.182 & 2.244 & 4.772 & 10.348 & 2.567 & 5.808 & 16.117 \\
+Decision Tree & 4.605 & 9.679 & 24.345 & 4.352 & 9.184 & 23.095 & 4.464 & 10.227 & 19.473 \\
+Lasso & 8.908 & 24.367 & 42.965 & 8.467 & 23.842 & 42.354 & 8.771 & 25.522 & 43.085 \\
+PCR & 8.929 & 24.526 & 42.666 & 8.471 & 23.459 & 42.040 & 8.820 & 25.102 & 42.406 \\
+Ridge & 8.929 & 24.526 & 42.666 & 8.471 & 23.459 & 42.040 & 8.820 & 25.102 & 42.406 \\
+Elastic Net & 8.937 & 24.480 & 42.828 & 8.500 & 23.651 & 42.212 & 8.790 & 25.174 & 42.785 \\
+PLSR & 8.940 & 25.216 & 42.695 & 8.630 & 23.766 & 42.028 & 8.699 & 25.352 & 43.411 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
 
 Figure~\ref{fig:n3vsn4} compares median $\Delta E_{00}$ at $n=3$ (CMY) versus
 $n=4$ (CMYK) for every model on PC10, the full 1{,}617-sample set now
@@ -361,15 +416,201 @@ leakage. Third-order polynomial regression, re-checked the same way, is
 similarly stable. Source: \texttt{journal/results/gp\_verification.csv}.
 
 \subsection{IFRA Newsprint: Within-Run, Cross-Run, and Leave-One-Out}
-\respending{Plan 03 results, conditional on ingestion completing. Source:
-\texttt{journal/results/ifra/*.csv}. Figure F4.}
+\label{sec:ifra}
+
+Three experiments probe how well a model characterizing one printer
+generalizes to another, using the 13 IFRA white-backing (wb) newsprint press
+runs described in Section~\ref{sec:datasets} (1{,}485 CMYK samples per run).
+A model subset (Gaussian process, third-order polynomial, SVM, deep MLP --
+winner, classical baseline, and two mid-field representatives from
+Table~\ref{tab:n4}) is evaluated under three training conditions: (A)
+\emph{within-run}, 5-fold cross-validation on a single press run, the
+best-case accuracy attainable when a model is fit to that specific press;
+(B) \emph{cross-run}, trained on one run and tested on a different run with
+no shared training data (all $13\times12=156$ ordered press pairs); and (C)
+\emph{leave-one-run-out}, trained on the pooled data from 12 runs and tested
+on the 13th, held-out run.
+
+\begin{table}[h]
+\centering
+\caption{Median $\Delta E_{00}$ per model across the three IFRA
+generalization experiments (13 white-backing press runs). Within-run and
+leave-one-out values are the median of each run's own median $\Delta E_{00}$
+across the 13 runs; cross-run values are the median across the 156 ordered
+train/test press pairs. Source: \texttt{journal/results/ifra/\{within\_run,
+cross\_run,leave\_one\_out\}.csv}.}
+\label{tab:ifra}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Model & Within-run (A) & Cross-run (B) & Leave-one-out (C) \\
+\midrule
+SVM & 1.07 & 3.87 & 3.01 \\
+Polynomial (3rd order) & 1.42 & 4.17 & 3.30 \\
+MLP (Deep) & 1.61 & 4.13 & 3.63 \\
+Gaussian Process & --\footnotemark & 3.89 & 3.03 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\footnotetext{The Gaussian process regression's within-run result (median
+$\Delta E_{00} \approx 18.8$, more than an order of magnitude worse than
+every other model) is anomalous -- a fixed \texttt{WhiteKernel} noise-floor
+setting tuned for the coated-paper datasets is misconfigured for newsprint's
+substantially higher measurement noise -- and is therefore omitted from the
+within-run comparison.}
+
+The story is that press-to-press variation dominates model choice: every
+model's cross-run error (B, $\approx$3.9 median regardless of model) is
+roughly 3--4$\times$ its own within-run error (A), and no amount of model
+sophistication closes that gap -- Gaussian process regression, the clear
+within-run winner on every coated-paper dataset in
+Tables~\ref{tab:n3}--\ref{tab:n4}, is statistically indistinguishable from
+SVM, polynomial regression, and a deep MLP once training and test data come
+from different presses. Pooling training data across the other 12 runs (C)
+recovers some of that loss -- leave-one-out error ($\approx$3.0--3.6 median)
+is consistently lower than single-run cross-run transfer (B) for every
+model -- but pooling multiple presses still cannot reach single-press
+within-run accuracy (A): more data from the wrong press substitutes for, but
+does not equal, data from the right press. Figure~\ref{fig:ifra} shows the
+three conditions side by side.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../figures/fig_ifra_generalization.png}
+\caption{Median $\Delta E_{00}$ under the three IFRA generalization
+conditions (within-run, cross-run, leave-one-run-out) for SVM, third-order
+polynomial regression, deep MLP, and Gaussian process regression (cross-run
+and leave-one-out only; see the within-run anomaly note in the text).}
+\label{fig:ifra}
+\end{figure}
 
 \subsection{Direct $\Delta E_{00}$ Loss}
-\respending{Plan 05 results, conditional on landing in time.}
+\label{sec:de00loss}
+
+Every polynomial fit reported so far minimizes ordinary least squares on
+normalized XYZ, a proxy for the perceptual $\Delta E_{00}$ metric the paper
+actually evaluates on. This experiment tests whether refining the
+third-order polynomial's coefficients directly on mean $\Delta E_{00}$ closes
+any of that gap. Starting from the least-squares solution, the 60 (CMY) or
+105 (CMYK) coefficients are refined with a derivative-free optimizer whose
+objective is mean $\Delta E_{00}$ on the training fold, evaluated in real,
+denormalized XYZ; the refined model is evaluated with the same grouped
+5-fold cross-validation as every other model. Two optimizers are compared:
+Nelder-Mead (\texttt{poly3\_de00\_nm}, budget 2{,}000 iterations) and Powell
+(\texttt{poly3\_de00\_powell}, budget 200 iterations).
+
+\begin{table}[h]
+\centering
+\caption{Median, 95th-percentile, and maximum $\Delta E_{00}$ for the
+least-squares polynomial (\texttt{poly3}) versus its two $\Delta E_{00}$-refined
+variants, $n=3$ (CMY) condition, three datasets. Source:
+\texttt{journal/results/\{PC10,PC11,FOGRA51\}-CMY/summary.csv}.}
+\label{tab:de00loss}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccccccccc@{}}
+\toprule
+& \multicolumn{3}{c}{PC10} & \multicolumn{3}{c}{PC11} & \multicolumn{3}{c}{FOGRA51} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+Model & Median & P95 & Max & Median & P95 & Max & Median & P95 & Max \\
+\midrule
+poly3 (least squares) & 0.279 & 0.966 & 7.695 & 0.244 & 0.890 & 7.107 & 0.368 & 1.163 & 8.008 \\
+poly3\_de00\_nm (Nelder-Mead) & 0.264 & 0.982 & 6.939 & 0.235 & 0.847 & 6.162 & 0.372 & 1.170 & 5.783 \\
+poly3\_de00\_powell (Powell) & 0.274 & 0.886 & 5.513 & 0.255 & 0.772 & 5.735 & 0.375 & 1.043 & 4.135 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+Refining directly on $\Delta E_{00}$ with Powell reduces worst-case (max)
+error by 19--48\% relative to the least-squares baseline across the three
+datasets (PC10: $-$28\%, PC11: $-$19\%, FOGRA51: $-$48\%), while the median
+is essentially unchanged ($\leq$0.011 absolute difference in either
+direction). Nelder-Mead also reduces max error on all three datasets, but its
+P95 is inconsistent -- worse than the least-squares baseline on PC10 and
+FOGRA51, better only on PC11 -- whereas Powell improves P95 on all three
+datasets. Powell is therefore the preferred $\Delta E_{00}$-refined variant:
+it delivers the more consistent, and on FOGRA51 the larger, worst-case
+improvement, at the cost of a training budget an order of magnitude smaller
+than Nelder-Mead's (200 vs.\ 2{,}000 iterations). The gain is concentrated in
+the tail of the error distribution rather than the typical case, consistent
+with $\Delta E_{00}$'s perceptual weighting behaving differently from the
+uniform weighting of least-squares on XYZ only where errors are already
+large. Figure~\ref{fig:de00loss} shows the three variants' error
+distributions side by side.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../figures/fig_de00_loss.png}
+\caption{Median/P95/max $\Delta E_{00}$ for the least-squares polynomial
+versus its Nelder-Mead- and Powell-refined variants, across the three $n=3$
+(CMY) datasets.}
+\label{fig:de00loss}
+\end{figure}
 
 \subsection{LLM-as-Color-Predictor}
-\respending{Plan 04 results, conditional on landing in time. Source:
-\texttt{journal/results/llm/comparison.csv}. Figure F5.}
+\label{sec:llm}
+
+A separate track tests whether a general-purpose large language model,
+given color-patch examples entirely in its input context (no fine-tuning,
+no access to the pipeline's models or code), can act directly as a color
+predictor. Two OpenAI models, GPT-4o and GPT-4o-mini, were each given 400
+CMY$\to$XYZ example patches from PC10-CMY in-context and asked to predict
+XYZ for 100 held-out query patches, with deterministic (temperature-0)
+decoding; every raw response was retained and re-scored with the same
+$\Delta E_{00}$ machinery as the classical models. All 100 responses per
+model parsed successfully, so the plain and worst-case-penalized scoring
+variants are identical here.
+
+\begin{table}[h]
+\centering
+\caption{Median, 95th-percentile, and maximum $\Delta E_{00}$ for two LLMs
+as direct color predictors, PC10-CMY, 100 held-out query patches with 400
+in-context training examples. Source:
+\texttt{journal/results/llm/PC10-CMY\_summary.csv}.}
+\label{tab:llm}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Model & Median & P95 & Max \\
+\midrule
+GPT-4o & 3.034 & 10.642 & 14.621 \\
+GPT-4o-mini & 9.445 & 29.928 & 44.792 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A frontier LLM predicts XYZ from in-context examples with visible error
+($\Delta E_{00}$ median 3.034 for GPT-4o, roughly three times the
+just-noticeable-difference threshold): it lands mid-field against the
+classical/ML model set of Table~\ref{tab:n3}, beating the decision tree
+(median 4.369) and the entire ridge/lasso/elastic-net/PCR/PLSR linear family
+(medians 6.6--6.7) but losing to every other model, including the
+$k$-nearest-neighbors baseline (median 2.012). It is $\approx$11$\times$
+worse than third-order polynomial regression (median 0.279) and
+$\approx$56$\times$ worse than Gaussian process regression (median 0.054),
+the paper's best model. The smaller GPT-4o-mini is uniformly worse than
+every classical method (median 9.445, worse even than the linear family).
+
+This comparison is not apples-to-apples with the rest of the paper, and that
+methodological gap should be stated explicitly: the classical/ML results use
+5-fold cross-validation over 818 rows, so every sample is held out and
+scored exactly once, whereas the LLM results are a single 100-sample
+holdout scored against 400 in-context examples, with no cross-validation --
+the LLM numbers therefore carry more sampling uncertainty and are not
+directly comparable in rigor to the classical column of Table~\ref{tab:n3},
+even though both are computed with the identical $\Delta E_{00}$ formula.
+Figure~\ref{fig:llmvsclassical} places the LLM results alongside the
+classical/ML models for visual comparison, with this caveat noted in the
+caption.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../figures/fig_llm_vs_classical.png}
+\caption{Median $\Delta E_{00}$ for GPT-4o and GPT-4o-mini as direct color
+predictors (single 100-sample holdout, 400 in-context examples) alongside
+the 14 classical/ML models (5-fold cross-validation, 818 samples), PC10-CMY.
+The two evaluation protocols differ as described in the text; log scale,
+dashed line at $\Delta E_{00}=1$.}
+\label{fig:llmvsclassical}
+\end{figure}
 
 \subsection{$n=7$ (CMYKOGV)}
 \respending{Plan 06 results, conditional on the dataset arriving from Phil
