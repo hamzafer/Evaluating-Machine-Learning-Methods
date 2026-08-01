@@ -23,6 +23,15 @@
 | [06](06-cmykogv.md) | n=7 CMYKOGV experiments | **BLOCKED** | Data from Will via Phil — parked last |
 | [07](07-paper.md) | Paper draft, figures, correction paragraph | TODO | Phil call for §correction wording only |
 
+## Operating protocol (per Hamza, 1 Aug 2026 — applies to every plan)
+
+Subagent-driven execution, one task at a time, until all plans are done:
+1. **Implementer** subagent per task (only agent that commits; task brief + report as files).
+2. **Review** agent gates every diff (spec compliance + quality; Critical/Important findings loop back).
+3. **Verification** agent/coordinator independently re-checks numeric outputs — anomalies investigated before recorded (this caught the noise-floor misinterpretation in plan 01).
+4. **Support agents** run in parallel on disjoint files, never commit (coordinator reviews + commits): **visual** (figures from results CSVs), **interpret** (written readings of tables/figures), **latex** (keeps `journal/paper/` current as results land), **audit** (git-history checks), **teach** (keeps `docs/teaching/` current so Hamza can explain everything to Phil).
+5. Progress ledger: `.superpowers/sdd/progress.md`. Ledger + `git log` outrank memory after any context loss.
+
 **Cut list** (Phil: skippable if time is limited — not planned): linearization
 preprocessing, colorimetric density input domain, genetic algorithms
 (Nelder-Mead/Powell are covered inside plan 05).
