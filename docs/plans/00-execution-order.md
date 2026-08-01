@@ -40,3 +40,8 @@ Done before this plan set existed (commits `a0c937a`, `afec865`):
 v1 evaluation corrected + published state tagged (`aic2025-published`);
 journal pipeline built (5-fold CV, per-fold scalers, ΔE00 on denormalized XYZ,
 Lab-roundtrip tripwire); first results for 6 variants × 14 models in `journal/results/`.
+
+**Runtime rule (learned 1 Aug, the hard way):** any GP fit on >2,000 training rows
+must subsample to 2,000 with a fixed seed and report that choice (plan 06 already
+says this; it applies to ALL plans — plan 03's LOO ran GP on 17.8k rows and took
+~4h for what subsampling would do in minutes with near-identical accuracy).
