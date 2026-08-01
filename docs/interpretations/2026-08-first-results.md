@@ -186,3 +186,276 @@ None of points 1–5 change the qualitative story (GP and low-order polynomial r
 lead, linear models fail badly, tree ensembles are tail-robust) but points 1 and 2 in
 particular affect numbers that would otherwise go straight into the paper's headline
 table, and should be resolved first.
+
+---
+
+# 2026-08-01: Direct ΔE00 loss, LLM predictor, IFRA newsprint generalization
+
+Source for this section: `journal/results/{PC10,PC11,FOGRA51}-CMY/summary.csv`
+(poly3 vs. poly3_de00_nm/powell), `journal/results/llm/PC10-CMY_summary.csv`,
+`journal/results/ifra/{within_run,cross_run,leave_one_out}.csv`, and a direct
+re-fit/diagnostic of the Gaussian Process model (`journal/pipeline/models.py`)
+run against `journal/pipeline/datasets.py` to confirm the within-run anomaly's
+root cause. All numbers below were read from the actual CSVs or freshly
+computed against the pipeline's own code, not estimated.
+
+## 6. Direct ΔE00-loss optimization vs. least-squares poly3
+
+`journal/pipeline/de00_poly.py`'s `DE00Polynomial` fits the same degree-3
+polynomial form as `poly3`, but instead of ordinary least squares on XYZ, it
+minimizes CIEDE2000 directly via a derivative-free optimizer — Nelder-Mead
+(`poly3_de00_nm`, maxiter=2000) or Powell (`poly3_de00_powell`, maxiter=200)
+— starting from the LSQ solution. All three CMY variants:
+
+| dataset  | model              | median | p95   | max    |
+|----------|--------------------|--------|-------|--------|
+| PC10-CMY | poly3 (LSQ)        | 0.279  | 0.966 | 7.695  |
+|          | poly3_de00_nm      | 0.264  | 0.982 | 6.939  |
+|          | poly3_de00_powell  | 0.274  | 0.886 | 5.513  |
+| PC11-CMY | poly3 (LSQ)        | 0.244  | 0.890 | 7.107  |
+|          | poly3_de00_nm      | 0.235  | 0.847 | 6.162  |
+|          | poly3_de00_powell  | 0.255  | 0.772 | 5.735  |
+| FOGRA51-CMY | poly3 (LSQ)     | 0.368  | 1.163 | 8.008  |
+|          | poly3_de00_nm      | 0.372  | 1.170 | 5.783  |
+|          | poly3_de00_powell  | 0.375  | 1.043 | 4.135  |
+
+Powell's worst-case reduction vs. LSQ poly3: **28.4% (PC10), 19.3% (PC11),
+48.4% (FOGRA51)** — a genuine, dataset-dependent but consistently large cut
+in the tail. The median, meanwhile, is flat to marginally *worse* under
+direct ΔE00 optimization (PC10 −1.8%, PC11 +4.5%, FOGRA51 +1.9% relative to
+LSQ). Nelder-Mead shows the same direction of effect but weaker and less
+reliable: it improves p95 on PC11 (0.890→0.847) but *worsens* it on PC10
+(0.966→0.982) and FOGRA51 (1.163→1.170), while its max reduction (9.8%,
+13.3%, 27.8%) never beats Powell's on the same dataset.
+
+**Why the tail moves and the median doesn't.** Ordinary least squares
+minimizes squared error in raw XYZ space, which is a metric-agnostic,
+roughly uniform objective across the input domain. CIEDE2000 is not
+uniform: it re-weights lightness, chroma and hue differently depending on
+where in Lab space a pair of colors sits, and (as already established in §3
+above) that re-weighting diverges most sharply from a flat XYZ metric in
+exactly the region a fixed-degree polynomial already struggles with — dark,
+saturated, high-ink-coverage patches. For the bulk of mid-tone samples,
+where ΔE00 and squared-XYZ-error broadly agree on what "close" means, LSQ is
+already doing about as well as any refit can do — there's no daylight
+between the two objectives there, so the median can't improve much (and can
+occasionally get slightly worse, since the optimizer is now explicitly
+trading a little bit of typical-case fit for a lot of worst-case fit). In
+the tail, where the two metrics disagree substantially, directly optimizing
+the metric the paper actually reports — rather than a proxy — lets the
+degree-3 polynomial's fixed, limited coefficient budget get reallocated
+toward the specific patches that are perceptually expensive rather than
+merely numerically large in XYZ. That reallocation is a real win worth
+reporting (worst-case ΔE00 is what determines whether a printer profile
+ever produces a genuinely bad color, not the median), but it is a tail
+effect, not a central-tendency effect, and both should be reported plainly
+as such rather than as "direct-loss training improves accuracy."
+
+One secondary point worth a line in the paper: Powell out-performs
+Nelder-Mead here despite a 10x smaller iteration budget (200 vs. 2000). A
+degree-3 polynomial over 3 inputs has 20 coefficients per output channel ×
+3 channels = 60 free parameters; Nelder-Mead's simplex is well known to
+degrade in reliability well before 60 dimensions, while Powell's
+coordinate-wise line-search scales more gracefully. That the cheaper
+optimizer gives the more consistent (never-worse-than-LSQ) p95/max result is
+a methods point, not a coincidence, and should inform which optimizer is
+used if this approach is extended to CMYK (35 coefficients/channel) or
+n>4.
+
+## 7. LLM as color predictor: gpt-4o is mid-field, gpt-4o-mini is not competitive
+
+`journal/llm/run_llm.py` queries OpenAI chat models with a text prompt
+containing 400 in-context (recipe → XYZ) training examples and asks for a
+JSON XYZ prediction on 100 held-out CMY recipes from PC10 (`build_split` in
+`journal/llm/protocol.py`, seed=42, exact-duplicate recipes dropped before
+splitting). Results (`journal/results/llm/PC10-CMY_summary.csv`):
+
+| model        | median | p95    | max    | n parsed/total |
+|--------------|--------|--------|--------|-----------------|
+| gpt-4o       | 3.034  | 10.642 | 14.621 | 100/100 |
+| gpt-4o-mini  | 9.445  | 29.928 | 44.792 | 100/100 |
+
+Both models parsed cleanly on every one of the 100 queries (no penalty
+applied; `worst_case` and `parsed_only` rows are identical), so these are
+genuine prediction errors, not parse-failure artifacts.
+
+Placed against the full PC10-CMY leaderboard (5-fold CV, n=818, from §1):
+gpt-4o's median of 3.034 lands **between random_forest (1.716)/knn (2.012)
+and decision_tree (4.369)** — worse than every regression method tested
+except decision_tree and the five linear models, but clearly better than
+plain linear regression (6.6+) and much better than gpt-4o-mini.
+gpt-4o-mini's median (9.445) is worse than *every* classical method on this
+dataset, including the linear-model floor (6.6–6.64) — it is, on this
+sample, the single worst predictor tested against PC10-CMY so far. The
+honest one-line summary: **a strong general-purpose LLM, given nothing but
+400 text examples and no gradient-based fitting, lands solidly in the
+middle of a 14-method regression leaderboard — not competitive with GP,
+poly3, SVM, gradient boosting or either MLP, but decisively ahead of raw
+linear regression and roughly on par with decision trees.** A smaller/cheaper
+model (gpt-4o-mini) is not a viable predictor at all here.
+
+**The CV-vs-holdout caveat, stated plainly.** The classical/GP numbers in
+this doc are pooled 5-fold CV results over the *entire* 818-sample CMY
+dataset — every sample predicted exactly once, by a model that never saw it
+during fitting, aggregated over 5 independent train/test splits. The LLM
+numbers are a *single* random 100-sample holdout, "fit" only by pasting 400
+example rows into a static prompt (no refitting, no folds, no repeated
+draws). This is a much noisier estimate: with only 100 test points, the p95
+figure is anchored on roughly 5 samples, and a different seed's 100-row
+draw could shift the median and especially the tail meaningfully. The
+comparison above (gpt-4o sitting between random_forest and decision_tree) is
+a reasonable, useful signal — but it should be reported as "a single-draw
+estimate, consistent with mid-field performance," not with the same
+statistical confidence as the CV numbers, and ideally re-run over multiple
+seeds/folds before being placed in the same results table as the
+cross-validated methods.
+
+## 8. IFRA newsprint generalization: press variation dominates, pooling helps
+
+`journal/pipeline/run_ifra.py` runs three experiments on the 13 valid wb
+press runs (1,485 samples each; bb is currently quarantined — see §9):
+
+- **A. Within-run** — ordinary 5-fold CV inside a single run (train and test
+  on the same press condition).
+- **B. Cross-run** — fit on one full run (1,485), test on a *different* full
+  run (1,485); all 13×12=156 ordered pairs, subset of 4 models
+  (gaussian_process, poly3, svm, mlp_deep).
+- **C. Leave-one-run-out (LOO)** — fit on the other 12 runs pooled
+  (~17,820 samples), test on the 13th; same 4-model subset.
+
+Excluding Gaussian Process (broken within-run — see below), the other three
+subset models give a consistent story (median-of-medians across all
+runs/pairs):
+
+| experiment  | poly3 | svm   | mlp_deep | pooled (poly3/svm/mlp_deep) |
+|-------------|-------|-------|----------|-------------------------------|
+| within-run  | 1.42  | 1.07  | 1.61     | **≈1.4** |
+| cross-run   | 4.58  | 4.36  | 4.59  (mean of pair-medians) | **≈4.0** (median-of-medians) |
+| LOO         | 3.38  | 3.09  | 3.61  (mean of medians)      | **≈3.0–3.1** (median-of-medians) |
+
+**Interpretation.** Within-run error (~1.4 ΔE00) is what these models can
+achieve when asked to predict colors from the *same* press condition they
+were trained on — essentially the achievable floor for this substrate,
+limited mostly by real press repeatability noise (§9: ~0.6–0.8 ΔE00) plus
+whatever the model itself can't capture. Cross-run error (~4.0 ΔE00) is
+roughly **2.8× higher** — asking a model fit on one press run to predict an
+entirely different run's colors cold is dominated by genuine physical
+differences between press conditions (substrate batch, dot gain, ink
+behavior, press wear), not by model quality; every one of the four models
+tested lands in the same 4.0–4.6 range regardless of method, which is
+itself evidence that this is a domain-shift ceiling rather than a
+fitting problem. Pooling training data across runs (LOO: train on 12 runs
+at once instead of 1) recovers a meaningful chunk of that gap — cross-run
+≈4.0 → LOO ≈3.0, roughly a **25% relative reduction**. Seeing many
+different presses' realizations of the same nominal recipe grid lets a
+model start to average over press-to-press idiosyncrasy instead of
+committing to one press's specific behavior, which is directly useful
+evidence for the multi-printer generalization question this dataset was
+acquired to answer: pooling helps, measurably, but it does not fully close
+the gap back to within-run accuracy (LOO's ~3.0 is still roughly 2× the
+within-run ~1.4 floor) — cross-press generalization has a real cost of its
+own, beyond ordinary regression error, that more pooled training data
+narrows but does not eliminate.
+
+**The Gaussian Process within-run anomaly (INVESTIGATED — root cause
+confirmed).** GP's within-run median is **16.64–20.07 ΔE00 across all 13
+wb runs (mean 18.75)** — worse by an order of magnitude than the other
+three models on the identical splits, and, unlike everywhere else in this
+project, GP is the *worst* model rather than the best. This is systemic
+(present in all 13 runs, not one outlier), so it was investigated directly
+rather than reported as-is:
+
+1. Refitting `journal/pipeline/models.py`'s exact GP config
+   (`ConstantKernel()*RBF()+WhiteKernel(1e-5)`, `normalize_y=True`) on one
+   within-run fold (`IFRA-wb-Age_64a_wb-CMYK`, first `KFold(5, seed=42)`
+   split, replicating the pipeline's own per-fold `[0,1]` `MinMaxScaler` on
+   both X and Y) gives a fitted kernel of
+   `0.989**2 * RBF(length_scale=1e-05) + WhiteKernel(noise_level=0.00217)`
+   — **the RBF length_scale has collapsed to sklearn's own lower
+   optimization bound.** The same diagnostic on PC10-CMY (a healthy lab
+   dataset, identical code path) gives `3.38**2 * RBF(length_scale=0.885) +
+   WhiteKernel(1e-05)` — a sane length_scale on the order of the full
+   `[0,1]` input range, which is exactly the regime that produces the
+   0.05 ΔE00 median already reported in §2.
+2. Consequence, verified sample-by-sample: for the Age_64a_wb fold, 4 of
+   the first 5 held-out test predictions are **identical to 8 decimal
+   places** to the training set's mean XYZ (`[23.189, 23.117, 16.955]`) —
+   the model is not predicting the queried recipe at all, it is returning
+   the training set's average color regardless of which of the 297 unseen
+   recipes it is asked about. Only query points that happen to sit almost
+   exactly on top of a training point (inside the now-microscopic kernel
+   bump) get a real, recipe-specific prediction.
+3. **Root cause:** `WhiteKernel(1e-5)` sets a noise floor far below the
+   real point-to-point scatter in this data. §9 below independently
+   measures wb's genuine press repeatability at median ≈0.63–0.8 ΔE00
+   between two measurements of the *identical* recipe on the *identical*
+   press run — small in absolute terms, but far larger than the training
+   data's assumed near-zero noise. Faced with nearby-but-not-identical
+   training inputs producing meaningfully different outputs, under a noise
+   budget that's initialized and constrained to be tiny, the only way the
+   marginal-likelihood optimizer can reconcile this is to shrink the RBF
+   length_scale until "nearby" points are no longer considered similar at
+   all. Once collapsed, any query that isn't essentially an exact
+   duplicate of a training point falls outside the kernel's reach and the
+   posterior mean reverts to the (`normalize_y=True`-inverse-transformed)
+   prior mean — approximately the training set's average color — which is
+   badly wrong for almost every specific, non-average newsprint patch.
+   This is "prior-mean reversion, off-recipe."
+4. **Why cross-run and LOO don't show it, using the identical kernel
+   config:** cross-run's mean pair-median for GP is 4.35 — in line with
+   poly3 (4.58)/svm (4.36), not anomalous — and LOO's is 3.10, the *best*
+   of the four subset models. Both of those experiments test on a
+   *different* run's colors, where genuine press-to-press systematic
+   difference (§8's ~4.0–4.6 ΔE00 domain-shift ceiling) already dominates
+   the error budget for every model tested, GP included. Whatever the GP's
+   internal length-scale is doing, a mean-reverted prediction and a
+   genuinely-extrapolated one land in a similar ballpark once the "right
+   answer" is already that far from any training point for structural
+   (domain-shift) reasons rather than noise reasons — so the pathology is
+   masked, not absent. Within-run is the one experiment that puts GP back
+   in the "dense, smooth, same-domain" regime where it's supposed to
+   dominate (and does, spectacularly, on the lab datasets), which is
+   exactly why the noise-floor mismatch is maximally exposed there instead.
+
+This is a config/data interaction, not evidence that Gaussian Processes
+are unsuitable for this problem — the fix (raising the WhiteKernel noise
+floor, or its bounds, to reflect real newsprint repeatability) is
+straightforward but not yet implemented or re-run, and is recorded as an
+open decision for Phil in the teaching briefing rather than silently
+patched.
+
+## 9. The wb duplicate-patch repeatability finding: a genuine newsprint noise floor
+
+Every one of the 13 wb press-run files contains the same 28 repeated
+patches — a fixed QC subset of the ECI2002/CGATS chart design, present in
+identical form across all 13 runs — meaning the identical nominal CMYK
+recipe is measured twice within a single run's own 1,485-row file, at two
+different physical chart positions. Computing ΔE00 between each such pair
+(364 pairs total, pooled across all 13 runs, using the same
+`make_groups`/pairwise machinery as `journal/pipeline/verify_gp.py`):
+**median 0.634, p95 2.812, max 8.260, mean 0.998**, with per-run medians
+spanning 0.383 (Mbd_103a) to 1.934 (marca_133) — most runs cluster around
+0.5–1.0. Critically, **0 of the 364 pairs are byte-identical**, in sharp
+contrast to PC10/PC11/FOGRA51, where `journal/pipeline/verify_gp.py`
+already documents that every duplicate-recipe pair *is* byte-identical (an
+upstream averaging artifact that makes the "noise floor" computation
+invalid for those three lab datasets — the paper must cite literature
+repeatability, ~0.1–0.3 ΔE00, for those instead). The wb numbers, by
+contrast, are genuine, non-trivial, non-artifactual repeatability: this is
+what re-measuring the same recipe on the same newsprint press run actually
+costs in ΔE00, roughly **2–4× the lab repeatability figure (~0.2–0.5)**
+this document's own reference scale cites for controlled proofing
+conditions — consistent with newsprint's rougher substrate and generally
+higher process variability.
+
+This number is directly useable in the paper as the honest noise floor for
+IFRA within-run results: poly3/svm/mlp_deep's within-run medians of
+~1.1–1.6 ΔE00 (§8) sit at roughly 1.5–2.5× this genuine repeatability floor
+— a solid, unremarkable result for a well-fit regression model, not "at the
+noise floor" the way the (unverified, later partly-invalidated) lab-dataset
+GP claim was originally framed in §2. It also independently corroborates
+the bb quarantine decision (commit `7719a02`): the identical computation
+applied to bb's "duplicate" patches gives a median of 25–28 ΔE00 — proof
+those aren't really duplicate measurements under bb's current chart-layout
+join, confirming that join is wrong (see teaching briefing, open item (a)),
+while wb's ~0.6–0.8 confirms wb's join is sound.
