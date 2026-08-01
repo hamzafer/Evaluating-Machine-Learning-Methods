@@ -43,10 +43,10 @@ def process(dataset_name, input_type, output_type, visualize=False):
         output_pred = model.predict(input_test)
 
         # Convert predicted XYZ to LAB
-        output_pred_lab = xyz2lab(output_pred)  # Replace with your actual conversion after denormalization
+        output_pred_lab = xyz2lab(scaler.inverse_transform(output_pred))
 
         # Convert true XYZ to LAB for the test set
-        output_test_lab = xyz2lab(output_test)
+        output_test_lab = xyz2lab(scaler.inverse_transform(output_test))
 
         # Calculate the error between the predicted and true LAB values
         errors = error(output_pred_lab, output_test_lab)

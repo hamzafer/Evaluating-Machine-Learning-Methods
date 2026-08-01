@@ -1,16 +1,16 @@
 Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
-"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000}",1.5186496789,1.36225275954,6.81943737775,3.67602692142,1.10842036721
-"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 1000}",5.64135264158,5.39507961141,11.7080232717,10.4612752839,2.96779469412
-"{'hidden_layer_sizes': (6,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}",3.48132492657,3.09855409819,8.93630947449,7.38234183371,1.91531548029
-"{'hidden_layer_sizes': (6,), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 1000}",4.79099550379,4.4108457262,12.0885206121,8.93839582607,2.52988329457
-"{'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200}",2.4811354333,1.99407612297,8.25457466377,5.88653977028,1.71576138471
-"{'hidden_layer_sizes': (50, 30, 10), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 500}",2.36356878253,2.08069340187,7.63803645651,5.08784264283,1.42240283075
-"{'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200}",2.4811354333,1.99407612297,8.25457466377,5.88653977028,1.71576138471
-"{'hidden_layer_sizes': (20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 300}",2.44395134933,2.16754585378,7.81507756774,4.81572844433,1.42840716359
-"{'hidden_layer_sizes': (30, 20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 400}",1.88611555825,1.60748807071,6.56149088754,4.05801257858,1.1420852107
-"{'hidden_layer_sizes': (20,), 'activation': 'tanh', 'solver': 'adam', 'max_iter': 200}",1.83341590018,1.64352116511,6.64241551399,4.23226969083,1.1818273665
-"{'hidden_layer_sizes': (20,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 200}",5.04100277499,4.77542974127,11.2795300639,8.86270841477,2.57149552607
-"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'sgd', 'max_iter': 500}",3.31148383549,3.02444771962,9.64059389946,7.26931106656,1.90755373709
-"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 1000}",1.50748088026,1.23267306634,5.6420868544,4.08854101626,1.08489067202
-"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}",2.76628434223,2.47981989486,9.38083795013,5.51045744406,1.71465452297
-"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 1000}",1.50748088026,1.23267306634,5.6420868544,4.08854101626,1.08489067202
+"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'lbfgs', 'max_iter': 1000}",9.2595764554,6.65706853555,56.3677993087,26.6335897588,8.84604227936
+"{'hidden_layer_sizes': (6,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 1000}",27.3137644342,26.0797698637,66.4590464088,51.950508808,13.1089375401
+"{'hidden_layer_sizes': (6,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}",19.9651331855,19.4242533207,55.362642741,38.2423370142,9.90721612695
+"{'hidden_layer_sizes': (6,), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 1000}",27.0389530082,25.8968709094,71.776828512,55.9378016451,14.3009091208
+"{'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200}",15.0584127987,12.9769722161,53.6068282468,33.8420496414,9.78079486393
+"{'hidden_layer_sizes': (50, 30, 10), 'activation': 'tanh', 'solver': 'sgd', 'max_iter': 500}",15.0755148909,12.7479562054,50.9153517363,38.1791342262,10.41033421
+"{'hidden_layer_sizes': (10,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 200}",15.0584127987,12.9769722161,53.6068282468,33.8420496414,9.78079486393
+"{'hidden_layer_sizes': (20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 300}",16.2491720075,13.3235750508,64.9137423879,36.296429197,10.7889825692
+"{'hidden_layer_sizes': (30, 20, 10), 'activation': 'relu', 'solver': 'adam', 'max_iter': 400}",11.9115040207,9.53227648648,55.0129449068,27.8870555611,8.55608072467
+"{'hidden_layer_sizes': (20,), 'activation': 'tanh', 'solver': 'adam', 'max_iter': 200}",14.106772393,10.2513860689,54.679055052,38.7772690825,12.0733355827
+"{'hidden_layer_sizes': (20,), 'activation': 'logistic', 'solver': 'adam', 'max_iter': 200}",28.4567041428,28.1205789654,73.2143674417,49.6106734946,12.9815765742
+"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'sgd', 'max_iter': 500}",21.8655432516,20.1609673784,53.4299364121,42.2344911252,10.8287005637
+"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 1000}",9.11684837888,6.28579652427,55.4007574472,24.006435637,8.39020428389
+"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'adam', 'max_iter': 1000}",18.9223659284,16.8404586178,57.2539811052,41.0222528741,11.3245359862
+"{'hidden_layer_sizes': (20,), 'activation': 'relu', 'solver': 'lbfgs', 'max_iter': 1000}",9.11684837888,6.28579652427,55.4007574472,24.006435637,8.39020428389

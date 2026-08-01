@@ -34,8 +34,8 @@ def process(dataset_name, input_type, output_type, degree, visualize=False):
     xyz_pred = model.predict(cmy_test)
 
     # Convert predicted and test XYZ values to Lab
-    lab_pred = xyz2lab(xyz_pred)
-    lab_test = xyz2lab(xyz_test)
+    lab_pred = xyz2lab(scaler.inverse_transform(xyz_pred))
+    lab_test = xyz2lab(scaler.inverse_transform(xyz_test))
 
     # Calculate the error between the predicted and actual Lab values
     errors = error(lab_pred, lab_test)
