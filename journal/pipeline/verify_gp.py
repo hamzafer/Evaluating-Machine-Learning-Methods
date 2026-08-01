@@ -1,5 +1,15 @@
 """GP headline verification: plain KFold vs GroupKFold + measurement noise floor.
 Run: .venv/bin/python -m journal.pipeline.verify_gp
+
+INTERPRETATION NOTE (supersedes commit cfc4bb3's message): the noise_floor
+rows are 0.000 because every duplicate-recipe pair in these CSVs is
+byte-identical (XYZ equal to full float precision) — an upstream
+averaging/duplication artifact, NOT evidence of perfect measurement
+repeatability. These rows are therefore INVALID as a noise estimate; the
+datasets contain no internal repeatability information. The paper must cite
+typical spectrophotometer repeatability from literature (~0.1-0.3 dE00)
+instead, and must not claim "at the measurement noise floor" from this CSV.
+The grouped-vs-plain CV comparison is unaffected and remains the valid result.
 """
 from itertools import combinations
 from pathlib import Path
