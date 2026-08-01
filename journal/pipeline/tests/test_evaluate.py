@@ -1,5 +1,5 @@
 import numpy as np
-from journal.pipeline.evaluate import make_groups, cross_validate
+from journal.pipeline.evaluate import make_groups, cross_validate, train_test
 
 
 def test_make_groups_identical_rows_share_id():
@@ -22,3 +22,11 @@ def test_grouped_cv_keeps_duplicates_out_of_train():
                                 groups=make_groups(X))
     assert np.median(de_plain) < 0.01          # memorization
     assert np.median(de_grouped) > np.median(de_plain)  # grouped CV blocks it
+
+
+def test_train_test_perfect_linear_map():
+    rng = np.random.RandomState(1)
+    Xtr, Xte = rng.uniform(0, 100, (200, 3)), rng.uniform(10, 90, (50, 3))
+    from sklearn.linear_model import LinearRegression
+    de = train_test(Xtr, Xtr * 0.9, Xte, Xte * 0.9, LinearRegression)
+    assert de.shape == (50,) and np.median(de) < 0.05   # exactly learnable map

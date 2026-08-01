@@ -47,3 +47,13 @@ def cross_validate(X: np.ndarray, Y: np.ndarray, model_factory, groups=None) -> 
         pred_xyz = np.clip(pred_xyz, 0.0, None)          # tristimulus can't be negative
         de[te] = delta_e00(pred_xyz, Y[te])
     return de
+
+
+def train_test(Xtr, Ytr, Xte, Yte, model_factory) -> np.ndarray:
+    """Fit on (Xtr,Ytr), return per-sample DE00 on (Xte,Yte). One fold's logic."""
+    sx = MinMaxScaler().fit(Xtr)
+    sy = MinMaxScaler().fit(Ytr)
+    model = model_factory()
+    model.fit(sx.transform(Xtr), sy.transform(Ytr))
+    pred = sy.inverse_transform(np.asarray(model.predict(sx.transform(Xte))))
+    return delta_e00(np.clip(pred, 0.0, None), Yte)
