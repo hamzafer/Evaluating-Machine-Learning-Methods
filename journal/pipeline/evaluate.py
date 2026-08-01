@@ -3,13 +3,19 @@ denormalized XYZ. Every test sample is predicted exactly once, so summary
 statistics pool over the full dataset rather than one 10% holdout.
 """
 import numpy as np
-from sklearn.model_selection import KFold
+from sklearn.model_selection import KFold, GroupKFold
 from sklearn.preprocessing import MinMaxScaler
 
 from .color import delta_e00
 
 SEED = 42
 FOLDS = 5
+
+
+def make_groups(X: np.ndarray) -> np.ndarray:
+    """One group id per distinct input recipe (row), so duplicates co-travel."""
+    _, inverse = np.unique(np.round(X, 6), axis=0, return_inverse=True)
+    return inverse
 
 
 def summarize(de: np.ndarray) -> dict:
@@ -24,11 +30,14 @@ def summarize(de: np.ndarray) -> dict:
     }
 
 
-def cross_validate(X: np.ndarray, Y: np.ndarray, model_factory) -> np.ndarray:
+def cross_validate(X: np.ndarray, Y: np.ndarray, model_factory, groups=None) -> np.ndarray:
     """Return pooled per-sample ΔE00 over 5-fold CV."""
     de = np.empty(len(X))
-    kf = KFold(n_splits=FOLDS, shuffle=True, random_state=SEED)
-    for tr, te in kf.split(X):
+    if groups is None:
+        splits = KFold(n_splits=FOLDS, shuffle=True, random_state=SEED).split(X)
+    else:
+        splits = GroupKFold(n_splits=FOLDS).split(X, groups=groups)
+    for tr, te in splits:
         sx = MinMaxScaler().fit(X[tr])
         sy = MinMaxScaler().fit(Y[tr])
         model = model_factory()
