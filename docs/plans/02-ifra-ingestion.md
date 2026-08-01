@@ -50,6 +50,15 @@ git add journal/data/processed/ifra/README.md
 git commit -m "journal: IFRA zip inventory — actual run counts and CGATS field map"
 ```
 
+> **AMENDMENT (post-Task-1 inventory — overrides the code below where they conflict).**
+> Ground truth from `journal/data/processed/ifra/README.md`:
+> 1. **Two formats, two readers.** wb (13 files) is genuine CGATS as assumed. bb is NOT CGATS: 4-line preamble + plain tab header (`SampleID  XYZ-X … CIE-Lab-b  380nm…730nm`); add `parse_bb(path)` alongside `parse_cgats`.
+> 2. **Skip the 5 `lab*`-prefixed bb files** — duplicate exports, not runs. True runs: 13 wb + 25 bb = 38.
+> 3. **bb has no CMYK columns.** Build the chart table (SAMPLE_ID → CMYK, byte-identical across all wb files) from any wb file and join it into every bb run on SampleID; assert no unmatched ids.
+> 4. **Derive XYZ/Lab from spectral uniformly for ALL runs** (wb and bb). Where bb ships native XYZ/Lab, do not use it as output — instead assert median |ΔE00(derived, native)| < 1 as a free cross-check of our spectral integration, and record the actual value in the ingestion log.
+> 5. Spectral band naming differs (`SPECTRAL_NM_380` vs `380nm`) — the `spectral_cols` regex must match both (it does).
+> 6. Filenames are inconsistent — never parse metadata from filenames; use file contents + backing directory only.
+
 ### Task 2: CGATS parser
 
 **Files:**
