@@ -52,4 +52,15 @@ def registry() -> dict:
         specs[f'{ds}-CMYK'] = DatasetSpec(
             name=f'{ds}-CMYK', csv=csv,
             input_cols=('CMYK_C', 'CMYK_M', 'CMYK_Y', 'CMYK_K'), filter_k_zero=False)
+
+    # IFRA 2005 newsprint (wb/bb kept separate per Phil). One DatasetSpec per
+    # press-run CSV produced by journal.pipeline.ingest_ifra.
+    ifra_root = REPO_ROOT / 'journal' / 'data' / 'processed' / 'ifra'
+    for backing in ('wb', 'bb'):
+        for csv in sorted((ifra_root / backing).glob('*.csv')):
+            name = f'IFRA-{backing}-{csv.stem}-CMYK'
+            specs[name] = DatasetSpec(
+                name=name, csv=csv,
+                input_cols=('CMYK_C', 'CMYK_M', 'CMYK_Y', 'CMYK_K'),
+                filter_k_zero=False)
     return specs
