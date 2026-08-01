@@ -39,8 +39,15 @@ def main():
                   f"[{time.time()-t0:5.1f}s]", flush=True)
         out_dir = RESULTS / ds_name
         out_dir.mkdir(parents=True, exist_ok=True)
-        pd.DataFrame(rows).sort_values('median').to_csv(out_dir / 'summary.csv', index=False)
-        print(f"wrote {out_dir/'summary.csv'}", flush=True)
+        out_csv = out_dir / 'summary.csv'
+        new = pd.DataFrame(rows)
+        if out_csv.exists():
+            # Merge-update: replace rows for models just run, keep all others.
+            # A partial --models run must never clobber a fuller summary.
+            old = pd.read_csv(out_csv)
+            new = pd.concat([old[~old.model.isin(new.model)], new], ignore_index=True)
+        new.sort_values('median').to_csv(out_csv, index=False)
+        print(f"wrote {out_csv}", flush=True)
 
 
 if __name__ == '__main__':
