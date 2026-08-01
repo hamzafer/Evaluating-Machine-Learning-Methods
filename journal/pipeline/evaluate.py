@@ -41,6 +41,8 @@ def cross_validate(X: np.ndarray, Y: np.ndarray, model_factory, groups=None) -> 
         sx = MinMaxScaler().fit(X[tr])
         sy = MinMaxScaler().fit(Y[tr])
         model = model_factory()
+        if hasattr(model, 'set_scaler'):
+            model.set_scaler(sy)
         model.fit(sx.transform(X[tr]), sy.transform(Y[tr]))
         pred_norm = np.asarray(model.predict(sx.transform(X[te])))
         pred_xyz = sy.inverse_transform(pred_norm)       # back to real 0-100 XYZ
@@ -54,6 +56,8 @@ def train_test(Xtr, Ytr, Xte, Yte, model_factory) -> np.ndarray:
     sx = MinMaxScaler().fit(Xtr)
     sy = MinMaxScaler().fit(Ytr)
     model = model_factory()
+    if hasattr(model, 'set_scaler'):
+        model.set_scaler(sy)
     model.fit(sx.transform(Xtr), sy.transform(Ytr))
     pred = sy.inverse_transform(np.asarray(model.predict(sx.transform(Xte))))
     return delta_e00(np.clip(pred, 0.0, None), Yte)
