@@ -1,0 +1,42 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{1}{section.2}\protected@file@percent }
+\citation{fogra2020}
+\citation{fogra2020}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{2}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Datasets}{2}{subsection.3.1}\protected@file@percent }
+\newlabel{sec:datasets}{{3.1}{2}{Datasets}{subsection.3.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Datasets used in the $n=3$ and $n=4$ conditions. Row counts are pooled across all 5 cross-validation folds (Section~\ref {sec:protocol}), so every sample is predicted exactly once.}}{2}{table.1}\protected@file@percent }
+\newlabel{tab:datasets}{{1}{2}{Datasets used in the $n=3$ and $n=4$ conditions. Row counts are pooled across all 5 cross-validation folds (Section~\ref {sec:protocol}), so every sample is predicted exactly once}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Models}{2}{subsection.3.2}\protected@file@percent }
+\newlabel{sec:models}{{3.2}{2}{Models}{subsection.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Evaluation Protocol}{2}{subsection.3.3}\protected@file@percent }
+\newlabel{sec:protocol}{{3.3}{2}{Evaluation Protocol}{subsection.3.3}{}}
+\citation{sharma2005ciede2000}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Model registry (14 methods). Configurations match the AIC 2025 paper's best configs except where marked (*), which were degenerate there (Lasso/Elastic Net at $\alpha =1.0$ collapsed to a constant predictor; SVR at $\varepsilon =0.1$ produced an insensitivity tube covering 10\% of the target range) and are replaced with standard, non-degenerate values.}}{3}{table.2}\protected@file@percent }
+\newlabel{tab:models}{{2}{3}{Model registry (14 methods). Configurations match the AIC 2025 paper's best configs except where marked (*), which were degenerate there (Lasso/Elastic Net at $\alpha =1.0$ collapsed to a constant predictor; SVR at $\varepsilon =0.1$ produced an insensitivity tube covering 10\% of the target range) and are replaced with standard, non-degenerate values}{table.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Correction to the AIC 2025 conference results.}{3}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{4}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}$n=3$ (CMY) -- Corrected}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Median, 95th-percentile, and maximum $\Delta E_{00}$ per model for the $n=3$ (CMY) condition on the three printer datasets, 818 $K=0$ samples each. All values from 5-fold cross-validation with every sample predicted exactly once; $\Delta E_{00}$ computed on denormalized XYZ (D50 illuminant, 2\textdegree {} standard observer), per Section~\ref {sec:protocol}. Models are sorted by PC10 median. Source: \texttt  {journal/results/\{PC10,PC11,FOGRA51\}-CMY/summary.csv}.}}{4}{table.3}\protected@file@percent }
+\newlabel{tab:n3}{{3}{4}{Median, 95th-percentile, and maximum $\Delta E_{00}$ per model for the $n=3$ (CMY) condition on the three printer datasets, 818 $K=0$ samples each. All values from 5-fold cross-validation with every sample predicted exactly once; $\Delta E_{00}$ computed on denormalized XYZ (D50 illuminant, 2\textdegree {} standard observer), per Section~\ref {sec:protocol}. Models are sorted by PC10 median. Source: \texttt {journal/results/\{PC10,PC11,FOGRA51\}-CMY/summary.csv}}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}$n=4$ (CMYK) and the $n{=}3 \to n{=}4$ Comparison}{4}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Median $\Delta E_{00}$ per model across the three CMY datasets (818 $K=0$ samples each, 5-fold cross-validation), ranked by mean median across datasets. Log scale; the dashed line marks the just-noticeable difference ($\Delta E_{00} \approx 1$).}}{5}{figure.1}\protected@file@percent }
+\newlabel{fig:n3comparison}{{1}{5}{Median $\Delta E_{00}$ per model across the three CMY datasets (818 $K=0$ samples each, 5-fold cross-validation), ranked by mean median across datasets. Log scale; the dashed line marks the just-noticeable difference ($\Delta E_{00} \approx 1$)}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Gaussian Process vs.\ Noise Floor}{5}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}IFRA Newsprint: Within-Run, Cross-Run, and Leave-One-Out}{5}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Direct $\Delta E_{00}$ Loss}{5}{subsection.4.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Median $\Delta E_{00}$ per model on PC10 at $n=3$ (CMY, 818 samples) versus $n=4$ (CMYK, 1{,}617 samples). Polynomial regression degrades $\times $3.4 with the added K channel, while Gaussian process regression degrades only $\times $1.2, the two highlighted comparisons.}}{6}{figure.2}\protected@file@percent }
+\newlabel{fig:n3vsn4}{{2}{6}{Median $\Delta E_{00}$ per model on PC10 at $n=3$ (CMY, 818 samples) versus $n=4$ (CMYK, 1{,}617 samples). Polynomial regression degrades $\times $3.4 with the added K channel, while Gaussian process regression degrades only $\times $1.2, the two highlighted comparisons}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}LLM-as-Color-Predictor}{6}{subsection.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}$n=7$ (CMYKOGV)}{6}{subsection.4.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{6}{section.5}\protected@file@percent }
+\bibstyle{unsrtnat}
+\bibdata{refs}
+\bibcite{fogra2020}{{1}{2020}{{Fogra Research Institute}}{{}}}
+\bibcite{sharma2005ciede2000}{{2}{2005}{{Sharma et~al.}}{{Sharma, Wu, and Dalal}}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{7}{section.6}\protected@file@percent }
+\gdef \@abspage@last{7}

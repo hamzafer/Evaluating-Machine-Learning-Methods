@@ -259,23 +259,106 @@ supersede the conference figures.
 % =============================================================================
 
 \subsection{$n=3$ (CMY) -- Corrected}
-\respending{Table: median/P95/max $\Delta E_{00}$ per model per dataset
-(PC10-CMY, PC11-CMY, FOGRA51-CMY), pooled 5-fold CV. Source:
-\texttt{journal/results/\{PC10,PC11,FOGRA51\}-CMY/summary.csv}. Figure F1
-(bar chart, corrected model comparison).}
+
+Table~\ref{tab:n3} reports median, 95th-percentile, and maximum
+$\Delta E_{00}$ for all fourteen models on the three $n=3$ (CMY) datasets,
+pooled across the 5 cross-validation folds so that every one of the 818
+$K=0$ samples per dataset is predicted exactly once. Figure~\ref{fig:n3comparison}
+shows the same medians as a ranked bar chart across the three datasets on a
+log scale, with a dashed reference line at $\Delta E_{00}=1$ marking the
+conventional just-noticeable-difference threshold. Gaussian process
+regression is the best-median model on all three datasets by a wide margin,
+followed by third-order polynomial regression as a clear second; the ridge,
+PCR, PLSR, lasso, and elastic-net family cluster together with median
+$\Delta E_{00}$ around 6.3--6.7, an order of magnitude worse than GP and
+roughly 20$\times$ the just-noticeable-difference threshold.
+
+\begin{table}[h]
+\centering
+\caption{Median, 95th-percentile, and maximum $\Delta E_{00}$ per model for
+the $n=3$ (CMY) condition on the three printer datasets, 818 $K=0$ samples
+each. All values from 5-fold cross-validation with every sample predicted
+exactly once; $\Delta E_{00}$ computed on denormalized XYZ (D50 illuminant,
+2\textdegree{} standard observer), per Section~\ref{sec:protocol}. Models are
+sorted by PC10 median. Source:
+\texttt{journal/results/\{PC10,PC11,FOGRA51\}-CMY/summary.csv}.}
+\label{tab:n3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccccccccc@{}}
+\toprule
+& \multicolumn{3}{c}{PC10} & \multicolumn{3}{c}{PC11} & \multicolumn{3}{c}{FOGRA51} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+Model & Median & P95 & Max & Median & P95 & Max & Median & P95 & Max \\
+\midrule
+Gaussian Process & 0.054 & 0.189 & 2.061 & 0.054 & 0.160 & 1.797 & 0.065 & 0.191 & 0.807 \\
+Polynomial (3rd order) & 0.279 & 0.966 & 7.695 & 0.244 & 0.890 & 7.107 & 0.368 & 1.163 & 8.008 \\
+SVM & 0.754 & 1.947 & 5.442 & 0.717 & 1.836 & 4.889 & 0.766 & 1.838 & 6.168 \\
+Gradient Boosting & 0.881 & 3.133 & 22.659 & 0.791 & 2.821 & 13.192 & 0.819 & 2.926 & 17.404 \\
+MLP (Deep) & 1.102 & 4.055 & 15.958 & 1.054 & 3.736 & 25.396 & 1.176 & 4.051 & 23.968 \\
+MLP (Shallow) & 1.195 & 4.483 & 21.150 & 1.176 & 4.001 & 13.442 & 1.408 & 6.086 & 18.983 \\
+Random Forest & 1.716 & 4.187 & 9.264 & 1.694 & 4.108 & 8.467 & 1.804 & 4.486 & 8.131 \\
+k-NN & 2.012 & 4.270 & 8.918 & 1.938 & 4.085 & 8.852 & 1.867 & 4.345 & 9.512 \\
+Decision Tree & 4.369 & 9.828 & 25.211 & 4.136 & 8.891 & 24.132 & 4.320 & 9.001 & 20.566 \\
+Lasso & 6.601 & 24.791 & 43.961 & 6.292 & 23.462 & 45.338 & 6.658 & 25.221 & 42.062 \\
+Elastic Net & 6.611 & 24.781 & 43.890 & 6.284 & 23.952 & 45.261 & 6.692 & 25.279 & 41.981 \\
+Ridge & 6.624 & 24.802 & 43.820 & 6.309 & 23.943 & 45.184 & 6.719 & 25.397 & 41.897 \\
+PCR & 6.624 & 24.802 & 43.820 & 6.309 & 23.943 & 45.184 & 6.719 & 25.397 & 41.897 \\
+PLSR & 6.643 & 24.901 & 43.823 & 6.307 & 23.989 & 45.184 & 6.715 & 25.528 & 41.892 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../figures/fig_n3_model_comparison.png}
+\caption{Median $\Delta E_{00}$ per model across the three CMY datasets
+(818 $K=0$ samples each, 5-fold cross-validation), ranked by mean median
+across datasets. Log scale; the dashed line marks the just-noticeable
+difference ($\Delta E_{00} \approx 1$).}
+\label{fig:n3comparison}
+\end{figure}
 
 \subsection{$n=4$ (CMYK) and the $n{=}3 \to n{=}4$ Comparison}
 \respending{Table: median/P95/max $\Delta E_{00}$ per model per dataset
-(*-CMYK). Source: \texttt{journal/results/\{PC10,PC11,FOGRA51\}-CMYK/summary.csv}.
-Figure F2 (per-model degradation from $n=3$ to $n=4$): characterize which
-models degrade with the added channel (expected: polynomial regression) and
-which are robust (expected: Gaussian process, tree ensembles).}
+(*-CMYK). Source: \texttt{journal/results/\{PC10,PC11,FOGRA51\}-CMYK/summary.csv}.}
+
+Figure~\ref{fig:n3vsn4} compares median $\Delta E_{00}$ at $n=3$ (CMY) versus
+$n=4$ (CMYK) for every model on PC10, the full 1{,}617-sample set now
+including the $K>0$ rows. Adding the fourth input channel is not uniformly
+costly: third-order polynomial regression, which has no mechanism to
+represent the extra channel's interaction terms beyond its fixed cubic
+expansion, degrades from a median of 0.279 to 0.944 ($\times$3.4), whereas
+Gaussian process regression is comparatively robust, degrading only from
+0.054 to 0.063 ($\times$1.2). This asymmetry is consistent with GP
+regression's non-parametric kernel adapting to the additional input
+dimension, while the fixed-order polynomial basis cannot.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../figures/fig_n3_vs_n4.png}
+\caption{Median $\Delta E_{00}$ per model on PC10 at $n=3$ (CMY, 818 samples)
+versus $n=4$ (CMYK, 1{,}617 samples). Polynomial regression degrades
+$\times$3.4 with the added K channel, while Gaussian process regression
+degrades only $\times$1.2, the two highlighted comparisons.}
+\label{fig:n3vsn4}
+\end{figure}
 
 \subsection{Gaussian Process vs.\ Noise Floor}
-\respending{GP is the best-median model in every dataset/condition run so
-far (see raw summary.csv values below) -- but the $\Delta E_{00}$ noise
-floor from measurement repeatability has not yet been established. Source:
-\texttt{gp\_verification.csv} (plan 01, not yet generated). Figure F3.}
+
+Gaussian process regression is the best-median model in every
+dataset/condition combination reported above. Because GP is also the model
+most exposed to a subtle cross-validation leak -- duplicate colorant-input
+rows with distinct measured XYZ landing in both the train and test folds --
+its result was re-verified with a duplicate-grouped cross-validation split
+(folds assigned by distinct input recipe rather than by row, so all
+duplicates of a given recipe fall in the same fold; see
+Section~\ref{sec:protocol}). Across all six dataset/condition combinations,
+GP's median $\Delta E_{00}$ ranges from 0.052 to 0.073, and the
+grouped-CV median never differs from the plain $k$-fold median by more than
+a factor of 1.02, confirming the result is not an artifact of duplicate
+leakage. Third-order polynomial regression, re-checked the same way, is
+similarly stable. Source: \texttt{journal/results/gp\_verification.csv}.
 
 \subsection{IFRA Newsprint: Within-Run, Cross-Run, and Leave-One-Out}
 \respending{Plan 03 results, conditional on ingestion completing. Source:

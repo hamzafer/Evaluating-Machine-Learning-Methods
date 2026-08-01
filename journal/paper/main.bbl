@@ -1,0 +1,22 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Fogra Research Institute}(2020)]{fogra2020}
+{Fogra Research Institute}.
+\newblock {FOGRA51} and {FOGRA52} characterisation data (version 1.0) [data
+  set].
+\newblock
+  \url{https://fogra.org/en/downloads/work-tools/characterisation-data}, 2020.
+
+\bibitem[Sharma et~al.(2005)Sharma, Wu, and Dalal]{sharma2005ciede2000}
+Gaurav Sharma, Wencheng Wu, and Edul~N. Dalal.
+\newblock The {CIEDE2000} color-difference formula: Implementation notes,
+  supplementary test data, and mathematical observations.
+\newblock \emph{Color Research \& Application}, 30\penalty0 (1):\penalty0
+  21--30, 2005.
+
+\end{thebibliography}
