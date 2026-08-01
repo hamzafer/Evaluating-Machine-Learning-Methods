@@ -1,0 +1,46 @@
+{
+  "sample_id": "271.0",
+  "model": "gpt-4o",
+  "dataset": "PC10-CMY",
+  "response": {
+    "id": "chatcmpl-E83rq027TefpH90X6cmWXdZ12NFGo",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "```json\n{\"X\": 10.45, \"Y\": 15.98, \"Z\": 30.14}\n```",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": [],
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null
+        }
+      }
+    ],
+    "created": 1785590198,
+    "model": "gpt-4o-2024-08-06",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": "default",
+    "system_fingerprint": "fp_684acb85fd",
+    "usage": {
+      "completion_tokens": 28,
+      "prompt_tokens": 12084,
+      "total_tokens": 12112,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": null,
+        "cached_tokens": 11904
+      }
+    }
+  }
+}
