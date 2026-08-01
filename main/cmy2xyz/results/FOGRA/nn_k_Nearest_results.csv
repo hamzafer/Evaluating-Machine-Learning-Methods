@@ -1,4 +1,4 @@
 Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
-"{'model': <class 'sklearn.neighbors._regression.KNeighborsRegressor'>, 'n_neighbors': 5, 'weights': 'uniform'}",1.3004328052,1.01896586292,5.68229920734,3.62840568565,1.06504825374
-"{'model': <class 'sklearn.neighbors._regression.KNeighborsRegressor'>, 'n_neighbors': 10, 'weights': 'distance'}",1.36058018499,1.11256421617,5.90984195118,3.80789651316,1.10360733082
-"{'model': <class 'sklearn.neighbors._regression.KNeighborsRegressor'>, 'n_neighbors': 5, 'weights': 'uniform'}",1.3004328052,1.01896586292,5.68229920734,3.62840568565,1.06504825374
+"{'model': <class 'sklearn.neighbors._regression.KNeighborsRegressor'>, 'n_neighbors': 5, 'weights': 'uniform'}",7.62797521065,5.66418757781,45.8257956935,20.8336607057,7.44139693805
+"{'model': <class 'sklearn.neighbors._regression.KNeighborsRegressor'>, 'n_neighbors': 10, 'weights': 'distance'}",7.77016851219,5.99565661073,43.5748117464,19.2880201138,7.38346475388
+"{'model': <class 'sklearn.neighbors._regression.KNeighborsRegressor'>, 'n_neighbors': 5, 'weights': 'uniform'}",7.62797521065,5.66418757781,45.8257956935,20.8336607057,7.44139693805

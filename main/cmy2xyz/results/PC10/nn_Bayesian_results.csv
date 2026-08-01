@@ -1,3 +1,3 @@
 Configuration,Mean Error,Median Error,Max Error,P95 Error,Std Dev
-"{'model': <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>, 'random_state': 42}",1.2720821823,0.979734716604,4.76112565879,3.22047551871,1.00449833106
-"{'model': <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>, 'random_state': 42}",1.2720821823,0.979734716604,4.76112565879,3.22047551871,1.00449833106
+"{'model': <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>, 'random_state': 42}",7.70410853431,6.00030941792,36.4723735874,19.6860221476,6.55706857002
+"{'model': <class 'sklearn.gaussian_process._gpr.GaussianProcessRegressor'>, 'random_state': 42}",7.70410853431,6.00030941792,36.4723735874,19.6860221476,6.55706857002
