@@ -1,0 +1,5 @@
+model_id,variant,median,p95,max,mean,n_parsed,n_total,penalty
+gpt-4o,parsed_only,3.034,10.642,14.621,4.069,100,100,
+gpt-4o,worst_case,3.034,10.642,14.621,4.069,100,100,30.0
+gpt-4o-mini,parsed_only,9.445,29.928,44.792,11.717,100,100,
+gpt-4o-mini,worst_case,9.445,29.928,44.792,11.717,100,100,30.0
