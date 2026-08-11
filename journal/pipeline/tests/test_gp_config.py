@@ -5,7 +5,10 @@ old `WhiteKernel(1e-5)` init seeded a local-optimum basin in which the RBF
 length_scale collapses to its lower bound and off-recipe predictions revert to
 the prior mean (~18-20 median dE00 on newsprint). The unified config —
 `WhiteKernel(noise_level=1e-3, noise_level_bounds=(1e-9, 1e5))` +
-`n_restarts_optimizer=10` — starts from a neutral noise level and must:
+`n_restarts_optimizer=15` (15, not 10: with the widened bounds, 10 restart
+draws missed the healthy basin on the noisiest pooled-LOO fit, IFRA
+marca_133; the fixed seed keeps the first 10 draws, so 15 is equal-or-better
+in LML everywhere) — starts from a neutral noise level and must:
   1. NOT collapse on data with genuine measurement noise at the newsprint
      scale (noise-to-signal variance ratio ~2e-3);
   2. stay never-worse on near-noise-free (coated-paper-like) data vs the old
@@ -74,7 +77,7 @@ def test_unified_config_is_frozen():
     gpr = model.estimator
     assert isinstance(gpr, GaussianProcessRegressor)
     assert gpr.normalize_y is True
-    assert gpr.n_restarts_optimizer == 10
+    assert gpr.n_restarts_optimizer == 15
     assert gpr.random_state == SEED
     white = gpr.kernel.k2
     assert isinstance(white, WhiteKernel)

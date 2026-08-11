@@ -69,10 +69,15 @@ def registry() -> dict:
         # noise init 1e-3 (the old 1e-5 init seeded a length-scale-collapse
         # basin on newsprint/KCMYG), lower bound widened to 1e-9 so clean
         # coated data can fit noise below 1e-5; restarts escape bad basins.
+        # n_restarts=15 (not 10): with the widened bounds the restart inits
+        # span 14 decades of noise level, and 10 draws missed the healthy
+        # basin on the noisiest pooled-LOO fit (IFRA marca_133); 15 recovers
+        # it, and with the fixed seed the first 10 draws are unchanged, so
+        # the chosen optimum is equal-or-better in LML everywhere.
         'gaussian_process': lambda: FitSubsampled(GaussianProcessRegressor(
             kernel=ConstantKernel() * RBF()
                    + WhiteKernel(noise_level=1e-3, noise_level_bounds=(1e-9, 1e5)),
-            normalize_y=True, n_restarts_optimizer=10, random_state=SEED)),
+            normalize_y=True, n_restarts_optimizer=15, random_state=SEED)),
         'mlp_shallow': lambda: MLPRegressor(hidden_layer_sizes=(64,), solver='lbfgs',
                                             max_iter=2000, random_state=SEED),
         'mlp_deep': lambda: MLPRegressor(hidden_layer_sizes=(64, 64, 64), solver='lbfgs',
