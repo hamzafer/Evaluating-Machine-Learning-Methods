@@ -65,8 +65,13 @@ def registry() -> dict:
         'random_forest': lambda: RandomForestRegressor(n_estimators=200, max_depth=15, random_state=SEED),
         'gradient_boost': lambda: MultiOutputRegressor(GradientBoostingRegressor(
             n_estimators=200, learning_rate=0.05, max_depth=5, random_state=SEED)),
+        # Plan 10 unified GP config (one config for every dataset): neutral
+        # noise init 1e-3 (the old 1e-5 init seeded a length-scale-collapse
+        # basin on newsprint/KCMYG), lower bound widened to 1e-9 so clean
+        # coated data can fit noise below 1e-5; restarts escape bad basins.
         'gaussian_process': lambda: FitSubsampled(GaussianProcessRegressor(
-            kernel=ConstantKernel() * RBF() + WhiteKernel(1e-5),
+            kernel=ConstantKernel() * RBF()
+                   + WhiteKernel(noise_level=1e-3, noise_level_bounds=(1e-9, 1e5)),
             normalize_y=True, n_restarts_optimizer=10, random_state=SEED)),
         'mlp_shallow': lambda: MLPRegressor(hidden_layer_sizes=(64,), solver='lbfgs',
                                             max_iter=2000, random_state=SEED),
