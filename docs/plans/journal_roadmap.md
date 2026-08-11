@@ -90,7 +90,10 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 | APTEC PC11 (coated paper) | CMY(K) | Available |
 | FOGRA51 (reference) | CMY(K) | Available |
 | IFRA newsprint (wb/bb) | CMYK + spectral | Received 29 Mar 2026 (`journal/data/raw/Ifra-{wb,bb}.zip`); keep wb/bb separate — wb is the industry norm, bb has more runs |
-| n>4 colorant datasets | CMYKOGV+ | Not yet received — Phil to ask Will (ex-Kodak) |
+| n=5 KCMYG | 5-ink (C M Y K G) | **Received 11 Aug 2026** — `journal/data/raw/ncolor/KCMYG_5clr_spectral.txt`, spectral, 2214 patches |
+| n=7 CMYKOGV (APTEC) | 7-ink | **Received 11 Aug 2026** — `.../APTEC_CMYKOGV_7clr_xyzlab.txt`, XYZ+Lab, 1624 patches |
+| n=7 CMYKOGB (Apex) | 7-ink | **Received 11 Aug 2026** — `.../Apex_CMYKOGB_7clr_spectral.txt`, spectral, 2000 patches |
+| More n-colour sets | n-colour | Phil to check with Marty (pending) |
 | Potential new prints | n-colour | Depends on RIP control |
 
 ## Timeline
