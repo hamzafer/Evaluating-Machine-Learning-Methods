@@ -5,10 +5,11 @@ Extended paper for MDPI Technologies special issue, building on the AIC 2025 con
 ## Target Journal
 
 - **Journal:** MDPI Technologies (Impact Factor 3.6, 5-yr IF 4.2; Phil, Jul 2026: "impact factor >5")
-- **Special issue:** "AI-Driven Color Models for Imaging, Formulation, Appearance Measurement and Computer Vision"
-- **Guest editors:** Eric J.J. Kirchner, Stephen Westland
-- **Submission deadline:** 30 August 2026
-- **Open access APC:** ~$1250 (funding TBD)
+- **Special issue:** "AI-Driven Color Models for Imaging, Formulation, Appearance Measurement and Computer Vision" (Technologies, ISSN 2227-7080)
+- **Guest editors:** Dr. Eric J. J. Kirchner (Zhejiang University), Prof. Dr. Stephen Westland (University of Leeds)
+- **Submission deadline:** Sunday 30 August 2026 (CONFIRMED via calendar invite 11 Aug 2026 — end of August, not September)
+- **Open access APC:** **1800 CHF** (~US$2,050 — corrected 11 Aug 2026 from earlier ~$1250 estimate; funding TBD, raise with Phil)
+- **Author instructions / LaTeX template:** https://www.mdpi.com/journal/technologies/instructions
 - **Special issue page:** https://www.mdpi.com/journal/technologies/special_issues/0O2229T6RE
 - **Follow-up talk:** ICC Expert Day, Gjøvik, 21 September 2026 — Hamza presents an outline (after the submission deadline; avoid disclosing too much before the article is published)
 
