@@ -39,8 +39,9 @@ commit). Ledger: `.superpowers/sdd/progress.md`. **No `Co-Authored-By` trailer**
 - Kiran/PhD positioning → paper related-work/discussion (Plan 07), gated on Phil's refs.
 
 ## Owed to / from Phil
+- **NOT blocked on Phil for any experiment or writing** — all datasets in hand (n=3/4/5/7); the key reference is resolved (Deshpande & Green, Optics Express 2014).
 - Hamza→Phil: draft + results summary (this week).
-- Phil→Hamza: exact refs (Kiran Optics Express; PhD benchmark), ISO substrate-correction standard no., Marty's extra n-colour sets, APC funding, author order.
+- Phil→Hamza (admin only, non-blocking): APC funding decision (1800 CHF), author order. (Marty's extra sets: dropped — we have a full ladder.)
 
 Done before this plan set (git): AIC correction + `aic2025-published` tag; journal pipeline
 (5-fold CV, per-fold scalers, ΔE00 on denorm XYZ, tripwire); results for n=3/n=4 + IFRA + ΔE00-loss;

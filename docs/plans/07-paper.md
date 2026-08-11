@@ -25,8 +25,9 @@ code repo's results CSVs; figures from `journal/figures/`. LaTeX agent keeps the
 - [ ] Discussion: add the reflexive "the corrected pipeline was itself AI-built" point (LLM mode C, discussion-only).
 
 ### Task 2: Positioning & references
-- [ ] Related-work/Discussion subsection positioning our numbers vs Kiran (Optics Express) and the PhD benchmark
-  (gated on Phil's exact refs). Add colourbill comparison (Plan 11).
+- [ ] Related-work/Discussion subsection positioning our ML results vs the model-based n-colour prior art:
+  **Deshpande, Green & Pointer, Optics Express 22(26):31786-31800 (2014)** (spot-colour overprint / inverse printer models),
+  + related n-colour separation work by the same authors. Add colourbill comparison (Plan 11). (Ref resolved — no longer gated on Phil.)
 - [ ] Cite: ISO substrate-correction standard (as out-of-scope/future work re newsprint bb), colour-science, CIEDE2000.
 - [ ] Answer Phil's questions (a) n<=4 and (b) n>4 explicitly in the conclusion, now with real n>4 data.
 

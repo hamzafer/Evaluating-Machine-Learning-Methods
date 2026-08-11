@@ -67,7 +67,7 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 
 ## Meeting Notes — 16 April 2026 (with Phil)
 
-- Benchmark against prior published results: the PhD work at https://scholar.google.com/citations?user=e19-J04AAAAJ&hl=en, and Kiran's Optics Express paper on n-colour.
+- Benchmark/position vs **Kiran Deshpande & Phil Green's model-based n-colour work** — esp. Deshpande, Green & Pointer, "Characterisation of the n-colour printing process using the spot colour overprint model," Optics Express 22(26):31786-31800 (2014) (https://opg.optica.org/oe/fulltext.cfm?uri=oe-22-26-31786&id=306859). (Resolved 11 Aug: the "PhD work" and "Kiran's paper" are the same researcher — Deshpande, Phil's collaborator. Scholar: https://scholar.google.com/citations?user=e19-J04AAAAJ&hl=en)
 - Will (ex-Kodak) is the contact for the n>4 dataset — Phil to ask.
 - Lookup tables become inefficient at larger numbers of colorants (supports the ML-for-n>4 argument).
 - Claude/GPT-based approaches: check for overfitting — cross-fold validation; train on a proportion of the data and check errors on the rest.
@@ -93,7 +93,6 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 | n=5 KCMYG | 5-ink (C M Y K G) | **Received 11 Aug 2026** — `journal/data/raw/ncolor/KCMYG_5clr_spectral.txt`, spectral, 2214 patches |
 | n=7 CMYKOGV (APTEC) | 7-ink | **Received 11 Aug 2026** — `.../APTEC_CMYKOGV_7clr_xyzlab.txt`, XYZ+Lab, 1624 patches |
 | n=7 CMYKOGB (Apex) | 7-ink | **Received 11 Aug 2026** — `.../Apex_CMYKOGB_7clr_spectral.txt`, spectral, 2000 patches |
-| More n-colour sets | n-colour | Phil to check with Marty (pending) |
 | Potential new prints | n-colour | Depends on RIP control |
 
 ## Timeline

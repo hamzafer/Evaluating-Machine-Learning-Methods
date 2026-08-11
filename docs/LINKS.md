@@ -9,7 +9,6 @@ Keep this current — the durable index of everything Phil has pointed us to.
 - **5-ink KCMYG** — Phil email 11 Aug 2026 → `journal/data/raw/ncolor/KCMYG_5clr_spectral.txt` (spectral, 2214 patches)
 - **7-ink CMYKOGB (Apex)** — Phil email 11 Aug 2026 → `journal/data/raw/ncolor/Apex_CMYKOGB_7clr_spectral.txt` (spectral, 2000 patches)
 - **IFRA newsprint (wb/bb)** — `journal/data/raw/Ifra-{wb,bb}.zip` (wb only used; bb out of scope)
-- **More n-colour sets** — Phil to check with **Marty** (pending).
 
 ## Tools / benchmarks
 - **colourbill** (Will's characterization-dataset analysis/comparison tool — external benchmark):
@@ -22,10 +21,12 @@ Keep this current — the durable index of everything Phil has pointed us to.
 - **Journal home:** https://www.mdpi.com/journal/technologies  (Technologies, ISSN 2227-7080)
 - **AIC 2025 proceedings:** https://www.aic2025.org/
 
-## References to obtain (Phil to provide exact citations)
-- Kiran's Optics Express paper on n-colour.
-- The PhD benchmark: https://scholar.google.com/citations?user=e19-J04AAAAJ&hl=en
-- ISO standard with the white<->black backing (substrate) correction equation.
+## Key references (resolved)
+- **Deshpande, Green & Pointer, "Characterisation of the n-colour printing process using the spot colour overprint model," Optics Express 22(26):31786-31800 (2014):** https://opg.optica.org/oe/fulltext.cfm?uri=oe-22-26-31786&id=306859
+  — the model-based n-colour prior art to position our ML approach against (Related Work + Discussion).
+  NOTE: the earlier "Kiran's Optics Express paper" and "the PhD benchmark" are the SAME researcher — **Kiran Deshpande** (Phil Green's collaborator/former PhD student). Scholar: https://scholar.google.com/citations?user=e19-J04AAAAJ&hl=en
+- Related n-colour work by the same authors (separation via inverse printer models; gamut evaluation).
+- ISO substrate-correction standard (wb<->bb backing conversion) — Phil mentioned; look up the exact number for a one-line future-work cite.
 
 ## Phil's LLM-as-equation prompt (11 Aug meeting)
 > "Generate an equation that transforms any coordinate in data set A into a coordinate
