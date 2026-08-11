@@ -326,9 +326,9 @@ press runs (1,485 samples each; bb is currently quarantined — see §9):
 - **C. Leave-one-run-out (LOO)** — fit on the other 12 runs pooled
   (~17,820 samples), test on the 13th; same 4-model subset.
 
-Excluding Gaussian Process (broken within-run — see below), the other three
-subset models give a consistent story (median-of-medians across all
-runs/pairs):
+Excluding Gaussian Process (within-run anomalous under the pre-Plan-10 GP
+config — see below, since RESOLVED), the other three subset models give a
+consistent story (median-of-medians across all runs/pairs):
 
 | experiment  | poly3 | svm   | mlp_deep | pooled (poly3/svm/mlp_deep) |
 |-------------|-------|-------|----------|-------------------------------|
@@ -421,11 +421,35 @@ rather than reported as-is:
    exactly why the noise-floor mismatch is maximally exposed there instead.
 
 This is a config/data interaction, not evidence that Gaussian Processes
-are unsuitable for this problem — the fix (raising the WhiteKernel noise
-floor, or its bounds, to reflect real newsprint repeatability) is
-straightforward but not yet implemented or re-run, and is recorded as an
-open decision for Phil in the teaching briefing rather than silently
-patched.
+are unsuitable for this problem.
+
+**RESOLVED (11 Aug 2026, Plan 10).** The Plan-10 diagnosis refined the
+root cause: the noise-floor mismatch is real, but it acts at
+*initialization* — the `WhiteKernel(1e-5)` init seeds a local-optimum
+basin (RBF length-scale collapse, log-marginal-likelihood ~10,000 nats
+worse than the healthy optimum) that a single L-BFGS start cannot leave.
+The default *bounds* were never the constraint: even the collapsed fit
+had already raised its noise level to ~0.002, matching the
+duplicate-measured newsprint repeatability (§9). Optimizer restarts
+escape the trap reliably, and the same collapse occurred (without
+restarts) on coated KCMYG-5, so it was never newsprint-specific. The fix
+is the unified, dataset-agnostic GP config now in `models.py`:
+`WhiteKernel(noise_level=1e-3, noise_level_bounds=(1e-9, 1e5))` +
+`n_restarts_optimizer=15` (+ the unchanged subsample-to-2000). Under it
+the within-run GP medians drop from 16.6–20.1 to ~0.7–2.1 ΔE00 — back in
+family (and mostly best-in-family), sitting at each run's own
+repeatability floor — while the coated/n>4 summaries improve or tie
+(PC10-CMY 0.054 → 0.044) and cross-run/LOO stay at their domain-shift
+levels. Why 15 restarts, not 10: the re-run's never-worse gate caught
+exactly one regression at 10 — the noisiest pooled-LOO fit (marca_133
+held out) landed in the collapsed basin because the widened noise bounds
+stretch the restart-init draws over 14 decades; 15 restarts (same seed,
+so the first 10 draws are unchanged and the optimum is equal-or-better
+in likelihood everywhere) restores it to 3.247, identical to the
+pre-change registry. All GP rows in `journal/results/` were regenerated
+under this final config; full before/after and the LOO provenance note
+(the old LOO rows predate the subsample cap) in
+`.superpowers/sdd/10-gp-consistency/task-2-3-report.md`.
 
 ## 9. The wb duplicate-patch repeatability finding: a genuine newsprint noise floor
 
