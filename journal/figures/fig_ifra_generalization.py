@@ -12,11 +12,11 @@ Model subset: gaussian_process, poly3, svm, mlp_deep.
 Aggregation (never hand-entered): for each (regime, model), take the MEDIAN of the
 per-run (or per-pair) "median" ΔE00 column -- i.e. a median-of-medians summary.
 
-gaussian_process is EXCLUDED from the within-run bar only: on this newsprint data its
-within-run kernel fit collapses to a noise-floor pathology (median-of-medians ~18.8,
-vs ~1-2 for the other three models), which is a known GP kernel misconfiguration on
-this dataset rather than a genuine generalization result. GP is included normally for
-cross-run and leave-one-out, where it behaves like the other models.
+gaussian_process is shown in all three regimes. History note: under the pre-Plan-10
+kernel (WhiteKernel(1e-5) init) the within-run GP fit collapsed to prior-mean
+reversion (median-of-medians ~18.8) and was omitted from this figure; the unified GP
+config (Plan 10: WhiteKernel(1e-3, bounds (1e-9,1e5)) + n_restarts_optimizer=15)
+resolved it, and the within-run CSV rows were regenerated under that config.
 
 Source (never hand-entered):
   journal/results/ifra/within_run.csv
@@ -60,8 +60,9 @@ REGIME_LABELS = {
     "leave_one_out": "Leave-one-out\n(train 12 runs pooled,\ntest held-out run)",
 }
 
-GP_WITHIN_RUN_OMITTED_NOTE = (
-    "GP within-run omitted (kernel noise-floor pathology on newsprint; see text)"
+GP_HISTORY_NOTE = (
+    "GP within-run was anomalous (~18.8) under the earlier kernel init; "
+    "resolved by the unified GP config (Plan 10) and re-run — see text"
 )
 
 
@@ -71,8 +72,7 @@ def load_regime_medians() -> pd.DataFrame:
     cross = pd.read_csv(os.path.join(RESULTS_DIR, "cross_run.csv"))
     loo = pd.read_csv(os.path.join(RESULTS_DIR, "leave_one_out.csv"))
 
-    within_agg = within[within["model"].isin(MODELS) & (within["model"] != "gaussian_process")] \
-        .groupby("model")["median"].median()
+    within_agg = within[within["model"].isin(MODELS)].groupby("model")["median"].median()
     cross_agg = cross[cross["model"].isin(MODELS)].groupby("model")["median"].median()
     loo_agg = loo[loo["model"].isin(MODELS)].groupby("model")["median"].median()
 
@@ -134,7 +134,7 @@ def make_figure(agg: pd.DataFrame, cross_overall: float, loo_overall: float, out
     ax.legend(loc="upper left", frameon=True, framealpha=0.95, fontsize=9, title="Model", ncol=2)
 
     fig.text(
-        0.5, 0.005, GP_WITHIN_RUN_OMITTED_NOTE,
+        0.5, 0.005, GP_HISTORY_NOTE,
         ha="center", va="bottom", fontsize=8.2, color="#555555", style="italic",
     )
 
