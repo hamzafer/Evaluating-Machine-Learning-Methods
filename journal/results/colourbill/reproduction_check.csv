@@ -1,0 +1,5 @@
+dataset,n,cb_degree,our_degree,cb_mean,our_mean,our_mean_at_cb_degree,cb_max,our_max,our_max_at_cb_degree,cb_std,our_std
+PC10-CMYK,1617,4,4,0.31,0.142,0.142,2.19,1.704,1.704,0.28,0.138
+PC11-CMYK,1617,4,4,0.26,0.139,0.139,1.64,1.763,1.763,0.21,0.129
+FOGRA51-CMYK,1617,4,4,0.34,0.198,0.198,2.65,2.069,2.069,0.22,0.162
+CMYKOGV-7,3302,4,5,0.58,0.133,0.345,12.37,2.445,4.812,0.6,0.134

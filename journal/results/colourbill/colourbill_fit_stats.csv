@@ -1,0 +1,6 @@
+dataset,cb_file,points_fitted,poly_degree,mean_de00,min_de00,max_de00,std_de00,filter_duplicates,weighted,de_method,ui_source
+CMYKOGV-7,APTEC_CMYKOGV_Coated_LinearCTV_2025_M1.txt,3534,4,0.55,0.00,12.76,0.61,No,On,dE00,"Explore > Estimate fit statistics, chardata.colourbill.com v1.18.0, 2026-08-11"
+CMYKOGV-7,APTEC_CMYKOGV_Coated_LinearCTV_2025_M1.txt,3302,4,0.58,0.00,12.37,0.60,Yes (median),On,dE00,"Explore > Estimate fit statistics, chardata.colourbill.com v1.18.0, 2026-08-11"
+PC10-CMYK,APTEC_PC10_CardBoard_2023_v1.txt,1617,4,0.31,0.01,2.19,0.28,No,On,dE00,"Explore > Estimate fit statistics, chardata.colourbill.com v1.18.0, 2026-08-11"
+PC11-CMYK,APTEC_PC11_CCNB_2023_v1.txt,1617,4,0.26,0.01,1.64,0.21,No,On,dE00,"Explore > Estimate fit statistics, chardata.colourbill.com v1.18.0, 2026-08-11"
+FOGRA51-CMYK,FOGRA51.txt,1617,4,0.34,0.02,2.65,0.22,No,On,dE00,"Explore > Estimate fit statistics, chardata.colourbill.com v1.18.0, 2026-08-11"
