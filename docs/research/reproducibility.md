@@ -34,6 +34,14 @@ median across seeds, per model: gaussian_process 0.0013, poly3 0.0091, svm 0.025
 knn 0.0586, mlp_deep 0.1034. Fold assignment is not a meaningful source of variance
 at the 2-3 decimals we report (MLPs excepted at the 0.1 level).
 
+**Caveat on the GP row (gate finding, 12 Aug):** this sweep ran BEFORE plan 10's unified GP
+config landed, so its `gaussian_process` rows use the old kernel (`WhiteKernel(1e-5)`,
+n_restarts=10) — e.g. PC10-CMY seed 42 reads 0.054, whereas the final config gives 0.044.
+The non-GP rows are unaffected (those models never changed). A GP-only re-sweep under the
+final config is recorded separately in
+`journal/results/robustness/seed_sweep_GP_finalconfig_REMOTE_x86.csv`; quote the GP
+seed-stability figure only from that file.
+
 Provenance: run on the remote (exploratory platform) 11-12 Aug; scripts: /tmp/seed_sweep.py
 (remote) + three tmux replication sessions; coordinator-verified deltas via git-diff on the
 remote clone.

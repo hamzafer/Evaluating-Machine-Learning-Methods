@@ -360,13 +360,19 @@ within-run ~1.4 floor) — cross-press generalization has a real cost of its
 own, beyond ordinary regression error, that more pooled training data
 narrows but does not eliminate.
 
-**The Gaussian Process within-run anomaly (INVESTIGATED — root cause
-confirmed).** GP's within-run median is **16.64–20.07 ΔE00 across all 13
-wb runs (mean 18.75)** — worse by an order of magnitude than the other
-three models on the identical splits, and, unlike everywhere else in this
-project, GP is the *worst* model rather than the best. This is systemic
-(present in all 13 runs, not one outlier), so it was investigated directly
-rather than reported as-is:
+**The Gaussian Process within-run anomaly (RESOLVED in plan 10 — see the
+addendum at the end of this subsection; the analysis below is the historical
+diagnosis that led to the fix).** Under the *original* config, GP's within-run
+median was **16.64–20.07 ΔE00 across all 13 wb runs (mean 18.75)** — worse by
+an order of magnitude than the other three models on the identical splits, and,
+unlike everywhere else in this project, GP was the *worst* model rather than the
+best. Under the final unified config (`WhiteKernel(1e-3, bounds 1e-9…1e5)`,
+`n_restarts_optimizer=15`) the same 13 runs give **0.674–2.141** (median-of-medians
+0.899) and GP ranks first of fourteen models on 12 of the 13 runs. The tables and
+median-of-medians figures in this subsection are therefore HISTORICAL; the current
+numbers live in `journal/results/ifra/within_run.csv` and
+`journal/figures/fig_ifra_generalization.png`. The collapse was systemic
+(present in all 13 runs, not one outlier), which is what made it diagnosable:
 
 1. Refitting `journal/pipeline/models.py`'s exact GP config
    (`ConstantKernel()*RBF()+WhiteKernel(1e-5)`, `normalize_y=True`) on one
