@@ -50,6 +50,11 @@ git add journal/data/processed/ifra/README.md
 git commit -m "journal: IFRA zip inventory — actual run counts and CGATS field map"
 ```
 
+> **STATUS (11 Aug 2026): bb is OUT OF SCOPE.** During execution bb WAS ingested then quarantined
+> (commit 7719a02): its chart layout differs from wb, so the CMYK join was invalid (duplicate-recipe
+> ΔE00 came out 25–28 vs wb's sane ~0.7). bb was then descoped entirely ('substrate correction', separate
+> problem) and its zip moved out of the repo. Only the 13 wb runs are used. The bb-reader parts below are historical.
+>
 > **AMENDMENT (post-Task-1 inventory — overrides the code below where they conflict).**
 > Ground truth from `journal/data/processed/ifra/README.md`:
 > 1. **Two formats, two readers.** wb (13 files) is genuine CGATS as assumed. bb is NOT CGATS: 4-line preamble + plain tab header (`SampleID  XYZ-X … CIE-Lab-b  380nm…730nm`); add `parse_bb(path)` alongside `parse_cgats`.

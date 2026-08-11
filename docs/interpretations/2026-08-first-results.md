@@ -1,5 +1,8 @@
 # First results: CMY / CMYK regression across PC10, PC11, FOGRA51
 
+> UPDATE (11 Aug 2026): IFRA black-backing (bb) was subsequently DESCOPED ENTIRELY (out of scope — a separate 'substrate correction' problem), not merely quarantined pending a data fix. wb-only going forward.
+
+
 Source: `journal/results/{PC10,PC11,FOGRA51}-{CMY,CMYK}/summary.csv`. Five-fold CV,
 per-sample ΔE00 pooled across all folds (every sample predicted exactly once), computed
 on denormalized XYZ. CMY = 818 samples with K=0 (3 inputs); CMYK = all 1,617 samples (4

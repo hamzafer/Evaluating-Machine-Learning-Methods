@@ -1,5 +1,7 @@
 # 04 — LLM as Direct Color Predictor Implementation Plan
 
+> **SUPERSEDED BY PLAN 08** (multi-LLM). This plan's GPT-4o/mini run is DONE and kept as the preliminary single-provider baseline; the full multi-model comparison (Claude Fable/Opus, GPT, DeepSeek via OpenRouter) lives in `08-multi-llm.md`.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 > **BEFORE implementing Task 2, load the `claude-api` skill** for current model ids, pricing, and SDK usage — do not code the API calls from memory.
 

@@ -109,42 +109,20 @@ def main():
     tmp_root = Path(tempfile.mkdtemp(prefix='ifra_ingest_'))
     try:
         wb_dir = OUT / 'wb'
-        bb_dir = OUT / 'bb'
         wb_dir.mkdir(parents=True, exist_ok=True)
-        bb_dir.mkdir(parents=True, exist_ok=True)
 
         wb_files = _extract(RAW / 'Ifra-wb.zip', tmp_root / 'wb')
-        bb_files = _extract(RAW / 'Ifra-bb.zip', tmp_root / 'bb')
-
         assert len(wb_files) == 13, f'expected 13 wb files, found {len(wb_files)}'
-        bb_real = [f for f in bb_files if not _is_bb_duplicate(f)]
-        bb_skipped = [f for f in bb_files if _is_bb_duplicate(f)]
-        assert len(bb_skipped) == 5, f'expected 5 bb duplicate files, found {len(bb_skipped)}'
-        assert len(bb_real) == 25, f'expected 25 real bb files, found {len(bb_real)}'
-
-        cmyk_table = _build_cmyk_table(wb_files[0])
 
         print(f'Processing {len(wb_files)} wb files...')
         for f in sorted(wb_files):
             n = _process_wb(f, wb_dir)
             print(f'  wb/{f.stem}: {n} samples')
 
-        print(f'Skipping {len(bb_skipped)} bb duplicate (lab*) files: '
-              f'{sorted(p.name for p in bb_skipped)}')
-        print(f'Processing {len(bb_real)} real bb files...')
-        cross_checks = {}
-        for f in sorted(bb_real):
-            n, cc = _process_bb(f, bb_dir, cmyk_table)
-            print(f'  bb/{f.stem}: {n} samples')
-            if cc is not None:
-                cross_checks[f.stem] = cc
-
-        if cross_checks:
-            medians = [m for m, _ in cross_checks.values()]
-            maxes = [x for _, x in cross_checks.values()]
-            print(f'\nCross-check summary over {len(cross_checks)} bb files with '
-                  f'native XYZ: median ΔE00 range [{min(medians):.3f}, {max(medians):.3f}], '
-                  f'max ΔE00 range [{min(maxes):.3f}, {max(maxes):.3f}]')
+        # Black-backing (bb) is OUT OF SCOPE (11 Aug 2026): ingested then quarantined
+        # for an invalid CMYK join (chart-layout mismatch; commit 7719a02), zip moved
+        # out of the repo. bb helpers (_process_bb/_build_cmyk_table/_is_bb_duplicate)
+        # retained but intentionally unused.
     finally:
         shutil.rmtree(tmp_root, ignore_errors=True)
 

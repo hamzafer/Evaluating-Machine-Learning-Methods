@@ -12,7 +12,7 @@ Subagent loop: **implementer** (only committer; brief+report as files) → **rev
 (spec + quality) → **verification** (independently re-check numbers; anomalies investigated
 before recorded) → support agents in parallel (visual/interpret/latex/audit/teach; never
 commit). Ledger: `.superpowers/sdd/progress.md`. **No `Co-Authored-By` trailer** in commits
-(`.claude/settings.json`). GP runtime rule: subsample GP training folds to <=2000 rows (seed 42).
+(`.claude/settings.json`). GP runtime rule: subsample GP training folds to <=2000 rows (seed 42) + `n_restarts_optimizer=10`.
 
 ## Plans
 
@@ -36,12 +36,12 @@ commit). Ledger: `.superpowers/sdd/progress.md`. **No `Co-Authored-By` trailer**
 - LLM work = both flavours: (A) predict colours directly, (B) emit a portable equation. Final paper inclusion decided after seeing results.
 - LLM models: Claude Fable, Claude Opus, GPT (latest), DeepSeek (latest), all via **OpenRouter** (needs Hamza's key at execution).
 - n-ladder datasets reported **per-dataset** with a measurement-conditions column (different sources/conditions — not one controlled sweep; robustness across independent systems is the framing).
-- Kiran/PhD positioning → paper related-work/discussion (Plan 07), gated on Phil's refs.
+- Kiran/PhD positioning → paper related-work/discussion (Plan 07). **Ref resolved: Deshpande, Green & Pointer, Optics Express 22(26):31786 (2014)** — no longer gated on Phil.
 
 ## Owed to / from Phil
 - **NOT blocked on Phil for any experiment or writing** — all datasets in hand (n=3/4/5/7); the key reference is resolved (Deshpande & Green, Optics Express 2014).
 - Hamza→Phil: draft + results summary (this week).
-- Phil→Hamza (admin only, non-blocking): APC funding decision (1800 CHF), author order. (Marty's extra sets: dropped — we have a full ladder.)
+- Phil→Hamza (admin only, non-blocking): APC funding decision (1800 CHF), author order. Dropped/not needed: Marty's extra sets; IFRA bb chart layout (bb is out of scope).
 
 Done before this plan set (git): AIC correction + `aic2025-published` tag; journal pipeline
 (5-fold CV, per-fold scalers, ΔE00 on denorm XYZ, tripwire); results for n=3/n=4 + IFRA + ΔE00-loss;

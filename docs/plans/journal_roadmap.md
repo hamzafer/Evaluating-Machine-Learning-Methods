@@ -21,25 +21,24 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 
 > "The main contribution could be: a) can ML/AI give as good or better results than existing methods on n≤4, avoiding the need for gray component algorithms etc; and b) can AI handle n>4 successfully. Either of these has potential to be a quite significant contribution in the field."
 
-## Research Extensions (prioritized)
+## Research Extensions
+
+> NOTE (11 Aug 2026): the priority tiering below is SUPERSEDED — all extensions are in scope (no MUST/NICE). Kept for history; see `00-execution-order.md` for the live status.
 
 ### High Priority — Core Contributions
 
 1. **n>4 colorant systems (CMYKOGV, etc.)**
    - The key innovation per Phil
    - Can AI/ML handle higher dimensionality where traditional polynomial methods struggle?
-   - *Data:* Waiting on Phil for n-colour datasets (n>4). He'll also check if they can print new targets depending on RIP control.
+   - *Data:* **All received (11 Aug):** n=5 KCMYG, n=7 CMYKOGV, n=7 CMYKOGB (`journal/data/raw/ncolor/`).
 
 2. **LLM as direct color predictor**
    - Feed CMY/CMYK sample data directly to Claude/GPT and have it predict XYZ values
    - Suggested at ICC GASIG meeting (Jul 2025) — "Claude would do a better job than ChatGPT models"
    - Compare LLM prediction accuracy against the 14 traditional ML methods
-   - Test with different models: Claude (Sonnet/Opus), GPT-4o, o1, o3-mini
+   - Models (locked 11 Aug): Claude Fable, Claude Opus, GPT (latest), DeepSeek (latest), via OpenRouter. Both flavours: predict directly + emit a portable ≤cubic equation (Plans 08, 09).
 
-3. **CMYK source space**
-   - Extend from CMY (3-channel) to CMYK (4-channel)
-   - Stepping stone to n>4
-   - Data already available (datasets have CMYK_K column, currently filtered out)
+3. **CMYK source space** — DONE (n=4 results for PC10/PC11/FOGRA51; poly3 degrades ~3× vs GP flat). Kept as the stepping stone to the n>4 ladder.
 
 ### Medium Priority
 
@@ -89,7 +88,7 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 | APTEC PC10 (cardboard) | CMY(K) | Available |
 | APTEC PC11 (coated paper) | CMY(K) | Available |
 | FOGRA51 (reference) | CMY(K) | Available |
-| IFRA newsprint (wb/bb) | CMYK + spectral | Received 29 Mar 2026 (`journal/data/raw/Ifra-{wb,bb}.zip`); keep wb/bb separate — wb is the industry norm, bb has more runs |
+| IFRA newsprint (wb) | CMYK + spectral | wb only (13 runs). **bb EXCLUDED** (out of scope, 'substrate correction'; zip moved out of repo). |
 | n=5 KCMYG | 5-ink (C M Y K G) | **Received 11 Aug 2026** — `journal/data/raw/ncolor/KCMYG_5clr_spectral.txt`, spectral, 2214 patches |
 | n=7 CMYKOGV (APTEC) | 7-ink | **Received 11 Aug 2026** — `.../APTEC_CMYKOGV_7clr_xyzlab.txt`, XYZ+Lab, 1624 patches |
 | n=7 CMYKOGB (Apex) | 7-ink | **Received 11 Aug 2026** — `.../Apex_CMYKOGB_7clr_spectral.txt`, spectral, 2000 patches |
@@ -105,7 +104,7 @@ The AIC 2025 paper evaluated 14 ML methods for CMY→XYZ color prediction on 3 p
 | **Aug 2026** | Final revisions, submit by Aug 30 |
 | **21 Sep 2026** | ICC Expert Day, Gjøvik — present outline of the work |
 
-**Status (21 Jul 2026):** Experiments not yet started — delayed by another journal paper's revision (done 15 Jul). Phil asked for a draft "soon as the deadline is not far off" (1 Jul) — ~5.5 weeks remain to the 30 Aug deadline, so the original Mar–Jul plan must now be compressed into Jul–Aug.
+**Status — HISTORICAL LOG (superseded; see `00-execution-order.md` for live status):** (21 Jul 2026) experiments not yet started. As of 11 Aug: plans 01–05 done, all data in hand, MDPI draft ported, plans 06–11 written.
 
 ## Key Contacts
 

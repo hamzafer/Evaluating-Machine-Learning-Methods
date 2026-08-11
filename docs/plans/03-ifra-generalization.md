@@ -8,6 +8,8 @@
 
 **Tech Stack:** existing pipeline; depends on plan 02 being complete.
 
+> wb-only: bb was quarantined (invalid CMYK join — chart-layout mismatch, commit 7719a02) and then descoped (out of scope, 11 Aug). Not an appendix/time item — bb is dropped.
+
 ## Global Constraints
 
 - wb runs only for the headline experiments (industry norm, per Phil); repeat for bb only if time allows (appendix).
