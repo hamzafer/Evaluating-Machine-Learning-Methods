@@ -12,7 +12,7 @@ Subagent loop: **implementer** (only committer; brief+report as files) → **rev
 (spec + quality) → **verification** (independently re-check numbers; anomalies investigated
 before recorded) → support agents in parallel (visual/interpret/latex/audit/teach; never
 commit). Ledger: `.superpowers/sdd/progress.md`. **No `Co-Authored-By` trailer** in commits
-(`.claude/settings.json`). GP runtime rule: subsample GP training folds to <=2000 rows (seed 42) + `n_restarts_optimizer=10`.
+(`.claude/settings.json`). GP config rule (unified, Plan 10, FINAL): `WhiteKernel(noise_level=1e-3, noise_level_bounds=(1e-9, 1e5))` + `n_restarts_optimizer=15` + subsample GP training folds to <=2000 rows (seed 42).
 
 ## Plans
 
@@ -27,8 +27,8 @@ commit). Ledger: `.superpowers/sdd/progress.md`. **No `Co-Authored-By` trailer**
 | [07](07-paper.md) | Paper: fill placeholders, positioning, trim, submit | IN PROGRESS |
 | [08](08-multi-llm.md) | Multi-LLM predictor (Claude Fable/Opus, GPT, DeepSeek via OpenRouter) | TODO |
 | [09](09-llm-equation.md) | LLM-as-equation-generator (Phil's prompt → portable ≤cubic eqn) | TODO |
-| [10](10-gp-consistency.md) | Unify GP config (n_restarts), re-check IFRA anomaly, re-run all GP | IN PROGRESS |
-| [11](11-colourbill-benchmark.md) | External benchmark vs colourbill tool | TODO |
+| [10](10-gp-consistency.md) | Unify GP config (WhiteKernel 1e-3 + n_restarts=15), IFRA anomaly resolved, all GP re-run | DONE |
+| [11](11-colourbill-benchmark.md) | External benchmark vs colourbill tool | DONE (974fbe3 + GP-final figure refresh) |
 
 ## Decisions locked (11 Aug grilling)
 - All experiments in scope; full plans for all.
