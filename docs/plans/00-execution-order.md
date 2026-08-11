@@ -1,47 +1,47 @@
 # 00 — Execution Order & Status
 
-> Strategy/context lives in `journal_roadmap.md`. This file is the operational index:
-> what runs, in what order, and where each plan stands. Update the Status column
-> whenever a plan changes state.
+> Strategy/context: `journal_roadmap.md`. Links: `docs/LINKS.md`. Meeting decisions
+> (11 Aug 2026): all work is in scope (no MUST/NICE tiering — Hamza). This file is
+> the operational index. Update the Status column as plans complete.
 
-**Deadline: 30 Aug 2026 (MDPI Technologies special issue).** Today's four-week window:
+**Deadline: Sunday 30 Aug 2026** (~19 days). APC 1800 CHF (funding TBD). Paper 10–12 pp.
+Draft + results summary to Phil by end of this week.
 
-| Week | Focus |
-|---|---|
-| W1 (1–8 Aug) | Plans 01, 02, 03 + Phil call (correction wording, chase CMYKOGV) |
-| W2 (9–15 Aug) | Plans 04, 05; 06 if data arrives |
-| W3 (16–23 Aug) | Plan 07 (writing takes over; experiments only to fill reviewer-visible gaps) |
-| W4 (24–30 Aug) | Buffer: Phil review round, MDPI formatting, submit |
+## Operating protocol (per Hamza) — applies to every plan
+Subagent loop: **implementer** (only committer; brief+report as files) → **review** gate
+(spec + quality) → **verification** (independently re-check numbers; anomalies investigated
+before recorded) → support agents in parallel (visual/interpret/latex/audit/teach; never
+commit). Ledger: `.superpowers/sdd/progress.md`. **No `Co-Authored-By` trailer** in commits
+(`.claude/settings.json`). GP runtime rule: subsample GP training folds to <=2000 rows (seed 42).
 
-| Plan | What | Status | Blocked on |
-|---|---|---|---|
-| [01](01-gp-verification.md) | Verify GP headline result (grouped CV + noise floor) | TODO | — |
-| [02](02-ifra-ingestion.md) | IFRA newsprint → pipeline datasets | TODO | — |
-| [03](03-ifra-generalization.md) | Cross-press-run generalization experiments | TODO | 02 |
-| [04](04-llm-predictor.md) | LLM as direct color predictor | TODO | API key (Hamza provides when ready) |
-| [05](05-direct-de00-loss.md) | Direct ΔE00 minimization + classical optimizers | TODO | — |
-| [06](06-cmykogv.md) | n=7 CMYKOGV experiments | **BLOCKED** | Data from Will via Phil — parked last |
-| [07](07-paper.md) | Paper draft, figures, correction paragraph | TODO | Phil call for §correction wording only |
+## Plans
 
-## Operating protocol (per Hamza, 1 Aug 2026 — applies to every plan)
+| Plan | What | Status |
+|---|---|---|
+| [01](01-gp-verification.md) | GP headline verification (grouped CV + noise floor) | DONE |
+| [02](02-ifra-ingestion.md) | IFRA newsprint ingestion (wb only) | DONE |
+| [03](03-ifra-generalization.md) | IFRA within/cross/leave-one-out | DONE |
+| [04](04-llm-predictor.md) | LLM-as-predictor, GPT-4o/mini (preliminary) | DONE (superseded by 08) |
+| [05](05-direct-de00-loss.md) | Direct ΔE00 minimization (Powell) | DONE |
+| [06](06-ncolor-ladder.md) | **n>4 ladder: n=5 + two n=7, full 3→4→5→7 comparison + figure** | TODO (headline) |
+| [07](07-paper.md) | Paper: fill placeholders, positioning, trim, submit | IN PROGRESS |
+| [08](08-multi-llm.md) | Multi-LLM predictor (Claude Fable/Opus, GPT, DeepSeek via OpenRouter) | TODO |
+| [09](09-llm-equation.md) | LLM-as-equation-generator (Phil's prompt → portable ≤cubic eqn) | TODO |
+| [10](10-gp-consistency.md) | Unify GP config (n_restarts), re-check IFRA anomaly, re-run all GP | TODO |
+| [11](11-colourbill-benchmark.md) | External benchmark vs colourbill tool | TODO |
 
-Subagent-driven execution, one task at a time, until all plans are done:
-1. **Implementer** subagent per task (only agent that commits; task brief + report as files).
-2. **Review** agent gates every diff (spec compliance + quality; Critical/Important findings loop back).
-3. **Verification** agent/coordinator independently re-checks numeric outputs — anomalies investigated before recorded (this caught the noise-floor misinterpretation in plan 01).
-4. **Support agents** run in parallel on disjoint files, never commit (coordinator reviews + commits): **visual** (figures from results CSVs), **interpret** (written readings of tables/figures), **latex** (keeps `journal/paper/` current as results land), **audit** (git-history checks), **teach** (keeps `docs/teaching/` current so Hamza can explain everything to Phil).
-5. Progress ledger: `.superpowers/sdd/progress.md`. Ledger + `git log` outrank memory after any context loss.
+## Decisions locked (11 Aug grilling)
+- All experiments in scope; full plans for all.
+- "Dataset A→B" (Phil's LLM prompt) = the ink→colour characterization task, phrased for an LLM.
+- LLM work = both flavours: (A) predict colours directly, (B) emit a portable equation. Final paper inclusion decided after seeing results.
+- LLM models: Claude Fable, Claude Opus, GPT (latest), DeepSeek (latest), all via **OpenRouter** (needs Hamza's key at execution).
+- n-ladder datasets reported **per-dataset** with a measurement-conditions column (different sources/conditions — not one controlled sweep; robustness across independent systems is the framing).
+- Kiran/PhD positioning → paper related-work/discussion (Plan 07), gated on Phil's refs.
 
-**Cut list** (Phil: skippable if time is limited — not planned): linearization
-preprocessing, colorimetric density input domain, genetic algorithms
-(Nelder-Mead/Powell are covered inside plan 05).
+## Owed to / from Phil
+- Hamza→Phil: draft + results summary (this week).
+- Phil→Hamza: exact refs (Kiran Optics Express; PhD benchmark), ISO substrate-correction standard no., Marty's extra n-colour sets, APC funding, author order.
 
-Done before this plan set existed (commits `a0c937a`, `afec865`):
-v1 evaluation corrected + published state tagged (`aic2025-published`);
-journal pipeline built (5-fold CV, per-fold scalers, ΔE00 on denormalized XYZ,
-Lab-roundtrip tripwire); first results for 6 variants × 14 models in `journal/results/`.
-
-**Runtime rule (learned 1 Aug, the hard way):** any GP fit on >2,000 training rows
-must subsample to 2,000 with a fixed seed and report that choice (plan 06 already
-says this; it applies to ALL plans — plan 03's LOO ran GP on 17.8k rows and took
-~4h for what subsampling would do in minutes with near-identical accuracy).
+Done before this plan set (git): AIC correction + `aic2025-published` tag; journal pipeline
+(5-fold CV, per-fold scalers, ΔE00 on denorm XYZ, tripwire); results for n=3/n=4 + IFRA + ΔE00-loss;
+MDPI template port (`../MDPI-Phil-Journal`, `main.tex`, 14pp, honest placeholders).
