@@ -7,3 +7,10 @@ __pycache__/
 # proprietary/unlicensed industry datasets (IFRA, future n>4 sets) — keep local only
 journal/data/raw/
 journal/data/processed/
+
+# local agent tooling (skills caches, worktrees) — settings.json stays tracked
+.agents/
+.claude/skills/
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+skills-lock.json
