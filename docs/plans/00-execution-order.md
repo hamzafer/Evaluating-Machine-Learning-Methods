@@ -23,11 +23,11 @@ commit). Ledger: `.superpowers/sdd/progress.md`. **No `Co-Authored-By` trailer**
 | [03](03-ifra-generalization.md) | IFRA within/cross/leave-one-out | DONE |
 | [04](04-llm-predictor.md) | LLM-as-predictor, GPT-4o/mini (preliminary) | DONE (superseded by 08) |
 | [05](05-direct-de00-loss.md) | Direct ΔE00 minimization (Powell) | DONE |
-| [06](06-ncolor-ladder.md) | **n>4 ladder: n=5 + two n=7, full 3→4→5→7 comparison + figure** | TODO (headline) |
+| [06](06-ncolor-ladder.md) | **n>4 ladder: n=5 + two n=7, full 3→4→5→7 comparison + figure** | DONE (df8caf8, 2409e23, e3de56d — all gated) |
 | [07](07-paper.md) | Paper: fill placeholders, positioning, trim, submit | IN PROGRESS |
 | [08](08-multi-llm.md) | Multi-LLM predictor (Claude Fable/Opus, GPT, DeepSeek via OpenRouter) | TODO |
 | [09](09-llm-equation.md) | LLM-as-equation-generator (Phil's prompt → portable ≤cubic eqn) | TODO |
-| [10](10-gp-consistency.md) | Unify GP config (n_restarts), re-check IFRA anomaly, re-run all GP | TODO |
+| [10](10-gp-consistency.md) | Unify GP config (n_restarts), re-check IFRA anomaly, re-run all GP | IN PROGRESS |
 | [11](11-colourbill-benchmark.md) | External benchmark vs colourbill tool | TODO |
 
 ## Decisions locked (11 Aug grilling)
