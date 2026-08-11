@@ -10,7 +10,6 @@ IFRA-wb-Age_64a_wb-CMYK,svm,0.959,3.208,22.988,1.257,1485
 IFRA-wb-Age_64a_wb-CMYK,decision_tree,3.476,7.252,11.466,3.695,1485
 IFRA-wb-Age_64a_wb-CMYK,random_forest,1.797,3.868,7.381,1.948,1485
 IFRA-wb-Age_64a_wb-CMYK,gradient_boost,1.222,3.696,13.957,1.504,1485
-IFRA-wb-Age_64a_wb-CMYK,gaussian_process,19.539,26.743,32.014,18.532,1485
 IFRA-wb-Age_64a_wb-CMYK,mlp_shallow,1.583,4.923,13.522,2.008,1485
 IFRA-wb-Age_64a_wb-CMYK,mlp_deep,1.389,4.28,8.891,1.753,1485
 IFRA-wb-Arena_111_wb-CMYK,poly3,0.937,2.905,13.91,1.193,1485
@@ -24,7 +23,6 @@ IFRA-wb-Arena_111_wb-CMYK,svm,0.896,2.926,8.549,1.157,1485
 IFRA-wb-Arena_111_wb-CMYK,decision_tree,3.475,7.285,14.271,3.67,1485
 IFRA-wb-Arena_111_wb-CMYK,random_forest,1.817,3.838,6.082,1.947,1485
 IFRA-wb-Arena_111_wb-CMYK,gradient_boost,1.445,4.322,24.455,1.786,1485
-IFRA-wb-Arena_111_wb-CMYK,gaussian_process,18.702,26.533,28.782,17.828,1485
 IFRA-wb-Arena_111_wb-CMYK,mlp_shallow,1.454,4.774,14.694,1.894,1485
 IFRA-wb-Arena_111_wb-CMYK,mlp_deep,1.325,4.195,13.978,1.678,1485
 IFRA-wb-Dnvk_131_wb-CMYK,poly3,1.332,3.314,22.508,1.603,1485
@@ -38,7 +36,6 @@ IFRA-wb-Dnvk_131_wb-CMYK,svm,1.253,3.35,10.4,1.48,1485
 IFRA-wb-Dnvk_131_wb-CMYK,decision_tree,3.526,7.462,12.841,3.82,1485
 IFRA-wb-Dnvk_131_wb-CMYK,random_forest,2.007,4.085,7.017,2.147,1485
 IFRA-wb-Dnvk_131_wb-CMYK,gradient_boost,1.556,4.057,10.706,1.812,1485
-IFRA-wb-Dnvk_131_wb-CMYK,gaussian_process,19.205,25.501,30.263,18.126,1485
 IFRA-wb-Dnvk_131_wb-CMYK,mlp_shallow,1.839,5.069,18.435,2.201,1485
 IFRA-wb-Dnvk_131_wb-CMYK,mlp_deep,1.718,4.78,13.505,2.065,1485
 IFRA-wb-GratN_90_wb-CMYK,poly3,0.914,2.454,18.347,1.117,1485
@@ -52,7 +49,6 @@ IFRA-wb-GratN_90_wb-CMYK,svm,0.798,2.413,8.362,1.01,1485
 IFRA-wb-GratN_90_wb-CMYK,decision_tree,3.341,7.127,16.014,3.585,1485
 IFRA-wb-GratN_90_wb-CMYK,random_forest,1.775,3.805,7.915,1.93,1485
 IFRA-wb-GratN_90_wb-CMYK,gradient_boost,1.158,3.314,9.203,1.434,1485
-IFRA-wb-GratN_90_wb-CMYK,gaussian_process,18.192,26.044,28.915,17.558,1485
 IFRA-wb-GratN_90_wb-CMYK,mlp_shallow,1.459,4.713,17.449,1.875,1485
 IFRA-wb-GratN_90_wb-CMYK,mlp_deep,1.292,4.227,19.639,1.668,1485
 IFRA-wb-Mbd_103a_wb-CMYK,poly3,1.383,5.042,30.504,1.964,1485
@@ -66,7 +62,6 @@ IFRA-wb-Mbd_103a_wb-CMYK,svm,0.903,3.053,12.461,1.201,1485
 IFRA-wb-Mbd_103a_wb-CMYK,decision_tree,3.022,6.862,12.063,3.335,1485
 IFRA-wb-Mbd_103a_wb-CMYK,random_forest,1.56,3.4,6.389,1.689,1485
 IFRA-wb-Mbd_103a_wb-CMYK,gradient_boost,1.079,3.586,14.036,1.425,1485
-IFRA-wb-Mbd_103a_wb-CMYK,gaussian_process,18.519,27.149,31.447,17.77,1485
 IFRA-wb-Mbd_103a_wb-CMYK,mlp_shallow,1.556,4.722,17.005,1.959,1485
 IFRA-wb-Mbd_103a_wb-CMYK,mlp_deep,1.514,4.817,12.598,1.932,1485
 IFRA-wb-NordK_92a_wb-CMYK,poly3,1.768,5.999,36.789,2.383,1485
@@ -80,7 +75,6 @@ IFRA-wb-NordK_92a_wb-CMYK,svm,1.154,3.695,12.844,1.464,1485
 IFRA-wb-NordK_92a_wb-CMYK,decision_tree,3.448,7.321,16.05,3.632,1485
 IFRA-wb-NordK_92a_wb-CMYK,random_forest,1.943,4.096,7.39,2.08,1485
 IFRA-wb-NordK_92a_wb-CMYK,gradient_boost,1.384,3.961,16.527,1.73,1485
-IFRA-wb-NordK_92a_wb-CMYK,gaussian_process,19.112,25.886,32.721,18.25,1485
 IFRA-wb-NordK_92a_wb-CMYK,mlp_shallow,1.803,5.325,16.514,2.256,1485
 IFRA-wb-NordK_92a_wb-CMYK,mlp_deep,1.681,4.773,10.548,2.027,1485
 IFRA-wb-PressJ_158_wb-CMYK,poly3,3.152,9.998,36.131,4.05,1485
@@ -94,7 +88,6 @@ IFRA-wb-PressJ_158_wb-CMYK,svm,2.294,5.971,15.067,2.646,1485
 IFRA-wb-PressJ_158_wb-CMYK,decision_tree,3.157,8.582,17.499,3.719,1485
 IFRA-wb-PressJ_158_wb-CMYK,random_forest,2.327,5.481,10.981,2.631,1485
 IFRA-wb-PressJ_158_wb-CMYK,gradient_boost,2.043,5.171,15.011,2.362,1485
-IFRA-wb-PressJ_158_wb-CMYK,gaussian_process,16.64,25.455,32.226,16.081,1485
 IFRA-wb-PressJ_158_wb-CMYK,mlp_shallow,2.464,5.876,13.222,2.77,1485
 IFRA-wb-PressJ_158_wb-CMYK,mlp_deep,2.428,5.733,10.77,2.751,1485
 IFRA-wb-RZPOI_125_2_wb-CMYK,poly3,1.542,5.415,35.549,2.094,1485
@@ -108,7 +101,6 @@ IFRA-wb-RZPOI_125_2_wb-CMYK,svm,1.073,3.001,13.837,1.318,1485
 IFRA-wb-RZPOI_125_2_wb-CMYK,decision_tree,3.313,7.25,12.416,3.53,1485
 IFRA-wb-RZPOI_125_2_wb-CMYK,random_forest,1.61,3.525,6.258,1.765,1485
 IFRA-wb-RZPOI_125_2_wb-CMYK,gradient_boost,1.246,3.572,12.451,1.555,1485
-IFRA-wb-RZPOI_125_2_wb-CMYK,gaussian_process,18.41,25.914,30.721,17.676,1485
 IFRA-wb-RZPOI_125_2_wb-CMYK,mlp_shallow,1.61,4.659,10.582,1.984,1485
 IFRA-wb-RZPOI_125_2_wb-CMYK,mlp_deep,1.539,4.352,10.201,1.882,1485
 IFRA-wb-SudK_99_2_wb-CMYK,poly3,1.9,6.448,37.127,2.564,1485
@@ -122,7 +114,6 @@ IFRA-wb-SudK_99_2_wb-CMYK,svm,1.349,3.729,17.103,1.648,1485
 IFRA-wb-SudK_99_2_wb-CMYK,decision_tree,3.233,7.405,14.668,3.559,1485
 IFRA-wb-SudK_99_2_wb-CMYK,random_forest,1.816,3.912,7.903,1.975,1485
 IFRA-wb-SudK_99_2_wb-CMYK,gradient_boost,1.701,4.972,14.768,2.09,1485
-IFRA-wb-SudK_99_2_wb-CMYK,gaussian_process,18.578,28.885,34.209,18.336,1485
 IFRA-wb-SudK_99_2_wb-CMYK,mlp_shallow,1.948,5.186,13.617,2.28,1485
 IFRA-wb-SudK_99_2_wb-CMYK,mlp_deep,1.896,5.534,12.429,2.325,1485
 IFRA-wb-Sudz_100_wb-CMYK,poly3,2.081,7.253,33.635,2.838,1485
@@ -136,7 +127,6 @@ IFRA-wb-Sudz_100_wb-CMYK,svm,1.541,5.954,18.682,2.19,1485
 IFRA-wb-Sudz_100_wb-CMYK,decision_tree,3.366,8.522,22.655,3.792,1485
 IFRA-wb-Sudz_100_wb-CMYK,random_forest,1.943,5.786,15.408,2.389,1485
 IFRA-wb-Sudz_100_wb-CMYK,gradient_boost,1.678,5.519,14.329,2.149,1485
-IFRA-wb-Sudz_100_wb-CMYK,gaussian_process,19.224,25.721,31.296,18.077,1485
 IFRA-wb-Sudz_100_wb-CMYK,mlp_shallow,2.242,7.14,17.856,2.838,1485
 IFRA-wb-Sudz_100_wb-CMYK,mlp_deep,1.998,7.273,21.501,2.671,1485
 IFRA-wb-TagesA_147_2_wb-CMYK,poly3,1.383,4.36,27.231,1.849,1485
@@ -150,7 +140,6 @@ IFRA-wb-TagesA_147_2_wb-CMYK,svm,1.026,3.126,12.632,1.31,1485
 IFRA-wb-TagesA_147_2_wb-CMYK,decision_tree,3.262,7.123,12.241,3.464,1485
 IFRA-wb-TagesA_147_2_wb-CMYK,random_forest,1.823,4.081,7.616,2.0,1485
 IFRA-wb-TagesA_147_2_wb-CMYK,gradient_boost,1.249,3.47,15.238,1.537,1485
-IFRA-wb-TagesA_147_2_wb-CMYK,gaussian_process,18.773,26.533,31.749,17.982,1485
 IFRA-wb-TagesA_147_2_wb-CMYK,mlp_shallow,1.673,4.896,10.952,2.045,1485
 IFRA-wb-TagesA_147_2_wb-CMYK,mlp_deep,1.608,4.547,13.175,1.959,1485
 IFRA-wb-TagesA_147_wb-CMYK,poly3,1.416,4.334,27.204,1.831,1485
@@ -164,7 +153,6 @@ IFRA-wb-TagesA_147_wb-CMYK,svm,1.001,3.005,9.946,1.255,1485
 IFRA-wb-TagesA_147_wb-CMYK,decision_tree,3.13,7.047,12.413,3.375,1485
 IFRA-wb-TagesA_147_wb-CMYK,random_forest,1.785,3.858,7.146,1.951,1485
 IFRA-wb-TagesA_147_wb-CMYK,gradient_boost,1.2,3.522,13.371,1.499,1485
-IFRA-wb-TagesA_147_wb-CMYK,gaussian_process,18.772,26.269,31.717,17.93,1485
 IFRA-wb-TagesA_147_wb-CMYK,mlp_shallow,1.675,4.746,14.936,2.029,1485
 IFRA-wb-TagesA_147_wb-CMYK,mlp_deep,1.614,5.368,17.14,2.096,1485
 IFRA-wb-marca_133_wb-CMYK,poly3,2.138,5.734,27.42,2.566,1485
@@ -178,6 +166,18 @@ IFRA-wb-marca_133_wb-CMYK,svm,2.053,6.229,13.86,2.545,1485
 IFRA-wb-marca_133_wb-CMYK,decision_tree,4.596,10.353,17.517,5.023,1485
 IFRA-wb-marca_133_wb-CMYK,random_forest,2.657,6.48,10.729,3.03,1485
 IFRA-wb-marca_133_wb-CMYK,gradient_boost,2.667,6.693,16.6,3.081,1485
-IFRA-wb-marca_133_wb-CMYK,gaussian_process,20.074,26.461,31.686,18.853,1485
 IFRA-wb-marca_133_wb-CMYK,mlp_shallow,2.473,6.709,19.021,2.933,1485
 IFRA-wb-marca_133_wb-CMYK,mlp_deep,2.405,6.266,12.187,2.768,1485
+IFRA-wb-Age_64a_wb-CMYK,gaussian_process,0.755,1.656,6.484,0.837,1485
+IFRA-wb-Arena_111_wb-CMYK,gaussian_process,0.82,2.231,5.241,0.975,1485
+IFRA-wb-Dnvk_131_wb-CMYK,gaussian_process,1.052,2.385,4.422,1.157,1485
+IFRA-wb-GratN_90_wb-CMYK,gaussian_process,0.674,1.537,3.768,0.75,1485
+IFRA-wb-Mbd_103a_wb-CMYK,gaussian_process,0.721,1.826,3.997,0.82,1485
+IFRA-wb-NordK_92a_wb-CMYK,gaussian_process,0.992,2.435,5.328,1.128,1485
+IFRA-wb-PressJ_158_wb-CMYK,gaussian_process,2.141,5.195,10.397,2.42,1485
+IFRA-wb-RZPOI_125_2_wb-CMYK,gaussian_process,0.899,2.039,3.603,0.997,1485
+IFRA-wb-SudK_99_2_wb-CMYK,gaussian_process,1.172,2.689,5.667,1.308,1485
+IFRA-wb-Sudz_100_wb-CMYK,gaussian_process,1.392,4.746,15.463,1.843,1485
+IFRA-wb-TagesA_147_2_wb-CMYK,gaussian_process,0.847,2.234,6.994,0.999,1485
+IFRA-wb-TagesA_147_wb-CMYK,gaussian_process,0.835,2.038,6.175,0.954,1485
+IFRA-wb-marca_133_wb-CMYK,gaussian_process,1.984,5.083,10.945,2.319,1485

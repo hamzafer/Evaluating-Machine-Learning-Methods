@@ -1,5 +1,5 @@
 model,median,p95,max,mean,n
-gaussian_process,0.054,0.16,1.797,0.071,818
+gaussian_process,0.044,0.14,1.773,0.064,818
 poly3_de00_nm,0.235,0.847,6.162,0.358,818
 poly3,0.244,0.89,7.107,0.368,818
 poly3_de00_powell,0.255,0.772,5.735,0.347,818
