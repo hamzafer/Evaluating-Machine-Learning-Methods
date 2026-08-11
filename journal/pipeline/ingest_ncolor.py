@@ -5,7 +5,7 @@ Run: .venv/bin/python -m journal.pipeline.ingest_ncolor
 Raw files (journal/data/raw/ncolor/, see its README):
 
 - KCMYG_5clr_spectral.txt   (2214 patches, 5 inks, spectral nm380..nm730)
-- APTEC_CMYKOGV_7clr_xyzlab.txt (1624 patches, 7 inks, native XYZ + Lab, D50/2 M1)
+- APTEC_CMYKOGV_7clr_xyzlab.txt (3534 patches, 7 inks, native XYZ + Lab, D50/2 M1)
 - Apex_CMYKOGB_7clr_spectral.txt (2000 patches, 7 inks, spectral nm380..nm730)
 
 All three carry a CGATS-style BEGIN_DATA_FORMAT/BEGIN_DATA block, so

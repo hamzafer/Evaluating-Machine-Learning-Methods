@@ -31,11 +31,22 @@ class DatasetSpec:
     filter_k_zero: bool          # True for CMY variants (818 rows), False for CMYK (1617)
     target_cols: tuple = ('XYZ_X', 'XYZ_Y', 'XYZ_Z')
     lab_cols: tuple = ('LAB_L', 'LAB_A', 'LAB_B')
+    # Opt-in (Plan 06): drop byte-identical duplicate rows (same inks AND same
+    # XYZ+Lab) at load. The processed CSV keeps every row as received; dedup is
+    # a modelling choice — identical pairs would otherwise leak across CV folds.
+    dedup_exact: bool = False
+    # Opt-in (Plan 06): run.py passes groups=make_groups(X) into cross_validate
+    # (GroupKFold), so repeated recipes co-travel. n=3/4/IFRA specs stay on
+    # plain KFold (plan-01 verified equivalence there).
+    grouped: bool = False
 
     def load(self):
         df = pd.read_csv(self.csv)
         if self.filter_k_zero:
             df = df[df['CMYK_K'] == 0].reset_index(drop=True)
+        if self.dedup_exact:
+            value_cols = list(self.input_cols) + list(self.target_cols) + list(self.lab_cols)
+            df = df.drop_duplicates(subset=value_cols).reset_index(drop=True)
         X = df.loc[:, list(self.input_cols)].to_numpy(dtype=float)
         Y = df.loc[:, list(self.target_cols)].to_numpy(dtype=float)
         # Tripwire: the dataset's own XYZ must reproduce its measured Lab.
@@ -63,4 +74,18 @@ def registry() -> dict:
                 name=name, csv=csv,
                 input_cols=('CMYK_C', 'CMYK_M', 'CMYK_Y', 'CMYK_K'),
                 filter_k_zero=False)
+
+    # n>4 colorant ladder (Plan 06), produced by journal.pipeline.ingest_ncolor.
+    # All three use grouped CV (Apex's 20 genuine paper-white repeats co-travel;
+    # catches any residual same-recipe rows). CMYKOGV-7's CSV keeps all 3534
+    # rows as received (averaged export with redundant repeats); exact-dedup at
+    # load drops the byte-identical ones -> 3302 effective rows, zero info loss.
+    ncolor_root = REPO_ROOT / 'journal' / 'data' / 'processed' / 'ncolor'
+    for ds, n_inks, dedup in (('KCMYG-5', 5, False),
+                              ('CMYKOGV-7', 7, True),
+                              ('CMYKOGB-7', 7, False)):
+        specs[ds] = DatasetSpec(
+            name=ds, csv=ncolor_root / f'{ds}.csv',
+            input_cols=tuple(f'INK_{i}' for i in range(1, n_inks + 1)),
+            filter_k_zero=False, dedup_exact=dedup, grouped=True)
     return specs

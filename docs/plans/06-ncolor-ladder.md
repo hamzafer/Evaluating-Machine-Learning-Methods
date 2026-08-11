@@ -21,7 +21,7 @@ run `journal.pipeline.run`, then a figure script. No new modelling machinery.
 ## Datasets (in `journal/data/raw/ncolor/`, see its README)
 | Name | Inks | Cols | Patches | Measurement |
 |---|---|---|---|---|
-| CMYKOGV-7 | 7 (APTEC) | 7CLR_1..7 + XYZ+LAB | 1624 | D50/2°, M1, registry |
+| CMYKOGV-7 | 7 (APTEC) | 7CLR_1..7 + XYZ+LAB | 3534 raw / 3302 effective (exact-dedup at load; header's 1624 stale) | D50/2°, M1, registry |
 | KCMYG-5 | 5 | 5CLR_1..5 + spectral | 2214 | D50/2°, ProfileMaker |
 | CMYKOGB-7 | 7 (Apex) | 7CLR_1..7 + spectral | 2000 | D50/2°, ProfileMaker |
 
@@ -41,7 +41,7 @@ with columns `SAMPLE_ID, INK_1..INK_n, XYZ_X/Y/Z, LAB_L/A/B`.
   For APTEC: use native XYZ_X/Y/Z + LAB. For the two spectral: derive via `spectral_to_xyz`.
   **Verify ink-value scale** (0–1 vs 0–100) per file and normalize to a consistent 0–100; record what you found.
 - [ ] Step 4: Run tests → pass.
-- [ ] Step 5: Run `ingest()` on the three real files; assert row counts (1624/2214/2000), no NaNs,
+- [ ] Step 5: Run `ingest()` on the three real files; assert row counts (3534/2214/2000), no NaNs,
   ink ranges sane, unprinted-patch XYZ_Y plausible. For CMYKOGV cross-check derived-vs-native if both present.
 - [ ] Step 6: Commit code + processed CSVs (git add -f) + README note. **No Co-Authored-By trailer.**
 
