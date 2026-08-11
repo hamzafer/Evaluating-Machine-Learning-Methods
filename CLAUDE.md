@@ -2,6 +2,13 @@
 
 Guidance for Claude Code in this repository.
 
+## Git commits
+
+Three distinct parts, three distinct rules:
+- **Subject line** (the one-line summary): stays clean, no mention of Claude/the model.
+- **Body/description** (the explanatory paragraph): fine to mention the model by name in prose if relevant (e.g. "drafted with Claude Sonnet 5").
+- **`Co-Authored-By: Claude ...` trailer**: never add it, in either part — enforced via `.claude/settings.json`'s `attribution` setting, but keep it out even if writing a commit manually.
+
 ## Project
 
 ML methods for printer color characterization (CMY(K)→XYZ regression, evaluated with CIEDE2000). Produced the AIC 2025 conference paper; now being extended into a journal paper.
@@ -19,9 +26,9 @@ ML methods for printer color characterization (CMY(K)→XYZ regression, evaluate
 
 `data/cleaned/*.csv` — PC10, PC11, FOGRA51: 1,617 rows each, columns `SAMPLE_ID, CMYK_C/M/Y/K, LAB_L/A/B, XYZ_X/Y/Z`. Note: 799 rows have K>0; the AIC paper trained CMY-only by *dropping the K column but keeping those rows* (identical CMY → different XYZ in training). The fresh pipeline must handle K properly.
 
-`journal/data/raw/Ifra-{wb,bb}.zip` — IFRA 2005 newsprint: 43 press runs (13 white-backing + 30 black-backing — **keep wb/bb separate**, per Phil), ECI2002/CGATS format, 1,485 samples each, CMYK + 36-band spectral reflectance 380–730nm. Needs ingestion: parse (latin-1 encoding) + spectral→XYZ via colour-science (D50, 2° observer).
+`journal/data/raw/Ifra-wb.zip` — IFRA 2005 newsprint, **white-backing only** (13 press runs × 1,485 samples; CMYK + 36-band spectral 380–730nm). Ingested. **Black-backing is OUT OF SCOPE** (11 Aug decision: a separate 'substrate correction' problem; its zip was moved out of the repo).
 
-n>4 (CMYKOGV) datasets: not yet received — waiting on Phil.
+n>4 datasets: **all received (11 Aug)** — n=5 KCMYG, n=7 CMYKOGV, n=7 CMYKOGB in `journal/data/raw/ncolor/` (see its README and `docs/DATA.md`). Full n=3/4/5/7 ladder in hand.
 
 ## Rules for the journal work
 
