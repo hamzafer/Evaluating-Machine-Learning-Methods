@@ -11,7 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 from .datasets import registry as dataset_registry
-from .evaluate import cross_validate, summarize
+from .evaluate import cross_validate, make_groups, summarize
 from .models import registry as model_registry
 
 RESULTS = Path(__file__).resolve().parents[1] / 'results'
@@ -27,10 +27,11 @@ def main():
     for ds_name in args.datasets:
         spec = ds_reg[ds_name]
         X, Y = spec.load()
+        groups = make_groups(X) if spec.grouped else None
         rows = []
         for m_name in args.models:
             t0 = time.time()
-            de = cross_validate(X, Y, m_reg[m_name])
+            de = cross_validate(X, Y, m_reg[m_name], groups=groups)
             stats = summarize(de)
             rows.append({'model': m_name, **{k: round(v, 3) for k, v in stats.items()
                                              if k != 'n'}, 'n': stats['n']})

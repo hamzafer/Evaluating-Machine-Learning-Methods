@@ -5,6 +5,7 @@ were degenerate there (Lasso/ElasticNet at alpha=1.0 -> constant predictor,
 SVR epsilon=0.1 -> tube covers 10% of the target range) use standard sensible
 values instead, noted below. Every stochastic model is seeded.
 """
+import numpy as np
 from sklearn.cross_decomposition import PLSRegression
 from sklearn.decomposition import PCA
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
@@ -22,6 +23,28 @@ from sklearn.tree import DecisionTreeRegressor
 from .de00_poly import DE00Polynomial
 
 SEED = 42
+
+
+class FitSubsampled:
+    """Fit-time subsampling wrapper (Plan 10's unified GP config): if a
+    training fold exceeds `cap` rows, fit the inner estimator on a fixed-seed
+    random subsample of `cap` rows; predict is untouched. Lives here so
+    evaluate.py stays model-agnostic — only the GP is wrapped (cubic fit cost).
+    """
+
+    def __init__(self, estimator, cap=2000, seed=SEED):
+        self.estimator, self.cap, self.seed = estimator, cap, seed
+
+    def fit(self, X, y):
+        X, y = np.asarray(X), np.asarray(y)
+        if len(X) > self.cap:
+            keep = np.random.RandomState(self.seed).choice(len(X), self.cap, replace=False)
+            X, y = X[keep], y[keep]
+        self.estimator.fit(X, y)
+        return self
+
+    def predict(self, X):
+        return self.estimator.predict(X)
 
 
 def registry() -> dict:
@@ -42,9 +65,9 @@ def registry() -> dict:
         'random_forest': lambda: RandomForestRegressor(n_estimators=200, max_depth=15, random_state=SEED),
         'gradient_boost': lambda: MultiOutputRegressor(GradientBoostingRegressor(
             n_estimators=200, learning_rate=0.05, max_depth=5, random_state=SEED)),
-        'gaussian_process': lambda: GaussianProcessRegressor(
+        'gaussian_process': lambda: FitSubsampled(GaussianProcessRegressor(
             kernel=ConstantKernel() * RBF() + WhiteKernel(1e-5),
-            normalize_y=True, random_state=SEED),
+            normalize_y=True, n_restarts_optimizer=10, random_state=SEED)),
         'mlp_shallow': lambda: MLPRegressor(hidden_layer_sizes=(64,), solver='lbfgs',
                                             max_iter=2000, random_state=SEED),
         'mlp_deep': lambda: MLPRegressor(hidden_layer_sizes=(64, 64, 64), solver='lbfgs',
