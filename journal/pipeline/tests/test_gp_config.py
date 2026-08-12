@@ -84,6 +84,9 @@ def test_unified_config_is_frozen():
     assert white.noise_level == 1e-3
     assert tuple(white.noise_level_bounds) == (1e-9, 1e5)
     assert isinstance(gpr.kernel.k1.k2, RBF)
+    # Pin the amplitude term as well: swapping ConstantKernel for something
+    # else would otherwise slip past this freeze test (gate finding L6).
+    assert isinstance(gpr.kernel.k1.k1, ConstantKernel)
 
 
 def test_no_collapse_on_newsprint_scale_noise():
