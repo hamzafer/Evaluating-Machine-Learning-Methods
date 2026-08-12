@@ -86,7 +86,11 @@ so removing it moves the pooled median in opposite directions for the two famili
 (PC10-CMY; PC11-CMY and PC10-CMYK give the same picture — linear ratios 1.26-1.33, decision_tree
 0.000 on all three.)
 
-So the whole sign pattern follows from one two-part mechanism:
+So the sign pattern for the models with large systematic effects follows from one two-part mechanism
+(scoped, after the verification gate observed that knn and svm are actually negative in 4 of 6 cells
+despite their ratios predicting positive — those deltas are all <=0.024, i.e. genuinely split noise,
+so the mechanism below should be read as explaining the linear family and the tree family, not every
+cell in the table):
 - **Global models** (linear family, poly3): the dropped rows are high-error, so deleting them pulls the
   pooled median **down**. Systematic, deterministic, and nothing to do with train/test contamination.
   Largest effect where the linear error distribution is broadest (median ~6.6, p95 ~25), which is why
@@ -110,7 +114,12 @@ held **fixed**) from the fold reshuffle:
 Roughly half to two-thirds is pool composition; the rest is that `KFold(shuffle, seed=42)` on 795 rows
 is a completely different partition than on 818.
 
-## The excursions are inside each model's own split noise
+## Which excursions are noise, and which are a real shift
+
+**Corrected 12 Aug after the verification gate flagged the original wording of this section as
+self-contradictory** (it claimed the linear moves were split noise, while its own table showed a
+spread smaller than the move; the gate re-ran seeds 0-9 and reproduced the table exactly). The
+mechanism section above is the correct account for the linear family, and this section now says so.
 
 Median over CV seeds 0-9, PC11-CMY (the dataset with the largest single move):
 
@@ -122,10 +131,22 @@ Median over CV seeds 0-9, PC11-CMY (the dataset with the largest single move):
 | ridge | 6.195..6.301 (0.106) | 6.151..6.238 (0.087) |
 | plsr | 6.188..6.287 (0.099) | 6.152..6.232 (0.080) |
 
-decision_tree's +0.191 sits inside its own 0.21-0.30 seed-to-seed spread; the linear family's ~0.15
-moves sit inside its 0.08-0.11 spread. The MLP cells that moved ~0.10 in *both* directions across
-datasets are likewise noise, not signal. GP, the headline model, moves +0.000..+0.002 — it barely
-notices, because only 3.7% of rows were affected and its clean-row error already dominated.
+Two different things are happening, and they should not be described in the same breath:
+
+- **Noise-scale:** decision_tree's +0.191 sits inside its own 0.21-0.30 seed-to-seed spread, and the
+  MLP cells that moved ~0.10 in *both* directions across datasets are likewise split noise. GP, the
+  headline model, moves +0.000..+0.002 — it barely notices, because only 3.7% of rows were affected
+  and its clean-row error already dominated.
+- **A real, systematic shift:** the linear family's ~0.15 move is NOT inside its seed spread
+  (ridge undeduped 6.195..6.301 vs deduped 6.151..6.238 — only 3 of 10 deduped seed-medians fall
+  inside the undeduped range, and the seed-median shift is a systematic -0.068 for ridge, -0.062 for
+  plsr). That is the expected consequence of the pool-composition mechanism above: the dropped rows
+  are light patches that a global linear fit finds *harder* than average, so removing them lowers the
+  median deterministically. Leakage is definitionally impossible for these models — they cannot
+  memorise a row — so this is a change in what the median is taken over, not a change in accuracy.
+
+The deterministic explanation is the stronger claim, and it is the correct one: prefer it to any
+appeal to split noise when describing the linear family.
 
 ## Before/after medians (dE00), all 16 models x 6 datasets
 

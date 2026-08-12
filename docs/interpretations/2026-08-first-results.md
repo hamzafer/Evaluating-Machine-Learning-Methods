@@ -1,5 +1,12 @@
 # First results: CMY / CMYK regression across PC10, PC11, FOGRA51
 
+> STALE NUMBERS (12 Aug 2026): every n<=4 figure in this document predates two changes —
+> the unified GP config (plan 10) and the uniform exact-dedup policy that fixed the CV
+> duplicate-leakage defect (`docs/research/cv-leakage-2026-08-12.md`). Sample counts are now
+> **795** (CMY) and **1588** (CMYK), not 818/1617, and every median here has moved. The
+> narrative and mechanisms remain valid; for current values read
+> `journal/results/*/summary.csv` or `journal/results/run_log.tsv`.
+
 > UPDATE (11 Aug 2026): IFRA black-backing (bb) was subsequently DESCOPED ENTIRELY (out of scope — a separate 'substrate correction' problem), not merely quarantined pending a data fix. wb-only going forward.
 
 
