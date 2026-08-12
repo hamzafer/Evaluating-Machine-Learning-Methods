@@ -80,3 +80,32 @@ near the cap where marginally different linear algebra changes which restart win
 Provenance: run on the remote (exploratory platform) 11-12 Aug; scripts: /tmp/seed_sweep.py
 (remote) + three tmux replication sessions; coordinator-verified deltas via git-diff on the
 remote clone.
+
+## 4. Post-dedup re-measurement (13 Aug) — both checks redone after the leakage fix
+
+Sections 1-3 were measured on the as-received row sets (818/1617). After the uniform exact-dedup
+policy (`cv-leakage-2026-08-12.md`) both robustness checks were re-run on the current data.
+
+**Cross-platform, full matrix, post-dedup** (16 models x 6 coated datasets = 96 cells, x86_64 vs the
+committed arm64 values): **58 cells bit-exact, 76 within 0.01 ΔE00, max |delta| 0.108**. Every one of
+the largest divergences is an iteratively-optimised neural net (mlp_deep PC10-CMYK -0.108,
+mlp_shallow PC10-CMYK +0.050, mlp_deep PC11-CMYK -0.045); the closed-form, kernel and tree methods
+agree to <=0.01 or exactly. Same conclusion as section 1, on current data, and tighter: the earlier
+0.42 worst case was at n=7, which this matrix does not cover.
+
+**CV seed sensitivity, post-dedup** (`seed_sweep_POSTDEDUP_REMOTE_x86.csv`, 5 seeds x 6 datasets x 5
+models = 150 runs). Max std of the median across seeds, per model:
+
+| model | pre-dedup | post-dedup |
+|---|---|---|
+| gaussian_process | 0.0013 | **0.0012** |
+| poly3 | 0.0091 | **0.0088** |
+| svm | 0.0253 | **0.0228** |
+| knn | 0.0586 | **0.0436** |
+| mlp_deep | 0.1034 | **0.0906** |
+
+Every model's seed sensitivity is slightly *lower* after deduplication — consistent with the
+mechanism in the leakage note (whether a duplicate's twin lands in the training fold was itself a
+source of seed-to-seed variation, and that source is now gone). The paper's claim that fold
+assignment is not a meaningful source of variance at the reported precision holds on current data,
+with GP the most stable model at 0.001.
