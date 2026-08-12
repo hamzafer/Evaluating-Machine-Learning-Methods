@@ -48,6 +48,8 @@ MODEL_DISPLAY_NAMES = {
     "ridge": "Ridge",
     "pcr": "PCR",
     "plsr": "PLSR",
+    "poly3_de00_nm": "Poly3 + $\\Delta E_{00}$ (Nelder--Mead)",
+    "poly3_de00_powell": "Poly3 + $\\Delta E_{00}$ (Powell)",
 }
 
 JND = 1.0
