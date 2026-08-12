@@ -1,0 +1,308 @@
+{
+  "PC10": {
+    "n_rows": 1617,
+    "declared_sets": 1617,
+    "ink_cols": [
+      "CMYK_C",
+      "CMYK_M",
+      "CMYK_Y",
+      "CMYK_K"
+    ],
+    "ink_range": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "dedup": {
+      "n_rows": 1617,
+      "n_unique_recipes": 1588,
+      "n_duplicate_recipe_groups": 29,
+      "n_rows_in_duplicate_groups": 58,
+      "n_groups_identical_measurement": 29,
+      "n_rows_identical_measurement": 58,
+      "n_groups_differing_measurement": 0,
+      "n_rows_differing_measurement": 0,
+      "max_measurement_spread_within_dup_group": 0.0
+    },
+    "xyz_lab_self_consistency": null,
+    "spectral_vs_native": {
+      "has_spectral": false,
+      "has_native_colorimetry": true,
+      "both_present": false
+    },
+    "header_notes": [
+      "DESCRIPTOR line mismatches dataset identity: DESCRIPTOR\tAPTEC_PC11_CCNB_2023_v1"
+    ],
+    "duplicate_sample_ids": {
+      "n_duplicate_ids": 0,
+      "example_ids": []
+    }
+  },
+  "PC11": {
+    "n_rows": 1617,
+    "declared_sets": 1617,
+    "ink_cols": [
+      "CMYK_C",
+      "CMYK_M",
+      "CMYK_Y",
+      "CMYK_K"
+    ],
+    "ink_range": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "dedup": {
+      "n_rows": 1617,
+      "n_unique_recipes": 1588,
+      "n_duplicate_recipe_groups": 29,
+      "n_rows_in_duplicate_groups": 58,
+      "n_groups_identical_measurement": 29,
+      "n_rows_identical_measurement": 58,
+      "n_groups_differing_measurement": 0,
+      "n_rows_differing_measurement": 0,
+      "max_measurement_spread_within_dup_group": 0.0
+    },
+    "xyz_lab_self_consistency": null,
+    "spectral_vs_native": {
+      "has_spectral": false,
+      "has_native_colorimetry": true,
+      "both_present": false
+    },
+    "header_notes": [],
+    "duplicate_sample_ids": {
+      "n_duplicate_ids": 0,
+      "example_ids": []
+    }
+  },
+  "FOGRA51": {
+    "n_rows": 1617,
+    "declared_sets": 1617,
+    "ink_cols": [
+      "CMYK_C",
+      "CMYK_M",
+      "CMYK_Y",
+      "CMYK_K"
+    ],
+    "ink_range": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "dedup": {
+      "n_rows": 1617,
+      "n_unique_recipes": 1588,
+      "n_duplicate_recipe_groups": 29,
+      "n_rows_in_duplicate_groups": 58,
+      "n_groups_identical_measurement": 29,
+      "n_rows_identical_measurement": 58,
+      "n_groups_differing_measurement": 0,
+      "n_rows_differing_measurement": 0,
+      "max_measurement_spread_within_dup_group": 0.0
+    },
+    "xyz_lab_self_consistency": null,
+    "spectral_vs_native": {
+      "has_spectral": false,
+      "has_native_colorimetry": true,
+      "both_present": false
+    },
+    "header_notes": [],
+    "duplicate_sample_ids": {
+      "n_duplicate_ids": 0,
+      "example_ids": []
+    }
+  },
+  "KCMYG5": {
+    "n_rows": 2214,
+    "declared_sets": 2214,
+    "ink_cols": [
+      "5CLR_1",
+      "5CLR_2",
+      "5CLR_3",
+      "5CLR_4",
+      "5CLR_5"
+    ],
+    "ink_range": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "dedup": {
+      "n_rows": 2214,
+      "n_unique_recipes": 2214,
+      "n_duplicate_recipe_groups": 0,
+      "n_rows_in_duplicate_groups": 0,
+      "n_groups_identical_measurement": 0,
+      "n_rows_identical_measurement": 0,
+      "n_groups_differing_measurement": 0,
+      "n_rows_differing_measurement": 0,
+      "max_measurement_spread_within_dup_group": 0.0
+    },
+    "xyz_lab_self_consistency": null,
+    "spectral_vs_native": {
+      "has_spectral": true,
+      "has_native_colorimetry": false,
+      "both_present": false
+    },
+    "header_notes": [],
+    "duplicate_sample_ids": {
+      "n_duplicate_ids": 0,
+      "example_ids": []
+    }
+  },
+  "CMYKOGV7": {
+    "n_rows": 3534,
+    "declared_sets": 1624,
+    "ink_cols": [
+      "7CLR_1",
+      "7CLR_2",
+      "7CLR_3",
+      "7CLR_4",
+      "7CLR_5",
+      "7CLR_6",
+      "7CLR_7"
+    ],
+    "ink_range": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "dedup": {
+      "n_rows": 3534,
+      "n_unique_recipes": 3302,
+      "n_duplicate_recipe_groups": 169,
+      "n_rows_in_duplicate_groups": 401,
+      "n_groups_identical_measurement": 169,
+      "n_rows_identical_measurement": 401,
+      "n_groups_differing_measurement": 0,
+      "n_rows_differing_measurement": 0,
+      "max_measurement_spread_within_dup_group": 0.0
+    },
+    "xyz_lab_self_consistency": {
+      "median_dE00": 0.005368368529426467,
+      "p95_dE00": 0.019716384165103774,
+      "max_dE00": 0.026656111212931353,
+      "mean_abs_dL": 1.6503506223768783e-05,
+      "mean_abs_da": 0.007893991122525229,
+      "mean_abs_db": 0.007103236706076811
+    },
+    "spectral_vs_native": {
+      "has_spectral": false,
+      "has_native_colorimetry": true,
+      "both_present": false
+    },
+    "header_notes": [
+      "NUMBER_OF_SETS declared=1624 but actual data rows=3534"
+    ],
+    "duplicate_sample_ids": {
+      "n_duplicate_ids": 0,
+      "example_ids": []
+    }
+  },
+  "CMYKOGB7": {
+    "n_rows": 2000,
+    "declared_sets": 2000,
+    "ink_cols": [
+      "7CLR_1",
+      "7CLR_2",
+      "7CLR_3",
+      "7CLR_4",
+      "7CLR_5",
+      "7CLR_6",
+      "7CLR_7"
+    ],
+    "ink_range": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "dedup": {
+      "n_rows": 2000,
+      "n_unique_recipes": 1981,
+      "n_duplicate_recipe_groups": 1,
+      "n_rows_in_duplicate_groups": 20,
+      "n_groups_identical_measurement": 0,
+      "n_rows_identical_measurement": 0,
+      "n_groups_differing_measurement": 1,
+      "n_rows_differing_measurement": 20,
+      "max_measurement_spread_within_dup_group": 0.03080000000000005
+    },
+    "xyz_lab_self_consistency": null,
+    "spectral_vs_native": {
+      "has_spectral": true,
+      "has_native_colorimetry": false,
+      "both_present": false
+    },
+    "header_notes": [],
+    "duplicate_sample_ids": {
+      "n_duplicate_ids": 0,
+      "example_ids": []
+    }
+  },
+  "IFRA_Age64a": {
+    "n_rows": 1485,
+    "declared_sets": 1485,
+    "ink_cols": [
+      "CMYK_C",
+      "CMYK_M",
+      "CMYK_Y",
+      "CMYK_K"
+    ],
+    "ink_range": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "dedup": {
+      "n_rows": 1485,
+      "n_unique_recipes": 1457,
+      "n_duplicate_recipe_groups": 28,
+      "n_rows_in_duplicate_groups": 56,
+      "n_groups_identical_measurement": 0,
+      "n_rows_identical_measurement": 0,
+      "n_groups_differing_measurement": 28,
+      "n_rows_differing_measurement": 56,
+      "max_measurement_spread_within_dup_group": 0.03320000000000001
+    },
+    "xyz_lab_self_consistency": null,
+    "spectral_vs_native": {
+      "has_spectral": true,
+      "has_native_colorimetry": false,
+      "both_present": false
+    },
+    "header_notes": [],
+    "duplicate_sample_ids": {
+      "n_duplicate_ids": 0,
+      "example_ids": []
+    }
+  },
+  "IFRA_PressJ158": {
+    "n_rows": 1485,
+    "declared_sets": 1485,
+    "ink_cols": [
+      "CMYK_C",
+      "CMYK_M",
+      "CMYK_Y",
+      "CMYK_K"
+    ],
+    "ink_range": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "dedup": {
+      "n_rows": 1485,
+      "n_unique_recipes": 1457,
+      "n_duplicate_recipe_groups": 28,
+      "n_rows_in_duplicate_groups": 56,
+      "n_groups_identical_measurement": 0,
+      "n_rows_identical_measurement": 0,
+      "n_groups_differing_measurement": 28,
+      "n_rows_differing_measurement": 56,
+      "max_measurement_spread_within_dup_group": 0.07300000000000001
+    },
+    "xyz_lab_self_consistency": null,
+    "spectral_vs_native": {
+      "has_spectral": true,
+      "has_native_colorimetry": false,
+      "both_present": false
+    },
+    "header_notes": [],
+    "duplicate_sample_ids": {
+      "n_duplicate_ids": 0,
+      "example_ids": []
+    }
+  }
+}
