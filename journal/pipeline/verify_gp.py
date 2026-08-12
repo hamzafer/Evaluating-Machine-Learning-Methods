@@ -82,6 +82,9 @@ def main():
         # byte-identical. A partial --datasets run must never clobber the CSV.
         old = pd.read_csv(OUT)
         new = pd.concat([old[~old.dataset.isin(new.dataset)], new], ignore_index=True)
+    # Canonical order, so a partial --datasets run and a full run write the same
+    # layout and a re-run never shows up as a spurious whole-file diff.
+    new = new.sort_values(['dataset', 'model', 'cv'], kind='stable').reset_index(drop=True)
     new.to_csv(OUT, index=False)
     print(f"wrote {OUT}")
 
