@@ -28,7 +28,9 @@ class DatasetSpec:
     name: str                    # e.g. 'PC10-CMY'
     csv: Path
     input_cols: tuple            # declares n: 3, 4, or more
-    filter_k_zero: bool          # True for CMY variants (818 rows), False for CMYK (1617)
+    filter_k_zero: bool          # True for CMY variants, False for CMYK. Raw row counts
+                                 # are 818/1617; the coated specs also set dedup_exact,
+                                 # so their EFFECTIVE counts are 795/1588.
     target_cols: tuple = ('XYZ_X', 'XYZ_Y', 'XYZ_Z')
     lab_cols: tuple = ('LAB_L', 'LAB_A', 'LAB_B')
     # Drop byte-identical duplicate rows (same inks AND same XYZ+Lab) at load.
