@@ -1,0 +1,159 @@
+Launching 45 GP fold-fits with 20 workers
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 15 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 18 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 15 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 16 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 19 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 12 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+[1/45] PC10 CMYK fold=4 took 578.6s (elapsed 579s)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 10 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 22 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 13 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+[2/45] PC10 CMYK fold=1 took 670.9s (elapsed 671s)
+[3/45] PC10 CMYK fold=2 took 750.1s (elapsed 750s)
+[4/45] PC10 CMYK fold=3 took 766.7s (elapsed 767s)
+[5/45] PC10 CMYK fold=0 took 874.0s (elapsed 874s)
+>>> COMPLETE PC10 CMYK gaussian_process: {'median': 0.05711183902689458, 'p95': 0.47142956896155924, 'max': 12.723843342213712, 'n': 1617}
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 14 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+[6/45] IFRA_Age64a CMYK fold=0 took 574.1s (elapsed 1153s)
+[7/45] CMYKOGB7 native fold=0 took 1209.8s (elapsed 1210s)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 15 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+[8/45] KCMYG5 native fold=3 took 1261.8s (elapsed 1262s)
+[9/45] IFRA_Age64a CMYK fold=1 took 605.8s (elapsed 1277s)
+[10/45] CMYKOGB7 native fold=3 took 1358.9s (elapsed 1359s)
+[11/45] CMYKOGB7 native fold=1 took 1367.0s (elapsed 1367s)
+[12/45] IFRA_Age64a CMYK fold=2 took 633.6s (elapsed 1384s)
+[13/45] IFRA_Age64a CMYK fold=3 took 632.5s (elapsed 1399s)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 11 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+[14/45] CMYKOGB7 native fold=2 took 1423.4s (elapsed 1424s)
+[15/45] KCMYG5 native fold=0 took 1438.3s (elapsed 1438s)
+[16/45] IFRA_Age64a CMYK fold=4 took 578.1s (elapsed 1452s)
+>>> COMPLETE IFRA_Age64a CMYK gaussian_process: {'median': 0.7517762585250968, 'p95': 1.694646800967501, 'max': 5.687366834675116, 'n': 1485}
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 14 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+[17/45] CMYKOGV7 native fold=1 took 1483.8s (elapsed 1484s)
+[18/45] CMYKOGV7 native fold=0 took 1489.3s (elapsed 1489s)
+[19/45] KCMYG5 native fold=4 took 1512.4s (elapsed 1512s)
+[20/45] PC10 CMY fold=3 took 116.1s (elapsed 1540s)
+[21/45] PC10 CMY fold=2 took 144.6s (elapsed 1544s)
+[22/45] PC10 CMY fold=1 took 177.5s (elapsed 1561s)
+[23/45] PC10 CMY fold=0 took 197.9s (elapsed 1565s)
+[24/45] PC11 CMY fold=0 took 116.8s (elapsed 1569s)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 19 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 19 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+[25/45] PC11 CMY fold=2 took 120.1s (elapsed 1609s)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 18 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+[26/45] PC11 CMY fold=3 took 107.5s (elapsed 1620s)
+[27/45] PC11 CMY fold=1 took 146.0s (elapsed 1630s)
+[28/45] PC11 CMY fold=4 took 97.9s (elapsed 1637s)
+>>> COMPLETE PC11 CMY gaussian_process: {'median': 0.04410715443990175, 'p95': 0.13970313555350675, 'max': 1.7547766433344896, 'n': 818}
+[29/45] CMYKOGV7 native fold=4 took 1647.2s (elapsed 1647s)
+[30/45] FOGRA51 CMY fold=0 took 114.5s (elapsed 1658s)
+[31/45] PC10 CMY fold=4 took 232.4s (elapsed 1671s)
+>>> COMPLETE PC10 CMY gaussian_process: {'median': 0.046694292265195156, 'p95': 0.15685751960660416, 'max': 2.0928651848584976, 'n': 818}
+[32/45] FOGRA51 CMY fold=1 took 115.2s (elapsed 1677s)
+[33/45] FOGRA51 CMY fold=3 took 110.2s (elapsed 1679s)
+[34/45] CMYKOGB7 native fold=4 took 1682.7s (elapsed 1683s)
+>>> COMPLETE CMYKOGB7 native gaussian_process: {'median': 1.2574925260255179, 'p95': 8.657147598810084, 'max': 47.26093899298255, 'n': 2000}
+[35/45] FOGRA51 CMY fold=4 took 86.1s (elapsed 1696s)
+[36/45] CMYKOGV7 native fold=2 took 1712.6s (elapsed 1713s)
+[37/45] IFRA_PressJ158 CMYK fold=0 took 563.3s (elapsed 1716s)
+[38/45] FOGRA51 CMY fold=2 took 162.3s (elapsed 1727s)
+>>> COMPLETE FOGRA51 CMY gaussian_process: {'median': 0.05823732028287186, 'p95': 0.16102747010953405, 'max': 0.4845577070650429, 'n': 818}
+[39/45] KCMYG5 native fold=2 took 1756.5s (elapsed 1757s)
+/home/user1/blind_verify/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 13 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+[40/45] IFRA_PressJ158 CMYK fold=3 took 491.3s (elapsed 1768s)
+[41/45] IFRA_PressJ158 CMYK fold=2 took 541.2s (elapsed 1803s)
+[42/45] IFRA_PressJ158 CMYK fold=1 took 609.5s (elapsed 1819s)
+[43/45] CMYKOGV7 native fold=3 took 1834.3s (elapsed 1834s)
+>>> COMPLETE CMYKOGV7 native gaussian_process: {'median': 0.22592865737346624, 'p95': 4.854503164919603, 'max': 45.21521735599509, 'n': 3534}
+[44/45] IFRA_PressJ158 CMYK fold=4 took 475.4s (elapsed 1834s)
+>>> COMPLETE IFRA_PressJ158 CMYK gaussian_process: {'median': 2.194370690240056, 'p95': 5.425228328639697, 'max': 9.982447694668409, 'n': 1485}
+[45/45] KCMYG5 native fold=1 took 1857.8s (elapsed 1858s)
+>>> COMPLETE KCMYG5 native gaussian_process: {'median': 0.8513654480472912, 'p95': 2.3260262448555764, 'max': 32.423797551975575, 'n': 2214}
+ALL GP DONE
+GP_SWEEP_DONE
