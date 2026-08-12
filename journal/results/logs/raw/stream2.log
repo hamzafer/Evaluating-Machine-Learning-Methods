@@ -1,0 +1,79 @@
+=== run_ifra A Age_64a 23:09:45
+A within-run IFRA-wb-Age_64a_wb-CMYK gaussian_process: median=0.755
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A Arena_111 23:12:27
+A within-run IFRA-wb-Arena_111_wb-CMYK gaussian_process: median=0.820
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A Dnvk_131 23:15:13
+A within-run IFRA-wb-Dnvk_131_wb-CMYK gaussian_process: median=1.052
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A GratN_90 23:17:54
+A within-run IFRA-wb-GratN_90_wb-CMYK gaussian_process: median=0.674
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A Mbd_103a 23:20:34
+A within-run IFRA-wb-Mbd_103a_wb-CMYK gaussian_process: median=0.721
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A NordK_92a 23:23:27
+A within-run IFRA-wb-NordK_92a_wb-CMYK gaussian_process: median=0.992
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A PressJ_158 23:26:18
+A within-run IFRA-wb-PressJ_158_wb-CMYK gaussian_process: median=2.141
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A RZPOI_125_2 23:29:16
+A within-run IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process: median=0.899
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A SudK_99_2 23:32:05
+A within-run IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=1.172
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A Sudz_100 23:34:54
+A within-run IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=1.392
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A TagesA_147_2 23:37:42
+A within-run IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=0.847
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A TagesA_147 23:40:08
+A within-run IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=0.835
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra A marca_133 23:42:11
+A within-run IFRA-wb-marca_133_wb-CMYK gaussian_process: median=1.984
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+=== run_ifra C Age_64a 23:44:12
+C LOO IFRA-wb-Age_64a_wb-CMYK gaussian_process: median=2.169
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C Arena_111 23:45:23
+C LOO IFRA-wb-Arena_111_wb-CMYK gaussian_process: median=4.410
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C Dnvk_131 23:46:26
+C LOO IFRA-wb-Dnvk_131_wb-CMYK gaussian_process: median=2.006
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C GratN_90 23:47:27
+C LOO IFRA-wb-GratN_90_wb-CMYK gaussian_process: median=5.720
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C Mbd_103a 23:48:39
+C LOO IFRA-wb-Mbd_103a_wb-CMYK gaussian_process: median=1.775
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C NordK_92a 23:49:46
+C LOO IFRA-wb-NordK_92a_wb-CMYK gaussian_process: median=3.437
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C PressJ_158 23:50:49
+C LOO IFRA-wb-PressJ_158_wb-CMYK gaussian_process: median=6.451
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C RZPOI_125_2 23:52:00
+C LOO IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process: median=3.155
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C SudK_99_2 23:53:03
+C LOO IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=3.535
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C Sudz_100 23:54:18
+C LOO IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=2.310
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C TagesA_147_2 23:55:28
+C LOO IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=1.775
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C TagesA_147 23:56:41
+C LOO IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=1.718
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+=== run_ifra C marca_133 23:57:44
+C LOO IFRA-wb-marca_133_wb-CMYK gaussian_process: median=3.247
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/ifra/leave_one_out.csv
+STREAM2 DONE 23:58:45

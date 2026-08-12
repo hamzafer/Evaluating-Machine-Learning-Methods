@@ -1,0 +1,347 @@
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 15 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 7 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 30 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 10 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+PC10-CMY       gaussian_process kfold    median=0.044
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 5 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 20 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 15 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+PC10-CMY       gaussian_process grouped  median=0.044
+PC10-CMY       poly3            kfold    median=0.279
+PC10-CMY       poly3            grouped  median=0.277
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 29 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 10 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 36 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+PC10-CMYK      gaussian_process kfold    median=0.056
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 35 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 12 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 14 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 29 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 11 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+PC10-CMYK      gaussian_process grouped  median=0.058
+PC10-CMYK      poly3            kfold    median=0.944
+PC10-CMYK      poly3            grouped  median=0.932
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 13 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 11 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+PC11-CMY       gaussian_process kfold    median=0.044
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 9 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 15 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+PC11-CMY       gaussian_process grouped  median=0.043
+PC11-CMY       poly3            kfold    median=0.244
+PC11-CMY       poly3            grouped  median=0.239
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 12 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 41 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+PC11-CMYK      gaussian_process kfold    median=0.056
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 11 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 19 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 11 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 12 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 11 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 11 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+PC11-CMYK      gaussian_process grouped  median=0.056
+PC11-CMYK      poly3            kfold    median=0.868
+PC11-CMYK      poly3            grouped  median=0.883
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 12 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 6 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 25 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 15 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 12 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+FOGRA51-CMY    gaussian_process kfold    median=0.056
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 6 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 5 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 15 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 17 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 5 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+FOGRA51-CMY    gaussian_process grouped  median=0.055
+FOGRA51-CMY    poly3            kfold    median=0.368
+FOGRA51-CMY    poly3            grouped  median=0.365
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 37 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 13 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 9 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 30 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+FOGRA51-CMYK   gaussian_process kfold    median=0.067
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 10 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+FOGRA51-CMYK   gaussian_process grouped  median=0.067
+FOGRA51-CMYK   poly3            kfold    median=0.822
+FOGRA51-CMYK   poly3            grouped  median=0.817
+IFRA-wb-Age_64a_wb-CMYK gaussian_process kfold    median=0.755
+IFRA-wb-Age_64a_wb-CMYK gaussian_process grouped  median=0.747
+IFRA-wb-Age_64a_wb-CMYK poly3            kfold    median=1.051
+IFRA-wb-Age_64a_wb-CMYK poly3            grouped  median=1.048
+IFRA-wb-Arena_111_wb-CMYK gaussian_process kfold    median=0.820
+IFRA-wb-Arena_111_wb-CMYK gaussian_process grouped  median=0.815
+IFRA-wb-Arena_111_wb-CMYK poly3            kfold    median=0.937
+IFRA-wb-Arena_111_wb-CMYK poly3            grouped  median=0.936
+IFRA-wb-Dnvk_131_wb-CMYK gaussian_process kfold    median=1.052
+IFRA-wb-Dnvk_131_wb-CMYK gaussian_process grouped  median=1.034
+IFRA-wb-Dnvk_131_wb-CMYK poly3            kfold    median=1.332
+IFRA-wb-Dnvk_131_wb-CMYK poly3            grouped  median=1.325
+IFRA-wb-GratN_90_wb-CMYK gaussian_process kfold    median=0.674
+IFRA-wb-GratN_90_wb-CMYK gaussian_process grouped  median=0.667
+IFRA-wb-GratN_90_wb-CMYK poly3            kfold    median=0.914
+IFRA-wb-GratN_90_wb-CMYK poly3            grouped  median=0.918
+IFRA-wb-Mbd_103a_wb-CMYK gaussian_process kfold    median=0.721
+IFRA-wb-Mbd_103a_wb-CMYK gaussian_process grouped  median=0.701
+IFRA-wb-Mbd_103a_wb-CMYK poly3            kfold    median=1.383
+IFRA-wb-Mbd_103a_wb-CMYK poly3            grouped  median=1.391
+IFRA-wb-NordK_92a_wb-CMYK gaussian_process kfold    median=0.992
+IFRA-wb-NordK_92a_wb-CMYK gaussian_process grouped  median=0.990
+IFRA-wb-NordK_92a_wb-CMYK poly3            kfold    median=1.768
+IFRA-wb-NordK_92a_wb-CMYK poly3            grouped  median=1.761
+IFRA-wb-PressJ_158_wb-CMYK gaussian_process kfold    median=2.141
+IFRA-wb-PressJ_158_wb-CMYK gaussian_process grouped  median=2.124
+IFRA-wb-PressJ_158_wb-CMYK poly3            kfold    median=3.152
+IFRA-wb-PressJ_158_wb-CMYK poly3            grouped  median=3.126
+IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process kfold    median=0.899
+IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process grouped  median=0.892
+IFRA-wb-RZPOI_125_2_wb-CMYK poly3            kfold    median=1.542
+IFRA-wb-RZPOI_125_2_wb-CMYK poly3            grouped  median=1.530
+IFRA-wb-SudK_99_2_wb-CMYK gaussian_process kfold    median=1.172
+IFRA-wb-SudK_99_2_wb-CMYK gaussian_process grouped  median=1.165
+IFRA-wb-SudK_99_2_wb-CMYK poly3            kfold    median=1.900
+IFRA-wb-SudK_99_2_wb-CMYK poly3            grouped  median=1.858
+IFRA-wb-Sudz_100_wb-CMYK gaussian_process kfold    median=1.392
+IFRA-wb-Sudz_100_wb-CMYK gaussian_process grouped  median=1.377
+IFRA-wb-Sudz_100_wb-CMYK poly3            kfold    median=2.081
+IFRA-wb-Sudz_100_wb-CMYK poly3            grouped  median=2.061
+IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process kfold    median=0.847
+IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process grouped  median=0.829
+IFRA-wb-TagesA_147_2_wb-CMYK poly3            kfold    median=1.383
+IFRA-wb-TagesA_147_2_wb-CMYK poly3            grouped  median=1.396
+IFRA-wb-TagesA_147_wb-CMYK gaussian_process kfold    median=0.835
+IFRA-wb-TagesA_147_wb-CMYK gaussian_process grouped  median=0.821
+IFRA-wb-TagesA_147_wb-CMYK poly3            kfold    median=1.416
+IFRA-wb-TagesA_147_wb-CMYK poly3            grouped  median=1.405
+IFRA-wb-marca_133_wb-CMYK gaussian_process kfold    median=1.984
+IFRA-wb-marca_133_wb-CMYK gaussian_process grouped  median=1.974
+IFRA-wb-marca_133_wb-CMYK poly3            kfold    median=2.138
+IFRA-wb-marca_133_wb-CMYK poly3            grouped  median=2.139
+KCMYG-5        gaussian_process kfold    median=0.852
+KCMYG-5        gaussian_process grouped  median=0.867
+KCMYG-5        poly3            kfold    median=1.482
+KCMYG-5        poly3            grouped  median=1.457
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 40 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+CMYKOGV-7      gaussian_process kfold    median=0.253
+CMYKOGV-7      gaussian_process grouped  median=0.249
+CMYKOGV-7      poly3            kfold    median=5.312
+CMYKOGV-7      poly3            grouped  median=5.386
+CMYKOGB-7      gaussian_process kfold    median=1.291
+CMYKOGB-7      gaussian_process grouped  median=1.280
+CMYKOGB-7      poly3            kfold    median=3.211
+CMYKOGB-7      poly3            grouped  median=3.332
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/gp_verification.csv
