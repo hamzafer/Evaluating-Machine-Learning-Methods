@@ -61,9 +61,14 @@ Seven of nine reproduce exactly; the two multi-ink sets differ by ≤0.016 ΔE00
 restarted log-marginal-likelihood optimizer can settle on marginally different optima when
 the linear-algebra path differs, while remaining deterministic on each platform. Note this
 is an order of magnitude tighter than the MLP divergence in §1, i.e. the GP results the
-paper leans on are the *least* platform-sensitive of the family. The IFRA GP mirror
-(within/cross/LOO) was still running when this table was written; spot values agreed exactly
-(GratN_90 within-run 0.674, Mbd_103a 0.721).
+paper leans on are the *least* platform-sensitive of the family.
+
+**IFRA newsprint, within-run GP: 13/13 runs bit-exact across platforms** (both platforms
+0.674–2.141, median-of-medians 0.899; largest delta 0.0000). This is the regime the plan-10
+fix was aimed at, and it is fully platform-independent — the resolved anomaly is not an
+artifact of one machine's linear algebra. The cross-run (156 pairs) and leave-one-out mirrors
+were still running when this table was written; per-spec `run.py` GP values seen so far also
+agree exactly (e.g. RZPOI_125_2 0.899).
 
 Provenance: run on the remote (exploratory platform) 11-12 Aug; scripts: /tmp/seed_sweep.py
 (remote) + three tmux replication sessions; coordinator-verified deltas via git-diff on the
