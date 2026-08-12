@@ -65,10 +65,9 @@ MODELS = [
     # They are re-run with reasoning explicitly disabled; gpt-5.6-sol answered
     # fine at effort=low and keeps that setting so its recorded run is the one
     # actually scored.
-    {"id": "deepseek/deepseek-v4-pro", "max_tokens": 3000,
-     "reasoning": {"enabled": False}, "price_in": 1.168, "price_out": 2.336,
-     "note": "reasoning DISABLED (budget): with reasoning on it spent 2400 and "
-             "then 8000 completion tokens thinking and returned no answer"},
+    {"id": "deepseek/deepseek-v4-pro", "max_tokens": 24000,
+     "reasoning": {"enabled": True}, "price_in": 1.168, "price_out": 2.336,
+     "note": "ARCHIVED ROW was produced with reasoning DISABLED and 371 completion tokens, so the coefficients are written from memory, not fitted - it is NOT a fair test of this model. The two earlier reasoning attempts were truncated by max_tokens, NOT by cost (they charged $0.0033 and $0.0092 and showed real derivation work). Config below is now reasoning-enabled with max_tokens 24000; a fair re-run costs about $0.02 and is PENDING."},
     {"id": "openai/gpt-5.6-sol", "max_tokens": 3000,
      "reasoning": {"effort": "low"}, "price_in": 5.0, "price_out": 30.0,
      "note": "reasoning effort=low"},
