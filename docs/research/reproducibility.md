@@ -66,9 +66,16 @@ paper leans on are the *least* platform-sensitive of the family.
 **IFRA newsprint, within-run GP: 13/13 runs bit-exact across platforms** (both platforms
 0.674–2.141, median-of-medians 0.899; largest delta 0.0000). This is the regime the plan-10
 fix was aimed at, and it is fully platform-independent — the resolved anomaly is not an
-artifact of one machine's linear algebra. The cross-run (156 pairs) and leave-one-out mirrors
-were still running when this table was written; per-spec `run.py` GP values seen so far also
-agree exactly (e.g. RZPOI_125_2 0.899).
+artifact of one machine's linear algebra. **The mirror is now complete: cross-run 156/156
+pairs and leave-one-out 13/13 are also bit-exact** (max |delta| 0.0000 in both). So every
+one of the 182 IFRA GP results in the paper reproduces digit-for-digit on independent
+hardware; the only cross-platform GP divergence anywhere is KCMYG-5 (−0.016) and
+CMYKOGV-7 (−0.013).
+
+Why the newsprint results are the stable ones while two coated multi-ink sets drift: the
+IFRA fits are small enough (≤1,485 training rows, or the 2,000-row cap on pooled LOO) that
+the optimizer lands in the same basin on both platforms, whereas KCMYG-5 and CMYKOGV-7 sit
+near the cap where marginally different linear algebra changes which restart wins.
 
 Provenance: run on the remote (exploratory platform) 11-12 Aug; scripts: /tmp/seed_sweep.py
 (remote) + three tmux replication sessions; coordinator-verified deltas via git-diff on the
