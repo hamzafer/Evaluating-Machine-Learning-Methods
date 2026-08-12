@@ -1,0 +1,187 @@
+A within-run IFRA-wb-Age_64a_wb-CMYK gaussian_process: median=0.755
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 31 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+A within-run IFRA-wb-Arena_111_wb-CMYK gaussian_process: median=0.820
+A within-run IFRA-wb-Dnvk_131_wb-CMYK gaussian_process: median=1.052
+A within-run IFRA-wb-GratN_90_wb-CMYK gaussian_process: median=0.674
+A within-run IFRA-wb-Mbd_103a_wb-CMYK gaussian_process: median=0.721
+A within-run IFRA-wb-NordK_92a_wb-CMYK gaussian_process: median=0.992
+A within-run IFRA-wb-PressJ_158_wb-CMYK gaussian_process: median=2.141
+A within-run IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process: median=0.899
+A within-run IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=1.172
+A within-run IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=1.392
+A within-run IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=0.847
+A within-run IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=0.835
+A within-run IFRA-wb-marca_133_wb-CMYK gaussian_process: median=1.984
+wrote /home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/journal/results/ifra/within_run.csv
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-Arena_111_wb-CMYK gaussian_process: median=4.343
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-Dnvk_131_wb-CMYK gaussian_process: median=1.677
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-GratN_90_wb-CMYK gaussian_process: median=5.355
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-Mbd_103a_wb-CMYK gaussian_process: median=2.574
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-NordK_92a_wb-CMYK gaussian_process: median=3.370
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-PressJ_158_wb-CMYK gaussian_process: median=6.831
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process: median=3.635
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=3.575
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=3.405
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=2.030
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=2.012
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 26 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+B cross-run IFRA-wb-Age_64a_wb-CMYK->IFRA-wb-marca_133_wb-CMYK gaussian_process: median=3.062
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-Age_64a_wb-CMYK gaussian_process: median=4.413
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-Dnvk_131_wb-CMYK gaussian_process: median=4.300
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-GratN_90_wb-CMYK gaussian_process: median=2.767
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-Mbd_103a_wb-CMYK gaussian_process: median=5.005
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-NordK_92a_wb-CMYK gaussian_process: median=6.847
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-PressJ_158_wb-CMYK gaussian_process: median=9.758
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process: median=5.492
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=6.429
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=5.520
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=5.199
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=5.259
+B cross-run IFRA-wb-Arena_111_wb-CMYK->IFRA-wb-marca_133_wb-CMYK gaussian_process: median=3.216
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-Age_64a_wb-CMYK gaussian_process: median=1.568
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-Arena_111_wb-CMYK gaussian_process: median=4.203
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-GratN_90_wb-CMYK gaussian_process: median=5.404
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-Mbd_103a_wb-CMYK gaussian_process: median=2.514
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-NordK_92a_wb-CMYK gaussian_process: median=3.253
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-PressJ_158_wb-CMYK gaussian_process: median=6.574
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process: median=3.874
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=3.902
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=3.101
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=1.809
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=1.848
+B cross-run IFRA-wb-Dnvk_131_wb-CMYK->IFRA-wb-marca_133_wb-CMYK gaussian_process: median=2.638
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-Age_64a_wb-CMYK gaussian_process: median=5.382
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-Arena_111_wb-CMYK gaussian_process: median=2.682
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-Dnvk_131_wb-CMYK gaussian_process: median=5.436
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-Mbd_103a_wb-CMYK gaussian_process: median=6.299
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-NordK_92a_wb-CMYK gaussian_process: median=7.687
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-PressJ_158_wb-CMYK gaussian_process: median=10.042
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process: median=5.300
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=7.309
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=6.544
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=6.288
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=6.255
+B cross-run IFRA-wb-GratN_90_wb-CMYK->IFRA-wb-marca_133_wb-CMYK gaussian_process: median=4.388
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-Age_64a_wb-CMYK gaussian_process: median=2.618
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-Arena_111_wb-CMYK gaussian_process: median=4.981
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-Dnvk_131_wb-CMYK gaussian_process: median=2.648
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-GratN_90_wb-CMYK gaussian_process: median=6.300
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-NordK_92a_wb-CMYK gaussian_process: median=3.197
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-PressJ_158_wb-CMYK gaussian_process: median=5.676
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process: median=3.365
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=2.505
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=2.427
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=1.559
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=1.554
+B cross-run IFRA-wb-Mbd_103a_wb-CMYK->IFRA-wb-marca_133_wb-CMYK gaussian_process: median=3.671
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-Age_64a_wb-CMYK gaussian_process: median=3.298
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-Arena_111_wb-CMYK gaussian_process: median=6.787
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-Dnvk_131_wb-CMYK gaussian_process: median=3.218
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-GratN_90_wb-CMYK gaussian_process: median=7.614
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-Mbd_103a_wb-CMYK gaussian_process: median=3.150
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-PressJ_158_wb-CMYK gaussian_process: median=5.543
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process: median=4.183
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=3.619
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=3.568
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=2.731
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=2.609
+B cross-run IFRA-wb-NordK_92a_wb-CMYK->IFRA-wb-marca_133_wb-CMYK gaussian_process: median=4.934
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-Age_64a_wb-CMYK gaussian_process: median=6.672
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-Arena_111_wb-CMYK gaussian_process: median=9.549
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-Dnvk_131_wb-CMYK gaussian_process: median=6.366
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-GratN_90_wb-CMYK gaussian_process: median=9.979
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-Mbd_103a_wb-CMYK gaussian_process: median=5.377
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-NordK_92a_wb-CMYK gaussian_process: median=5.330
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-RZPOI_125_2_wb-CMYK gaussian_process: median=7.140
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=5.669
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=5.478
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=5.645
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=5.634
+B cross-run IFRA-wb-PressJ_158_wb-CMYK->IFRA-wb-marca_133_wb-CMYK gaussian_process: median=7.779
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-Age_64a_wb-CMYK gaussian_process: median=3.813
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-Arena_111_wb-CMYK gaussian_process: median=5.389
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-Dnvk_131_wb-CMYK gaussian_process: median=4.035
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-GratN_90_wb-CMYK gaussian_process: median=5.377
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-Mbd_103a_wb-CMYK gaussian_process: median=3.294
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-NordK_92a_wb-CMYK gaussian_process: median=4.157
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-PressJ_158_wb-CMYK gaussian_process: median=7.001
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-SudK_99_2_wb-CMYK gaussian_process: median=4.122
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-Sudz_100_wb-CMYK gaussian_process: median=3.301
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process: median=3.477
+B cross-run IFRA-wb-RZPOI_125_2_wb-CMYK->IFRA-wb-TagesA_147_wb-CMYK gaussian_process: median=3.439

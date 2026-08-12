@@ -1,0 +1,8 @@
+/Users/hamza/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 17 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+CMYKOGV-7      gaussian_process median=  0.249 p95=  4.497 max=  49.757 [226.4s]
+wrote /Users/hamza/Documents/ntnu/phill/Evaluating-Machine-Learning-Methods/journal/results/CMYKOGV-7/summary.csv

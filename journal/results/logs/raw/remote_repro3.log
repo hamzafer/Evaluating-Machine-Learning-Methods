@@ -1,0 +1,35 @@
+CMYKOGV-7      poly3            median=  5.310 p95= 25.118 max=  54.355 [  3.7s]
+CMYKOGV-7      ridge            median= 15.006 p95= 27.588 max=  47.912 [  0.0s]
+CMYKOGV-7      lasso            median= 14.973 p95= 27.888 max=  51.026 [  0.0s]
+CMYKOGV-7      elastic          median= 15.024 p95= 27.546 max=  50.401 [  0.0s]
+CMYKOGV-7      pcr              median= 15.006 p95= 27.588 max=  47.912 [  0.0s]
+CMYKOGV-7      plsr             median= 18.359 p95= 37.385 max=  53.348 [  0.0s]
+CMYKOGV-7      knn              median=  3.578 p95=  9.520 max=  29.401 [  0.0s]
+CMYKOGV-7      svm              median=  2.186 p95= 11.166 max=  32.512 [  2.9s]
+CMYKOGV-7      decision_tree    median=  5.517 p95= 15.006 max=  45.418 [  0.0s]
+CMYKOGV-7      random_forest    median=  3.699 p95=  9.572 max=  35.144 [  3.5s]
+CMYKOGV-7      gradient_boost   median=  3.850 p95= 15.539 max=  39.399 [  3.8s]
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 17 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 41 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 31 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+CMYKOGV-7      gaussian_process median=  0.236 p95=  4.324 max=  52.179 [3810.2s]
+CMYKOGV-7      mlp_shallow      median=  3.296 p95= 14.525 max=  38.632 [  2.4s]
+CMYKOGV-7      mlp_deep         median=  3.164 p95= 12.610 max=  30.143 [ 81.1s]
+CMYKOGV-7      poly3_de00_nm    median=  5.316 p95= 21.476 max=  53.808 [ 24.1s]
+CMYKOGV-7      poly3_de00_powell median=  3.183 p95= 12.717 max=  41.195 [7194.6s]
+wrote /home/user1/Desktop/HAMZA/Evaluating-Machine-Learning-Methods/journal/results/CMYKOGV-7/summary.csv

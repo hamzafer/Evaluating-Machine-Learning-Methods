@@ -12,12 +12,15 @@ so a chunked or model-subset re-run never clobbers a fuller result set.
 import argparse
 from pathlib import Path
 
+import time
+
 import numpy as np
 import pandas as pd
 
 from .datasets import registry as dreg
 from .evaluate import cross_validate, summarize, train_test
 from .models import registry as mreg
+from .runlog import append as log_run
 
 SUBSET = ['gaussian_process', 'poly3', 'svm', 'mlp_deep']
 OUT = Path(__file__).resolve().parents[1] / 'results' / 'ifra'
@@ -64,7 +67,9 @@ def main():
         rows = []
         for n in picked:
             for m in models_a:
+                t0 = time.time()
                 s = summarize(cross_validate(*runs[n], mreg()[m]))
+                log_run('run_ifra.py', 'ifra-within-run', n, m, s, time.time() - t0)
                 rows.append({'run': n, 'model': m,
                              **{k: round(v, 3) for k, v in s.items()}})
                 print(f"A within-run {n} {m}: median={s['median']:.3f}", flush=True)
@@ -78,7 +83,10 @@ def main():
                 if a == b:
                     continue
                 for m in models_bc:
+                    t0 = time.time()
                     s = summarize(train_test(*runs[a], *runs[b], mreg()[m]))
+                    log_run('run_ifra.py', 'ifra-cross-run', f'{a}->{b}', m, s,
+                            time.time() - t0)
                     rows.append({'train': a, 'test': b, 'model': m,
                                  **{k: round(v, 3) for k, v in s.items()}})
                     print(f"B cross-run {a}->{b} {m}: median={s['median']:.3f}", flush=True)
@@ -91,7 +99,9 @@ def main():
             Xtr = np.vstack([runs[n][0] for n in names if n != held])
             Ytr = np.vstack([runs[n][1] for n in names if n != held])
             for m in models_bc:
+                t0 = time.time()
                 s = summarize(train_test(Xtr, Ytr, *runs[held], mreg()[m]))
+                log_run('run_ifra.py', 'ifra-loo', f'held={held}', m, s, time.time() - t0)
                 rows.append({'held_out': held, 'model': m,
                              **{k: round(v, 3) for k, v in s.items()}})
                 print(f"C LOO {held} {m}: median={s['median']:.3f}", flush=True)

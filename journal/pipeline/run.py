@@ -13,6 +13,7 @@ import pandas as pd
 from .datasets import registry as dataset_registry
 from .evaluate import cross_validate, make_groups, summarize
 from .models import registry as model_registry
+from .runlog import append as log_run
 
 RESULTS = Path(__file__).resolve().parents[1] / 'results'
 
@@ -33,8 +34,11 @@ def main():
             t0 = time.time()
             de = cross_validate(X, Y, m_reg[m_name], groups=groups)
             stats = summarize(de)
+            elapsed = time.time() - t0
             rows.append({'model': m_name, **{k: round(v, 3) for k, v in stats.items()
                                              if k != 'n'}, 'n': stats['n']})
+            log_run('run.py', '5fold-grouped' if spec.grouped else '5fold-kfold',
+                    ds_name, m_name, stats, elapsed)
             print(f"{ds_name:14s} {m_name:16s} median={stats['median']:7.3f} "
                   f"p95={stats['p95']:7.3f} max={stats['max']:8.3f} "
                   f"[{time.time()-t0:5.1f}s]", flush=True)
