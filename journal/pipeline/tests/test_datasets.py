@@ -65,11 +65,68 @@ def test_registry_ncolor_specs():
         assert spec.input_cols == tuple(f'INK_{i}' for i in range(1, n + 1))
         assert spec.filter_k_zero is False and spec.grouped is True
         assert spec.dedup_exact is (name == 'CMYKOGV-7')
-    # existing specs untouched: plain KFold, no dedup
-    assert reg['PC10-CMYK'].grouped is False and reg['PC10-CMYK'].dedup_exact is False
 
 
 def test_cmykogv_effective_rows():
     # CSV keeps all 3534 rows as received; exact dedup at load -> 3302.
     X, Y = registry()['CMYKOGV-7'].load()
     assert X.shape == (3302, 7) and Y.shape == (3302, 3)
+
+
+# --- Uniform dedup policy on the coated n<=4 sets (fix of the CV duplicate
+# leakage found 12 Aug 2026, docs/research/cv-leakage-2026-08-12.md). The
+# property that matters is that no duplicate recipe survives the load, so the
+# seeded shuffled KFold cannot put a row's byte-identical twin in the training
+# fold. Asserted directly on the loaded arrays, not via the flag.
+
+COATED = ('PC10', 'PC11', 'FOGRA51')
+# 818 - 23 duplicate CMY groups; 1617 - 29 duplicate CMYK groups.
+COATED_ROWS = {'CMY': 795, 'CMYK': 1588}
+
+
+def _n_duplicate_recipes(X):
+    _, counts = np.unique(np.round(X, 6), axis=0, return_counts=True)
+    return int((counts > 1).sum())
+
+
+def test_coated_specs_effective_row_counts():
+    reg = registry()
+    for ds in COATED:
+        for variant, expected in COATED_ROWS.items():
+            name = f'{ds}-{variant}'
+            X, Y = reg[name].load()
+            assert X.shape == (expected, len(reg[name].input_cols)), name
+            assert Y.shape == (expected, 3), name
+
+
+def test_coated_specs_have_no_duplicate_recipes():
+    reg = registry()
+    for ds in COATED:
+        for variant in COATED_ROWS:
+            name = f'{ds}-{variant}'
+            X, _ = reg[name].load()
+            assert _n_duplicate_recipes(X) == 0, name
+
+
+def test_coated_specs_keep_plain_kfold():
+    # Grouping is unnecessary by construction once dedup removes every twin;
+    # the seeded shuffled KFold protocol (and its numbers) stays.
+    reg = registry()
+    for ds in COATED:
+        for variant in COATED_ROWS:
+            assert reg[f'{ds}-{variant}'].grouped is False
+
+
+def test_ifra_specs_keep_their_duplicates():
+    # IFRA duplicate recipes carry genuinely DIFFERING measurements (real press
+    # repeatability, ~0.6-0.8 dE00). Deduplicating them would destroy signal,
+    # so they must stay un-deduplicated at full 1485 rows.
+    reg = registry()
+    ifra = [n for n in reg if n.startswith('IFRA-')]
+    assert len(ifra) == 13
+    for name in ifra:
+        spec = reg[name]
+        assert spec.dedup_exact is False, name
+        X, _ = spec.load()
+        assert X.shape == (1485, 4), name
+        assert _n_duplicate_recipes(X) > 0, name
