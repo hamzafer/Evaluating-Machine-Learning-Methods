@@ -31,13 +31,15 @@ class DatasetSpec:
     filter_k_zero: bool          # True for CMY variants (818 rows), False for CMYK (1617)
     target_cols: tuple = ('XYZ_X', 'XYZ_Y', 'XYZ_Z')
     lab_cols: tuple = ('LAB_L', 'LAB_A', 'LAB_B')
-    # Opt-in (Plan 06): drop byte-identical duplicate rows (same inks AND same
-    # XYZ+Lab) at load. The processed CSV keeps every row as received; dedup is
-    # a modelling choice — identical pairs would otherwise leak across CV folds.
+    # Drop byte-identical duplicate rows (same inks AND same XYZ+Lab) at load.
+    # The source CSV keeps every row as received; dedup is a modelling choice —
+    # identical pairs would otherwise leak across CV folds and double-count in
+    # the pooled median. On for every coated n<=4 set and CMYKOGV-7; off for
+    # IFRA, whose duplicate recipes differ in value (genuine repeatability).
     dedup_exact: bool = False
     # Opt-in (Plan 06): run.py passes groups=make_groups(X) into cross_validate
-    # (GroupKFold), so repeated recipes co-travel. n=3/4/IFRA specs stay on
-    # plain KFold (plan-01 verified equivalence there).
+    # (GroupKFold), so repeated recipes co-travel. The coated n<=4 and IFRA specs
+    # stay on plain KFold (plan-01 verified equivalence there).
     grouped: bool = False
 
     def load(self):
@@ -56,16 +58,29 @@ class DatasetSpec:
 
 def registry() -> dict:
     specs = {}
+    # Coated sets: exact-dedup at load, same policy as CMYKOGV-7. Their duplicate
+    # recipes are byte-identical (an upstream averaging/duplication artifact, not
+    # repeated measurement), so a test row's twin could sit in the training fold
+    # under plain KFold -- measured leakage, see
+    # docs/research/cv-leakage-2026-08-12.md. Dropping the twins removes both the
+    # leakage and the pooled-median double-counting; 818 -> 795 (CMY),
+    # 1617 -> 1588 (CMYK). No duplicate recipe survives, so grouped CV is
+    # unnecessary by construction and the seeded shuffled KFold stays.
     for ds, csv in _CSV.items():
         specs[f'{ds}-CMY'] = DatasetSpec(
             name=f'{ds}-CMY', csv=csv,
-            input_cols=('CMYK_C', 'CMYK_M', 'CMYK_Y'), filter_k_zero=True)
+            input_cols=('CMYK_C', 'CMYK_M', 'CMYK_Y'), filter_k_zero=True,
+            dedup_exact=True)
         specs[f'{ds}-CMYK'] = DatasetSpec(
             name=f'{ds}-CMYK', csv=csv,
-            input_cols=('CMYK_C', 'CMYK_M', 'CMYK_Y', 'CMYK_K'), filter_k_zero=False)
+            input_cols=('CMYK_C', 'CMYK_M', 'CMYK_Y', 'CMYK_K'), filter_k_zero=False,
+            dedup_exact=True)
 
     # IFRA 2005 newsprint (wb/bb kept separate per Phil). One DatasetSpec per
     # press-run CSV produced by journal.pipeline.ingest_ifra.
+    # NOT deduplicated, deliberately: IFRA's duplicate recipes carry genuinely
+    # DIFFERING measurements (real press repeatability, ~0.6-0.8 dE00), which is
+    # signal about the press, not an artifact. Dropping them would destroy it.
     ifra_root = REPO_ROOT / 'journal' / 'data' / 'processed' / 'ifra'
     for backing in ('wb', 'bb'):
         for csv in sorted((ifra_root / backing).glob('*.csv')):
