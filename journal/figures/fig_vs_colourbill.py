@@ -28,6 +28,14 @@ Caveat that must accompany any use of this output: colourbill rows are in-sample
 goodness-of-fit; CV rows are out-of-sample prediction error. Common metrics are
 mean and max dE00 only (colourbill does not report median/p95).
 
+Second, smaller caveat (12 Aug 2026): colourbill's coated-CMYK numbers were read off
+its UI for the datasets as-received, i.e. fitted on 1617 rows, whereas our CV rows now
+use the 1588 exact-deduplicated rows. colourbill is a compiled external tool we cannot
+re-run per-configuration, so the row counts differ slightly between the two series. Each
+row's own `n` is carried in comparison.csv; the 29-row difference is immaterial next to
+the in-sample/out-of-sample gap above. (For CMYKOGV-7 both a 3534-row and a 3302-row
+colourbill fit were captured, so that dataset is matched exactly.)
+
 Sources (never hand-entered):
   journal/results/colourbill/colourbill_fit_stats.csv   (verbatim UI readings, 11 Aug 2026)
   data/cleaned/{APTEC_PC10_CardBoard_2023_v1,APTEC_PC11_CCNB_2023_v1,FOGRA51}.csv
@@ -65,14 +73,28 @@ DATASET_LABELS = {
 }
 
 
-def load_dataset(name):
-    """Return (X inks 0-100, Lab) exactly as colourbill sees the file, after the
-    same dedup our pipeline applies (CMYKOGV only, 3534 -> 3302)."""
+def load_dataset(name, dedup):
+    """Return (X inks 0-100, Lab).
+
+    Two data bases are needed, because the two series being bridged were produced
+    under different conventions:
+
+      dedup=False -> the file exactly as colourbill's UI saw it. Used for the step-1
+        reproduction check on the coated sets, whose whole point is to refit
+        colourbill's model class on colourbill's own rows (1617). CMYKOGV-7 is the
+        exception there: colourbill was run on both 3534 and 3302 rows and we pair
+        with its 3302 one, so step 1 passes dedup=True for that dataset only.
+      dedup=True  -> our pipeline's data basis, i.e. datasets.py's dedup_exact.
+        Required for the step-2 bridge, which is labelled "the same model class
+        under OUR protocol" -- and since 12 Aug our protocol drops byte-identical
+        duplicate rows on every coated set (1617 -> 1588; CMYKOGV 3534 -> 3302).
+
+    Keeping step 2 on the un-deduplicated rows would reintroduce into a published
+    number the pooled-median double-counting that dedup exists to remove.
+    """
     if name == "CMYKOGV-7":
         df = pd.read_csv(os.path.join(REPO, "journal", "data", "processed", "ncolor", "CMYKOGV-7.csv"))
         ink_cols = [f"INK_{i}" for i in range(1, 8)]
-        value_cols = ink_cols + ["XYZ_X", "XYZ_Y", "XYZ_Z", "LAB_L", "LAB_A", "LAB_B"]
-        df = df.drop_duplicates(subset=value_cols).reset_index(drop=True)  # = datasets.py dedup_exact
     else:
         csv = {
             "PC10-CMYK": "APTEC_PC10_CardBoard_2023_v1.csv",
@@ -81,6 +103,9 @@ def load_dataset(name):
         }[name]
         df = pd.read_csv(os.path.join(REPO, "data", "cleaned", csv))
         ink_cols = ["CMYK_C", "CMYK_M", "CMYK_Y", "CMYK_K"]
+    if dedup:  # = datasets.py dedup_exact
+        value_cols = ink_cols + ["XYZ_X", "XYZ_Y", "XYZ_Z", "LAB_L", "LAB_A", "LAB_B"]
+        df = df.drop_duplicates(subset=value_cols).reset_index(drop=True)
     X = df[ink_cols].to_numpy(float)
     lab = df[["LAB_L", "LAB_A", "LAB_B"]].to_numpy(float)
     return X, lab
@@ -135,9 +160,12 @@ def main():
     cb = pd.read_csv(os.path.join(CB_DIR, "colourbill_fit_stats.csv"))
 
     # -- step 1: reproduction check (resubstitution, same data, documented strategy)
+    # Data basis = whichever rows colourbill itself fitted, so the comparison is
+    # matched: coated CMYK has only a 1617-row colourbill run, CMYKOGV-7 has both
+    # 3534 and 3302 and we pair with its 3302 (deduplicated) one.
     repro_rows = []
     for ds in DATASETS:
-        X, lab = load_dataset(ds)
+        X, lab = load_dataset(ds, dedup=(ds == "CMYKOGV-7"))
         max_deg = min(5, X.shape[1])
         deg, st = resub_stats(X, lab, max_deg)
         cb_row = cb[(cb.dataset == ds) & (cb.points_fitted == len(X))].iloc[0]
@@ -159,9 +187,11 @@ def main():
     # -- step 2: the bridge (same model class, our CV protocol)
     # Bridge uses the degree colourbill itself selected (4 on all four datasets),
     # so the row is literally "colourbill's chosen model class under our protocol".
+    # Data basis = OUR pipeline's, i.e. deduplicated everywhere (coated 1617 -> 1588,
+    # CMYKOGV unchanged at 3302), so this row follows the protocol it claims to.
     bridge_rows = []
     for ds in DATASETS:
-        X, lab = load_dataset(ds)
+        X, lab = load_dataset(ds, dedup=True)
         deg = int(repro.set_index("dataset").loc[ds, "cb_degree"])
         st = cv_stats(X, lab, deg, grouped=(ds == "CMYKOGV-7"))
         bridge_rows.append({"dataset": ds, "degree": deg,
@@ -174,8 +204,15 @@ def main():
     # -- step 3: comparison table
     comp_rows = []
     for ds in DATASETS:
-        n_ours = {"CMYKOGV-7": 3302}.get(ds, 1617)
-        cb_row = cb[(cb.dataset == ds) & (cb.points_fitted == n_ours)].iloc[0]
+        # points_fitted selects which colourbill run to quote, and is COLOURBILL's
+        # own fitted-point count -- not ours. colourbill fitted the coated CMYK
+        # sets as-received (1617 rows); we now model 1588 after exact-dedup, and
+        # colourbill is an external tool we cannot re-run, so this key stays 1617.
+        # Do not "fix" it to 1588: there is no such colourbill run. The row-count
+        # difference is noted in the caveat below (it is minor next to the
+        # in-sample vs out-of-sample gap the comparison already carries).
+        n_cb = {"CMYKOGV-7": 3302}.get(ds, 1617)
+        cb_row = cb[(cb.dataset == ds) & (cb.points_fitted == n_cb)].iloc[0]
         comp_rows.append({"dataset": ds, "series": "colourbill poly (in-sample fit)",
                           "protocol": "resubstitution", "model": f"poly{cb_row.poly_degree} (Lab, IRLS)",
                           "median": None, "p95": None,

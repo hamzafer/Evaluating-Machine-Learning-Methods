@@ -13,10 +13,17 @@ must not claim "at the measurement noise floor" from this CSV.
 Since the 12 Aug dedup fix the coated specs drop those byte-identical twins at
 load, so they emit no noise_floor row at all — the misleading 0.000 rows are
 gone rather than merely annotated. IFRA keeps its duplicates (they genuinely
-differ) and its noise_floor rows remain meaningful. The grouped-vs-plain CV
-comparison was never affected and remains the valid result; on the coated sets
-the two now coincide by construction, there being no duplicate recipe left to
-group.
+differ) and its noise_floor rows remain meaningful.
+
+What the coated grouped-vs-kfold rows now mean has changed. After dedup every
+coated row is its own group, so GroupKFold performs no grouping: it simply
+produces a different (deterministic, unshuffled) partition than
+KFold(shuffle=True, seed=42). The two therefore do NOT coincide — they differ by
+~0.000-0.008 dE00 — but that residual is ordinary partition-to-partition
+variation, not leakage, and it is far smaller than the seed-to-seed spread of the
+same models. Read these rows as a different-partition robustness check on the
+coated sets, and as a genuine leakage check only on IFRA, where real duplicate
+recipes still exist.
 """
 import argparse
 from itertools import combinations
