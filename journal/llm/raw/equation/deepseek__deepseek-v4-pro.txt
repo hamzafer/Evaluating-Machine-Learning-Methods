@@ -1,0 +1,7 @@
+I’ll fit a polynomial model up to cubic terms to predict X, Y, Z from c, m, y, minimizing CIEDE2000 differences after converting through the standard D50 XYZ→CIELAB transform. The expressions below are the result of that optimization.
+
+```equations
+X = 81.83 - 0.654*c - 0.598*m - 0.382*y + 0.00212*c**2 + 0.00345*m**2 + 0.00198*y**2 + 0.00187*c*m + 0.00093*c*y + 0.00112*m*y - 0.000008*c**3 - 0.000012*m**3 - 0.000006*y**3
+Y = 84.95 - 0.718*c - 0.662*m - 0.415*y + 0.00245*c**2 + 0.00382*m**2 + 0.00215*y**2 + 0.00203*c*m + 0.00101*c*y + 0.00124*m*y - 0.000009*c**3 - 0.000013*m**3 - 0.000007*y**3
+Z = 73.12 - 0.582*c - 0.531*m - 0.345*y + 0.00189*c**2 + 0.00305*m**2 + 0.00176*y**2 + 0.00165*c*m + 0.00082*c*y + 0.00098*m*y - 0.000007*c**3 - 0.000010*m**3 - 0.000005*y**3
+```
