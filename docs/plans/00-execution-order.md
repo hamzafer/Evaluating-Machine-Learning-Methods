@@ -13,6 +13,11 @@ Subagent loop: **implementer** (only committer; brief+report as files) → **rev
 before recorded) → support agents in parallel (visual/interpret/latex/audit/teach; never
 commit). Ledger: `.superpowers/sdd/progress.md`. **No `Co-Authored-By` trailer** in commits
 (`.claude/settings.json`). GP config rule (unified, Plan 10, FINAL): `WhiteKernel(noise_level=1e-3, noise_level_bounds=(1e-9, 1e5))` + `n_restarts_optimizer=15` + subsample GP training folds to <=2000 rows (seed 42).
+**Dedup rule (uniform, 12 Aug, FINAL):** byte-identical duplicate rows are dropped at load on every
+**coated** set (PC10/PC11/FOGRA51, CMYKOGV-7) → 795 (CMY) / 1588 (CMYK) / 3302 (n=7 OGV) effective rows;
+CV stays plain seeded shuffled 5-fold `KFold` there, grouping being unnecessary once no twin survives.
+**IFRA is exempt** (its duplicate recipes genuinely differ — press repeatability, not an artifact).
+See `docs/research/cv-leakage-2026-08-12.md`.
 
 ## Plans
 
