@@ -1,0 +1,55 @@
+{
+  "id": "gen-1786571565-TbR0lCyWkeJunqbluUgA",
+  "object": "chat.completion",
+  "created": 1786571565,
+  "model": "anthropic/claude-fable-5",
+  "provider": "Amazon Bedrock",
+  "system_fingerprint": null,
+  "service_tier": "default",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "length",
+      "native_finish_reason": "max_tokens",
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "reasoning": "I'm modeling the CMY to XYZ conversion for a printing press using a multiplicative density approach, where each channel is computed as a base value multiplied by per-ink transmittance functions. The idea is to fit polynomial terms for each ink's contribution to capture how cyan, magenta, and yellow interact to produce the final color values. Now I'm normalizing the transmittance values by dividing by the baseline Z0 to get relative absorption curves for each ink, then fitting cubic polynomials to these normalized curves to build out the multiplicative model. I'll check how well this approach predicts mixed-ink combinations against the actual data. I'm trying to pin down the white point X0 more carefully by extrapolating from the cyan series\u2014the differences suggest X0 is around 85.1. The magenta data at m=5 gives X=81.32, and checking higher magenta levels shows a roughly linear initial effect, which helps constrain the estimate.\u2026",
+        "reasoning_details": [
+          {
+            "type": "reasoning.text",
+            "text": "I'm modeling the CMY to XYZ conversion for a printing press using a multiplicative density approach, where each channel is computed as a base value multiplied by per-ink transmittance functions. The idea is to fit polynomial terms for each ink's contribution to capture how cyan, magenta, and yellow interact to produce the final color values. Now I'm normalizing the transmittance values by dividing by the baseline Z0 to get relative absorption curves for each ink, then fitting cubic polynomials to these normalized curves to build out the multiplicative model. I'll check how well this approach predicts mixed-ink combinations against the actual data. I'm trying to pin down the white point X0 more carefully by extrapolating from the cyan series\u2014the differences suggest X0 is around 85.1. The magenta data at m=5 gives X=81.32, and checking higher magenta levels shows a roughly linear initial effect, which helps constrain the estimate.\u2026",
+            "format": "anthropic-claude-v1",
+            "index": 0,
+            "signature": "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"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5683,
+    "completion_tokens": 1600,
+    "total_tokens": 7283,
+    "cost": 0.13683,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.13683,
+      "upstream_inference_prompt_cost": 0.05683,
+      "upstream_inference_completions_cost": 0.08
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 238,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}
