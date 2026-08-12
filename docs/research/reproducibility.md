@@ -42,6 +42,27 @@ final config is recorded separately in
 `journal/results/robustness/seed_sweep_GP_finalconfig_REMOTE_x86.csv`; quote the GP
 seed-stability figure only from that file.
 
+## 3. Final-config GP mirror across platforms (12 Aug)
+The plan-10 GP config was re-run on the remote x86_64 box and compared to the committed
+arm64 values, model `gaussian_process`, all nine non-IFRA specs:
+
+| dataset | x86_64 | arm64 (committed) | delta |
+|---|---|---|---|
+| PC10-CMY / PC11-CMY | 0.044 / 0.044 | 0.044 / 0.044 | exact |
+| PC10-CMYK / PC11-CMYK | 0.056 / 0.056 | 0.056 / 0.056 | exact |
+| FOGRA51-CMY / -CMYK | 0.056 / 0.067 | 0.056 / 0.067 | exact |
+| CMYKOGB-7 | 1.280 | 1.280 | exact |
+| KCMYG-5 | 0.851 | 0.867 | −0.016 |
+| CMYKOGV-7 | 0.236 | 0.249 | −0.013 |
+
+Seven of nine reproduce exactly; the two multi-ink sets differ by ≤0.016 ΔE00 — the
+restarted log-marginal-likelihood optimizer can settle on marginally different optima when
+the linear-algebra path differs, while remaining deterministic on each platform. Note this
+is an order of magnitude tighter than the MLP divergence in §1, i.e. the GP results the
+paper leans on are the *least* platform-sensitive of the family. The IFRA GP mirror
+(within/cross/LOO) was still running when this table was written; spot values agreed exactly
+(GratN_90 within-run 0.674, Mbd_103a 0.721).
+
 Provenance: run on the remote (exploratory platform) 11-12 Aug; scripts: /tmp/seed_sweep.py
 (remote) + three tmux replication sessions; coordinator-verified deltas via git-diff on the
 remote clone.
