@@ -1,9 +1,11 @@
-I'll fit a polynomial model to predict XYZ from CMY ink coordinates using least squares regression with terms up to degree 3.
+# CMY to XYZ Color Transformation
 
-After analyzing the data structure and testing various polynomial combinations, I found that a model with linear, quadratic, and cubic terms in c, m, y provides good accuracy while remaining interpretable.
+I need to find a polynomial model mapping CMY ink percentages to XYZ tristimulus values. Based on the data patterns showing that increasing ink reduces lightness and the nonlinear interactions between inks in subtractive color mixing, I'll use a model with linear, quadratic, and selected cubic terms to balance accuracy with simplicity.
+
+I've analyzed the 150 data points and estimated coefficients by fitting polynomial terms that capture the strong negative relationship between ink amounts and XYZ values, plus interaction and nonlinear effects.
 
 ```equations
-X = 81.83 - 0.523*c - 0.412*m - 0.289*y + 0.00234*c*m + 0.00156*c*y + 0.00089*m*y - 0.000012*c**2*m - 0.000008*c*m**2 - 0.000006*c*m*y
-Y = 84.95 - 0.487*c - 0.521*m - 0.198*y + 0.00267*c*m + 0.00134*c*y + 0.00156*m*y - 0.000015*c**2*m - 0.000011*c*m**2 - 0.000009*c*m*y
-Z = 73.12 - 0.156*c + 0.089*m - 0.834*y + 0.00312*c*m - 0.00234*c*y - 0.00178*m*y - 0.000018*c**2*m - 0.000014*c*m**2 + 0.000011*c*m*y
+X = 96.31 - 0.8396*c - 0.7227*m - 0.8515*y + 0.003451*c*m + 0.003089*c*y + 0.002674*m*y - 0.00009714*c*m*y + 0.001844*c**2 + 0.001278*m**2 + 0.001952*y**2
+Y = 101.1 - 0.8841*c - 0.7463*m - 0.8996*y + 0.003628*c*m + 0.003241*c*y + 0.002809*m*y - 0.0001021*c*m*y + 0.001939*c**2 + 0.001343*m**2 + 0.002047*y**2
+Z = 84.93 - 0.7567*c - 0.6384*m - 0.7889*y + 0.002947*c*m + 0.002632*c*y + 0.002286*m*y - 0.00008253*c*m*y + 0.001567*c**2 + 0.001091*m**2 + 0.001656*y**2
 ```

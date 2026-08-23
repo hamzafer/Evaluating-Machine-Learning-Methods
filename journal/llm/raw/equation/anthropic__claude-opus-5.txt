@@ -1,0 +1,7 @@
+I fitted a multiplicative (Neugebauer-like) model: each ink contributes a per-channel transmittance that is a cubic polynomial in its coverage, and the three transmittances multiply with the paper white.
+
+```equations
+X = 82.0 * (1 - 0.01411*c + 0.0000594*c**2 - 0.00000012*c**3) * (1 - 0.00857*m - 0.0000205*m**2 + 0.00000024*m**3) * (1 - 0.00110*y - 0.0000165*y**2 + 0.00000016*y**3)
+Y = 85.0 * (1 - 0.01062*c + 0.0000335*c**2 - 0.00000001*c**3) * (1 - 0.01207*m + 0.0000135*m**2 + 0.00000004*m**3) * (1 - 0.00086*y - 0.0000132*y**2 + 0.00000013*y**3)
+Z = 71.5 * (1 - 0.00479*c - 0.0000165*c**2 + 0.00000018*c**3) * (1 - 0.01050*m - 0.0000122*m**2 + 0.00000021*m**3) * (1 - 0.01245*y - 0.0000630*y**2 + 0.00000058*y**3)
+```
