@@ -1,0 +1,46 @@
+{
+  "id": "gen-1787499820-3yvB2lJdyUFYtBUDADR5",
+  "object": "chat.completion",
+  "created": 1787499820,
+  "model": "anthropic/claude-haiku-4.5",
+  "provider": "Anthropic",
+  "system_fingerprint": null,
+  "service_tier": "default",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "end_turn",
+      "message": {
+        "role": "assistant",
+        "content": "I'll fit a polynomial model to predict XYZ from CMY ink coordinates using least squares regression with terms up to degree 3.\n\nAfter analyzing the data structure and testing various polynomial combinations, I found that a model with linear, quadratic, and cubic terms in c, m, y provides good accuracy while remaining interpretable.\n\n```equations\nX = 81.83 - 0.523*c - 0.412*m - 0.289*y + 0.00234*c*m + 0.00156*c*y + 0.00089*m*y - 0.000012*c**2*m - 0.000008*c*m**2 - 0.000006*c*m*y\nY = 84.95 - 0.487*c - 0.521*m - 0.198*y + 0.00267*c*m + 0.00134*c*y + 0.00156*m*y - 0.000015*c**2*m - 0.000011*c*m**2 - 0.000009*c*m*y\nZ = 73.12 - 0.156*c + 0.089*m - 0.834*y + 0.00312*c*m - 0.00234*c*y - 0.00178*m*y - 0.000018*c**2*m - 0.000014*c*m**2 + 0.000011*c*m*y\n```",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5089,
+    "completion_tokens": 364,
+    "total_tokens": 5453,
+    "cost": 0.006909,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.006909,
+      "upstream_inference_prompt_cost": 0.005089,
+      "upstream_inference_completions_cost": 0.00182
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}
