@@ -1,54 +1,114 @@
-# Fitting in cube-root XYZ space (23 Aug 2026)
+# The polynomial baseline was fitted in the wrong space (23 Aug 2026)
 
-## Where the idea came from
-During the plan-09 equation experiment, Claude Fable 5 (web channel, with a code interpreter)
-produced the study's most accurate equation by modelling the **cube root** of each tristimulus
-value as a polynomial, rather than modelling XYZ directly. Its stated reason: CIELAB is defined
-through a cube root of XYZ, so a least-squares fit in cube-root space is aligned with CIEDE2000,
-which is computed in CIELAB.
+**This document was rewritten after verification.** The first version reported the right numbers
+with the wrong explanation and an overblown novelty claim. Both were caught by the gate agent and
+are corrected below; the measurements themselves reproduced exactly.
 
-The equation itself is a weak artifact (2,542 expanded terms, 120 coefficients fitted to 150
-points, one run, one chart). **The idea behind it is not**, so it was tested properly here: same
-protocol, same folds, same metric, same term count as our existing `poly3`, across every dataset.
+## What was actually found
 
-## Implementation
-`journal/pipeline/models.py::CubeRootPolynomial`, registered as `poly3_cbrt`. Identical to `poly3`
-(degree-3 `PolynomialFeatures` + `LinearRegression`, 20 terms per channel) except that it fits
-`cbrt(XYZ)` and cubes the prediction. It uses the existing `set_scaler` hook so the root is taken on
-**physical** XYZ rather than MinMax-scaled values.
+Fitting the degree-3 polynomial to `cbrt(XYZ)` instead of `XYZ`, with identical folds, identical
+term counts and the identical metric, improves the **maximum error on all nine datasets (38-90%)**
+and the **median on eight of nine**.
 
-## Result: 5-fold CV, same folds as every other model
+| dataset | poly3 (XYZ) median | poly3_cbrt median | poly3 max | poly3_cbrt max |
+|---|---|---|---|---|
+| PC10-CMY | 0.268 | **0.148** | 6.795 | **2.048** |
+| PC10-CMYK | 0.942 | **0.219** | 33.978 | **3.506** |
+| PC11-CMY | 0.238 | **0.140** | 7.838 | **1.653** |
+| PC11-CMYK | 0.869 | **0.216** | 33.070 | **3.511** |
+| FOGRA51-CMY | **0.369** | 0.432 | 8.251 | **1.958** |
+| FOGRA51-CMYK | 0.816 | **0.437** | 29.287 | **5.786** |
+| KCMYG-5 | 1.457 | **1.024** | 65.742 | **29.230** |
+| CMYKOGV-7 | 5.386 | **0.830** | 59.833 | **27.979** |
+| CMYKOGB-7 | 3.332 | **1.611** | 48.974 | **30.274** |
 
-| dataset | poly3 median | poly3_cbrt median | change | poly3 max | poly3_cbrt max | change |
-|---|---|---|---|---|---|---|
-| PC10-CMY | 0.268 | **0.148** | -45% | 6.795 | **2.048** | -70% |
-| PC10-CMYK | 0.942 | **0.219** | -77% | 33.978 | **3.506** | -90% |
-| PC11-CMY | 0.238 | **0.140** | -41% | 7.838 | **1.653** | -79% |
-| PC11-CMYK | 0.869 | **0.216** | -75% | 33.070 | **3.511** | -89% |
-| FOGRA51-CMY | 0.369 | 0.432 | **+17%** | 8.251 | **1.958** | -76% |
-| FOGRA51-CMYK | 0.816 | **0.437** | -46% | 29.287 | **5.786** | -80% |
-| KCMYG-5 | 1.457 | **1.024** | -30% | 65.742 | **29.230** | -56% |
-| CMYKOGV-7 | 5.386 | **0.830** | -85% | 59.833 | **27.979** | -53% |
-| CMYKOGB-7 | 3.332 | **1.611** | -52% | 48.974 | **30.274** | -38% |
+Reproduced exactly (4 dp) by two independent implementations sharing no code path.
 
-**Median improves on 8 of 9 datasets. Maximum improves on 9 of 9, by 38-90%.** Same number of
-coefficients, same folds, no extra tuning.
+## Three corrections to the original write-up
 
-## Why this matters to the paper's argument
-The n>4 headline was that third-order polynomial regression degrades sharply as ink count grows
-(0.268 at n=3 to 5.386 at n=7) while the Gaussian process holds. That degradation is **largely an
-artifact of fitting in the wrong space**: in cube-root space the same polynomial gets 0.830 at n=7,
-recovering most of the gap to the GP (0.249).
+### 1. It is equivalent to fitting in CIELAB, and that is not novel
+CIELAB is an invertible linear map of `(f(X), f(Y), f(Z))` where `f` is essentially a cube root, and
+ordinary least squares is equivariant under invertible linear maps of the target. So
+**`poly3_cbrt` is the same estimator as "fit the polynomial in CIELAB and convert back"**. Verified:
+PC10-CMY 0.1476 both ways; CMYKOGV-7 0.8304 vs 0.8320 (differing only in the third decimal, where
+CIELAB's linear segment near black bites on Z ~ 0.45).
 
-The honest revised claim is stronger and more useful than the original: *the classical method's
-apparent failure at high ink counts is substantially a modelling-space choice, not an intrinsic
-limitation of low-order polynomials.* The GP still wins, but by a far smaller margin, and a
-practitioner who wants a simple portable polynomial has a much better option than the literature
-default.
+Fitting characterization models in a perceptually uniform space is long-standing practice. The
+honest framing is therefore **"our baseline was handicapped"**, a baseline correction requiring
+prior-art citation, not a discovery. The LLM-provenance story stays out of the paper.
 
-The one regression (FOGRA51-CMY median, +17%) needs investigating before this is written up.
+### 2. The CIEDE2000-alignment explanation is wrong
+The original claim (least squares in cube-root space aligns with the metric) fails its control:
+weighting a plain XYZ fit by `y^(-4/3)`, the first-order equivalent of that alignment, makes the
+median **worse** on 3 of 4 datasets (PC10-CMYK 0.942 -> 1.551). Positivity is not the mechanism
+either (flooring identity predictions changes PC10-CMY not at all).
 
-## Verification
-Reproduced by an independent from-scratch implementation sharing no code with
-`CubeRootPolynomial` (no `set_scaler` hook, no pipeline registry): PC10-CMY 0.148/2.048 and
-CMYKOGV-7 0.830/27.979, matching to three decimals.
+The real mechanism is **approximability**: the ink -> XYZ response is much closer to a low-order
+polynomial after a compressive transform. Degree-3 residual RMS as a percentage of target SD on
+PC10-CMY falls from 0.99/1.05/1.58 (X/Y/Z) to 0.65/0.62/0.75 under cube root.
+
+### 3. Cube root is not special
+Any variance-stabilising transform helps, and square root is often better:
+
+| dataset | identity | sqrt | cbrt | y^0.25 | log1p |
+|---|---|---|---|---|---|
+| PC10-CMY | 0.268 | **0.127** | 0.148 | 0.166 | 0.234 |
+| PC11-CMY | 0.238 | **0.124** | 0.140 | 0.154 | 0.206 |
+| FOGRA51-CMY | **0.369** | 0.376 | 0.432 | 0.467 | 0.562 |
+| PC10-CMYK | 0.942 | 0.252 | **0.219** | 0.250 | 0.385 |
+| FOGRA51-CMYK | 0.816 | **0.386** | 0.437 | 0.490 | 0.679 |
+| KCMYG-5 | 1.457 | 1.045 | 1.024 | **1.023** | 1.112 |
+| CMYKOGV-7 | 5.386 | 1.253 | 0.830 | **0.811** | 1.126 |
+| CMYKOGB-7 | 3.332 | 1.821 | 1.611 | **1.560** | 1.592 |
+
+## The finding that matters most: degree is the other lever
+
+On CMYKOGV-7 (7 inks, 3302 rows), 5-fold grouped CV, median ΔE00, measured in this repo:
+
+| degree | fitted in XYZ | fitted in cube-root space | terms/channel | train/test gap (cbrt) |
+|---|---|---|---|---|
+| 2 | 9.953 | 2.656 | 36 | — |
+| 3 | 5.386 | 0.830 | 120 | +0.023 |
+| **4** | **2.080** | **0.272** | 330 | +0.027 |
+| 5 | — | 0.126 | 792 | +0.036 |
+
+**The Gaussian process scores 0.249 on this dataset.** A degree-4 polynomial fitted in CIELAB scores
+0.272. That is a tie, and it is not overfitting: the train/test gap stays at +0.027, essentially
+unchanged from degree 3, at 2.7 rows per parameter.
+
+## Consequence for the paper
+
+The current n>4 headline is that third-order polynomial regression collapses as ink count grows
+(0.268 -> 5.386) while the Gaussian process holds. That comparison was against a baseline
+handicapped on **two** axes at once: fitted in XYZ rather than a perceptual space, and capped at
+3rd order.
+
+Corrected, the claim becomes narrower and more defensible:
+
+> A degree-3 polynomial fitted in XYZ degrades sharply with ink count. Most of that degradation is
+> attributable to the fitting space and the degree cap rather than to low-order polynomials as such:
+> refitted in CIELAB at degree 4, the same method reaches 0.272 against the Gaussian process's 0.249
+> on the 7-ink set.
+
+This weakens "ML beats classical at n>4" and replaces it with something more useful to a
+practitioner: **what the classical method needs in order to compete.** The Gaussian process retains
+real advantages (no degree choice, no space choice, and it is still 5-10x better at n<=4), and those
+should now carry the argument.
+
+Phil's 3rd-order cap needs a stated justification wherever the n>4 comparison rests on it, because
+at n=7 the cap is doing much of the work. The evidence here is that degree 4 does not overfit on a
+3302-row chart.
+
+## Open items
+- **FOGRA51-CMY** is the one median regression (+17%, while its max improves 76%). Explained: it is
+  the only coated set where the cube root makes the polynomial fit *worse* on every channel
+  (residual RMS 0.95->1.30, 1.05->1.28, 1.56->1.65), so the transform reallocates bias from dark to
+  light. Cube root wins its darkest lightness quartile (0.510 vs 0.597) and loses the two lightest.
+  Square root shows no regression on that dataset at all (0.376 vs 0.369) while still cutting the
+  max from 8.251 to 1.995. The white point is provably irrelevant: `cbrt(X/Xn)` differs from
+  `cbrt(X)` by a per-channel constant and OLS is equivariant to target scaling.
+- **Do not apply the transform per channel.** Mixed spaces are worse than either pure space, because
+  cross-channel residual correlation is what cancels in a* and b*.
+- The phrase "same 20 terms per channel" is only true at n=3; degree-3 gives 35 terms at n=4, 56 at
+  n=5 and 120 at n=7. The two models always have identical counts *as each other*, so the comparison
+  is fair, but the wording must not claim 20 everywhere.
