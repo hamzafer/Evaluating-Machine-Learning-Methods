@@ -80,16 +80,19 @@ MODELS = [
     # thinking OFF. Sole purpose is to establish whether a non-thinking Claude will
     # emit the equation at all -- every previous Claude call was routed to Bedrock,
     # which ignored the reasoning budget and truncated at max_tokens.
-    {"id": "anthropic/claude-haiku-4.5", "max_tokens": 4000,
-     "reasoning": {"enabled": False}, "price_in": 1.0, "price_out": 5.0,
+    {"id": "anthropic/claude-haiku-4.5", "max_tokens": 8000,
+     "reasoning": {"max_tokens": 4000}, "price_in": 1.0, "price_out": 5.0,
      "provider": {"order": ["anthropic"], "allow_fallbacks": False},
-     "note": "config probe: first-party Anthropic, thinking disabled"},
-    {"id": "anthropic/claude-opus-5", "max_tokens": 6000,
-     "reasoning": {"max_tokens": 2000}, "price_in": 5.0, "price_out": 25.0,
+     "note": "config probe 2: first-party Anthropic, thinking ENABLED with a 4000-token "
+             "budget inside an 8000-token completion. Proves the configuration that "
+             "failed three times on Bedrock routing."},
+    {"id": "anthropic/claude-opus-5", "max_tokens": 4000,
+     "reasoning": {"enabled": False}, "price_in": 5.0, "price_out": 25.0,
+     "provider": {"order": ["anthropic"], "allow_fallbacks": False},
      "note": "reasoning budget 2000 of 6000 completion tokens; sized after the fable-5 "
              "truncation failures"},
-    {"id": "anthropic/claude-fable-5", "max_tokens": 1900,
-     "reasoning": {"max_tokens": 1024}, "price_in": 10.0, "price_out": 50.0,
+    {"id": "anthropic/claude-fable-5", "max_tokens": 78000,
+     "reasoning": {"enabled": True}, "price_in": 10.0, "price_out": 50.0,
      "provider": {"order": ["anthropic"], "allow_fallbacks": False},
      "note": "routed to the first-party Anthropic endpoint (the Amazon Bedrock "
              "route refused this colour-data prompt as 'violative cyber content', "
