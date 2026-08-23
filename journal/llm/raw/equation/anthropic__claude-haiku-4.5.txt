@@ -1,0 +1,9 @@
+I'll fit a polynomial model to predict XYZ from CMY ink coordinates using least squares regression with terms up to degree 3.
+
+After analyzing the data structure and testing various polynomial combinations, I found that a model with linear, quadratic, and cubic terms in c, m, y provides good accuracy while remaining interpretable.
+
+```equations
+X = 81.83 - 0.523*c - 0.412*m - 0.289*y + 0.00234*c*m + 0.00156*c*y + 0.00089*m*y - 0.000012*c**2*m - 0.000008*c*m**2 - 0.000006*c*m*y
+Y = 84.95 - 0.487*c - 0.521*m - 0.198*y + 0.00267*c*m + 0.00134*c*y + 0.00156*m*y - 0.000015*c**2*m - 0.000011*c*m**2 - 0.000009*c*m*y
+Z = 73.12 - 0.156*c + 0.089*m - 0.834*y + 0.00312*c*m - 0.00234*c*y - 0.00178*m*y - 0.000018*c**2*m - 0.000014*c*m**2 + 0.000011*c*m*y
+```

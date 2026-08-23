@@ -71,6 +71,23 @@ MODELS = [
     {"id": "openai/gpt-5.6-sol", "max_tokens": 3000,
      "reasoning": {"effort": "low"}, "price_in": 5.0, "price_out": 30.0,
      "note": "reasoning effort=low"},
+    # Added 23 Aug: the fable-5 attempts died because reasoning is mandatory on that
+    # endpoint and consumed the whole completion allowance (2 paid calls, 1600 and 1900
+    # tokens, both finish_reason=length, both empty, $0.289 for nothing). Opus 5 is
+    # frontier Claude at half fable's output price, so the same balance buys 2.3x the
+    # tokens: max_tokens 6000 leaves room for the thinking AND the equation.
+    # PROBE (23 Aug): cheapest Claude, provider pinned to first-party Anthropic and
+    # thinking OFF. Sole purpose is to establish whether a non-thinking Claude will
+    # emit the equation at all -- every previous Claude call was routed to Bedrock,
+    # which ignored the reasoning budget and truncated at max_tokens.
+    {"id": "anthropic/claude-haiku-4.5", "max_tokens": 4000,
+     "reasoning": {"enabled": False}, "price_in": 1.0, "price_out": 5.0,
+     "provider": {"order": ["anthropic"], "allow_fallbacks": False},
+     "note": "config probe: first-party Anthropic, thinking disabled"},
+    {"id": "anthropic/claude-opus-5", "max_tokens": 6000,
+     "reasoning": {"max_tokens": 2000}, "price_in": 5.0, "price_out": 25.0,
+     "note": "reasoning budget 2000 of 6000 completion tokens; sized after the fable-5 "
+             "truncation failures"},
     {"id": "anthropic/claude-fable-5", "max_tokens": 1900,
      "reasoning": {"max_tokens": 1024}, "price_in": 10.0, "price_out": 50.0,
      "provider": {"order": ["anthropic"], "allow_fallbacks": False},
@@ -404,7 +421,15 @@ def main():
 
     print("\nPer-call charged cost (OpenRouter usage.cost, authoritative -- the "
           "/credits balance lags a call or two behind):")
-    billed = sum(r["cost_usd"] or 0.0 for r in rows)
+    # Rows carried forward from a previous partial run come back through csv.DictReader
+    # as strings, so coerce rather than assuming float (this crashed every --models
+    # subset run AFTER the CSV had been written).
+    def _cost(r):
+        try:
+            return float(r["cost_usd"] or 0.0)
+        except (TypeError, ValueError):
+            return 0.0
+    billed = sum(_cost(r) for r in rows)
     for r in rows:
         print(f"  {r['model_id']}: ${r['cost_usd'] or 0.0:.4f}")
     print(f"  billed this table: ${billed:.4f}")
