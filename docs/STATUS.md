@@ -1,111 +1,88 @@
-# Status — morning of 13 Aug 2026
+# Status — 23 Aug 2026
 
-Written at the end of an overnight session. Code repo HEAD `d64a8ab`, paper repo `b23491d`,
-working tree clean, 41 tests green, `journal/results/run_log.tsv` at 567 recorded fits.
-**5 commits unpushed** (`git push origin main`).
+Deadline **30 Aug**, seven days out. Code repo clean, 41 tests green, paper repo has 2 unpushed
+commits. This file supersedes the 13 Aug version.
 
-## Where the paper stands
+## Are the experiments finished?
 
-Every experiment except the LLM prediction table is complete, gated by a review agent, and
-independently verified. Plans 01-06, 10, 11 and 09 are done; 08 is partial (see below).
+**Essentially yes, with one fairness run in flight.** Everything the paper needs is measured, gated
+and committed. The one open item exists because of a finding made today (below): having discovered
+the polynomial baseline was fitted in the wrong space, the same correction must be offered to its
+competitors before any comparison between them is fair. That run is `poly4`, `poly4_cbrt` and
+`gaussian_process_cbrt` across the nine datasets.
 
-### The headline: ink count vs method
+| plan | state |
+|---|---|
+| 01-05 (n=3/4, GP verification, IFRA, direct ΔE00) | ✅ done, gated |
+| 06 (n>4 ladder: 5-ink and two 7-ink sets) | ✅ done, gated |
+| 09 (LLM as equation generator) | ✅ done, gated |
+| 10 (unified GP config, IFRA anomaly) | ✅ done, gated |
+| 11 (colourbill external benchmark) | ✅ done, gated |
+| 08 (200-sample LLM prediction table) | ⛔ dropped — superseded models, and the equation experiment answers Phil's question better |
+| fitting-space follow-up | 🏃 fairness run in progress |
 
-Median ΔE00, final post-dedup numbers, per dataset (never pooled — different printing systems):
+## The two results that matter most
 
-| n | dataset | Gaussian process | poly3 |
-|---|---|---|---|
-| 3 | PC10-CMY | **0.046** | 0.268 |
-| 4 | PC10-CMYK | **0.056** | 0.942 |
-| 5 | KCMYG | **0.867** | 1.457 |
-| 7 | CMYKOGV | **0.249** | 5.386 |
-| 7 | CMYKOGB | **1.280** | 3.332 |
+### 1. The polynomial baseline was fitted in the wrong space
+Fitting the same degree-3 polynomial to `cbrt(XYZ)` (equivalently: in CIELAB) rather than to XYZ
+improves the **maximum error on 9 of 9 datasets** and the **median on 8 of 9**. On the 7-ink set,
+5.386 → 0.830.
 
-Polynomial regression degrades by roughly 12-20x from 3 to 7 inks; the GP stays under 1.3
-everywhere. That answers Phil's question (b) — yes, ML handles n>4 — and it answers it on two
-independent 7-ink systems.
+Then degree, on CMYKOGV-7:
 
-### Newsprint (IFRA), and the anomaly that turned out to be an optimizer trap
-GP within-run is now **0.674-2.141** across all 13 press runs (median-of-medians 0.899) and ranks
-first of fourteen models on 12 of them. It previously looked like the *worst* model at ~19 ΔE00.
-Root cause was a local-optimum trap seeded by a near-zero WhiteKernel init, not a GP limitation;
-the fix is one documented kernel configuration used for every dataset in the paper.
+| degree | XYZ | CIELAB |
+|---|---|---|
+| 3 (current cap) | 5.386 | 0.830 |
+| **4** | 2.080 | **0.272** |
+| Gaussian process | | **0.249** |
 
-### External validation
-The colourbill/CharData tool ships four of our exact datasets. It independently reproduces our
-CMYKOGV deduplication (3534 -> 3302) and confirms our CIEDE2000 arithmetic to displayed precision,
-and our cross-validated error beats its in-sample degree-4 fit on the n=4 charts.
+**A degree-4 polynomial in CIELAB ties the GP at seven inks**, without overfitting (train/test gap
++0.027, unchanged from degree 3, on 3,302 rows).
 
-### Reproducibility (the strongest part of the methods section)
-- **An independent blind reimplementation** (separate machine, raw files plus a prose spec, no sight
-  of our code) reproduces GP to within 0.003 ΔE00 on every coated dataset and poly3 to within 0.006.
-  Its report, its results and all of its code are committed at `journal/verification/blind-2026-08-12/`.
-- **Cross-platform**: 58 of 96 model x dataset cells bit-exact between macOS/arm64 and Linux/x86_64
-  under an identical pinned environment; 76 within 0.01. Every large divergence is an MLP. All 182
-  IFRA GP results are bit-exact across platforms.
-- **Seed sensitivity**: max std of the median across 5 CV seeds is 0.0012 (GP) to 0.0906 (deep MLP).
+Consequence: the paper's n>4 headline was measured against a baseline handicapped on two axes at
+once, the fitting space and Phil's 3rd-order cap. The claim must narrow. Detail, controls and the
+corrected mechanism are in `docs/research/cube-root-fitting.md`.
 
-### The defect the blind reviewer found, and the fix
-The n<=4 datasets ran ungrouped, so byte-identical duplicate rows could straddle a train/test split
-— contradicting the protocol the paper stated. Measured directly: a decision tree scored **exactly
-0.0000** on those rows while scoring 4.4 on the rest. Fixed by one uniform policy (byte-identical
-duplicates dropped at load, everywhere), which changed analysed counts to **795 / 1588** and moved
-every n<=4 number by <=0.19. No conclusion changed; GP still wins all six datasets. Full evidence in
-`docs/research/cv-leakage-2026-08-12.md`.
+### 2. The LLM experiment
+Phil's prompt, 150 training pairs, scored on 100 held-out patches with our own ΔE00 code.
 
-## LLM track
+| model | condition | median ΔE00 |
+|---|---|---|
+| Claude Fable 5 | web, **with code execution** | **0.082** |
+| our least-squares cubic | baseline | 0.234 |
+| GPT-5.6 Sol | API, reasoning | 3.070 |
+| Claude Opus 5 | API, no reasoning | 14.291 |
+| DeepSeek V4 Pro | API, no reasoning | 23.764 |
+| Haiku 4.5 | API, reasoning | 28.781 |
+| Claude Opus 5 / Fable 5 | API, reasoning (8k, 24k, 78k tokens) | no answer produced |
 
-### Plan 09 (equation generator) — done, and the finding is sharp
-Phil's verbatim prompt, 150 in-prompt training pairs, scored on 100 held-out patches with our own
-ΔE00 code:
+Four readings:
+- Unaided, no LLM is competitive: the best reasoning-only answer is 13× worse than fitting a cubic.
+- Given a code interpreter, an LLM beat our baseline — but that is an automation result, not a
+  colour-science one.
+- Frontier Anthropic models did not terminate on this task at any budget up to 78,000 tokens, while
+  GPT-5.6 Sol converged in 2,747. A real behavioural difference, and the most novel LLM observation
+  we have.
+- Every accurate answer broke "as simple as possible" (expanded degree 9 and 27).
 
-| source | median ΔE00 | terms | total degree | max per-variable exponent |
-|---|---|---|---|---|
-| our least-squares cubic | **0.234** | 57 | 3 | 3 |
-| gpt-5.6-sol | 3.070 | 192 | **9** | 3 |
-| deepseek-v4-pro | 23.764 | 39 | 3 | 3 |
-| claude-fable-5 (API) | no answer | — | — | — |
-
-Two things worth saying in the paper:
-1. **No LLM-written equation came close to simply fitting a cubic** to the same rows — the best was
-   ~13x worse on the median and 3x worse on the max, so Phil's criterion (minimise average *and*
-   maximum) is met by none of them.
-2. **They satisfy the simplicity constraint by gaming it.** Asked for "exponents no greater than 3,
-   as simple as possible", gpt-5.6-sol multiplied three cubics (per-variable exponent 3, total degree
-   9, 192 terms). The Fable-via-harness run nested a cubic inside a cube (per-variable exponent 9).
-   The more accurate the answer, the more thoroughly the constraint was circumvented.
-
-### The harness experiment, and why its result is quarantined
-Because the API attempts for Claude failed, the identical prompt went through the Claude Code CLI on
-the subscription. It produced the most accurate equation of the study (median **0.215**, beating our
-own cubic) — but the archived session shows **5 Bash and 4 Write calls**: `--allowed-tools ""` did
-not disable tools, so it wrote code and fitted the coefficients numerically. That measures an agent
-with a code interpreter, not a model writing an equation. Recorded as a separate finding in
-`journal/results/llm/harness_channel_note.md`, not as Claude's answer. It is good evidence that an
-LLM benchmark without a stated channel is uninterpretable.
-
-### Plan 08 (prediction table) — not run
-Credit ran out ($0.42 spent of $0.66; **$0.24 left**). The old GPT-4o rows are retired as superseded.
+Weaknesses to state in the paper: n=1 per model, conditions differ per row, 3-ink chart only, so it
+does not address Phil's n>4 question.
 
 ## What needs Hamza
 
-1. **`git push origin main`** — 5 commits.
-2. **Two paid calls, both classifier-blocked pending your go:**
-   - Claude Fable 5 equation via API with a real reasoning budget (~$0.25). Claude's genuine
-     equation-writing ability is currently **untested**, and Phil considers testing Claude mandatory.
-   - DeepSeek re-run with reasoning enabled (~$0.02). Its committed row was produced with reasoning
-     off and 371 completion tokens, so its coefficients are written from memory, not fitted — the CSV
-     says so plainly, but it is not a fair test of that model. Config is already changed and ready.
-3. **~$3 of OpenRouter credit** for the 200-sample prediction table across the three models.
-4. **Paper trim**: 17pp against the 10-12pp target. Table surgery was tried and measured — it saves
-   nothing (floats reflow), so the pages have to come from prose. Methods is 3.5pp and is the safest
-   1.5pp; the rest needs your editorial calls. Page map is in the plan-07 notes.
-5. **Two questions for Phil**: the PC10 file's header declares itself `APTEC_PC11_CCNB_2023_v1`
-   (data is genuinely PC10's, so it looks like a copy-paste artifact at source, but our dataset table
-   calls PC10 "cardboard" on the strength of the filename); and KCMYG's provenance is still
-   unconfirmed.
+1. **Talk to Phil** about the 3rd-order cap and the narrowed n>4 claim. This is the one item with an
+   external dependency and it changes the paper's argument.
+2. Two data questions for the same conversation: the PC10 file's header declares itself
+   `APTEC_PC11_CCNB_2023_v1`, and KCMYG's provenance is uncited.
+3. **Paper trim**, 17pp against 10-12pp. Prose only; table surgery was measured and saves nothing.
+4. Push the paper repo (2 commits).
+5. Admin from Phil: APC funding (1800 CHF) and author order.
 
-## Known debt
-`docs/TECH_DEBT.md` — chiefly that Phil's unpublished datasets are recoverable from this public
-repo's git history (untracked at the tip, but present in a pushed commit), deferred to after
-publication by your call.
+## Provenance and audit
+- `journal/results/run_log.tsv` — every fit ever run, with accuracy, wall time, machine, package
+  versions and git commit.
+- `journal/results/logs/raw/` — verbatim console output of every run.
+- `journal/verification/blind-2026-08-12/` — the independent clean-room reimplementation, its code
+  and its report.
+- `docs/DECISION_LOG.md` — every decision, gate verdict and incident.
+- `docs/TECH_DEBT.md` — deferred items, chiefly the proprietary data in this public repo's history.

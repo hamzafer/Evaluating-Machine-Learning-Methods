@@ -80,10 +80,49 @@ class CubeRootPolynomial:
         return self._scaler.transform(Y) if self._scaler is not None else Y
 
 
+class CubeRootTarget:
+    """Fit ANY estimator against cbrt(physical XYZ) and cube the prediction back.
+
+    Generalisation of CubeRootPolynomial, so the fitting-space question can be
+    asked of every model rather than only the polynomial. Symmetry matters here:
+    having found that the polynomial baseline was handicapped by fitting in XYZ,
+    the same correction must be offered to its competitors before any comparison
+    between them is fair.
+    """
+
+    def __init__(self, factory):
+        self.factory = factory
+        self._scaler = None
+        self._inner = None
+
+    def set_scaler(self, scaler):
+        self._scaler = scaler
+
+    def fit(self, X, y_scaled):
+        Y = self._scaler.inverse_transform(y_scaled) if self._scaler is not None else y_scaled
+        self._inner = self.factory()
+        self._inner.fit(X, np.cbrt(np.clip(Y, 0.0, None)))
+        return self
+
+    def predict(self, X):
+        Y = np.clip(self._inner.predict(X), 0.0, None) ** 3
+        return self._scaler.transform(Y) if self._scaler is not None else Y
+
+
 def registry() -> dict:
     return {
         'poly3': lambda: make_pipeline(PolynomialFeatures(degree=3), LinearRegression()),
         'poly3_cbrt': lambda: CubeRootPolynomial(degree=3),
+        # Fairness controls for the fitting-space finding (23 Aug): the same
+        # correction offered to the polynomial's competitors, plus the degree
+        # lever Phil's 3rd-order cap currently forbids.
+        'poly4_cbrt': lambda: CubeRootPolynomial(degree=4),
+        'poly4': lambda: make_pipeline(PolynomialFeatures(degree=4), LinearRegression()),
+        'gaussian_process_cbrt': lambda: CubeRootTarget(
+            lambda: FitSubsampled(GaussianProcessRegressor(
+                kernel=ConstantKernel() * RBF() + WhiteKernel(
+                    noise_level=1e-3, noise_level_bounds=(1e-9, 1e5)),
+                normalize_y=True, n_restarts_optimizer=15, random_state=SEED))),
         'ridge': lambda: Ridge(alpha=0.5, random_state=SEED),
         'lasso': lambda: Lasso(alpha=1e-3, random_state=SEED),          # AIC's 1.0 was degenerate
         'elastic': lambda: ElasticNet(alpha=1e-3, l1_ratio=0.5, random_state=SEED),  # ditto
