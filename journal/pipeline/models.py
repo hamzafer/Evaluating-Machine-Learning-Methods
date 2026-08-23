@@ -47,9 +47,43 @@ class FitSubsampled:
         return self.estimator.predict(X)
 
 
+class CubeRootPolynomial:
+    """Polynomial fitted to the CUBE ROOT of physical XYZ, not to XYZ itself.
+
+    Motivation (surfaced by an LLM during the plan-09 equation experiment, then
+    tested here properly): CIELAB is defined through a cube root of XYZ, so
+    CIEDE2000 errors are roughly linear in cube-root space. Fitting there aligns
+    the least-squares objective with the metric the paper actually reports,
+    without any change to the evaluation protocol.
+
+    `evaluate.cross_validate` hands models MinMax-scaled targets, so this uses
+    the existing `set_scaler` hook to recover physical XYZ before taking the
+    root, and re-applies the scaler on the way out.
+    """
+
+    def __init__(self, degree=3):
+        self.degree = degree
+        self._scaler = None
+        self._model = None
+
+    def set_scaler(self, scaler):
+        self._scaler = scaler
+
+    def fit(self, X, y_scaled):
+        Y = self._scaler.inverse_transform(y_scaled) if self._scaler is not None else y_scaled
+        self._model = make_pipeline(PolynomialFeatures(degree=self.degree), LinearRegression())
+        self._model.fit(X, np.cbrt(np.clip(Y, 0.0, None)))
+        return self
+
+    def predict(self, X):
+        Y = np.clip(self._model.predict(X), 0.0, None) ** 3
+        return self._scaler.transform(Y) if self._scaler is not None else Y
+
+
 def registry() -> dict:
     return {
         'poly3': lambda: make_pipeline(PolynomialFeatures(degree=3), LinearRegression()),
+        'poly3_cbrt': lambda: CubeRootPolynomial(degree=3),
         'ridge': lambda: Ridge(alpha=0.5, random_state=SEED),
         'lasso': lambda: Lasso(alpha=1e-3, random_state=SEED),          # AIC's 1.0 was degenerate
         'elastic': lambda: ElasticNet(alpha=1e-3, l1_ratio=0.5, random_state=SEED),  # ditto
