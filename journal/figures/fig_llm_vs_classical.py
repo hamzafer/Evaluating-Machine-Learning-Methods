@@ -75,6 +75,10 @@ def load_data() -> pd.DataFrame:
     # exact-deduplicated at load (795 for PC10-CMY since 12 Aug), so a literal
     # here would silently go stale.
     n_classical = int(raw["n"].iloc[0])
+    # Only the display-named models: the 14-model registry plus the two dE00
+    # variants, per the paper's caption. The fitting-space variants added to
+    # summary.csv by the fairness run are tabulated in the paper, not plotted.
+    raw = raw[raw["model"].isin(MODEL_DISPLAY_NAMES)]
     classical = raw[["model", "median"]].copy()
     classical["group"] = "classical"
 
@@ -128,10 +132,8 @@ def make_figure(df: pd.DataFrame, out_path: str, n_classical: int) -> None:
         loc="upper right", frameon=True, framealpha=0.95, fontsize=9,
     )
 
-    fig.text(0.5, 0.005, caption(n_classical), ha="center", va="bottom", fontsize=8.0,
-             color="#555555", style="italic")
-
-    fig.tight_layout(rect=(0, 0.075, 1, 1))
+    # No in-figure footnote: the protocol caveat is stated in the paper caption.
+    fig.tight_layout()
     fig.savefig(out_path, dpi=320)
     plt.close(fig)
     print(f"Wrote: {out_path}")
