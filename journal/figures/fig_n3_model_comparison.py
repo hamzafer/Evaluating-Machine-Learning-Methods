@@ -48,9 +48,13 @@ MODEL_DISPLAY_NAMES = {
     "ridge": "Ridge",
     "pcr": "PCR",
     "plsr": "PLSR",
-    "poly3_de00_nm": "Poly3 + $\\Delta E_{00}$ (Nelder--Mead)",
+    "poly3_de00_nm": "Poly3 + $\\Delta E_{00}$ (Nelder–Mead)",
     "poly3_de00_powell": "Poly3 + $\\Delta E_{00}$ (Powell)",
 }
+# The figure shows exactly the models named above: the 14-model registry plus
+# the two dE00-refined variants, matching the paper's caption. The fitting-space
+# variants (poly3_cbrt, poly4, poly4_cbrt, gaussian_process_cbrt) added to
+# summary.csv by the fairness run are tabulated in the paper, not plotted here.
 
 JND = 1.0
 
@@ -62,6 +66,7 @@ def load_medians() -> pd.DataFrame:
         df = pd.read_csv(path)
         frames[ds] = df.set_index("model")["median"]
     combined = pd.DataFrame(frames)
+    combined = combined.loc[[m for m in combined.index if m in MODEL_DISPLAY_NAMES]]
     # "Overall" rank = mean of each model's median ΔE00 across the three datasets.
     combined["overall"] = combined[DATASETS].mean(axis=1)
     combined = combined.sort_values("overall", ascending=True)
@@ -111,8 +116,6 @@ def make_figure(combined: pd.DataFrame, out_path: str) -> None:
     ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:g}"))
     ax.set_xlabel(r"Median $\Delta E_{00}$ (log scale)")
 
-    ax.set_title("Median color error by model across CMY datasets (n = 3 inks)", fontsize=12.5, pad=12)
-
     ax.grid(axis="y", visible=False)
     ax.grid(axis="x", which="both", linestyle="--", alpha=0.35, zorder=0)
     ax.set_axisbelow(True)
@@ -120,7 +123,7 @@ def make_figure(combined: pd.DataFrame, out_path: str) -> None:
     ax.legend(loc="upper right", frameon=True, framealpha=0.95, fontsize=9, title="Dataset")
 
     fig.tight_layout()
-    fig.savefig(out_path, dpi=220)
+    fig.savefig(out_path, dpi=320)
     plt.close(fig)
     print(f"Wrote: {out_path}")
 
