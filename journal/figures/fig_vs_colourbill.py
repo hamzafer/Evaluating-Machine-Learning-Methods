@@ -224,39 +224,43 @@ def main():
                           "mean": b["mean"], "max": b["max"], "n": int(b.n)})
         summ = pd.read_csv(os.path.join(REPO, "journal", "results", ds, "summary.csv")).set_index("model")
         gp = summ.loc["gaussian_process"]
-        comp_rows.append({"dataset": ds, "series": "our best model (GP)",
+        comp_rows.append({"dataset": ds, "series": "our GP (XYZ)",
                           "protocol": "5-fold CV", "model": "gaussian_process (XYZ)",
                           "median": gp["median"], "p95": gp.p95,
                           "mean": gp["mean"], "max": gp["max"], "n": int(gp.n)})
+        gpc = summ.loc["gaussian_process_cbrt"]
+        comp_rows.append({"dataset": ds, "series": "our best model (GP, cbrt)",
+                          "protocol": "5-fold CV", "model": "gaussian_process_cbrt",
+                          "median": gpc["median"], "p95": gpc.p95,
+                          "mean": gpc["mean"], "max": gpc["max"], "n": int(gpc.n)})
     comp = pd.DataFrame(comp_rows)
     comp.to_csv(os.path.join(CB_DIR, "comparison.csv"), index=False)
     print("\ncomparison:\n", comp.to_string(index=False))
 
-    # -- step 4: figure (mean + max panels; the only stats colourbill shares)
-    series = ["colourbill poly (in-sample fit)", "same poly class, our CV", "our best model (GP)"]
-    colors = {series[0]: "#0072B2", series[1]: "#E69F00", series[2]: "#009E73"}
+    # -- step 4: figure (mean + max panels; the only stats colourbill shares).
+    # No in-figure title: MDPI figures carry their description in the caption.
+    series = ["colourbill poly (in-sample fit)", "same poly class, our CV",
+              "our GP (XYZ)", "our best model (GP, cbrt)"]
+    colors = {series[0]: "#0072B2", series[1]: "#E69F00",
+              series[2]: "#56B4E9", series[3]: "#009E73"}
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
     x = np.arange(len(DATASETS))
-    width = 0.26
-    for ax, stat, title in zip(axes, ["mean", "max"], ["Mean ΔE00", "Max ΔE00"]):
+    width = 0.21
+    for ax, stat, panel in zip(axes, ["mean", "max"], ["Mean ΔE00", "Max ΔE00"]):
         for i, s in enumerate(series):
             vals = [comp[(comp.dataset == d) & (comp.series == s)][stat].iloc[0] for d in DATASETS]
-            bars = ax.bar(x + (i - 1) * width, vals, width * 0.94, color=colors[s],
+            bars = ax.bar(x + (i - 1.5) * width, vals, width * 0.94, color=colors[s],
                           label=s if stat == "mean" else None)
             for b, v in zip(bars, vals):
                 ax.annotate(f"{v:.2f}", (b.get_x() + b.get_width() / 2, v),
-                            ha="center", va="bottom", fontsize=7.5, color="#333333")
-        ax.set_title(title, fontsize=11)
+                            ha="center", va="bottom", fontsize=6.5, color="#333333")
         ax.set_xticks(x, [DATASET_LABELS[d] for d in DATASETS], fontsize=8.5)
-        ax.set_ylabel("ΔE00", fontsize=9)
+        ax.set_ylabel(f"{panel}", fontsize=9)
         ax.spines[["top", "right"]].set_visible(False)
         ax.grid(axis="y", color="#dddddd", linewidth=0.6)
         ax.set_axisbelow(True)
     axes[0].legend(loc="upper left", fontsize=8, frameon=False)
-    fig.suptitle("External benchmark: colourbill CharData polynomial fit vs this work "
-                 "(in-sample fit vs 5-fold CV — protocols differ; see caption)",
-                 fontsize=10)
-    fig.tight_layout(rect=[0, 0, 1, 0.94])
+    fig.tight_layout()
     fig.savefig(OUT_FIG, dpi=320)
     print(f"\nwrote {OUT_FIG}")
 
