@@ -32,6 +32,11 @@ sample predicted exactly once. PC10: GP 0.046 vs poly3 0.268 at n=3, GP 0.056 vs
 **Numbers you must know:** GP is 0.041-0.070 across all six coated conditions. That is below typical
 print measurement repeatability, so the model is more consistent than the printer.
 
+**The corrected size of the advantage (know this, the old "5-10x" was wrong):** against the *best*
+polynomial at any degree and space, the GP is **2.0-2.4x** better at n<=4, not 5-10x. Against the
+corrected degree-3 CIELAB baseline it is 3.3-8.2x. The 5-10x figure only holds against the
+uncorrected degree-3-in-XYZ baseline, which is exactly the comparison this paper argues is unfair.
+
 **Likely challenge:** "Is it overfitting?" No. Grouped cross-validation was verified against plain
 k-fold and agrees within 0.003, and an independent clean-room reimplementation reproduced the GP
 medians to within 0.003 on every coated dataset.
@@ -112,10 +117,13 @@ only the 3-ink chart.
 **Three things to be able to say:**
 - Unaided, the best LLM equation is 13x worse than fitting a cubic to the same 150 rows.
 - With a code interpreter one beat our baseline, but that measures automation, not colour knowledge.
-- Claude Opus 5 and Fable 5, with reasoning enabled, produced **no answer at all** at 8,000, 24,000
-  and 78,000 completion tokens, while GPT-5.6 Sol converged in 2,747. The transcripts show careful
-  work (Neugebauer models, dot-gain curves, least-squares normal equations) that simply never
-  terminates.
+- With reasoning enabled, several models exhausted their entire completion budget without producing
+  an equation. **Archived evidence:** Fable 5 at 1,600 and at 78,000 tokens, DeepSeek V4 Pro at 2,400
+  and 8,000. Opus 5 also did this at 8,000 and 24,000 tokens (costing $0.18 and $0.63 for nothing),
+  but its raw response was later overwritten by the successful reasoning-disabled run, so that pair
+  is evidenced only in `docs/DECISION_LOG.md`, not in the archive. Cite the archived cases.
+  GPT-5.6 Sol converged in 2,747. The transcripts show careful work (Neugebauer models, dot-gain
+  curves, least-squares normal equations) that simply never terminates.
 - Every accurate LLM equation violated the "as simple as possible" instruction: expanded degrees of
   9 and 27, thousands of terms.
 
