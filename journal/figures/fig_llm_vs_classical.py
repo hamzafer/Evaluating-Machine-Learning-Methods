@@ -115,12 +115,6 @@ def make_figure(df: pd.DataFrame, out_path: str, n_classical: int) -> None:
     ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:g}"))
     ax.set_xlabel(r"Median $\Delta E_{00}$ (log scale)")
 
-    ax.set_title(
-        "Classical regression vs LLM-as-color-predictor on PC10 (CMY)\n"
-        "GPT-4o lands mid-pack; GPT-4o-mini trails every classical baseline",
-        fontsize=12.2, pad=12,
-    )
-
     ax.grid(axis="y", visible=False)
     ax.grid(axis="x", which="both", linestyle="--", alpha=0.35, zorder=0)
     ax.set_axisbelow(True)
@@ -138,7 +132,7 @@ def make_figure(df: pd.DataFrame, out_path: str, n_classical: int) -> None:
              color="#555555", style="italic")
 
     fig.tight_layout(rect=(0, 0.075, 1, 1))
-    fig.savefig(out_path, dpi=220)
+    fig.savefig(out_path, dpi=320)
     plt.close(fig)
     print(f"Wrote: {out_path}")
 
