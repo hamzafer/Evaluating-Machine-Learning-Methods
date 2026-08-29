@@ -1,0 +1,5 @@
+dataset,degree,terms_per_channel,median_xyz,gap_xyz,median_cbrt,gap_cbrt
+CMYKOGV-7,2,36,9.953,0.038,2.656,0.013
+CMYKOGV-7,3,120,5.386,0.121,0.83,0.029
+CMYKOGV-7,4,330,2.08,0.226,0.272,0.029
+CMYKOGV-7,5,792,0.506,0.133,0.126,0.036
