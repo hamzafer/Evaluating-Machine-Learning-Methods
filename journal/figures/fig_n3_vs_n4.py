@@ -44,9 +44,10 @@ MODEL_DISPLAY_NAMES = {
     "ridge": "Ridge",
     "pcr": "PCR",
     "plsr": "PLSR",
-    "poly3_de00_nm": "Poly3 + $\\Delta E_{00}$ (Nelder--Mead)",
-    "poly3_de00_powell": "Poly3 + $\\Delta E_{00}$ (Powell)",
 }
+# Exactly the 14-model registry: the paper's caption states the figure shows
+# the registry models only, so the dE00-refined and fitting-space variants in
+# summary.csv are excluded here.
 
 # Models whose n=3 -> n=4 shift gets a direct callout label (selective labeling,
 # not a number on every point).
@@ -57,6 +58,7 @@ def load_comparison() -> pd.DataFrame:
     cmy = pd.read_csv(CMY_PATH).set_index("model")["median"].rename("n3")
     cmyk = pd.read_csv(CMYK_PATH).set_index("model")["median"].rename("n4")
     df = pd.concat([cmy, cmyk], axis=1).dropna()
+    df = df.loc[[m for m in df.index if m in MODEL_DISPLAY_NAMES]]
     df = df.sort_values("n3", ascending=True)
     # Reverse so the best (lowest n=3 error) model lands at the TOP of the chart.
     df = df.iloc[::-1]
@@ -105,9 +107,6 @@ def make_figure(df: pd.DataFrame, out_path: str) -> None:
     ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:g}"))
     ax.set_xlabel(r"Median $\Delta E_{00}$ (log scale)")
 
-    ax.set_title("Effect of adding K: median color error at n = 3 vs n = 4 inks (PC10)",
-                 fontsize=12, pad=12)
-
     ax.grid(axis="y", visible=False)
     ax.grid(axis="x", which="both", linestyle="--", alpha=0.35, zorder=0)
     ax.set_axisbelow(True)
@@ -115,7 +114,7 @@ def make_figure(df: pd.DataFrame, out_path: str) -> None:
     ax.legend(loc="lower right", frameon=True, framealpha=0.95, fontsize=9)
 
     fig.tight_layout()
-    fig.savefig(out_path, dpi=220)
+    fig.savefig(out_path, dpi=320)
     plt.close(fig)
     print(f"Wrote: {out_path}")
 
