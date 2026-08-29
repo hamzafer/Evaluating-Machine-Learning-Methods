@@ -6,7 +6,7 @@ Method: parsed all nine LaTeX tables and compared cell-by-cell to `journal/resul
 
 ## (A) Exact mismatches
 
-1. **tab:ifra, SVM cross-run: paper 3.874, file 3.8735 → 3.873** (`ifra/cross_run.csv`, midpoint of entries 78/79 = 3.832, 3.915). Half-up vs banker's rounding; one digit. GP cross-run 3.8435 → 3.844 as printed.
+1. ~~**tab:ifra, SVM cross-run: paper 3.874, file 3.8735 → 3.873**~~ **WITHDRAWN (29 Aug, fix pass):** the float midpoint (3.832+3.915)/2 is 3.8735000000000004, and both `round()` and exact-decimal half-even round it to **3.874** — the same path that yields GP's 3.844. The paper's printed value is correct; no change made.
 2. **Sec 4.7 "84% of patches use at most four nonzero inks"**: 85.1% of 3,534 as-received, **84.1% of 3,302 analysed**. Correct as written since the sentence follows "3,302 analysed samples".
 3. **Sec 4.8 "Claude Fable 5 … spent its entire completion allowance on reasoning tokens and returned empty content at both 1,600 and 78,000"**: true at 78,000 (77,999 reasoning). At 1,600 the archive (`journal/llm/raw/equation/anthropic__claude-fable-5.attempt1-truncated.json`) shows **238 reasoning tokens**, finish_reason=length, and non-empty truncated prose ("I'm modeling the CMY to XYZ conversion…"). The 1,600 case is "truncated mid-derivation, no equation", not "empty content". Overstated.
 4. **IFRA "recovers 20–31%"**: (B−C)/(B−A) = GP 23.4%, SVM 30.9%, poly3 **31.5%**, MLP 20.1%. Should read 20–32% or "roughly 20–30%".
