@@ -1,13 +1,17 @@
 dataset,series,protocol,model,median,p95,mean,max,n
 PC10-CMYK,colourbill poly (in-sample fit),resubstitution,"poly4 (Lab, IRLS)",,,0.31,2.19,1617
 PC10-CMYK,"same poly class, our CV",5-fold CV,"poly4 (Lab, OLS)",0.112,0.387,0.156,2.624,1588
-PC10-CMYK,our best model (GP),5-fold CV,gaussian_process (XYZ),0.056,0.471,0.155,7.227,1588
+PC10-CMYK,our GP (XYZ),5-fold CV,gaussian_process (XYZ),0.056,0.471,0.155,7.227,1588
+PC10-CMYK,"our best model (GP, cbrt)",5-fold CV,gaussian_process_cbrt,0.05,0.229,0.083,2.723,1588
 PC11-CMYK,colourbill poly (in-sample fit),resubstitution,"poly4 (Lab, IRLS)",,,0.26,1.64,1617
 PC11-CMYK,"same poly class, our CV",5-fold CV,"poly4 (Lab, OLS)",0.112,0.38,0.153,2.709,1588
-PC11-CMYK,our best model (GP),5-fold CV,gaussian_process (XYZ),0.057,0.383,0.133,7.684,1588
+PC11-CMYK,our GP (XYZ),5-fold CV,gaussian_process (XYZ),0.057,0.383,0.133,7.684,1588
+PC11-CMYK,"our best model (GP, cbrt)",5-fold CV,gaussian_process_cbrt,0.052,0.216,0.079,1.766,1588
 FOGRA51-CMYK,colourbill poly (in-sample fit),resubstitution,"poly4 (Lab, IRLS)",,,0.34,2.65,1617
 FOGRA51-CMYK,"same poly class, our CV",5-fold CV,"poly4 (Lab, OLS)",0.167,0.484,0.219,3.642,1588
-FOGRA51-CMYK,our best model (GP),5-fold CV,gaussian_process (XYZ),0.069,0.267,0.114,3.153,1588
+FOGRA51-CMYK,our GP (XYZ),5-fold CV,gaussian_process (XYZ),0.069,0.267,0.114,3.153,1588
+FOGRA51-CMYK,"our best model (GP, cbrt)",5-fold CV,gaussian_process_cbrt,0.07,0.213,0.091,1.412,1588
 CMYKOGV-7,colourbill poly (in-sample fit),resubstitution,"poly4 (Lab, IRLS)",,,0.58,12.37,3302
 CMYKOGV-7,"same poly class, our CV",5-fold CV,"poly4 (Lab, OLS)",0.274,1.183,0.443,18.55,3302
-CMYKOGV-7,our best model (GP),5-fold CV,gaussian_process (XYZ),0.249,4.497,1.17,49.757,3302
+CMYKOGV-7,our GP (XYZ),5-fold CV,gaussian_process (XYZ),0.249,4.497,1.17,49.757,3302
+CMYKOGV-7,"our best model (GP, cbrt)",5-fold CV,gaussian_process_cbrt,0.16,0.677,0.245,5.713,3302
