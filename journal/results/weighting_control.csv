@@ -1,0 +1,10 @@
+dataset,median_unweighted_xyz,median_weighted_xyz,weighted_is_worse
+PC10-CMY,0.268,0.289,True
+PC11-CMY,0.238,0.255,True
+FOGRA51-CMY,0.369,0.402,True
+PC10-CMYK,0.942,1.551,True
+PC11-CMYK,0.869,1.4,True
+FOGRA51-CMYK,0.816,1.315,True
+KCMYG-5,1.457,1.933,True
+CMYKOGV-7,5.386,5.04,False
+CMYKOGB-7,3.332,4.468,True
