@@ -101,12 +101,6 @@ def make_figure(data: pd.DataFrame, out_path: str) -> None:
     ax.set_ylabel(r"Max (worst-case) $\Delta E_{00}$")
     ax.set_ylim(-ymax * 0.16, ymax * 1.42)
 
-    ax.set_title(
-        "Optimizing directly for ΔE00 cuts worst-case color error\n"
-        "(median error stays flat -- typical-case accuracy is not traded away)",
-        fontsize=12.2, pad=12,
-    )
-
     ax.grid(axis="x", visible=False)
     ax.grid(axis="y", linestyle="--", alpha=0.35, zorder=0)
     ax.set_axisbelow(True)
@@ -120,8 +114,8 @@ def make_figure(data: pd.DataFrame, out_path: str) -> None:
         ncol=2, frameon=True, framealpha=0.95, fontsize=9.5,
     )
 
-    fig.tight_layout(rect=(0, 0, 1, 0.90))
-    fig.savefig(out_path, dpi=220)
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
+    fig.savefig(out_path, dpi=320)
     plt.close(fig)
     print(f"Wrote: {out_path}")
 
