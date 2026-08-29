@@ -193,22 +193,11 @@ def make_figure(df: pd.DataFrame, lin_lo: float, lin_hi: float, out_path: str) -
     ax.legend(handles=legend_handles, loc="upper left", frameon=False,
               fontsize=8, labelcolor=INK_SECONDARY, handlelength=2.6)
 
-    # Title + honesty subtitle.
-    fig.text(0.055, 0.965,
-             "Polynomial regression degrades as inks grow; the Gaussian process holds",
-             fontsize=13.5, fontweight="bold", color=INK_PRIMARY, ha="left", va="top")
-    fig.text(0.055, 0.915,
-             "Median $\\Delta E_{00}$ across the n-colour ladder. Each rung is an independent dataset and printing system\n"
-             "— not one printer swept over ink counts — so compare each model's own trend, not levels across rungs.",
-             fontsize=9, color=INK_SECONDARY, ha="left", va="top", linespacing=1.35)
-
-    # Footnote: what was left out, with the range taken from the same CSVs.
-    fig.text(0.055, 0.018,
-             f"Linear-family models (ridge, lasso, elastic net, PCR, PLSR) omitted: their medians span "
-             f"{lin_lo:.1f}–{lin_hi:.1f} $\\Delta E_{{00}}$ across these datasets.",
-             fontsize=7.5, color=INK_MUTED, ha="left", va="bottom")
-
-    fig.subplots_adjust(left=0.075, right=0.985, top=0.845, bottom=0.155)
+    # No in-figure title, subtitle or footnote: the independent-rungs caveat and
+    # the linear-family omission are stated in the paper's caption, and the old
+    # title asserted a reading ("the Gaussian process holds") that Section 4.7's
+    # corrected comparison does not support.
+    fig.subplots_adjust(left=0.075, right=0.985, top=0.97, bottom=0.155)
     fig.savefig(out_path, dpi=320, facecolor=SURFACE)
     plt.close(fig)
     print(f"Wrote: {out_path}")
