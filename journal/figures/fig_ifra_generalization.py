@@ -60,12 +60,6 @@ REGIME_LABELS = {
     "leave_one_out": "Leave-one-out\n(train 12 runs pooled,\ntest held-out run)",
 }
 
-GP_HISTORY_NOTE = (
-    "GP within-run was anomalous (~18.8) under the earlier kernel init; "
-    "resolved by the unified GP config (Plan 10) and re-run — see text"
-)
-
-
 def load_regime_medians() -> pd.DataFrame:
     """Return DataFrame indexed by model, columns = regimes, values = median-of-medians."""
     within = pd.read_csv(os.path.join(RESULTS_DIR, "within_run.csv"))
@@ -120,26 +114,16 @@ def make_figure(agg: pd.DataFrame, cross_overall: float, loo_overall: float, out
     ymax = all_vals[~pd.isna(all_vals)].max()
     ax.set_ylim(0, ymax * 1.2)
 
-    ax.set_title(
-        "IFRA newsprint: press-to-press variation dominates model choice\n"
-        f"cross-run transfer stays high (median ≈ {cross_overall:.1f}) regardless of model; "
-        f"pooling 12 runs helps (leave-one-out median ≈ {loo_overall:.1f})",
-        fontsize=11.8, pad=14,
-    )
-
     ax.grid(axis="x", visible=False)
     ax.grid(axis="y", linestyle="--", alpha=0.35, zorder=0)
     ax.set_axisbelow(True)
 
     ax.legend(loc="upper left", frameon=True, framealpha=0.95, fontsize=9, title="Model", ncol=2)
 
-    fig.text(
-        0.5, 0.005, GP_HISTORY_NOTE,
-        ha="center", va="bottom", fontsize=8.2, color="#555555", style="italic",
-    )
-
-    fig.tight_layout(rect=(0, 0.035, 1, 1))
-    fig.savefig(out_path, dpi=220)
+    # No in-figure title or history footnote: the press-variation narrative and
+    # the GP kernel-initialization history are stated in the paper's text.
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=320)
     plt.close(fig)
     print(f"Wrote: {out_path}")
 
