@@ -257,7 +257,7 @@ def main():
                  "(in-sample fit vs 5-fold CV — protocols differ; see caption)",
                  fontsize=10)
     fig.tight_layout(rect=[0, 0, 1, 0.94])
-    fig.savefig(OUT_FIG, dpi=200)
+    fig.savefig(OUT_FIG, dpi=320)
     print(f"\nwrote {OUT_FIG}")
 
 

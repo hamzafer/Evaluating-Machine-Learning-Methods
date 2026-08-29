@@ -209,7 +209,7 @@ def make_figure(df: pd.DataFrame, lin_lo: float, lin_hi: float, out_path: str) -
              fontsize=7.5, color=INK_MUTED, ha="left", va="bottom")
 
     fig.subplots_adjust(left=0.075, right=0.985, top=0.845, bottom=0.155)
-    fig.savefig(out_path, dpi=220, facecolor=SURFACE)
+    fig.savefig(out_path, dpi=320, facecolor=SURFACE)
     plt.close(fig)
     print(f"Wrote: {out_path}")
 
