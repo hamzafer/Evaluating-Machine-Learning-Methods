@@ -40,12 +40,18 @@ prior-art citation, not a discovery. The LLM-provenance story stays out of the p
 ### 2. The CIEDE2000-alignment explanation is wrong
 The original claim (least squares in cube-root space aligns with the metric) fails its control:
 weighting a plain XYZ fit by `y^(-4/3)`, the first-order equivalent of that alignment, makes the
-median **worse** on 3 of 4 datasets (PC10-CMYK 0.942 -> 1.551). Positivity is not the mechanism
-either (flooring identity predictions changes PC10-CMY not at all).
+median **worse on 8 of the 9 datasets** (PC10-CMYK 0.942 -> 1.551, PC11-CMYK 0.869 -> 1.400,
+FOGRA51-CMYK 0.816 -> 1.315; the one exception is CMYKOGV-7, 5.386 -> 5.040, still far worse than
+the 0.830 the cube-root fit gives). Convention, refreshed 29 Aug 2026: each output channel is
+fitted separately with its own `y_c^(-4/3)` weights — channel-mean weights give different numbers
+(1.704/1.517/1.326 and a 9-of-9 count). Full run: `journal/results/weighting_control.csv`, script
+`journal/pipeline/sweeps.py`. Positivity is not the mechanism either (flooring identity
+predictions changes PC10-CMY not at all).
 
 The real mechanism is **approximability**: the ink -> XYZ response is much closer to a low-order
 polynomial after a compressive transform. Degree-3 residual RMS as a percentage of target SD on
-PC10-CMY falls from 0.99/1.05/1.58 (X/Y/Z) to 0.65/0.62/0.75 under cube root.
+PC10-CMY falls from 0.99/1.05/1.58 (X/Y/Z) to 0.65/0.62/0.75 under cube root
+(`journal/results/residual_rms.csv`).
 
 ### 3. Cube root is not special
 Any variance-stabilising transform helps, and square root is often better:
@@ -56,6 +62,7 @@ Any variance-stabilising transform helps, and square root is often better:
 | PC11-CMY | 0.238 | **0.124** | 0.140 | 0.154 | 0.206 |
 | FOGRA51-CMY | **0.369** | 0.376 | 0.432 | 0.467 | 0.562 |
 | PC10-CMYK | 0.942 | 0.252 | **0.219** | 0.250 | 0.385 |
+| PC11-CMYK | 0.869 | 0.243 | **0.216** | 0.251 | 0.379 |
 | FOGRA51-CMYK | 0.816 | **0.386** | 0.437 | 0.490 | 0.679 |
 | KCMYG-5 | 1.457 | 1.045 | 1.024 | **1.023** | 1.112 |
 | CMYKOGV-7 | 5.386 | 1.253 | 0.830 | **0.811** | 1.126 |
@@ -67,13 +74,17 @@ On CMYKOGV-7 (7 inks, 3302 rows), 5-fold grouped CV, median ΔE00, measured in t
 
 | degree | fitted in XYZ | fitted in cube-root space | terms/channel | train/test gap (cbrt) |
 |---|---|---|---|---|
-| 2 | 9.953 | 2.656 | 36 | — |
-| 3 | 5.386 | 0.830 | 120 | +0.023 |
-| **4** | **2.080** | **0.272** | 330 | +0.027 |
-| 5 | — | 0.126 | 792 | +0.036 |
+| 2 | 9.953 | 2.656 | 36 | +0.013 |
+| 3 | 5.386 | 0.830 | 120 | +0.029 |
+| **4** | **2.080** | **0.272** | 330 | +0.029 |
+| 5 | 0.506 | 0.126 | 792 | +0.036 |
+
+(Refreshed 29 Aug 2026 from `journal/results/CMYKOGV-7/degree_sweep.csv` — the earlier gap values
++0.023/+0.027 and the two missing cells were from a pre-dedup run; the XYZ-space gaps are
++0.038/+0.121/+0.226/+0.133.)
 
 **The Gaussian process scores 0.249 on this dataset.** A degree-4 polynomial fitted in CIELAB scores
-0.272. That is a tie, and it is not overfitting: the train/test gap stays at +0.027, essentially
+0.272. That is a tie, and it is not overfitting: the train/test gap stays at +0.029, essentially
 unchanged from degree 3, at 2.7 rows per parameter.
 
 ## Consequence for the paper
