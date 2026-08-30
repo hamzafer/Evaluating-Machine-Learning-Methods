@@ -1,3 +1,28 @@
+# Status — 31 Aug 2026: SUBMITTED
+
+**The journal paper was submitted to MDPI Technologies on 30 Aug 2026 at 23:58:47** (73 seconds
+before the special-issue deadline). Manuscript ID **technologies-4564760**, special issue
+"AI-Driven Color Models for Imaging, Formulation, Appearance Measurement and Computer Vision".
+Status: pending review. Title as submitted: **"AI and Machine Learning Methods for n-Colorant
+Printer Characterization"** — authors Muhammad Hamza Zafar (corresponding) and **Phil Green**.
+
+What went in: the 23-page build carrying Phil's complete tracked-changes review (296 changes,
+20 margin comments — extracted from `journal/final-review-phil/main-PG.docx`, applied by four
+parallel agents, then verified record-by-record by two independent agents; server copies
+MD5-verified against the local package). Headline changes from the review: subtitle dropped,
+corrections narrative removed, Figure 1 and the External Validation section deleted, the IFRA
+name replaced by "newsprint" throughout (data-permission concern), "registry" -> "model set",
+JND framing removed.
+
+APC: NTNU IOAP — central invoicing to institution, author eligible; fallback 1,260 CHF.
+Nothing owed unless accepted.
+
+Next: revision-round work is listed in `../MDPI-Phil-Journal/REVISION-TODO.md` (prior-work
+comparison table, implementation-details appendix, Phil's 7 extra references, Apex permission,
+Colour Engineering chapter pages). The section below is the pre-submission status of 23 Aug.
+
+---
+
 # Status — 23 Aug 2026
 
 Deadline **30 Aug**, seven days out. Code repo clean, 41 tests green, paper repo has 2 unpushed
