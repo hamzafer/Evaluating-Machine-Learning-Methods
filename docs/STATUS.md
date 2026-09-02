@@ -1,4 +1,4 @@
-# Status — 31 Aug 2026: SUBMITTED
+# Status — 2 Sep 2026: SUBMITTED, editor assigned
 
 **The journal paper was submitted to MDPI Technologies on 30 Aug 2026 at 23:58:47** (73 seconds
 before the special-issue deadline). Manuscript ID **technologies-4564760**, special issue
@@ -16,6 +16,16 @@ JND framing removed.
 
 APC: NTNU IOAP — central invoicing to institution, author eligible; fallback 1,260 CHF.
 Nothing owed unless accepted.
+
+## Post-submission log
+
+| date | event | action |
+|---|---|---|
+| 2 Sep 2026, 03:07 | **Assistant Editor assigned: Tyler Yu** (tyler.yu@mdpi.com). Paper passed intake and is in the reviewer-finding stage. | None. Tyler is the point of contact for any question about the manuscript. MDPI's English/figure-editing offer is an upsell; ignored. |
+| 2 Sep 2026, 03:07 | **Preprints.org invitation** (automated, sent to every submission; "recommended" carries no quality signal). Optional; no effect on peer review either way. | **Deferred pending Phil.** A preprint is permanent and public. Concerns: Phil's data-permission worry about naming the newsprint source, Apex permission still open on the revision TODO, and a v1 that stays online if reviewers force large changes. Ask Phil before clicking. |
+
+Expected next: reviewer reports, typically 2–4 weeks from editor assignment. Only trust emails from
+`@mdpi.com` addresses (MDPI's own phishing warning).
 
 Next: revision-round work is listed in `../MDPI-Phil-Journal/REVISION-TODO.md` (prior-work
 comparison table, implementation-details appendix, Phil's 7 extra references, Apex permission,
