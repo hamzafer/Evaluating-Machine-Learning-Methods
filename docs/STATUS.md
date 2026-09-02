@@ -24,6 +24,8 @@ Nothing owed unless accepted.
 | 2 Sep 2026, 03:07 | **Assistant Editor assigned: Tyler Yu** (tyler.yu@mdpi.com). Paper passed intake and is in the reviewer-finding stage. | None. Tyler is the point of contact for any question about the manuscript. MDPI's English/figure-editing offer is an upsell; ignored. |
 | 2 Sep 2026, 03:07 | **Preprints.org invitation** (automated, sent to every submission; "recommended" carries no quality signal). Optional; no effect on peer review either way. | **Deferred pending Phil.** A preprint is permanent and public. Concerns: Phil's data-permission worry about naming the newsprint source, Apex permission still open on the revision TODO, and a v1 that stays online if reviewers force large changes. Ask Phil before clicking. |
 
+| 2 Sep 2026 | **Phil's answers on the revision items** (chat): prior-work table + implementation details still wanted; extra refs only if they add something; CMYKOGB (Apex) may be used in research but the source must not be named and the data must not be shared; chapter ref confirmed as Wiley 2023 *Fundamentals and Applications of Colour Engineering* ch. 3 pp. 53-70; CharData cite gets v1.18.0. | Applied in the paper repo (commit cf56575): "Apex" removed from the data availability statement, bib fixed. **Open in this repo:** "Apex" still named in docs/README/ingester/raw filename, and the 13 processed newsprint CSVs are tracked in the public repo although the paper says the newsprint data is not redistributed. Both need Hamza's call. |
+
 Expected next: reviewer reports, typically 2–4 weeks from editor assignment. Only trust emails from
 `@mdpi.com` addresses (MDPI's own phishing warning).
 
