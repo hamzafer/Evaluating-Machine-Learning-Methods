@@ -38,8 +38,9 @@ newsprint data is licensed and *not* redistributed there.
   2. Rewrite history to purge them (`git filter-repo`), force-push, and ask
      GitHub support to clear cached views. Proper fix, destructive, needs a
      backup clone first.
-- **Action:** decide which; raise with Phil in the same message as 1a. The
-  code still runs because the raw zip and the ingester are local-only.
+- **Decision (2 Sep):** fix quietly first, mention to Phil afterwards. Not
+  raised in the 2 Sep reply. The code still runs because the raw zip and the
+  ingester are local-only.
 
 ---
 
@@ -106,6 +107,6 @@ Still open, in priority order (details in `REVISION-TODO.md` there):
 
 ## Suggested order
 
-1. Message Phil: preprint yes/no, and the newsprint-CSV question (1a, 1b).
+1. Message Phil: preprint yes/no (1a). Sent 2 Sep. Newsprint CSVs (1b): fix first, tell him after.
 2. Scrub "Apex" from this repo (2a). Half an hour.
 3. Start the prior-work table (3.1). This is the long pole.
