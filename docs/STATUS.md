@@ -26,6 +26,8 @@ Nothing owed unless accepted.
 
 | 2 Sep 2026 | **Phil's answers on the revision items** (chat): prior-work table + implementation details still wanted; extra refs only if they add something; CMYKOGB (Apex) may be used in research but the source must not be named and the data must not be shared; chapter ref confirmed as Wiley 2023 *Fundamentals and Applications of Colour Engineering* ch. 3 pp. 53-70; CharData cite gets v1.18.0. | Applied in the paper repo (commit cf56575): "Apex" removed from the data availability statement, bib fixed. **Open in this repo:** "Apex" still named in docs/README/ingester/raw filename, and the 13 processed newsprint CSVs are tracked in the public repo although the paper says the newsprint data is not redistributed. Both need Hamza's call. |
 
+| 2 Sep 2026 | **Replied to Phil**: listed the three applied fixes, said the prior-work table and implementation appendix are next, asked whether he is happy with a Preprints.org posting (current build, not the submitted PDF). | Awaiting his answer on the preprint. |
+
 Single to-do list for this period: `docs/plans/post-submission-checklist.md`.
 
 Expected next: reviewer reports, typically 2–4 weeks from editor assignment. Only trust emails from
