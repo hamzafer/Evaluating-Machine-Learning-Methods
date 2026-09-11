@@ -15,3 +15,17 @@ journal/data/processed/
 .claude/scheduled_tasks.lock
 skills-lock.json
 .playwright-mcp/
+
+# private working notes and correspondence — local only, never pushed
+docs/STATUS.md
+docs/DECISION_LOG.md
+docs/plans/
+docs/teaching/
+docs/audit/
+journal/final-review-phil/
+journal/paper/
+.superpowers/
+
+# all datasets local only (the public ones are downloadable from Fogra / the ICC registry)
+data/
+journal/data/
