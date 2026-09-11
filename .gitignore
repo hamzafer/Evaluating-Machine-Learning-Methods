@@ -29,3 +29,6 @@ journal/paper/
 # all datasets local only (the public ones are downloadable from Fogra / the ICC registry)
 data/
 journal/data/
+
+# third-party papers (copyrighted reading material) — local only
+main/*/paper/
