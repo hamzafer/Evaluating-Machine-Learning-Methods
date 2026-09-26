@@ -1,0 +1,27 @@
+{'model': 'poly3', 'dataset': 'CMYKOGV-7', 'n_train': 2641, 'fit_s': 0.008, 'predict_1M_s': 0.456, 'us_per_point': 0.45600000000000002, 'lut_17pow4_cmyk_s': 0.012, 'lut_9pow7_projected_s': 2.2000000000000002}
+{'model': 'poly4', 'dataset': 'CMYKOGV-7', 'n_train': 2641, 'fit_s': 0.019, 'predict_1M_s': 1.014, 'us_per_point': 1.014, 'lut_17pow4_cmyk_s': 0.023, 'lut_9pow7_projected_s': 4.9000000000000004}
+{'model': 'poly4_cbrt', 'dataset': 'CMYKOGV-7', 'n_train': 2641, 'fit_s': 0.019, 'predict_1M_s': 1.029, 'us_per_point': 1.0289999999999999, 'lut_17pow4_cmyk_s': 0.025, 'lut_9pow7_projected_s': 4.9000000000000004}
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 19 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 19 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+/Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/.venv/lib/python3.12/site-packages/sklearn/gaussian_process/_gpr.py:663: ConvergenceWarning: lbfgs failed to converge after 19 iteration(s) (status=2):
+ABNORMAL: 
+
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  _check_optimize_result("lbfgs", opt_res)
+{'model': 'gaussian_process', 'dataset': 'CMYKOGV-7', 'n_train': 2641, 'fit_s': 70.396, 'predict_1M_s': 16.36, 'us_per_point': 16.359999999999999, 'lut_17pow4_cmyk_s': 0.89, 'lut_9pow7_projected_s': 78.200000000000003}
+{'model': 'gaussian_process_cbrt', 'dataset': 'CMYKOGV-7', 'n_train': 2641, 'fit_s': 62.853, 'predict_1M_s': 16.552, 'us_per_point': 16.552, 'lut_17pow4_cmyk_s': 0.736, 'lut_9pow7_projected_s': 79.200000000000003}
+{'model': 'svm', 'dataset': 'CMYKOGV-7', 'n_train': 2641, 'fit_s': 0.282, 'predict_1M_s': 25.407, 'us_per_point': 25.407, 'lut_17pow4_cmyk_s': 0.565, 'lut_9pow7_projected_s': 121.5}
+{'model': 'random_forest', 'dataset': 'CMYKOGV-7', 'n_train': 2641, 'fit_s': 0.403, 'predict_1M_s': 10.632, 'us_per_point': 10.632, 'lut_17pow4_cmyk_s': 0.232, 'lut_9pow7_projected_s': 50.899999999999999}
+{'model': 'mlp_deep', 'dataset': 'CMYKOGV-7', 'n_train': 2641, 'fit_s': 0.37, 'predict_1M_s': 0.211, 'us_per_point': 0.21099999999999999, 'lut_17pow4_cmyk_s': 0.017, 'lut_9pow7_projected_s': 1.0}
+wrote /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods/journal/results/revision_r1/timing.csv

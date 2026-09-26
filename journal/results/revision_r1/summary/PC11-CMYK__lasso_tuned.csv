@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMYK,lasso_tuned,8.394,23.667,41.195,10.337,1588,0.1,"[{""fold"": 0, ""best_params"": {""alpha"": 0.001}}, {""fold"": 1, ""best_params"": {""alpha"": 0.001}}, {""fold"": 2, ""best_params"": {""alpha"": 0.001}}, {""fold"": 3, ""best_params"": {""alpha"": 0.001}}, {""fold"": 4, ""best_params"": {""alpha"": 0.0001}}]"

@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGB-7,mlp_deep_tuned,2.303,18.485,39.157,4.655,2000,65.9,"[{""fold"": 0, ""best_params"": {""alpha"": 0.001, ""hidden_layer_sizes"": [128, 128, 128]}}, {""fold"": 1, ""best_params"": {""alpha"": 0.001, ""hidden_layer_sizes"": [128, 128, 128]}}, {""fold"": 2, ""best_params"": {""alpha"": 0.001, ""hidden_layer_sizes"": [128, 128, 128]}}, {""fold"": 3, ""best_params"": {""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}}, {""fold"": 4, ""best_params"": {""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}}]"

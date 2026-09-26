@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+FOGRA51-CMY,random_forest_cbrt,2.013,4.158,10.939,2.203,795,1.4,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"

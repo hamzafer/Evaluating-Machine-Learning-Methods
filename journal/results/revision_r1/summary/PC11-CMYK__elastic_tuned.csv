@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMYK,elastic_tuned,8.424,23.462,41.649,10.342,1588,0.4,"[{""fold"": 0, ""best_params"": {""alpha"": 0.001, ""l1_ratio"": 0.8}}, {""fold"": 1, ""best_params"": {""alpha"": 0.001, ""l1_ratio"": 0.8}}, {""fold"": 2, ""best_params"": {""alpha"": 0.0001, ""l1_ratio"": 0.8}}, {""fold"": 3, ""best_params"": {""alpha"": 0.001, ""l1_ratio"": 0.8}}, {""fold"": 4, ""best_params"": {""alpha"": 0.001, ""l1_ratio"": 0.8}}]"

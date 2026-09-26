@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMY,poly3_cbrt,0.14,0.341,1.653,0.166,795,0.0,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"

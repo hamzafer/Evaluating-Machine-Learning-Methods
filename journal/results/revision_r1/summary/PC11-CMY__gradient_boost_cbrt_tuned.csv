@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMY,gradient_boost_cbrt_tuned,0.668,2.593,23.8,0.943,795,93.5,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"

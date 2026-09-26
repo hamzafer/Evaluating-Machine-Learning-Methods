@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMY,plsr_tuned,6.161,23.939,45.211,8.52,795,0.1,"[{""fold"": 0, ""best_params"": {""n_components"": 3}}, {""fold"": 1, ""best_params"": {""n_components"": 3}}, {""fold"": 2, ""best_params"": {""n_components"": 3}}, {""fold"": 3, ""best_params"": {""n_components"": 3}}, {""fold"": 4, ""best_params"": {""n_components"": 3}}]"

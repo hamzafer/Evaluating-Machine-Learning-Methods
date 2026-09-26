@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+KCMYG-5,lasso_tuned,10.681,26.169,50.045,12.232,2214,0.1,"[{""fold"": 0, ""best_params"": {""alpha"": 0.001}}, {""fold"": 1, ""best_params"": {""alpha"": 0.001}}, {""fold"": 2, ""best_params"": {""alpha"": 0.001}}, {""fold"": 3, ""best_params"": {""alpha"": 0.001}}, {""fold"": 4, ""best_params"": {""alpha"": 0.001}}]"

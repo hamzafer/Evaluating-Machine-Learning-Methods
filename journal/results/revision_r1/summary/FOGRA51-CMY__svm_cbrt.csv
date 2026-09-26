@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+FOGRA51-CMY,svm_cbrt,0.688,1.618,3.019,0.787,795,0.1,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"

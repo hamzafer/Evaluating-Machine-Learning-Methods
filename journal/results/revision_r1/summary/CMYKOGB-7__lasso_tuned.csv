@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGB-7,lasso_tuned,11.246,31.187,50.727,13.463,2000,0.1,"[{""fold"": 0, ""best_params"": {""alpha"": 1e-05}}, {""fold"": 1, ""best_params"": {""alpha"": 1e-05}}, {""fold"": 2, ""best_params"": {""alpha"": 1e-05}}, {""fold"": 3, ""best_params"": {""alpha"": 1e-05}}, {""fold"": 4, ""best_params"": {""alpha"": 1e-05}}]"

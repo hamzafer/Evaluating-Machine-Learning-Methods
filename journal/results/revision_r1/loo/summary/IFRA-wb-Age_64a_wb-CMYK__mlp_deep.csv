@@ -1,0 +1,2 @@
+held_out,model,n_train,median,p95,max,mean,n,seconds
+IFRA-wb-Age_64a_wb-CMYK,mlp_deep,17820,2.607,7.08,15.682,3.099,1485,2.2

@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMYK,knn_tuned,1.937,5.186,10.737,2.319,1588,0.4,"[{""fold"": 0, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 1, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 2, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 3, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 4, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}]"

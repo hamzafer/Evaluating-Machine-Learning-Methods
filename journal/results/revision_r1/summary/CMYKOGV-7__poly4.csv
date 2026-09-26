@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGV-7,poly4,2.08,13.8,57.988,3.934,3302,0.2,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"

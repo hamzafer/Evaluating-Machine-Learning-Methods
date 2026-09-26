@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC10-CMYK,random_forest_tuned,2.219,4.845,11.994,2.444,1588,28.4,"[{""fold"": 0, ""best_params"": {""max_depth"": null, ""max_features"": ""sqrt""}}, {""fold"": 1, ""best_params"": {""max_depth"": 15, ""max_features"": ""sqrt""}}, {""fold"": 2, ""best_params"": {""max_depth"": null, ""max_features"": ""sqrt""}}, {""fold"": 3, ""best_params"": {""max_depth"": 15, ""max_features"": ""sqrt""}}, {""fold"": 4, ""best_params"": {""max_depth"": 15, ""max_features"": ""sqrt""}}]"

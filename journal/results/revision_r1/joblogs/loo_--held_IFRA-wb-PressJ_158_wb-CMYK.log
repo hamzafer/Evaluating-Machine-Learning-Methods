@@ -1,0 +1,7 @@
+LOO IFRA-wb-PressJ_158_wb-CMYK gaussian_process   median=6.451 [192s]
+LOO IFRA-wb-PressJ_158_wb-CMYK svm                median=6.230 [50s]
+LOO IFRA-wb-PressJ_158_wb-CMYK mlp_deep           median=6.983 [3s]
+LOO IFRA-wb-PressJ_158_wb-CMYK poly3              median=6.697 [0s]
+LOO IFRA-wb-PressJ_158_wb-CMYK svm_sub2000        median=6.492 [2s]
+LOO IFRA-wb-PressJ_158_wb-CMYK mlp_deep_sub2000   median=7.127 [0s]
+LOO IFRA-wb-PressJ_158_wb-CMYK poly3_sub2000      median=6.700 [0s]

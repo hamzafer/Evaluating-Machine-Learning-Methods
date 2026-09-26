@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+KCMYG-5,random_forest_cbrt_tuned,2.001,5.306,37.863,2.411,2214,80.1,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"

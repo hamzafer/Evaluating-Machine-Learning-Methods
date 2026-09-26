@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGV-7,pcr_tuned,15.007,27.531,44.107,15.773,3302,0.7,"[{""fold"": 0, ""best_params"": {""alpha"": 0.001, ""n_components"": 7}}, {""fold"": 1, ""best_params"": {""alpha"": 0.5, ""n_components"": 7}}, {""fold"": 2, ""best_params"": {""alpha"": 10.0, ""n_components"": 7}}, {""fold"": 3, ""best_params"": {""alpha"": 10.0, ""n_components"": 7}}, {""fold"": 4, ""best_params"": {""alpha"": 0.001, ""n_components"": 7}}]"

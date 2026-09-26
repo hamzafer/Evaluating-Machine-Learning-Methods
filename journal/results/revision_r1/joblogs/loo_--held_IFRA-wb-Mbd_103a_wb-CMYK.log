@@ -1,0 +1,7 @@
+LOO IFRA-wb-Mbd_103a_wb-CMYK gaussian_process   median=1.775 [173s]
+LOO IFRA-wb-Mbd_103a_wb-CMYK svm                median=1.554 [49s]
+LOO IFRA-wb-Mbd_103a_wb-CMYK mlp_deep           median=2.100 [4s]
+LOO IFRA-wb-Mbd_103a_wb-CMYK poly3              median=1.962 [0s]
+LOO IFRA-wb-Mbd_103a_wb-CMYK svm_sub2000        median=1.969 [2s]
+LOO IFRA-wb-Mbd_103a_wb-CMYK mlp_deep_sub2000   median=2.005 [1s]
+LOO IFRA-wb-Mbd_103a_wb-CMYK poly3_sub2000      median=1.998 [0s]

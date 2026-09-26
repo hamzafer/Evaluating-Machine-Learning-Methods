@@ -1,0 +1,6 @@
+FOGRA51-CMY   poly4_cbrt               median=0.156 p95=0.341 max=1.168 [0s]
+FOGRA51-CMY   poly3_cbrt               median=0.432 p95=0.916 max=1.958 [0s]
+FOGRA51-CMY   poly3                    median=0.369 p95=1.135 max=8.251 [0s]
+FOGRA51-CMY   poly4                    median=0.125 p95=0.410 max=1.846 [0s]
+FOGRA51-CMY   svm                      median=0.796 p95=1.913 max=6.107 [0s]
+FOGRA51-CMY   mlp_deep                 median=1.083 p95=4.223 max=13.447 [2s]

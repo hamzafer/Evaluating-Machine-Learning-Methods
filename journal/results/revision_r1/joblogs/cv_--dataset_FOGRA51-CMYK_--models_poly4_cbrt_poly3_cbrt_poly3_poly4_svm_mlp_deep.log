@@ -1,0 +1,6 @@
+FOGRA51-CMYK  poly4_cbrt               median=0.167 p95=0.484 max=3.642 [0s]
+FOGRA51-CMYK  poly3_cbrt               median=0.437 p95=1.097 max=5.786 [0s]
+FOGRA51-CMYK  poly3                    median=0.816 p95=6.733 max=29.287 [0s]
+FOGRA51-CMYK  poly4                    median=0.213 p95=1.772 max=19.665 [0s]
+FOGRA51-CMYK  svm                      median=0.996 p95=4.872 max=13.246 [0s]
+FOGRA51-CMYK  mlp_deep                 median=1.658 p95=9.675 max=37.063 [2s]

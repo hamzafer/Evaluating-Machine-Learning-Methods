@@ -15,8 +15,9 @@ from sklearn.linear_model import ElasticNet, Lasso, LinearRegression, Ridge
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.neural_network import MLPRegressor
+from sklearn.model_selection import GroupKFold, ParameterGrid
 from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import MinMaxScaler, PolynomialFeatures
 from sklearn.svm import SVR
 from sklearn.tree import DecisionTreeRegressor
 
@@ -90,23 +91,100 @@ class CubeRootTarget:
     between them is fair.
     """
 
-    def __init__(self, factory):
-        self.factory = factory
+    def __init__(self, factory, rescale=False):
+        # rescale (revision R1, R2-1): MinMax-scale the cube-root target on the
+        # training fold before the inner fit, so a scale-sensitive estimator
+        # (SVR epsilon, MLP, Ridge alpha) sees targets on the same [0, 1] range
+        # it sees in XYZ mode; the transform is then the ONLY difference. The
+        # original GP variant keeps rescale=False (normalize_y already handles it).
+        self.factory, self.rescale = factory, rescale
         self._scaler = None
         self._inner = None
+        self._ts = None
 
     def set_scaler(self, scaler):
         self._scaler = scaler
 
     def fit(self, X, y_scaled):
         Y = self._scaler.inverse_transform(y_scaled) if self._scaler is not None else y_scaled
+        T = np.cbrt(np.clip(Y, 0.0, None))
+        if self.rescale:
+            self._ts = MinMaxScaler().fit(T)
+            T = self._ts.transform(T)
         self._inner = self.factory()
-        self._inner.fit(X, np.cbrt(np.clip(Y, 0.0, None)))
+        if hasattr(self._inner, 'set_scaler') and self.rescale:
+            # an inner tuner scores candidates on physical XYZ: hand it the map
+            # from its (scaled cube-root) targets back to XYZ
+            self._inner.set_scaler(_CbrtInverse(self._ts))
+        self._inner.fit(X, T)
         return self
 
     def predict(self, X):
-        Y = np.clip(self._inner.predict(X), 0.0, None) ** 3
+        T = np.asarray(self._inner.predict(X))
+        if self.rescale:
+            T = self._ts.inverse_transform(T)
+        Y = np.clip(T, 0.0, None) ** 3
         return self._scaler.transform(Y) if self._scaler is not None else Y
+
+
+class _CbrtInverse:
+    """Scaler-like adapter: scaled cube-root targets -> physical XYZ."""
+
+    def __init__(self, ts):
+        self.ts = ts
+
+    def inverse_transform(self, T):
+        return np.clip(self.ts.inverse_transform(np.asarray(T)), 0.0, None) ** 3
+
+
+class InnerTuned:
+    """Hyperparameter tuning INSIDE the training fold (revision R1-1).
+
+    Grid search over `grid` with a 3-fold inner split of the outer training
+    fold (grouped on duplicate recipes, seeded). Selection criterion is the
+    paper's own metric: median CIEDE2000 on denormalized XYZ, via the same
+    set_scaler hook the cube-root models use. The winner is refitted on the
+    whole training fold; the outer test fold is never seen during tuning.
+    """
+
+    def __init__(self, build, grid, n_inner=3, seed=SEED):
+        self.build, self.grid, self.n_inner, self.seed = build, grid, n_inner, seed
+        self._scaler = None
+        self.best_params_ = None
+        self.inner_scores_ = None
+
+    def set_scaler(self, scaler):
+        self._scaler = scaler
+
+    def _make(self, params):
+        m = self.build(**params)
+        if hasattr(m, 'set_scaler'):
+            m.set_scaler(self._scaler)
+        return m
+
+    def fit(self, X, y):
+        from .color import delta_e00
+        from .evaluate import make_groups
+        X, y = np.asarray(X), np.asarray(y)
+        splits = list(GroupKFold(n_splits=self.n_inner, shuffle=True, random_state=self.seed)
+                      .split(X, groups=make_groups(X)))
+        Ytrue = np.clip(self._scaler.inverse_transform(y), 0.0, None)
+        scores = []
+        for params in ParameterGrid(self.grid):
+            de = np.empty(len(X))
+            for tr, te in splits:
+                m = self._make(params).fit(X[tr], y[tr])
+                pred = np.clip(self._scaler.inverse_transform(np.asarray(m.predict(X[te]))), 0.0, None)
+                de[te] = delta_e00(pred, Ytrue[te])
+            scores.append((float(np.median(de)), params))
+        scores.sort(key=lambda t: t[0])
+        self.inner_scores_ = scores
+        self.best_params_ = scores[0][1]
+        self._model = self._make(self.best_params_).fit(X, y)
+        return self
+
+    def predict(self, X):
+        return self._model.predict(X)
 
 
 def registry() -> dict:
@@ -158,3 +236,90 @@ def registry() -> dict:
         'poly3_de00_nm': lambda: DE00Polynomial(method='Nelder-Mead', maxiter=2000),
         'poly3_de00_powell': lambda: DE00Polynomial(method='Powell', maxiter=200),
     }
+
+
+# ---------------------------------------------------------------------------
+# Revision R1 additions. Kept out of registry() so the 16-model matrix and
+# every existing summary.csv stay exactly as published.
+# ---------------------------------------------------------------------------
+
+# The 12 non-GP methods that had no cube-root variant (poly3/poly4 already do).
+CBRT_BASES = ('ridge', 'lasso', 'elastic', 'pcr', 'plsr', 'knn', 'svm',
+              'decision_tree', 'random_forest', 'gradient_boost',
+              'mlp_shallow', 'mlp_deep')
+
+
+def cbrt_registry() -> dict:
+    """R2-1: every non-GP method fitted against cbrt(XYZ), same config otherwise."""
+    base = registry()
+    return {f'{m}_cbrt': (lambda f=base[m]: CubeRootTarget(f, rescale=True))
+            for m in CBRT_BASES}
+
+
+def tuning_grids(n_inputs: int) -> dict:
+    """R1-1: (builder, grid) per non-closed-form method. Small grids that bracket
+    each fixed configuration; PLSR/PCR components span 1..n inputs."""
+    comps = list(range(1, n_inputs + 1))
+    return {
+        'ridge': (lambda alpha: Ridge(alpha=alpha, random_state=SEED),
+                  {'alpha': [1e-4, 1e-3, 1e-2, 0.1, 0.5, 1.0, 10.0]}),
+        'lasso': (lambda alpha: Lasso(alpha=alpha, max_iter=10000, random_state=SEED),
+                  {'alpha': [1e-5, 1e-4, 1e-3, 1e-2]}),
+        'elastic': (lambda alpha, l1_ratio: ElasticNet(alpha=alpha, l1_ratio=l1_ratio,
+                                                       max_iter=10000, random_state=SEED),
+                    {'alpha': [1e-5, 1e-4, 1e-3, 1e-2], 'l1_ratio': [0.2, 0.5, 0.8]}),
+        'pcr': (lambda n_components, alpha: make_pipeline(PCA(n_components=n_components),
+                                                          Ridge(alpha=alpha)),
+                {'n_components': comps, 'alpha': [1e-3, 0.5, 10.0]}),
+        'plsr': (lambda n_components: PLSRegression(n_components=n_components),
+                 {'n_components': comps}),
+        'knn': (lambda n_neighbors, weights: KNeighborsRegressor(n_neighbors=n_neighbors,
+                                                                 weights=weights),
+                {'n_neighbors': [1, 3, 5, 7, 10, 15], 'weights': ['uniform', 'distance']}),
+        'svm': (lambda C, gamma, epsilon: MultiOutputRegressor(
+                    SVR(kernel='rbf', C=C, gamma=gamma, epsilon=epsilon)),
+                {'C': [1.0, 10.0, 100.0, 1000.0], 'gamma': ['scale', 1.0, 10.0],
+                 'epsilon': [0.001, 0.01]}),
+        'decision_tree': (lambda max_depth, min_samples_leaf: DecisionTreeRegressor(
+                              max_depth=max_depth, min_samples_leaf=min_samples_leaf,
+                              random_state=SEED),
+                          {'max_depth': [None, 10, 15, 20], 'min_samples_leaf': [1, 2, 5]}),
+        'random_forest': (lambda max_depth, max_features: RandomForestRegressor(
+                              n_estimators=200, max_depth=max_depth, max_features=max_features,
+                              random_state=SEED),
+                          {'max_depth': [None, 15, 25], 'max_features': [1.0, 'sqrt']}),
+        'gradient_boost': (lambda n_estimators, learning_rate, max_depth: MultiOutputRegressor(
+                               GradientBoostingRegressor(n_estimators=n_estimators,
+                                                         learning_rate=learning_rate,
+                                                         max_depth=max_depth, random_state=SEED)),
+                           {'n_estimators': [200, 500], 'learning_rate': [0.05, 0.1],
+                            'max_depth': [3, 5, 7]}),
+        'mlp_shallow': (lambda hidden_layer_sizes, alpha: MLPRegressor(
+                            hidden_layer_sizes=hidden_layer_sizes, alpha=alpha, solver='lbfgs',
+                            max_iter=2000, random_state=SEED),
+                        {'hidden_layer_sizes': [(32,), (64,), (128,)],
+                         'alpha': [1e-5, 1e-4, 1e-3]}),
+        'mlp_deep': (lambda hidden_layer_sizes, alpha: MLPRegressor(
+                         hidden_layer_sizes=hidden_layer_sizes, alpha=alpha, solver='lbfgs',
+                         max_iter=2000, random_state=SEED),
+                     {'hidden_layer_sizes': [(64, 64, 64), (128, 128, 128)],
+                      'alpha': [1e-4, 1e-3]}),
+    }
+
+
+def tuned_registry(n_inputs: int) -> dict:
+    return {f'{m}_tuned': (lambda b=b, g=g: InnerTuned(b, g))
+            for m, (b, g) in tuning_grids(n_inputs).items()}
+
+
+
+CBRT_TUNED_BASES = ('svm', 'mlp_deep', 'gradient_boost', 'random_forest', 'knn')
+
+
+def cbrt_tuned_registry(n_inputs: int) -> dict:
+    """Best effort per competitor: tuned inside the fold AND fitted in cube-root
+    space (the combination of R1-1 and R2-1) for the five nonlinear competitors."""
+    g = tuning_grids(n_inputs)
+    return {f'{m}_cbrt_tuned': (lambda b=g[m][0], gr=g[m][1]:
+                                CubeRootTarget(lambda: InnerTuned(b, gr), rescale=True))
+            for m in CBRT_TUNED_BASES}

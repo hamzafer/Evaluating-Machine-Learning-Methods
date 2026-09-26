@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+KCMYG-5,gaussian_process_cbrt,0.764,2.067,16.172,0.926,2214,616.6,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"

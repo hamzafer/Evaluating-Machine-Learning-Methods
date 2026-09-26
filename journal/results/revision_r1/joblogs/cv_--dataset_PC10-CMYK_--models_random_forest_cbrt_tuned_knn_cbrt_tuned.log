@@ -1,0 +1,2 @@
+PC10-CMYK     random_forest_cbrt_tuned median=1.886 p95=3.831 max=7.514 [30s]
+PC10-CMYK     knn_cbrt_tuned           median=1.967 p95=5.131 max=12.094 [0s]

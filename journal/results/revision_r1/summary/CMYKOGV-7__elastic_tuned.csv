@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGV-7,elastic_tuned,14.729,28.498,47.019,15.797,3302,0.3,"[{""fold"": 0, ""best_params"": {""alpha"": 0.01, ""l1_ratio"": 0.5}}, {""fold"": 1, ""best_params"": {""alpha"": 0.01, ""l1_ratio"": 0.5}}, {""fold"": 2, ""best_params"": {""alpha"": 0.01, ""l1_ratio"": 0.5}}, {""fold"": 3, ""best_params"": {""alpha"": 0.01, ""l1_ratio"": 0.5}}, {""fold"": 4, ""best_params"": {""alpha"": 0.01, ""l1_ratio"": 0.5}}]"

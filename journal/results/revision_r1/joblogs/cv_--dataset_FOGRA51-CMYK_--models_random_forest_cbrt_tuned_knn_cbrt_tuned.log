@@ -1,0 +1,2 @@
+FOGRA51-CMYK  random_forest_cbrt_tuned median=1.904 p95=3.952 max=9.459 [31s]
+FOGRA51-CMYK  knn_cbrt_tuned           median=2.050 p95=5.254 max=18.712 [0s]

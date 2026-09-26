@@ -1,0 +1,2 @@
+held_out,model,n_train,median,p95,max,mean,n,seconds
+IFRA-wb-PressJ_158_wb-CMYK,mlp_deep,17820,6.983,12.14,17.32,7.122,1485,3.1

@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+FOGRA51-CMYK,mlp_shallow_cbrt,1.357,4.232,19.796,1.79,1588,0.5,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"

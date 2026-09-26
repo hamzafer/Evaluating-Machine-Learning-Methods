@@ -1,0 +1,6 @@
+CMYKOGB-7     poly4_cbrt               median=1.132 p95=3.843 max=24.096 [0s]
+CMYKOGB-7     poly3_cbrt               median=1.611 p95=7.091 max=30.274 [0s]
+CMYKOGB-7     poly3                    median=3.332 p95=24.845 max=48.974 [0s]
+CMYKOGB-7     poly4                    median=1.698 p95=19.662 max=48.974 [0s]
+CMYKOGB-7     svm                      median=1.776 p95=13.228 max=42.827 [4s]
+CMYKOGB-7     mlp_deep                 median=2.536 p95=15.106 max=39.321 [4s]

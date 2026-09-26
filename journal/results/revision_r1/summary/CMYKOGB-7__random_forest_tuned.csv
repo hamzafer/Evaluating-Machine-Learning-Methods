@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGB-7,random_forest_tuned,2.317,8.091,69.316,3.218,2000,55.5,"[{""fold"": 0, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 1, ""best_params"": {""max_depth"": 15, ""max_features"": 1.0}}, {""fold"": 2, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 3, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 4, ""best_params"": {""max_depth"": 15, ""max_features"": 1.0}}]"

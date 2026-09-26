@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+FOGRA51-CMYK,gaussian_process_cbrt,0.07,0.213,1.412,0.091,1588,247.0,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"

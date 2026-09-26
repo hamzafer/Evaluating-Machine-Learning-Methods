@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+KCMYG-5,lasso_cbrt,5.823,12.155,27.381,6.476,2214,0.0,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"

@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+FOGRA51-CMYK,plsr_tuned,8.626,25.14,42.19,10.719,1588,0.1,"[{""fold"": 0, ""best_params"": {""n_components"": 3}}, {""fold"": 1, ""best_params"": {""n_components"": 3}}, {""fold"": 2, ""best_params"": {""n_components"": 4}}, {""fold"": 3, ""best_params"": {""n_components"": 3}}, {""fold"": 4, ""best_params"": {""n_components"": 4}}]"

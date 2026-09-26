@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMY,pcr_tuned,6.152,23.926,45.213,8.515,795,0.1,"[{""fold"": 0, ""best_params"": {""alpha"": 0.5, ""n_components"": 3}}, {""fold"": 1, ""best_params"": {""alpha"": 0.001, ""n_components"": 3}}, {""fold"": 2, ""best_params"": {""alpha"": 0.001, ""n_components"": 3}}, {""fold"": 3, ""best_params"": {""alpha"": 0.5, ""n_components"": 3}}, {""fold"": 4, ""best_params"": {""alpha"": 0.001, ""n_components"": 3}}]"

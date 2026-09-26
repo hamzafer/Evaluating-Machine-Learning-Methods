@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+FOGRA51-CMYK,ridge_tuned,8.767,24.96,40.577,10.699,1588,0.2,"[{""fold"": 0, ""best_params"": {""alpha"": 0.0001}}, {""fold"": 1, ""best_params"": {""alpha"": 0.0001}}, {""fold"": 2, ""best_params"": {""alpha"": 0.1}}, {""fold"": 3, ""best_params"": {""alpha"": 0.0001}}, {""fold"": 4, ""best_params"": {""alpha"": 0.0001}}]"

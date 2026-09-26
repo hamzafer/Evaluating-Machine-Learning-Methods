@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMYK,decision_tree_tuned,4.413,9.098,22.321,4.817,1588,0.4,"[{""fold"": 0, ""best_params"": {""max_depth"": 15, ""min_samples_leaf"": 1}}, {""fold"": 1, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 1}}, {""fold"": 2, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 1}}, {""fold"": 3, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 1}}, {""fold"": 4, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 1}}]"

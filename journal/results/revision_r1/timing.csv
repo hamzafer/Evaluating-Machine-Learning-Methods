@@ -1,0 +1,9 @@
+model,dataset,n_train,fit_s,predict_1M_s,us_per_point,lut_17pow4_cmyk_s,lut_9pow7_projected_s
+poly3,CMYKOGV-7,2641,0.008,0.456,0.456,0.012,2.2
+poly4,CMYKOGV-7,2641,0.019,1.014,1.014,0.023,4.9
+poly4_cbrt,CMYKOGV-7,2641,0.019,1.029,1.029,0.025,4.9
+gaussian_process,CMYKOGV-7,2641,70.396,16.36,16.36,0.89,78.2
+gaussian_process_cbrt,CMYKOGV-7,2641,62.853,16.552,16.552,0.736,79.2
+svm,CMYKOGV-7,2641,0.282,25.407,25.407,0.565,121.5
+random_forest,CMYKOGV-7,2641,0.403,10.632,10.632,0.232,50.9
+mlp_deep,CMYKOGV-7,2641,0.37,0.211,0.211,0.017,1.0

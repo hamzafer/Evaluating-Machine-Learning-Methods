@@ -1,0 +1,7 @@
+LOO IFRA-wb-Arena_111_wb-CMYK gaussian_process   median=4.410 [139s]
+LOO IFRA-wb-Arena_111_wb-CMYK svm                median=4.732 [50s]
+LOO IFRA-wb-Arena_111_wb-CMYK mlp_deep           median=4.467 [4s]
+LOO IFRA-wb-Arena_111_wb-CMYK poly3              median=4.459 [0s]
+LOO IFRA-wb-Arena_111_wb-CMYK svm_sub2000        median=4.934 [2s]
+LOO IFRA-wb-Arena_111_wb-CMYK mlp_deep_sub2000   median=4.785 [0s]
+LOO IFRA-wb-Arena_111_wb-CMYK poly3_sub2000      median=4.562 [0s]

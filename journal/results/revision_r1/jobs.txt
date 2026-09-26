@@ -1,0 +1,128 @@
+optim --dataset CMYKOGV-7 --fold 0
+optim --dataset CMYKOGV-7 --fold 1
+optim --dataset CMYKOGV-7 --fold 2
+optim --dataset CMYKOGV-7 --fold 3
+optim --dataset CMYKOGV-7 --fold 4
+optim --dataset CMYKOGB-7 --fold 0
+optim --dataset CMYKOGB-7 --fold 1
+optim --dataset CMYKOGB-7 --fold 2
+optim --dataset CMYKOGB-7 --fold 3
+optim --dataset CMYKOGB-7 --fold 4
+optim --dataset KCMYG-5 --fold 0
+optim --dataset KCMYG-5 --fold 1
+optim --dataset KCMYG-5 --fold 2
+optim --dataset KCMYG-5 --fold 3
+optim --dataset KCMYG-5 --fold 4
+cv --dataset KCMYG-5 --models gaussian_process
+cv --dataset KCMYG-5 --models gaussian_process_cbrt
+cv --dataset CMYKOGV-7 --models gaussian_process
+cv --dataset CMYKOGV-7 --models gaussian_process_cbrt
+cv --dataset CMYKOGB-7 --models gaussian_process
+cv --dataset CMYKOGB-7 --models gaussian_process_cbrt
+cv --dataset KCMYG-5 --models mlp_deep_tuned
+cv --dataset KCMYG-5 --models gradient_boost_tuned
+cv --dataset KCMYG-5 --models svm_tuned
+cv --dataset CMYKOGV-7 --models mlp_deep_tuned
+cv --dataset CMYKOGV-7 --models gradient_boost_tuned
+cv --dataset CMYKOGV-7 --models svm_tuned
+cv --dataset CMYKOGB-7 --models mlp_deep_tuned
+cv --dataset CMYKOGB-7 --models gradient_boost_tuned
+cv --dataset CMYKOGB-7 --models svm_tuned
+loo --held IFRA-wb-Age_64a_wb-CMYK
+loo --held IFRA-wb-Arena_111_wb-CMYK
+loo --held IFRA-wb-Dnvk_131_wb-CMYK
+loo --held IFRA-wb-GratN_90_wb-CMYK
+loo --held IFRA-wb-marca_133_wb-CMYK
+loo --held IFRA-wb-Mbd_103a_wb-CMYK
+loo --held IFRA-wb-NordK_92a_wb-CMYK
+loo --held IFRA-wb-PressJ_158_wb-CMYK
+loo --held IFRA-wb-RZPOI_125_2_wb-CMYK
+loo --held IFRA-wb-SudK_99_2_wb-CMYK
+loo --held IFRA-wb-Sudz_100_wb-CMYK
+loo --held IFRA-wb-TagesA_147_2_wb-CMYK
+loo --held IFRA-wb-TagesA_147_wb-CMYK
+cv --dataset KCMYG-5 --models ridge_tuned lasso_tuned elastic_tuned pcr_tuned plsr_tuned knn_tuned decision_tree_tuned random_forest_tuned mlp_shallow_tuned
+cv --dataset CMYKOGV-7 --models ridge_tuned lasso_tuned elastic_tuned pcr_tuned plsr_tuned knn_tuned decision_tree_tuned random_forest_tuned mlp_shallow_tuned
+cv --dataset CMYKOGB-7 --models ridge_tuned lasso_tuned elastic_tuned pcr_tuned plsr_tuned knn_tuned decision_tree_tuned random_forest_tuned mlp_shallow_tuned
+cv --dataset PC10-CMY --models ridge_tuned lasso_tuned elastic_tuned pcr_tuned plsr_tuned knn_tuned decision_tree_tuned random_forest_tuned mlp_shallow_tuned
+cv --dataset PC11-CMY --models ridge_tuned lasso_tuned elastic_tuned pcr_tuned plsr_tuned knn_tuned decision_tree_tuned random_forest_tuned mlp_shallow_tuned
+cv --dataset FOGRA51-CMY --models ridge_tuned lasso_tuned elastic_tuned pcr_tuned plsr_tuned knn_tuned decision_tree_tuned random_forest_tuned mlp_shallow_tuned
+cv --dataset PC10-CMYK --models ridge_tuned lasso_tuned elastic_tuned pcr_tuned plsr_tuned knn_tuned decision_tree_tuned random_forest_tuned mlp_shallow_tuned
+cv --dataset PC11-CMYK --models ridge_tuned lasso_tuned elastic_tuned pcr_tuned plsr_tuned knn_tuned decision_tree_tuned random_forest_tuned mlp_shallow_tuned
+cv --dataset FOGRA51-CMYK --models ridge_tuned lasso_tuned elastic_tuned pcr_tuned plsr_tuned knn_tuned decision_tree_tuned random_forest_tuned mlp_shallow_tuned
+cv --dataset KCMYG-5 --models mlp_deep_cbrt
+cv --dataset KCMYG-5 --models ridge_cbrt lasso_cbrt elastic_cbrt pcr_cbrt plsr_cbrt knn_cbrt svm_cbrt decision_tree_cbrt random_forest_cbrt gradient_boost_cbrt mlp_shallow_cbrt
+cv --dataset CMYKOGV-7 --models mlp_deep_cbrt
+cv --dataset CMYKOGV-7 --models ridge_cbrt lasso_cbrt elastic_cbrt pcr_cbrt plsr_cbrt knn_cbrt svm_cbrt decision_tree_cbrt random_forest_cbrt gradient_boost_cbrt mlp_shallow_cbrt
+cv --dataset CMYKOGB-7 --models mlp_deep_cbrt
+cv --dataset CMYKOGB-7 --models ridge_cbrt lasso_cbrt elastic_cbrt pcr_cbrt plsr_cbrt knn_cbrt svm_cbrt decision_tree_cbrt random_forest_cbrt gradient_boost_cbrt mlp_shallow_cbrt
+cv --dataset PC10-CMY --models mlp_deep_cbrt
+cv --dataset PC10-CMY --models ridge_cbrt lasso_cbrt elastic_cbrt pcr_cbrt plsr_cbrt knn_cbrt svm_cbrt decision_tree_cbrt random_forest_cbrt gradient_boost_cbrt mlp_shallow_cbrt
+cv --dataset PC11-CMY --models mlp_deep_cbrt
+cv --dataset PC11-CMY --models ridge_cbrt lasso_cbrt elastic_cbrt pcr_cbrt plsr_cbrt knn_cbrt svm_cbrt decision_tree_cbrt random_forest_cbrt gradient_boost_cbrt mlp_shallow_cbrt
+cv --dataset FOGRA51-CMY --models mlp_deep_cbrt
+cv --dataset FOGRA51-CMY --models ridge_cbrt lasso_cbrt elastic_cbrt pcr_cbrt plsr_cbrt knn_cbrt svm_cbrt decision_tree_cbrt random_forest_cbrt gradient_boost_cbrt mlp_shallow_cbrt
+cv --dataset PC10-CMYK --models mlp_deep_cbrt
+cv --dataset PC10-CMYK --models ridge_cbrt lasso_cbrt elastic_cbrt pcr_cbrt plsr_cbrt knn_cbrt svm_cbrt decision_tree_cbrt random_forest_cbrt gradient_boost_cbrt mlp_shallow_cbrt
+cv --dataset PC11-CMYK --models mlp_deep_cbrt
+cv --dataset PC11-CMYK --models ridge_cbrt lasso_cbrt elastic_cbrt pcr_cbrt plsr_cbrt knn_cbrt svm_cbrt decision_tree_cbrt random_forest_cbrt gradient_boost_cbrt mlp_shallow_cbrt
+cv --dataset FOGRA51-CMYK --models mlp_deep_cbrt
+cv --dataset FOGRA51-CMYK --models ridge_cbrt lasso_cbrt elastic_cbrt pcr_cbrt plsr_cbrt knn_cbrt svm_cbrt decision_tree_cbrt random_forest_cbrt gradient_boost_cbrt mlp_shallow_cbrt
+cv --dataset PC10-CMY --models gaussian_process gaussian_process_cbrt
+cv --dataset PC10-CMY --models mlp_deep_tuned
+cv --dataset PC10-CMY --models gradient_boost_tuned
+cv --dataset PC10-CMY --models svm_tuned
+cv --dataset PC11-CMY --models gaussian_process gaussian_process_cbrt
+cv --dataset PC11-CMY --models mlp_deep_tuned
+cv --dataset PC11-CMY --models gradient_boost_tuned
+cv --dataset PC11-CMY --models svm_tuned
+cv --dataset FOGRA51-CMY --models gaussian_process gaussian_process_cbrt
+cv --dataset FOGRA51-CMY --models mlp_deep_tuned
+cv --dataset FOGRA51-CMY --models gradient_boost_tuned
+cv --dataset FOGRA51-CMY --models svm_tuned
+cv --dataset PC10-CMYK --models gaussian_process gaussian_process_cbrt
+cv --dataset PC10-CMYK --models mlp_deep_tuned
+cv --dataset PC10-CMYK --models gradient_boost_tuned
+cv --dataset PC10-CMYK --models svm_tuned
+cv --dataset PC11-CMYK --models gaussian_process gaussian_process_cbrt
+cv --dataset PC11-CMYK --models mlp_deep_tuned
+cv --dataset PC11-CMYK --models gradient_boost_tuned
+cv --dataset PC11-CMYK --models svm_tuned
+cv --dataset FOGRA51-CMYK --models gaussian_process gaussian_process_cbrt
+cv --dataset FOGRA51-CMYK --models mlp_deep_tuned
+cv --dataset FOGRA51-CMYK --models gradient_boost_tuned
+cv --dataset FOGRA51-CMYK --models svm_tuned
+cv --dataset KCMYG-5 --models poly4_cbrt poly3_cbrt poly3 poly4 svm mlp_deep
+cv --dataset CMYKOGV-7 --models poly4_cbrt poly3_cbrt poly3 poly4 svm mlp_deep
+cv --dataset CMYKOGB-7 --models poly4_cbrt poly3_cbrt poly3 poly4 svm mlp_deep
+cv --dataset PC10-CMY --models poly4_cbrt poly3_cbrt poly3 poly4 svm mlp_deep
+cv --dataset PC11-CMY --models poly4_cbrt poly3_cbrt poly3 poly4 svm mlp_deep
+cv --dataset FOGRA51-CMY --models poly4_cbrt poly3_cbrt poly3 poly4 svm mlp_deep
+cv --dataset PC10-CMYK --models poly4_cbrt poly3_cbrt poly3 poly4 svm mlp_deep
+cv --dataset PC11-CMYK --models poly4_cbrt poly3_cbrt poly3 poly4 svm mlp_deep
+cv --dataset FOGRA51-CMYK --models poly4_cbrt poly3_cbrt poly3 poly4 svm mlp_deep
+optim --dataset PC11-CMY --fold 0
+optim --dataset PC11-CMY --fold 1
+optim --dataset PC11-CMY --fold 2
+optim --dataset PC11-CMY --fold 3
+optim --dataset PC11-CMY --fold 4
+optim --dataset FOGRA51-CMY --fold 0
+optim --dataset FOGRA51-CMY --fold 1
+optim --dataset FOGRA51-CMY --fold 2
+optim --dataset FOGRA51-CMY --fold 3
+optim --dataset FOGRA51-CMY --fold 4
+optim --dataset PC10-CMYK --fold 0
+optim --dataset PC10-CMYK --fold 1
+optim --dataset PC10-CMYK --fold 2
+optim --dataset PC10-CMYK --fold 3
+optim --dataset PC10-CMYK --fold 4
+optim --dataset PC11-CMYK --fold 0
+optim --dataset PC11-CMYK --fold 1
+optim --dataset PC11-CMYK --fold 2
+optim --dataset PC11-CMYK --fold 3
+optim --dataset PC11-CMYK --fold 4
+optim --dataset FOGRA51-CMYK --fold 0
+optim --dataset FOGRA51-CMYK --fold 1
+optim --dataset FOGRA51-CMYK --fold 2
+optim --dataset FOGRA51-CMYK --fold 3
+optim --dataset FOGRA51-CMYK --fold 4

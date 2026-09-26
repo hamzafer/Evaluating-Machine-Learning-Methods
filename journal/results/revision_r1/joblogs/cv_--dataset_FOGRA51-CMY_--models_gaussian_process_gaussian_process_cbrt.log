@@ -1,0 +1,2 @@
+FOGRA51-CMY   gaussian_process         median=0.057 p95=0.182 max=0.679 [43s]
+FOGRA51-CMY   gaussian_process_cbrt    median=0.053 p95=0.165 max=0.458 [50s]

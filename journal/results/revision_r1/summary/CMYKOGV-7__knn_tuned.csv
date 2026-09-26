@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGV-7,knn_tuned,3.466,8.884,28.568,3.938,3302,1.9,"[{""fold"": 0, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 1, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 2, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 3, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 4, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}]"
