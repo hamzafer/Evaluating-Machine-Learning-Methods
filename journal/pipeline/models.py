@@ -112,6 +112,10 @@ class CubeRootTarget:
             self._ts = MinMaxScaler().fit(T)
             T = self._ts.transform(T)
         self._inner = self.factory()
+        if hasattr(self._inner, 'set_scaler') and self.rescale:
+            # an inner tuner scores candidates on physical XYZ: hand it the map
+            # from its (scaled cube-root) targets back to XYZ
+            self._inner.set_scaler(_CbrtInverse(self._ts))
         self._inner.fit(X, T)
         return self
 
@@ -121,6 +125,16 @@ class CubeRootTarget:
             T = self._ts.inverse_transform(T)
         Y = np.clip(T, 0.0, None) ** 3
         return self._scaler.transform(Y) if self._scaler is not None else Y
+
+
+class _CbrtInverse:
+    """Scaler-like adapter: scaled cube-root targets -> physical XYZ."""
+
+    def __init__(self, ts):
+        self.ts = ts
+
+    def inverse_transform(self, T):
+        return np.clip(self.ts.inverse_transform(np.asarray(T)), 0.0, None) ** 3
 
 
 class InnerTuned:
@@ -296,3 +310,16 @@ def tuning_grids(n_inputs: int) -> dict:
 def tuned_registry(n_inputs: int) -> dict:
     return {f'{m}_tuned': (lambda b=b, g=g: InnerTuned(b, g))
             for m, (b, g) in tuning_grids(n_inputs).items()}
+
+
+
+CBRT_TUNED_BASES = ('svm', 'mlp_deep', 'gradient_boost', 'random_forest', 'knn')
+
+
+def cbrt_tuned_registry(n_inputs: int) -> dict:
+    """Best effort per competitor: tuned inside the fold AND fitted in cube-root
+    space (the combination of R1-1 and R2-1) for the five nonlinear competitors."""
+    g = tuning_grids(n_inputs)
+    return {f'{m}_cbrt_tuned': (lambda b=g[m][0], gr=g[m][1]:
+                                CubeRootTarget(lambda: InnerTuned(b, gr), rescale=True))
+            for m in CBRT_TUNED_BASES}

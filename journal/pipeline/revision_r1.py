@@ -26,8 +26,8 @@ import pandas as pd
 from .datasets import registry as dataset_registry
 from .de00_poly import DE00Polynomial
 from .evaluate import cross_validate, fold_splits, make_groups, summarize, train_test
-from .models import (FitSubsampled, cbrt_registry, registry as model_registry,
-                     tuned_registry)
+from .models import (FitSubsampled, cbrt_registry, cbrt_tuned_registry,
+                     registry as model_registry, tuned_registry)
 from .runlog import append as log_run
 
 OUT = Path(__file__).resolve().parents[1] / 'results' / 'revision_r1'
@@ -36,7 +36,8 @@ NINE = ('PC10-CMY', 'PC11-CMY', 'FOGRA51-CMY', 'PC10-CMYK', 'PC11-CMYK',
 
 
 def all_models(n_inputs: int) -> dict:
-    return {**model_registry(), **cbrt_registry(), **tuned_registry(n_inputs)}
+    return {**model_registry(), **cbrt_registry(), **tuned_registry(n_inputs),
+            **cbrt_tuned_registry(n_inputs)}
 
 
 def _write_persample(path: Path, de: np.ndarray):
