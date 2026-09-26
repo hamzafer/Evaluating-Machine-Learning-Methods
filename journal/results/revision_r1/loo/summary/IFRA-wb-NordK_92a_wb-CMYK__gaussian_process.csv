@@ -1,0 +1,2 @@
+held_out,model,n_train,median,p95,max,mean,n,seconds
+IFRA-wb-NordK_92a_wb-CMYK,gaussian_process,17820,3.437,5.923,8.218,3.607,1485,163.3

@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC10-CMY,random_forest_tuned,1.731,4.04,10.446,1.998,795,18.2,"[{""fold"": 0, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 1, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 2, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 3, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 4, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}]"

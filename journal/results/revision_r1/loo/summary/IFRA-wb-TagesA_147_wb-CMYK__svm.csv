@@ -1,0 +1,2 @@
+held_out,model,n_train,median,p95,max,mean,n,seconds
+IFRA-wb-TagesA_147_wb-CMYK,svm,17820,1.295,2.89,4.795,1.431,1485,45.7

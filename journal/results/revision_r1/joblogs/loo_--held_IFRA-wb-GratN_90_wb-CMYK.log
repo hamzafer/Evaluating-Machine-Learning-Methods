@@ -1,0 +1,7 @@
+LOO IFRA-wb-GratN_90_wb-CMYK gaussian_process   median=5.720 [178s]
+LOO IFRA-wb-GratN_90_wb-CMYK svm                median=5.902 [51s]
+LOO IFRA-wb-GratN_90_wb-CMYK mlp_deep           median=6.148 [3s]
+LOO IFRA-wb-GratN_90_wb-CMYK poly3              median=5.912 [0s]
+LOO IFRA-wb-GratN_90_wb-CMYK svm_sub2000        median=6.062 [2s]
+LOO IFRA-wb-GratN_90_wb-CMYK mlp_deep_sub2000   median=6.071 [1s]
+LOO IFRA-wb-GratN_90_wb-CMYK poly3_sub2000      median=6.012 [0s]

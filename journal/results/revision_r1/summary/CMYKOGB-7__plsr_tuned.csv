@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGB-7,plsr_tuned,11.268,30.971,50.771,13.481,2000,0.5,"[{""fold"": 0, ""best_params"": {""n_components"": 6}}, {""fold"": 1, ""best_params"": {""n_components"": 7}}, {""fold"": 2, ""best_params"": {""n_components"": 7}}, {""fold"": 3, ""best_params"": {""n_components"": 5}}, {""fold"": 4, ""best_params"": {""n_components"": 7}}]"

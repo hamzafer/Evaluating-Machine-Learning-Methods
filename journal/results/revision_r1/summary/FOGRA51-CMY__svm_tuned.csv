@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+FOGRA51-CMY,svm_tuned,0.121,0.346,2.854,0.152,795,84.0,"[{""fold"": 0, ""best_params"": {""C"": 1000.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 1, ""best_params"": {""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 2, ""best_params"": {""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 3, ""best_params"": {""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 4, ""best_params"": {""C"": 1000.0, ""epsilon"": 0.001, ""gamma"": 1.0}}]"

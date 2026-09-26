@@ -1,0 +1,2 @@
+KCMYG-5       random_forest_cbrt_tuned median=2.001 p95=5.306 max=37.863 [80s]
+KCMYG-5       knn_cbrt_tuned           median=1.633 p95=4.511 max=41.179 [1s]

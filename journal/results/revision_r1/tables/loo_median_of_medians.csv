@@ -1,0 +1,8 @@
+model,runs,median_of_medians
+gaussian_process,13,3.155314
+svm,13,3.008322
+mlp_deep,13,3.624914
+poly3,13,3.301166
+svm_sub2000,13,3.341823
+mlp_deep_sub2000,13,3.517838
+poly3_sub2000,13,3.327864

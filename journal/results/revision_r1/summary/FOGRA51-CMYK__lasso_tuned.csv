@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+FOGRA51-CMYK,lasso_tuned,8.699,25.264,41.372,10.677,1588,0.1,"[{""fold"": 0, ""best_params"": {""alpha"": 0.001}}, {""fold"": 1, ""best_params"": {""alpha"": 0.001}}, {""fold"": 2, ""best_params"": {""alpha"": 0.001}}, {""fold"": 3, ""best_params"": {""alpha"": 0.001}}, {""fold"": 4, ""best_params"": {""alpha"": 0.001}}]"

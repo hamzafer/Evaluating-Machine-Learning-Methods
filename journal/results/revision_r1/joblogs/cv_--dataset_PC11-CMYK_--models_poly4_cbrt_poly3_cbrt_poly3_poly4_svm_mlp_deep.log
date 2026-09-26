@@ -1,0 +1,6 @@
+PC11-CMYK     poly4_cbrt               median=0.112 p95=0.380 max=2.709 [0s]
+PC11-CMYK     poly3_cbrt               median=0.216 p95=0.752 max=3.511 [0s]
+PC11-CMYK     poly3                    median=0.869 p95=7.500 max=33.070 [0s]
+PC11-CMYK     poly4                    median=0.227 p95=2.464 max=23.535 [0s]
+PC11-CMYK     svm                      median=0.994 p95=4.731 max=19.743 [0s]
+PC11-CMYK     mlp_deep                 median=1.633 p95=9.516 max=29.132 [2s]

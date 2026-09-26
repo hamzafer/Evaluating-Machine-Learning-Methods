@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC10-CMY,decision_tree_tuned,4.382,9.478,16.067,4.825,795,0.5,"[{""fold"": 0, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 1}}, {""fold"": 1, ""best_params"": {""max_depth"": 10, ""min_samples_leaf"": 1}}, {""fold"": 2, ""best_params"": {""max_depth"": 10, ""min_samples_leaf"": 1}}, {""fold"": 3, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 1}}, {""fold"": 4, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 1}}]"

@@ -1,0 +1,2 @@
+CMYKOGV-7     random_forest_cbrt_tuned median=2.631 p95=6.364 max=11.605 [53s]
+CMYKOGV-7     knn_cbrt_tuned           median=3.135 p95=8.419 max=28.689 [2s]

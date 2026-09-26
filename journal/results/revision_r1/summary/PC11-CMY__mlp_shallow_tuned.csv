@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMY,mlp_shallow_tuned,1.002,3.224,20.763,1.291,795,6.5,"[{""fold"": 0, ""best_params"": {""alpha"": 1e-05, ""hidden_layer_sizes"": [128]}}, {""fold"": 1, ""best_params"": {""alpha"": 0.001, ""hidden_layer_sizes"": [128]}}, {""fold"": 2, ""best_params"": {""alpha"": 0.0001, ""hidden_layer_sizes"": [128]}}, {""fold"": 3, ""best_params"": {""alpha"": 0.0001, ""hidden_layer_sizes"": [128]}}, {""fold"": 4, ""best_params"": {""alpha"": 0.001, ""hidden_layer_sizes"": [128]}}]"

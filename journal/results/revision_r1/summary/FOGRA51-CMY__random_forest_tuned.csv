@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+FOGRA51-CMY,random_forest_tuned,1.887,4.316,10.982,2.114,795,18.0,"[{""fold"": 0, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 1, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 2, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 3, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}, {""fold"": 4, ""best_params"": {""max_depth"": null, ""max_features"": 1.0}}]"

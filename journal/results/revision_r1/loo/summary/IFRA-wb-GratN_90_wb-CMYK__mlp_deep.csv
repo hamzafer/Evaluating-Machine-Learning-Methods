@@ -1,0 +1,2 @@
+held_out,model,n_train,median,p95,max,mean,n,seconds
+IFRA-wb-GratN_90_wb-CMYK,mlp_deep,17820,6.148,9.265,15.727,5.922,1485,3.3

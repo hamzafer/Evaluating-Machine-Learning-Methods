@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGV-7,svm_tuned,0.463,3.812,23.436,1.079,3302,2154.1,"[{""fold"": 0, ""best_params"": {""C"": 10.0, ""epsilon"": 0.001, ""gamma"": ""scale""}}, {""fold"": 1, ""best_params"": {""C"": 10.0, ""epsilon"": 0.001, ""gamma"": ""scale""}}, {""fold"": 2, ""best_params"": {""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 3, ""best_params"": {""C"": 100.0, ""epsilon"": 0.001, ""gamma"": ""scale""}}, {""fold"": 4, ""best_params"": {""C"": 10.0, ""epsilon"": 0.001, ""gamma"": 1.0}}]"

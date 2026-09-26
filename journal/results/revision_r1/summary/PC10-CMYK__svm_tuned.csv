@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC10-CMYK,svm_tuned,0.143,1.14,11.25,0.36,1588,383.2,"[{""fold"": 0, ""best_params"": {""C"": 1000.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 1, ""best_params"": {""C"": 1000.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 2, ""best_params"": {""C"": 1000.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 3, ""best_params"": {""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 4, ""best_params"": {""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}}]"

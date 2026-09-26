@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGV-7,ridge_tuned,15.011,27.531,44.532,15.773,3302,0.3,"[{""fold"": 0, ""best_params"": {""alpha"": 0.0001}}, {""fold"": 1, ""best_params"": {""alpha"": 1.0}}, {""fold"": 2, ""best_params"": {""alpha"": 10.0}}, {""fold"": 3, ""best_params"": {""alpha"": 10.0}}, {""fold"": 4, ""best_params"": {""alpha"": 0.0001}}]"

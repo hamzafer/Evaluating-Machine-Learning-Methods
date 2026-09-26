@@ -1,0 +1,6 @@
+PC10-CMY      poly4_cbrt               median=0.085 p95=0.255 max=2.171 [0s]
+PC10-CMY      poly3_cbrt               median=0.148 p95=0.454 max=2.048 [0s]
+PC10-CMY      poly3                    median=0.268 p95=0.982 max=6.795 [0s]
+PC10-CMY      poly4                    median=0.101 p95=0.340 max=2.331 [0s]
+PC10-CMY      svm                      median=0.730 p95=1.835 max=7.489 [0s]
+PC10-CMY      mlp_deep                 median=1.134 p95=4.072 max=15.654 [1s]

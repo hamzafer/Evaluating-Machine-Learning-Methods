@@ -1,0 +1,2 @@
+held_out,model,n_train,median,p95,max,mean,n,seconds
+IFRA-wb-Sudz_100_wb-CMYK,gaussian_process,17820,2.31,8.16,25.664,3.071,1485,183.5

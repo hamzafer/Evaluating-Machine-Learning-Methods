@@ -1,0 +1,2 @@
+PC10-CMY      random_forest_cbrt_tuned median=1.926 p95=3.880 max=8.811 [20s]
+PC10-CMY      knn_cbrt_tuned           median=1.824 p95=3.695 max=10.290 [0s]

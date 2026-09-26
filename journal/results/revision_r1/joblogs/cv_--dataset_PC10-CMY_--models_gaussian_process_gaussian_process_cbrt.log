@@ -1,0 +1,2 @@
+PC10-CMY      gaussian_process         median=0.046 p95=0.153 max=2.274 [48s]
+PC10-CMY      gaussian_process_cbrt    median=0.041 p95=0.148 max=2.270 [49s]

@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+KCMYG-5,decision_tree_tuned,4.848,14.498,41.239,5.916,2214,1.1,"[{""fold"": 0, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 2}}, {""fold"": 1, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 2}}, {""fold"": 2, ""best_params"": {""max_depth"": 15, ""min_samples_leaf"": 1}}, {""fold"": 3, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 1}}, {""fold"": 4, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 2}}]"

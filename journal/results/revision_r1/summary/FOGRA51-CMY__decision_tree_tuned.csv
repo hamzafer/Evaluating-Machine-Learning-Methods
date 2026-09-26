@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+FOGRA51-CMY,decision_tree_tuned,4.49,9.308,16.939,4.896,795,0.2,"[{""fold"": 0, ""best_params"": {""max_depth"": 10, ""min_samples_leaf"": 1}}, {""fold"": 1, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 1}}, {""fold"": 2, ""best_params"": {""max_depth"": 10, ""min_samples_leaf"": 1}}, {""fold"": 3, ""best_params"": {""max_depth"": 10, ""min_samples_leaf"": 1}}, {""fold"": 4, ""best_params"": {""max_depth"": 10, ""min_samples_leaf"": 1}}]"

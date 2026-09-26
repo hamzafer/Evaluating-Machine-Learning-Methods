@@ -1,0 +1,2 @@
+held_out,model,n_train,median,p95,max,mean,n,seconds
+IFRA-wb-GratN_90_wb-CMYK,gaussian_process,17820,5.72,8.837,11.056,5.484,1485,177.8

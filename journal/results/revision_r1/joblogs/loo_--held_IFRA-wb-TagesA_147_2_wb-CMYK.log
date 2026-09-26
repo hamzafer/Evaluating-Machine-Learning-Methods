@@ -1,0 +1,7 @@
+LOO IFRA-wb-TagesA_147_2_wb-CMYK gaussian_process   median=1.775 [174s]
+LOO IFRA-wb-TagesA_147_2_wb-CMYK svm                median=1.347 [46s]
+LOO IFRA-wb-TagesA_147_2_wb-CMYK mlp_deep           median=2.365 [3s]
+LOO IFRA-wb-TagesA_147_2_wb-CMYK poly3              median=2.023 [0s]
+LOO IFRA-wb-TagesA_147_2_wb-CMYK svm_sub2000        median=1.705 [2s]
+LOO IFRA-wb-TagesA_147_2_wb-CMYK mlp_deep_sub2000   median=2.241 [1s]
+LOO IFRA-wb-TagesA_147_2_wb-CMYK poly3_sub2000      median=2.028 [0s]

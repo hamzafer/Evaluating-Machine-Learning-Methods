@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMYK,mlp_deep_tuned,1.303,7.459,30.315,2.292,1588,36.0,"[{""fold"": 0, ""best_params"": {""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}}, {""fold"": 1, ""best_params"": {""alpha"": 0.001, ""hidden_layer_sizes"": [128, 128, 128]}}, {""fold"": 2, ""best_params"": {""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}}, {""fold"": 3, ""best_params"": {""alpha"": 0.001, ""hidden_layer_sizes"": [128, 128, 128]}}, {""fold"": 4, ""best_params"": {""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}}]"

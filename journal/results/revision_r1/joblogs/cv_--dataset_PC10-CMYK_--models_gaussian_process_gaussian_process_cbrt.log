@@ -1,0 +1,2 @@
+PC10-CMYK     gaussian_process         median=0.056 p95=0.471 max=7.227 [270s]
+PC10-CMYK     gaussian_process_cbrt    median=0.050 p95=0.229 max=2.723 [282s]

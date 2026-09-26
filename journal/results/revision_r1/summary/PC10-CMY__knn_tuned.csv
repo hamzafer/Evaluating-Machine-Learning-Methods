@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC10-CMY,knn_tuned,1.808,3.707,10.192,1.986,795,0.2,"[{""fold"": 0, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 1, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 2, ""best_params"": {""n_neighbors"": 5, ""weights"": ""distance""}}, {""fold"": 3, ""best_params"": {""n_neighbors"": 7, ""weights"": ""distance""}}, {""fold"": 4, ""best_params"": {""n_neighbors"": 10, ""weights"": ""distance""}}]"

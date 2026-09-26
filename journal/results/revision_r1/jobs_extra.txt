@@ -1,0 +1,36 @@
+cv --dataset KCMYG-5 --models mlp_deep_cbrt_tuned
+cv --dataset KCMYG-5 --models gradient_boost_cbrt_tuned
+cv --dataset KCMYG-5 --models svm_cbrt_tuned
+cv --dataset KCMYG-5 --models random_forest_cbrt_tuned knn_cbrt_tuned
+cv --dataset CMYKOGV-7 --models mlp_deep_cbrt_tuned
+cv --dataset CMYKOGV-7 --models gradient_boost_cbrt_tuned
+cv --dataset CMYKOGV-7 --models svm_cbrt_tuned
+cv --dataset CMYKOGV-7 --models random_forest_cbrt_tuned knn_cbrt_tuned
+cv --dataset CMYKOGB-7 --models mlp_deep_cbrt_tuned
+cv --dataset CMYKOGB-7 --models gradient_boost_cbrt_tuned
+cv --dataset CMYKOGB-7 --models svm_cbrt_tuned
+cv --dataset CMYKOGB-7 --models random_forest_cbrt_tuned knn_cbrt_tuned
+cv --dataset PC10-CMY --models mlp_deep_cbrt_tuned
+cv --dataset PC10-CMY --models gradient_boost_cbrt_tuned
+cv --dataset PC10-CMY --models svm_cbrt_tuned
+cv --dataset PC10-CMY --models random_forest_cbrt_tuned knn_cbrt_tuned
+cv --dataset PC11-CMY --models mlp_deep_cbrt_tuned
+cv --dataset PC11-CMY --models gradient_boost_cbrt_tuned
+cv --dataset PC11-CMY --models svm_cbrt_tuned
+cv --dataset PC11-CMY --models random_forest_cbrt_tuned knn_cbrt_tuned
+cv --dataset FOGRA51-CMY --models mlp_deep_cbrt_tuned
+cv --dataset FOGRA51-CMY --models gradient_boost_cbrt_tuned
+cv --dataset FOGRA51-CMY --models svm_cbrt_tuned
+cv --dataset FOGRA51-CMY --models random_forest_cbrt_tuned knn_cbrt_tuned
+cv --dataset PC10-CMYK --models mlp_deep_cbrt_tuned
+cv --dataset PC10-CMYK --models gradient_boost_cbrt_tuned
+cv --dataset PC10-CMYK --models svm_cbrt_tuned
+cv --dataset PC10-CMYK --models random_forest_cbrt_tuned knn_cbrt_tuned
+cv --dataset PC11-CMYK --models mlp_deep_cbrt_tuned
+cv --dataset PC11-CMYK --models gradient_boost_cbrt_tuned
+cv --dataset PC11-CMYK --models svm_cbrt_tuned
+cv --dataset PC11-CMYK --models random_forest_cbrt_tuned knn_cbrt_tuned
+cv --dataset FOGRA51-CMYK --models mlp_deep_cbrt_tuned
+cv --dataset FOGRA51-CMYK --models gradient_boost_cbrt_tuned
+cv --dataset FOGRA51-CMYK --models svm_cbrt_tuned
+cv --dataset FOGRA51-CMYK --models random_forest_cbrt_tuned knn_cbrt_tuned

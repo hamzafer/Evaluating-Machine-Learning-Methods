@@ -1,0 +1,6 @@
+PC10-CMYK     poly4_cbrt               median=0.112 p95=0.387 max=2.625 [0s]
+PC10-CMYK     poly3_cbrt               median=0.219 p95=0.759 max=3.506 [0s]
+PC10-CMYK     poly3                    median=0.942 p95=8.310 max=33.978 [0s]
+PC10-CMYK     poly4                    median=0.246 p95=2.811 max=25.385 [0s]
+PC10-CMYK     svm                      median=1.017 p95=5.387 max=23.175 [0s]
+PC10-CMYK     mlp_deep                 median=1.729 p95=11.800 max=48.645 [2s]

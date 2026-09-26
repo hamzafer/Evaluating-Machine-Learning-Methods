@@ -1,0 +1,2 @@
+held_out,model,n_train,median,p95,max,mean,n,seconds
+IFRA-wb-TagesA_147_wb-CMYK,gaussian_process,17820,1.718,3.64,6.174,1.879,1485,154.5

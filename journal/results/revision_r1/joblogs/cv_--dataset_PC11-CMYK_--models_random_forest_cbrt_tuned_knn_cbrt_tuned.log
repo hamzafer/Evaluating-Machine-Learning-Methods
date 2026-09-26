@@ -1,0 +1,2 @@
+PC11-CMYK     random_forest_cbrt_tuned median=1.806 p95=3.697 max=7.913 [31s]
+PC11-CMYK     knn_cbrt_tuned           median=1.894 p95=4.895 max=9.905 [0s]

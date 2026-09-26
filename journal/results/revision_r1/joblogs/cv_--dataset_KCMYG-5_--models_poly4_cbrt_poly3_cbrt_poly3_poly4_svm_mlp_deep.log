@@ -1,0 +1,6 @@
+KCMYG-5       poly4_cbrt               median=0.853 p95=2.118 max=39.488 [0s]
+KCMYG-5       poly3_cbrt               median=1.024 p95=2.389 max=29.230 [0s]
+KCMYG-5       poly3                    median=1.457 p95=7.928 max=65.742 [0s]
+KCMYG-5       poly4                    median=1.057 p95=3.289 max=55.860 [0s]
+KCMYG-5       svm                      median=1.185 p95=6.275 max=38.741 [6s]
+KCMYG-5       mlp_deep                 median=1.970 p95=9.030 max=35.677 [4s]

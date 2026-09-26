@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+CMYKOGV-7,decision_tree_tuned,5.331,15.768,38.032,6.592,3302,1.0,"[{""fold"": 0, ""best_params"": {""max_depth"": null, ""min_samples_leaf"": 1}}, {""fold"": 1, ""best_params"": {""max_depth"": 20, ""min_samples_leaf"": 1}}, {""fold"": 2, ""best_params"": {""max_depth"": 15, ""min_samples_leaf"": 1}}, {""fold"": 3, ""best_params"": {""max_depth"": 20, ""min_samples_leaf"": 1}}, {""fold"": 4, ""best_params"": {""max_depth"": 20, ""min_samples_leaf"": 1}}]"

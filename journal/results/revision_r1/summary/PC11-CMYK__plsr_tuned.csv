@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC11-CMYK,plsr_tuned,8.425,23.412,41.62,10.367,1588,0.1,"[{""fold"": 0, ""best_params"": {""n_components"": 4}}, {""fold"": 1, ""best_params"": {""n_components"": 4}}, {""fold"": 2, ""best_params"": {""n_components"": 4}}, {""fold"": 3, ""best_params"": {""n_components"": 4}}, {""fold"": 4, ""best_params"": {""n_components"": 4}}]"

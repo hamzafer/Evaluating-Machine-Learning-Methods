@@ -1,0 +1,2 @@
+dataset,model,median,p95,max,mean,n,seconds,folds
+PC10-CMY,ridge_tuned,6.52,24.695,43.855,8.923,795,0.1,"[{""fold"": 0, ""best_params"": {""alpha"": 0.0001}}, {""fold"": 1, ""best_params"": {""alpha"": 0.1}}, {""fold"": 2, ""best_params"": {""alpha"": 0.1}}, {""fold"": 3, ""best_params"": {""alpha"": 0.0001}}, {""fold"": 4, ""best_params"": {""alpha"": 0.5}}]"

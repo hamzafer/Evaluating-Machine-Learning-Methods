@@ -104,7 +104,7 @@ def appendix_tuned():
         for ds in NINE:
             r = r1(ds, f'{m}_cbrt_tuned')
             cells.append(f3(r['median']) if r is not None else '--')
-        lines.append(f'{NAMES[m]} (tuned, cbrt) & ' + ' & '.join(cells) + ' \\\\')
+        lines.append(f'{NAMES[m]}, tuned, cbrt & ' + ' & '.join(cells) + ' \\\\')
     lines += ['\\midrule', 'Gaussian Process (cbrt) & ' + ' & '.join(
         f3(pub(ds).loc['gaussian_process_cbrt', 'median']) for ds in NINE) + ' \\\\']
     write('app_best_effort', '\n'.join(lines))
