@@ -56,6 +56,11 @@ MODELS = [
     ("random_forest", "Random Forest", "#e87ba4", False),
 ]
 LINEAR_FAMILY = ["ridge", "lasso", "elastic", "pcr", "plsr"]
+# Revision R1 (Reviewer 2, minor 2): discrete markers for the CORRECTED classical
+# baseline (degree 4, fitted in cube-root/CIELAB space), so the degree-3 XYZ
+# curve cannot be misread as the best the polynomial can do. Markers only, no
+# line: it is a reference, not one of the uncorrected trajectories.
+CORRECTED = "poly4_cbrt"
 
 INK_PRIMARY = "#0b0b0b"
 INK_SECONDARY = "#52514e"
@@ -73,7 +78,7 @@ def load_medians() -> tuple[pd.DataFrame, float, float]:
         cols[dataset] = s
         linear_vals.extend(s.reindex(LINEAR_FAMILY).dropna().tolist())
     df = pd.DataFrame(cols)
-    missing = [m for m, *_ in MODELS if m not in df.index]
+    missing = [m for m, *_ in MODELS if m not in df.index] + ([] if CORRECTED in df.index else [CORRECTED])
     if missing:
         raise SystemExit(f"models missing from summaries: {missing}")
     return df, min(linear_vals), max(linear_vals)
@@ -123,6 +128,14 @@ def make_figure(df: pd.DataFrame, lin_lo: float, lin_hi: float, out_path: str) -
         ax.plot([xs[4]], [vals[4]], "o", markerfacecolor=SURFACE, markersize=ms,
                 alpha=alpha, markeredgecolor=color, markeredgewidth=1.8,
                 linestyle="none", zorder=4)
+
+    # Corrected polynomial: discrete diamond markers at every rung.
+    corr = [df.loc[CORRECTED, d] for d in datasets]
+    ax.plot(xs, corr, "D", color=INK_PRIMARY, markersize=7.5, markerfacecolor="#ffd23f",
+            markeredgewidth=1.3, linestyle="none", zorder=6)
+    for x, v in zip(xs, corr):
+        ax.annotate(f"{v:.2f}", xy=(x, v), xytext=(0, -12), textcoords="offset points",
+                    va="top", ha="center", fontsize=8, color=INK_PRIMARY, zorder=6)
 
     # Direct end labels for every series (relief for sub-3:1 hues), spread to
     # avoid collisions, in text ink with the colored line as the identity mark.
@@ -189,6 +202,9 @@ def make_figure(df: pd.DataFrame, lin_lo: float, lin_hi: float, out_path: str) -
                markerfacecolor=SURFACE, markeredgecolor=INK_SECONDARY,
                markeredgewidth=1.5, linestyle=(0, (4, 3)), linewidth=1.6,
                label="dashed, open: second 7-ink system (CMYKOGB)"),
+        Line2D([], [], color=INK_PRIMARY, marker="D", markersize=7.5, markerfacecolor="#ffd23f",
+               markeredgewidth=1.3, linestyle="none",
+               label="corrected polynomial (degree 4, CIELAB fit), for reference"),
     ]
     ax.legend(handles=legend_handles, loc="upper left", frameon=False,
               fontsize=8, labelcolor=INK_SECONDARY, handlelength=2.6)
