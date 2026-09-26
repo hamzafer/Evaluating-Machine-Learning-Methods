@@ -82,6 +82,57 @@ def cmd_cv(args):
               f"max={s['max']:.3f} [{secs:.0f}s]", flush=True)
 
 
+def cmd_cv_fold(args):
+    """One outer fold of cmd_cv (same splits, scalers and scoring as
+    evaluate.cross_validate), so a slow model can run its five folds in parallel;
+    cv-merge assembles them into the standard outputs."""
+    from sklearn.preprocessing import MinMaxScaler
+    from .color import delta_e00
+    spec = dataset_registry()[args.dataset]
+    X, Y = spec.load()
+    groups = make_groups(X) if spec.grouped else None
+    reg = all_models(X.shape[1])
+    tr, te = fold_splits(X, groups)[args.fold]
+    sx, sy = MinMaxScaler().fit(X[tr]), MinMaxScaler().fit(Y[tr])
+    model = reg[args.model]()
+    if hasattr(model, 'set_scaler'):
+        model.set_scaler(sy)
+    t0 = time.time()
+    model.fit(sx.transform(X[tr]), sy.transform(Y[tr]))
+    pred = np.clip(sy.inverse_transform(np.asarray(model.predict(sx.transform(X[te])))), 0.0, None)
+    de = delta_e00(pred, Y[te])
+    info = {'fold': args.fold, 'seconds': round(time.time() - t0, 1)}
+    if getattr(model, 'best_params_', None) is not None:
+        info['best_params'] = {k: (list(v) if isinstance(v, tuple) else v) for k, v in model.best_params_.items()}
+    elif getattr(getattr(model, '_inner', None), 'best_params_', None) is not None:
+        info['best_params'] = {k: (list(v) if isinstance(v, tuple) else v) for k, v in model._inner.best_params_.items()}
+    part = OUT / 'cv_folds' / f'{args.dataset}__{args.model}__fold{args.fold}.csv'
+    part.parent.mkdir(parents=True, exist_ok=True)
+    pd.DataFrame({'idx': te, 'de00': np.round(de, 6)}).to_csv(part, index=False)
+    part.with_suffix('.json').write_text(json.dumps(info))
+    print(f"{args.dataset} {args.model} fold {args.fold} done [{info['seconds']}s]", flush=True)
+
+
+def cmd_cv_merge(args):
+    spec = dataset_registry()[args.dataset]
+    X, _ = spec.load()
+    parts = [pd.read_csv(OUT / 'cv_folds' / f'{args.dataset}__{args.model}__fold{i}.csv') for i in range(5)]
+    infos = [json.loads((OUT / 'cv_folds' / f'{args.dataset}__{args.model}__fold{i}.json').read_text()) for i in range(5)]
+    allp = pd.concat(parts).sort_values('idx')
+    assert len(allp) == len(X) and (allp.idx.to_numpy() == np.arange(len(X))).all()
+    de = allp.de00.to_numpy()
+    s = summarize(de)
+    secs = sum(f['seconds'] for f in infos)
+    _write_persample(OUT / 'persample' / args.dataset / f'{args.model}.csv', de)
+    _write_summary(OUT / 'summary' / f'{args.dataset}__{args.model}.csv',
+                   {'dataset': args.dataset, 'model': args.model,
+                    **{k: round(v, 3) for k, v in s.items() if k != 'n'}, 'n': s['n'],
+                    'seconds': round(secs, 1), 'folds': json.dumps(infos)})
+    log_run('revision_r1.py', '5fold-grouped' if spec.grouped else '5fold-kfold',
+            args.dataset, args.model, s, secs, notes='revision R1 (per-fold jobs)')
+    print(f"{args.dataset:13s} {args.model:24s} median={s['median']:.3f} p95={s['p95']:.3f} max={s['max']:.3f}")
+
+
 def cmd_optim(args):
     """R1-4: per fold, Powell (budget as published: maxiter=200), then Nelder-Mead
     given exactly the objective evaluations Powell used in that fold."""
@@ -204,9 +255,11 @@ def main():
     p = sub.add_parser('cv'); p.add_argument('--dataset', required=True); p.add_argument('--models', nargs='+', required=True)
     p = sub.add_parser('optim'); p.add_argument('--dataset', required=True); p.add_argument('--fold', type=int)
     p = sub.add_parser('optim-merge'); p.add_argument('--dataset', required=True)
+    p = sub.add_parser('cv-fold'); p.add_argument('--dataset', required=True); p.add_argument('--model', required=True); p.add_argument('--fold', type=int, required=True)
+    p = sub.add_parser('cv-merge'); p.add_argument('--dataset', required=True); p.add_argument('--model', required=True)
     p = sub.add_parser('loo'); p.add_argument('--held', required=True); p.add_argument('--models', nargs='*')
     args = ap.parse_args()
-    {'cv': cmd_cv, 'optim': cmd_optim, 'optim-merge': cmd_optim_merge, 'loo': cmd_loo}[args.cmd](args)
+    {'cv': cmd_cv, 'cv-fold': cmd_cv_fold, 'cv-merge': cmd_cv_merge, 'optim': cmd_optim, 'optim-merge': cmd_optim_merge, 'loo': cmd_loo}[args.cmd](args)
 
 
 if __name__ == '__main__':
