@@ -7,7 +7,7 @@ Writes journal/results/revision_r1/timing.csv
 
 Protocol: fit on fold 0's training split of CMYKOGV-7 (the largest dataset,
 7 inks, 3,302 analyzed rows) exactly as in cross-validation; time predict() on
-1,000,000 random ink vectors; fill a real 17^4 = 83,521-node CMYK grid with the
+1,000,000 random ink vectors (in 100k blocks); fill a real 17^4 = 83,521-node CMYK grid with the
 PC10-CMYK model; project a 9^7 = 4,782,969-node seven-ink grid from the
 measured per-point rate. Every timing is the median of 3 repeats.
 """
@@ -41,9 +41,12 @@ def fit_model(spec_name, m, reg):
     return model, time.perf_counter() - t0, X.shape[1], len(tr)
 
 
-def timed_predict(model, Z):
+def timed_predict(model, Z, chunk=100_000):
+    """Predict in 100k-point blocks, as a LUT builder would (a Gaussian process
+    would otherwise materialize a 1M x 2,000 kernel matrix at once)."""
     t0 = time.perf_counter()
-    model.predict(Z)
+    for i in range(0, len(Z), chunk):
+        model.predict(Z[i:i + chunk])
     return time.perf_counter() - t0
 
 

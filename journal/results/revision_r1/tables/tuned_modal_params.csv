@@ -6,7 +6,7 @@ ridge,PC10-CMYK,"{""alpha"": 0.0001}",4
 ridge,PC11-CMYK,"{""alpha"": 0.0001}",3
 ridge,FOGRA51-CMYK,"{""alpha"": 0.0001}",4
 ridge,KCMYG-5,"{""alpha"": 0.0001}",2
-ridge,CMYKOGV-7,"{""alpha"": 0.0001}",2
+ridge,CMYKOGV-7,"{""alpha"": 10.0}",2
 ridge,CMYKOGB-7,"{""alpha"": 0.0001}",4
 lasso,PC10-CMY,"{""alpha"": 0.001}",4
 lasso,PC11-CMY,"{""alpha"": 0.001}",5
@@ -46,7 +46,7 @@ plsr,CMYKOGV-7,"{""n_components"": 4}",5
 plsr,CMYKOGB-7,"{""n_components"": 7}",3
 knn,PC10-CMY,"{""n_neighbors"": 5, ""weights"": ""distance""}",3
 knn,PC11-CMY,"{""n_neighbors"": 5, ""weights"": ""distance""}",2
-knn,FOGRA51-CMY,"{""n_neighbors"": 5, ""weights"": ""distance""}",2
+knn,FOGRA51-CMY,"{""n_neighbors"": 10, ""weights"": ""distance""}",2
 knn,PC10-CMYK,"{""n_neighbors"": 5, ""weights"": ""distance""}",5
 knn,PC11-CMYK,"{""n_neighbors"": 5, ""weights"": ""distance""}",5
 knn,FOGRA51-CMYK,"{""n_neighbors"": 5, ""weights"": ""distance""}",2
@@ -76,7 +76,7 @@ random_forest,PC10-CMYK,"{""max_depth"": 15, ""max_features"": ""sqrt""}",3
 random_forest,PC11-CMYK,"{""max_depth"": null, ""max_features"": ""sqrt""}",4
 random_forest,FOGRA51-CMYK,"{""max_depth"": null, ""max_features"": ""sqrt""}",3
 random_forest,KCMYG-5,"{""max_depth"": null, ""max_features"": ""sqrt""}",5
-random_forest,CMYKOGV-7,"{""max_depth"": null, ""max_features"": ""sqrt""}",2
+random_forest,CMYKOGV-7,"{""max_depth"": 15, ""max_features"": ""sqrt""}",2
 random_forest,CMYKOGB-7,"{""max_depth"": null, ""max_features"": 1.0}",3
 gradient_boost,PC10-CMY,"{""learning_rate"": 0.1, ""max_depth"": 5, ""n_estimators"": 500}",4
 gradient_boost,PC11-CMY,"{""learning_rate"": 0.1, ""max_depth"": 5, ""n_estimators"": 500}",5
@@ -88,7 +88,7 @@ gradient_boost,KCMYG-5,"{""learning_rate"": 0.05, ""max_depth"": 7, ""n_estimato
 gradient_boost,CMYKOGV-7,"{""learning_rate"": 0.1, ""max_depth"": 7, ""n_estimators"": 500}",5
 gradient_boost,CMYKOGB-7,"{""learning_rate"": 0.05, ""max_depth"": 7, ""n_estimators"": 200}",4
 mlp_shallow,PC10-CMY,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128]}",4
-mlp_shallow,PC11-CMY,"{""alpha"": 0.001, ""hidden_layer_sizes"": [128]}",2
+mlp_shallow,PC11-CMY,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128]}",2
 mlp_shallow,FOGRA51-CMY,"{""alpha"": 0.001, ""hidden_layer_sizes"": [128]}",3
 mlp_shallow,PC10-CMYK,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128]}",2
 mlp_shallow,PC11-CMYK,"{""alpha"": 1e-05, ""hidden_layer_sizes"": [128]}",4

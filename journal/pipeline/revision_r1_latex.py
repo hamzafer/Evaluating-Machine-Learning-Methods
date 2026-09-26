@@ -76,13 +76,12 @@ def appendix_cbrt():
         cells = []
         for ds in NINE:
             if m in ('poly3', 'poly4'):
-                p = pub(ds)
-                cells.append(f"{f3(p.loc[m, 'median'])} $\\to$ {f3(p.loc[m + '_cbrt', 'median'])}")
+                cells.append(f3(pub(ds).loc[m + '_cbrt', 'median']))
             else:
                 r = r1(ds, f'{m}_cbrt')
-                cells.append(f"{f3(pub(ds).loc[m, 'median'])} $\\to$ {f3(r['median']) if r is not None else '--'}")
+                cells.append(f3(r['median']) if r is not None else '--')
         lines.append(f'{NAMES[m]} & ' + ' & '.join(cells) + ' \\\\')
-    cells = [f"{f3(pub(ds).loc['gaussian_process', 'median'])} $\\to$ {f3(pub(ds).loc['gaussian_process_cbrt', 'median'])}" for ds in NINE]
+    cells = [f3(pub(ds).loc['gaussian_process_cbrt', 'median']) for ds in NINE]
     lines += ['\\midrule', 'Gaussian Process & ' + ' & '.join(cells) + ' \\\\']
     write('app_cbrt', '\n'.join(lines))
 
@@ -95,8 +94,10 @@ def appendix_tuned():
         cells = []
         for ds in NINE:
             r = r1(ds, f'{m}_tuned')
-            cells.append(f"{f3(pub(ds).loc[m, 'median'])} $\\to$ {f3(r['median']) if r is not None else '--'}")
+            cells.append(f3(r['median']) if r is not None else '--')
         lines.append(f'{NAMES[m]} & ' + ' & '.join(cells) + ' \\\\')
+    lines += ['\\midrule', 'Gaussian Process (fixed, XYZ) & ' + ' & '.join(
+        f3(pub(ds).loc['gaussian_process', 'median']) for ds in NINE) + ' \\\\']
     write('app_tuned', '\n'.join(lines))
     lines = [f'\\textbf{{Method}} & {hdr} \\\\', '\\midrule']
     for m in ('svm', 'mlp_deep', 'gradient_boost', 'random_forest', 'knn'):
