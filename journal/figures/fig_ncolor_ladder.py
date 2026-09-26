@@ -131,11 +131,14 @@ def make_figure(df: pd.DataFrame, lin_lo: float, lin_hi: float, out_path: str) -
 
     # Corrected polynomial: discrete diamond markers at every rung.
     corr = [df.loc[CORRECTED, d] for d in datasets]
-    ax.plot(xs, corr, "D", color=INK_PRIMARY, markersize=7.5, markerfacecolor="#ffd23f",
+    # offset slightly right of each rung so a diamond never hides a curve's dot,
+    # value label beside it (not above/below, where curve labels sit)
+    xd = [x + 0.12 for x in xs]
+    ax.plot(xd, corr, "D", color=INK_PRIMARY, markersize=7.5, markerfacecolor="#ffd23f",
             markeredgewidth=1.3, linestyle="none", zorder=6)
-    for x, v in zip(xs, corr):
-        ax.annotate(f"{v:.2f}", xy=(x, v), xytext=(0, -12), textcoords="offset points",
-                    va="top", ha="center", fontsize=8, color=INK_PRIMARY, zorder=6)
+    for x, v in zip(xd, corr):
+        ax.annotate(f"{v:.2f}", xy=(x, v), xytext=(7, 0), textcoords="offset points",
+                    va="center", ha="left", fontsize=8, color=INK_PRIMARY, zorder=6)
 
     # Direct end labels for every series (relief for sub-3:1 hues), spread to
     # avoid collisions, in text ink with the colored line as the identity mark.
