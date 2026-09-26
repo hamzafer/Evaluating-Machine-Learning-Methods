@@ -30,14 +30,22 @@ def summarize(de: np.ndarray) -> dict:
     }
 
 
-def cross_validate(X: np.ndarray, Y: np.ndarray, model_factory, groups=None) -> np.ndarray:
-    """Return pooled per-sample ΔE00 over 5-fold CV."""
-    de = np.empty(len(X))
+def fold_splits(X: np.ndarray, groups=None):
+    """The exact outer splits every experiment uses (seeded KFold, or GroupKFold)."""
     if groups is None:
-        splits = KFold(n_splits=FOLDS, shuffle=True, random_state=SEED).split(X)
-    else:
-        splits = GroupKFold(n_splits=FOLDS).split(X, groups=groups)
-    for tr, te in splits:
+        return list(KFold(n_splits=FOLDS, shuffle=True, random_state=SEED).split(X))
+    return list(GroupKFold(n_splits=FOLDS).split(X, groups=groups))
+
+
+def cross_validate(X: np.ndarray, Y: np.ndarray, model_factory, groups=None,
+                   fold_hook=None) -> np.ndarray:
+    """Return pooled per-sample ΔE00 over 5-fold CV.
+
+    fold_hook(i, model) is called after each fold's fit (revision R1: records
+    tuned hyperparameters / optimizer evaluations). It never changes results.
+    """
+    de = np.empty(len(X))
+    for i, (tr, te) in enumerate(fold_splits(X, groups)):
         sx = MinMaxScaler().fit(X[tr])
         sy = MinMaxScaler().fit(Y[tr])
         model = model_factory()
@@ -48,6 +56,8 @@ def cross_validate(X: np.ndarray, Y: np.ndarray, model_factory, groups=None) -> 
         pred_xyz = sy.inverse_transform(pred_norm)       # back to real 0-100 XYZ
         pred_xyz = np.clip(pred_xyz, 0.0, None)          # tristimulus can't be negative
         de[te] = delta_e00(pred_xyz, Y[te])
+        if fold_hook is not None:
+            fold_hook(i, model)
     return de
 
 

@@ -8,8 +8,10 @@ from .color import delta_e00
 
 
 class DE00Polynomial:
-    def __init__(self, method='Nelder-Mead', maxiter=2000):
-        self.method, self.maxiter = method, maxiter
+    def __init__(self, method='Nelder-Mead', maxiter=2000, maxfev=None):
+        # maxfev (revision R1-4): cap on objective evaluations, so optimizers
+        # can be compared at equal compute. None keeps the original behaviour.
+        self.method, self.maxiter, self.maxfev = method, maxiter, maxfev
         self._sy = None                      # optional y-scaler (identity if None)
 
     def set_scaler(self, sy):                # pipeline hook: real-XYZ objective
@@ -30,9 +32,13 @@ class DE00Polynomial:
             return float(np.mean(delta_e00(
                 np.clip(self._denorm(pred), 0.0, None), Ytrue)))
 
-        res = minimize(objective, w0, method=self.method,
-                       options={'maxiter': self.maxiter, 'xatol': 1e-6, 'fatol': 1e-6}
-                       if self.method == 'Nelder-Mead' else {'maxiter': self.maxiter})
+        opts = ({'maxiter': self.maxiter, 'xatol': 1e-6, 'fatol': 1e-6}
+                if self.method == 'Nelder-Mead' else {'maxiter': self.maxiter})
+        if self.maxfev is not None:
+            opts['maxfev'] = self.maxfev
+        res = minimize(objective, w0, method=self.method, options=opts)
+        self.nfev_, self.nit_, self.message_ = int(res.nfev), int(getattr(res, 'nit', -1)), str(res.message)
+        self.n_coef_ = int(w0.size)
         self._w = res.x if res.fun <= objective(w0) else w0   # never worse than LSQ
         return self
 
