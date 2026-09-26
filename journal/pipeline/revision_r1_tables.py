@@ -234,10 +234,32 @@ def table_optim():
     return df
 
 
+def table_best_vs_gp():
+    """Best-effort SVM (tuned in-fold, cube root) against the cube-root GP."""
+    rows = []
+    for ds in NINE:
+        a, g = persample(ds, 'svm_cbrt_tuned'), persample(ds, 'gaussian_process_cbrt')
+        if a is None or g is None:
+            continue
+        rng = np.random.default_rng(SEED)
+        pr = paired(a, g, rng)
+        rows.append({'dataset': ds, 'svm_median': float(np.median(a)), 'gp_median': float(np.median(g)),
+                     'svm_p95': float(np.percentile(a, 95)), 'gp_p95': float(np.percentile(g, 95)),
+                     'svm_max': float(a.max()), 'gp_max': float(g.max()),
+                     'median_diff': pr['median_diff'], 'lo': pr['median_diff_lo'], 'hi': pr['median_diff_hi'],
+                     'frac_svm_better': pr['frac_a_better'], 'p': pr['p']})
+    if not rows:
+        return None
+    df = pd.DataFrame(rows)
+    df['p_holm'] = holm(df.p)
+    df.to_csv(OUT / 'best_effort_svm_vs_gp.csv', index=False)
+    return df
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     for name, fn in (('stats', table_stats), ('loo', table_loo), ('cbrt_all', table_cbrt_all),
-                     ('tuned', table_tuned), ('optim', table_optim)):
+                     ('tuned', table_tuned), ('optim', table_optim), ('best_vs_gp', table_best_vs_gp)):
         r = fn()
         print(f'== {name}: ' + ('no data yet' if r is None else 'written'))
         if r is not None:

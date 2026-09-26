@@ -1,2 +1,2 @@
 dataset,model,median,p95,max,mean,n,seconds,folds
-PC10-CMY,svm_cbrt_tuned,0.098,0.249,2.005,0.12,795,51.5,"[{""fold"": 0}, {""fold"": 1}, {""fold"": 2}, {""fold"": 3}, {""fold"": 4}]"
+PC10-CMY,svm_cbrt_tuned,0.098,0.249,2.005,0.12,795,28.8,"[{""fold"": 0, ""seconds"": 6.2, ""best_params"": {""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 1, ""seconds"": 3.7, ""best_params"": {""C"": 10.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 2, ""seconds"": 6.4, ""best_params"": {""C"": 10.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 3, ""seconds"": 6.3, ""best_params"": {""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}}, {""fold"": 4, ""seconds"": 6.2, ""best_params"": {""C"": 10.0, ""epsilon"": 0.001, ""gamma"": 1.0}}]"

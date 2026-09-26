@@ -19,7 +19,7 @@ lasso,CMYKOGV-7,"{""alpha"": 0.001}",5
 lasso,CMYKOGB-7,"{""alpha"": 1e-05}",5
 elastic,PC10-CMY,"{""alpha"": 0.001, ""l1_ratio"": 0.8}",4
 elastic,PC11-CMY,"{""alpha"": 0.001, ""l1_ratio"": 0.8}",4
-elastic,FOGRA51-CMY,"{""alpha"": 0.001, ""l1_ratio"": 0.8}",2
+elastic,FOGRA51-CMY,"{""alpha"": 0.0001, ""l1_ratio"": 0.8}",2
 elastic,PC10-CMYK,"{""alpha"": 0.001, ""l1_ratio"": 0.8}",3
 elastic,PC11-CMYK,"{""alpha"": 0.001, ""l1_ratio"": 0.8}",4
 elastic,FOGRA51-CMYK,"{""alpha"": 0.001, ""l1_ratio"": 0.8}",4
@@ -46,7 +46,7 @@ plsr,CMYKOGV-7,"{""n_components"": 4}",5
 plsr,CMYKOGB-7,"{""n_components"": 7}",3
 knn,PC10-CMY,"{""n_neighbors"": 5, ""weights"": ""distance""}",3
 knn,PC11-CMY,"{""n_neighbors"": 5, ""weights"": ""distance""}",2
-knn,FOGRA51-CMY,"{""n_neighbors"": 10, ""weights"": ""distance""}",2
+knn,FOGRA51-CMY,"{""n_neighbors"": 5, ""weights"": ""distance""}",2
 knn,PC10-CMYK,"{""n_neighbors"": 5, ""weights"": ""distance""}",5
 knn,PC11-CMYK,"{""n_neighbors"": 5, ""weights"": ""distance""}",5
 knn,FOGRA51-CMYK,"{""n_neighbors"": 5, ""weights"": ""distance""}",2
@@ -59,7 +59,9 @@ svm,FOGRA51-CMY,"{""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}",3
 svm,PC10-CMYK,"{""C"": 1000.0, ""epsilon"": 0.001, ""gamma"": 1.0}",3
 svm,PC11-CMYK,"{""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}",4
 svm,FOGRA51-CMYK,"{""C"": 100.0, ""epsilon"": 0.001, ""gamma"": 1.0}",5
+svm,KCMYG-5,"{""C"": 10.0, ""epsilon"": 0.001, ""gamma"": ""scale""}",4
 svm,CMYKOGV-7,"{""C"": 10.0, ""epsilon"": 0.001, ""gamma"": ""scale""}",2
+svm,CMYKOGB-7,"{""C"": 10.0, ""epsilon"": 0.001, ""gamma"": ""scale""}",4
 decision_tree,PC10-CMY,"{""max_depth"": null, ""min_samples_leaf"": 1}",3
 decision_tree,PC11-CMY,"{""max_depth"": null, ""min_samples_leaf"": 1}",3
 decision_tree,FOGRA51-CMY,"{""max_depth"": 10, ""min_samples_leaf"": 1}",4
@@ -88,7 +90,7 @@ gradient_boost,KCMYG-5,"{""learning_rate"": 0.05, ""max_depth"": 7, ""n_estimato
 gradient_boost,CMYKOGV-7,"{""learning_rate"": 0.1, ""max_depth"": 7, ""n_estimators"": 500}",5
 gradient_boost,CMYKOGB-7,"{""learning_rate"": 0.05, ""max_depth"": 7, ""n_estimators"": 200}",4
 mlp_shallow,PC10-CMY,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128]}",4
-mlp_shallow,PC11-CMY,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128]}",2
+mlp_shallow,PC11-CMY,"{""alpha"": 0.001, ""hidden_layer_sizes"": [128]}",2
 mlp_shallow,FOGRA51-CMY,"{""alpha"": 0.001, ""hidden_layer_sizes"": [128]}",3
 mlp_shallow,PC10-CMYK,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128]}",2
 mlp_shallow,PC11-CMYK,"{""alpha"": 1e-05, ""hidden_layer_sizes"": [128]}",4
@@ -97,11 +99,11 @@ mlp_shallow,KCMYG-5,"{""alpha"": 1e-05, ""hidden_layer_sizes"": [128]}",2
 mlp_shallow,CMYKOGV-7,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128]}",2
 mlp_shallow,CMYKOGB-7,"{""alpha"": 1e-05, ""hidden_layer_sizes"": [128]}",3
 mlp_deep,PC10-CMY,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}",3
-mlp_deep,PC11-CMY,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}",2
-mlp_deep,FOGRA51-CMY,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}",2
+mlp_deep,PC11-CMY,"{""alpha"": 0.001, ""hidden_layer_sizes"": [128, 128, 128]}",2
+mlp_deep,FOGRA51-CMY,"{""alpha"": 0.001, ""hidden_layer_sizes"": [128, 128, 128]}",2
 mlp_deep,PC10-CMYK,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}",3
 mlp_deep,PC11-CMYK,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}",3
 mlp_deep,FOGRA51-CMYK,"{""alpha"": 0.001, ""hidden_layer_sizes"": [128, 128, 128]}",3
 mlp_deep,KCMYG-5,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}",3
-mlp_deep,CMYKOGV-7,"{""alpha"": 0.0001, ""hidden_layer_sizes"": [128, 128, 128]}",2
+mlp_deep,CMYKOGV-7,"{""alpha"": 0.001, ""hidden_layer_sizes"": [128, 128, 128]}",2
 mlp_deep,CMYKOGB-7,"{""alpha"": 0.001, ""hidden_layer_sizes"": [128, 128, 128]}",3
