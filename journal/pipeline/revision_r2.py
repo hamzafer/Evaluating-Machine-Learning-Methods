@@ -257,6 +257,40 @@ def cmd_ifra_pairs(args):
     print(pd.DataFrame(summ).to_string(index=False))
 
 
+def cmd_optim_cost(args):
+    """Reviewer 2 point 3: convergence and compute of the R1 direct-DE00 fits
+    (canonical laptop runs, journal/results/revision_r1/optim_folds) next to the
+    closed-form least-squares fit they start from (timed here, median of 5)."""
+    rows = []
+    for d in NINE:
+        spec = dataset_registry()[d]
+        X, Y = spec.load()
+        tr, _ = fold_splits(X, make_groups(X) if spec.grouped else None)[0]
+        sx, sy = MinMaxScaler().fit(X[tr]), MinMaxScaler().fit(Y[tr])
+        Xtr, Ytr = sx.transform(X[tr]), sy.transform(Y[tr])
+        ts = []
+        for _ in range(5):
+            t0 = time.perf_counter()
+            Phi = PolynomialFeatures(degree=3).fit_transform(Xtr)
+            LinearRegression(fit_intercept=False).fit(Phi, Ytr)
+            ts.append(time.perf_counter() - t0)
+        infos = [json.loads((R1_FOLDS / f'{d}__fold{i}.json').read_text()) for i in range(5)]
+        rows.append({'dataset': d, 'n_coef': infos[0]['n_coef'],
+                     'ols_fit_ms': round(float(np.median(ts)) * 1e3, 2),
+                     'powell_s_median_fold': round(float(np.median([f['powell_seconds'] for f in infos])), 1),
+                     'powell_s_max_fold': round(float(max(f['powell_seconds'] for f in infos)), 1),
+                     'powell_nfev_median': int(np.median([f['powell_nfev'] for f in infos])),
+                     'powell_nit_median': int(np.median([f['powell_nit'] for f in infos])),
+                     'powell_converged_folds': sum('successfully' in f['powell_message'] for f in infos),
+                     'nm_s_median_fold': round(float(np.median([f['nm_seconds'] for f in infos])), 1),
+                     'nm_budget_exhausted_folds': sum('Maximum number' in f['nm_message'] for f in infos),
+                     'powell_messages': '; '.join(sorted({f['powell_message'] for f in infos}))})
+    out = ROOT / 'revision_r2' / 'optim_cost.csv'
+    pd.DataFrame(rows).to_csv(out, index=False)
+    print(pd.DataFrame(rows).drop(columns='powell_messages').to_string(index=False))
+    print(f'wrote {out}')
+
+
 def jobs_list(args):
     """Print the full job list (one line per job), heaviest datasets first."""
     order = ('CMYKOGV-7', 'CMYKOGB-7', 'KCMYG-5', 'PC10-CMYK', 'PC11-CMYK', 'FOGRA51-CMYK',
@@ -279,8 +313,9 @@ def main():
     sub.add_parser('jobs')
     sub.add_parser('folds')
     sub.add_parser('ifra-pairs')
+    sub.add_parser('optim-cost')
     args = ap.parse_args()
-    {'seeds': cmd_seeds, 'seeds-merge': cmd_seeds_merge, 'jobs': jobs_list, 'folds': cmd_folds, 'ifra-pairs': cmd_ifra_pairs}[args.cmd](args)
+    {'seeds': cmd_seeds, 'seeds-merge': cmd_seeds_merge, 'jobs': jobs_list, 'folds': cmd_folds, 'ifra-pairs': cmd_ifra_pairs, 'optim-cost': cmd_optim_cost}[args.cmd](args)
 
 
 if __name__ == '__main__':
