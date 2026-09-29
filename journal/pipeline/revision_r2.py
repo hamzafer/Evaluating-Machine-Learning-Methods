@@ -40,7 +40,9 @@ from .datasets import registry as dataset_registry
 from .evaluate import fold_splits, make_groups, summarize
 
 ROOT = Path(__file__).resolve().parents[1] / 'results'
-OUT = ROOT / 'revision_r2' / 'seeds'
+import os
+# R2_SEEDS_DIR: the laptop cross-check writes to seeds_laptop/, masters to seeds/
+OUT = ROOT / 'revision_r2' / os.environ.get('R2_SEEDS_DIR', 'seeds')
 R1_FOLDS = ROOT / 'revision_r1' / 'optim_folds'
 NINE = ('PC10-CMY', 'PC11-CMY', 'FOGRA51-CMY', 'PC10-CMYK', 'PC11-CMYK',
         'FOGRA51-CMYK', 'KCMYG-5', 'CMYKOGV-7', 'CMYKOGB-7')
