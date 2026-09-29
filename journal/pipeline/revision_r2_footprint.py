@@ -76,12 +76,14 @@ def _strip(obj, seen=None):
     for k in ('factory', 'build', 'grid', 'inner_scores_'):
         if k in obj.__dict__:
             obj.__dict__[k] = None
-    for v in list(obj.__dict__.values()):
+    def walk(v):
         if hasattr(v, '__dict__'):
             _strip(v, seen)
         elif isinstance(v, (list, tuple)):
             for x in v:
-                _strip(x, seen)
+                walk(x)
+    for v in list(obj.__dict__.values()):
+        walk(v)
     return obj
 
 
@@ -112,7 +114,13 @@ def learned_values(model) -> int:
     from sklearn.tree import DecisionTreeRegressor
     m = model
     if isinstance(m, Pipeline):
-        return sum(learned_values(s) for _, s in m.steps)
+        steps = [s for _, s in m.steps]
+        if (len(steps) == 2 and isinstance(steps[0], PolynomialFeatures) and steps[0].include_bias
+                and isinstance(steps[1], LinearRegression)):
+            # the bias column's coefficient and the intercept are one number per channel:
+            # the deployable polynomial is the n_terms x 3 coefficient matrix
+            return int(steps[1].coef_.size)
+        return sum(learned_values(s) for s in steps)
     if isinstance(m, PolynomialFeatures):
         return 0                                   # exponents are implied by the degree
     if isinstance(m, (LinearRegression, Ridge, Lasso, ElasticNet)):
@@ -141,9 +149,8 @@ def learned_values(model) -> int:
     # repo wrappers
     for attr in ('_model', '_inner', 'estimator'):
         if getattr(m, attr, None) is not None and attr in m.__dict__:
-            inner = learned_values(m.__dict__[attr])
-            ts = m.__dict__.get('_ts')
-            return inner + (2 * ts.n_features_in_ if ts is not None else 0)
+            # input/output scalers are not counted for any model (like-for-like)
+            return learned_values(m.__dict__[attr])
     raise TypeError(f'no footprint rule for {type(m).__name__}')
 
 
@@ -244,12 +251,26 @@ def cmd_embedded(args):
     pd.DataFrame(rows).to_csv(OUT / 'poly4_embedded.csv', index=False)
 
 
+def cmd_recount(args):
+    """Refit each model once and rewrite only the learned_values column of
+    footprint.csv (a counting rule changed; timings are left as measured)."""
+    reg = {**model_registry(), **cbrt_registry(), **cbrt_tuned_registry(7)}
+    path = OUT / 'footprint.csv'
+    f = pd.read_csv(path)
+    for i, m in enumerate(f.model):
+        model, *_ = fit_model('CMYKOGV-7', m, reg)
+        f.loc[i, 'learned_values'] = learned_values(model)
+        print(m, int(f.loc[i, 'learned_values']), flush=True)
+    f.to_csv(path, index=False)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--embedded', action='store_true')
+    ap.add_argument('--recount', action='store_true')
     ap.add_argument('--models', nargs='*')
     args = ap.parse_args()
-    cmd_embedded(args) if args.embedded else cmd_all(args)
+    cmd_embedded(args) if args.embedded else cmd_recount(args) if args.recount else cmd_all(args)
 
 
 if __name__ == '__main__':

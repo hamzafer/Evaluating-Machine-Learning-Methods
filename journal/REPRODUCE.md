@@ -31,22 +31,42 @@ scripts for the sets that need conversion (`journal.pipeline.ingest_ncolor`,
 | Median, 95th percentile, maximum | `journal/pipeline/evaluate.py`, `summarize` |
 
 The exact fold of every analyzed row is published in `journal/results/revision_r2/folds/`
-(`idx` = row position after filtering and deduplication, `fold`, and `recipe_group` for the
-grouped sets; `SAMPLE_ID` for the publicly available datasets). Regenerate and check with
-`python -m journal.pipeline.revision_r2 folds`.
+(`idx` = row position after filtering and deduplication, and `fold`; for the publicly available
+datasets also `SAMPLE_ID`, and `recipe_group` where folds are grouped). Regenerate them with
+`python -m journal.pipeline.revision_r2 folds`, which asserts that its rows match the dataset loader.
 
 ## 4. Rerunning the experiments
 
 ```
-python -m journal.pipeline.run                       # main model matrix, per dataset
-python -m journal.pipeline.run_ifra                  # newsprint experiments
-python -m journal.pipeline.revision_r1 --help        # round-1 revision experiments
-python -m journal.pipeline.revision_r1_timing        # fit / predict / LUT timing (idle machine)
-python -m journal.pipeline.revision_r2 --help        # round-2: optimizer start-point sensitivity
-python -m journal.pipeline.revision_r2_footprint     # round-2: memory footprint and latency
+python -m journal.pipeline.run                         # main model matrix, per dataset
+python -m journal.pipeline.run_ifra                    # newsprint experiments
+python -m journal.pipeline.revision_r1 --help          # round-1 revision experiments
+python -m journal.pipeline.revision_r1_timing          # Table 12 timing (idle machine)
+
+# round 2 (Reviewer 2)
+python -m journal.pipeline.revision_r2 folds           # fold assignment files (section 3)
+python -m journal.pipeline.revision_r2 ifra-pairs      # newsprint run metadata, model-free run comparison
+python -m journal.pipeline.revision_r2 optim-cost      # convergence and cost of the direct-DE00 fits
+python -m journal.pipeline.revision_r2 jobs            # the 990 start-point jobs, one per line
+python -m journal.pipeline.revision_r2 seeds --dataset PC10-CMY --fold 0 --start ols --method powell
+python -m journal.pipeline.revision_r2 seeds-merge     # pool the jobs into seeds/summary.csv
+python -m journal.pipeline.revision_r2_footprint       # memory footprint and latency (idle machine)
+python -m journal.pipeline.revision_r2_footprint --embedded   # degree-4 polynomial as a bare matrix
+python -m journal.pipeline.revision_r2_tables          # LaTeX tables from the round-2 CSVs
+cd journal/figures && python fig_de00_loss.py          # likewise the other figure scripts
 ```
+
+`seeds` writes to `journal/results/revision_r2/seeds/`; set `R2_SEEDS_DIR=seeds_laptop` to write
+elsewhere (the six coated datasets were run on the laptop, the canonical platform, into
+`seeds_laptop/`; the full sweep ran on a second machine into `seeds/`). Timings are
+machine-specific; everything else reproduces to the precision reported, with platform drift of up
+to about 0.2 ΔE00 for iteratively fitted models (see the paper's Reproducibility paragraph).
+
+The KCMYG-5 and CMYKOGB-7 experiments need the restricted datasets, so they can only be rerun
+with the providers' permission. Their per-row outputs here contain row positions, folds and errors
+only.
 
 Per-sample ΔE00 for every (dataset, model) pair is in `journal/results/revision_r1/persample/`
 and the one-row summaries in `journal/results/revision_r1/summary/`; round-2 outputs are in
 `journal/results/revision_r2/`. Figures are generated from these CSVs by the scripts in
-`journal/figures/`.
+`journal/figures/` (they use Arial; matplotlib falls back to its default font where it is absent).

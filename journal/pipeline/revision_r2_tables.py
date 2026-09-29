@@ -27,10 +27,10 @@ def sig3(x):
     """Three significant figures, as the R1 timing table (no scientific notation)."""
     if x < 0.001:
         return '$<$0.001'
-    s = f'{x:.3g}'
-    if 'e' in s:
-        s = f'{x:.0f}'
-    return s
+    # three significant figures, but never more than the CSV's three decimals
+    import math
+    decimals = min(3, max(0, 2 - math.floor(math.log10(x))))
+    return f'{x:.{decimals}f}'
 
 
 def thousands(x):

@@ -23,6 +23,7 @@ import os
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -110,8 +111,9 @@ def make_figure(data: pd.DataFrame, out_path: str) -> None:
     ax.tick_params(axis="x", length=0, pad=3)
     ax.set_ylabel(f"Maximum {METRIC}")
     ax.set_ylim(0, ymax * 1.24)
-    ax.set_yticks([0, 2, 4, 6, 8])
-    ax.spines["left"].set_bounds(0, 8)
+    top = 2 * int(np.ceil(ymax / 2))          # even tick at or above the tallest bar
+    ax.set_yticks(np.arange(0, top + 1, 2))
+    ax.spines["left"].set_bounds(0, top)
     ax.grid(axis="y")
 
     # Legend above the axes, outside the data, so it never meets the

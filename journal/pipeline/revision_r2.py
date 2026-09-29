@@ -14,10 +14,10 @@ Starts (coefficient vector w0 handed to scipy.optimize.minimize):
   nXXsK    ols * (1 + XX/100 * N(0,1)), elementwise, noise seed K (XX in 01, 05, 10; K in 0..2)
   zero     all coefficients zero (a naive start with no least-squares information)
 
-Budgets are the paper's: Powell maxiter=200; Nelder-Mead gets exactly the objective
+Budgets are the paper's: Powell maxiter=200; Nelder-Mead gets at most the objective
 evaluations the OLS-start Powell fit used in the same fold in revision R1
 (journal/results/revision_r1/optim_folds/<dataset>__fold<i>.json), so every start
-of one fold runs Nelder-Mead on the same budget.
+of one fold runs Nelder-Mead on the same budget (scipy stops at, in practice exactly at, maxfev).
 
 Outputs under journal/results/revision_r2/seeds/:
   jobs/<dataset>__f<i>__<start>__<method>.csv   idx, de00 (that fold's test samples)
@@ -150,7 +150,9 @@ def cmd_seeds_merge(args):
                              'seconds_total': round(sum(i['seconds'] for i in infos), 1),
                              'seconds_max_fold': round(max(i['seconds'] for i in infos), 1),
                              'nfev_mean': round(float(np.mean([i['nfev'] for i in infos])), 0),
-                             'folds_converged': sum(i['success'] for i in infos),
+                             # Nelder-Mead is budget-capped by design, so its scipy 'success' flag is
+                             # not a convergence test; reported for Powell only
+                             'folds_converged': (sum(i['success'] for i in infos) if m == 'powell' else ''),
                              'train_obj_end_mean': round(float(np.mean([i['train_obj_end'] for i in infos])), 4),
                              'train_obj_ols_mean': round(float(np.mean([i['train_obj_ols'] for i in infos])), 4)})
     pd.DataFrame(rows).to_csv(OUT / 'summary.csv', index=False)
@@ -188,16 +190,18 @@ def cmd_folds(args):
         if d in PUBLIC_IDS:
             rows['SAMPLE_ID'] = df['SAMPLE_ID'].to_numpy()
         rows['fold'] = fold
-        if groups is not None:
-            rows['recipe_group'] = groups
+        if groups is not None and d in PUBLIC_IDS:
+            rows['recipe_group'] = groups   # restricted sets: row position and fold only
         pd.DataFrame(rows).to_csv(out / f'{d}.csv', index=False)
         print(f'{d:13s} n={len(X):5d} folds={np.bincount(fold).tolist()} '
               f'{"grouped" if groups is not None else "seeded KFold"}', flush=True)
 
 
 def cmd_ifra_pairs(args):
-    """Reviewer 2 point 2: what the 13 newsprint runs are, and how much of the
-    cross-run error is press-to-press difference. Uses only what the data record:
+    """Reviewer 2 point 2: what the 13 newsprint runs are, and whether the
+    cross-run error is already present in the measured data (model-free).
+    Only one title has two runs, so the same-title rows are a single pair:
+    indicative, not a category statistic. Uses only what the data record:
     the raw file headers (chart, instrument, creation date) and the file names
     (one newspaper title per run, one title, TagesA, present twice).
 
@@ -218,11 +222,11 @@ def cmd_ifra_pairs(args):
             head = z.read(name).decode('latin-1').split('BEGIN_DATA\n')[0]
             field = lambda k: (re.search(rf'^{k}\s+"?([^"\n]*)"?', head, re.M) or [None, ''])[1].strip()
             stem = name.replace('.txt', '')
+            # PRINT_CONDITIONS is empty in all 13 headers, so it is not exported
             runs.append({'run': f'IFRA-wb-{stem}-CMYK', 'title': stem.split('_')[0],
                          'created': field('CREATED').split('"')[0].strip(),
                          'instrument': field('INSTRUMENTATION'),
-                         'chart': head.splitlines()[0].strip(),
-                         'print_conditions': field('PRINT_CONDITIONS')})
+                         'chart': head.splitlines()[0].strip()})
     runs = pd.DataFrame(runs)
     runs.to_csv(out / 'runs.csv', index=False)
     title = dict(zip(runs.run, runs.title))
