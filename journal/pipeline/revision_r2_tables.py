@@ -67,10 +67,40 @@ def table_s4():
     return head + '\n\\midrule\n' + '\n'.join(body)
 
 
+SEED_ORDER = ('PC10-CMY', 'PC11-CMY', 'FOGRA51-CMY', 'PC10-CMYK', 'PC11-CMYK', 'FOGRA51-CMYK',
+              'KCMYG-5', 'CMYKOGV-7', 'CMYKOGB-7')
+COATED = SEED_ORDER[:6]
+
+
+def seeds_table():
+    """Supplementary Table S5: start-point sensitivity. Coated sets from the laptop
+    run (canonical platform), n>4 from the second machine; each block's baseline is
+    its own least-squares start on the same machine. Cell = the worst (highest)
+    pooled median over the three noise seeds of that level."""
+    lap = pd.read_csv(R2 / 'seeds_laptop' / 'summary.csv')
+    mas = pd.read_csv(R2 / 'seeds' / 'summary.csv')
+    rows = []
+    for d in SEED_ORDER:
+        src = lap if d in COATED else mas
+        cells = [d + (r'$^\ast$' if d not in COATED else '')]
+        for meth in ('powell', 'nm'):
+            g = src[(src.dataset == d) & (src.method == meth)].set_index('start')['median']
+            cells.append(f'{g["ols"]:.3f}')
+            for lvl in ('01', '05', '10'):
+                cells.append(f'{max(g[f"n{lvl}s{k}"] for k in range(3)):.3f}')
+            cells.append(f'{g["zero"]:.3f}')
+        rows.append(' & '.join(cells) + r' \\')
+    head = (r'& \multicolumn{5}{c}{\textbf{Powell}} & \multicolumn{5}{c}{\textbf{Nelder--Mead}} \\' + '\n'
+            r'\cmidrule(lr){2-6}\cmidrule(lr){7-11}' + '\n'
+            r'\textbf{Dataset} & LS & 1\% & 5\% & 10\% & zero & LS & 1\% & 5\% & 10\% & zero \\')
+    return head + '\n\\midrule\n' + '\n'.join(rows)
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / 'timing_footprint_columns.tex').write_text(table_timing_columns() + '\n')
     (OUT / 'table_s4_footprint.tex').write_text(table_s4() + '\n')
+    (OUT / 'table_s5_seeds.tex').write_text(seeds_table() + '\n')
     for p in sorted(OUT.glob('*.tex')):
         print(f'== {p.name}\n{p.read_text()}')
 
