@@ -1,0 +1,11 @@
+model,same_title,n_pairs,median_of_medians,min_median,max_median
+gaussian_process,False,154,3.876,1.429,10.042
+gaussian_process,True,2,0.832,0.823,0.841
+mlp_deep,False,154,4.152,1.936,10.289
+mlp_deep,True,2,1.466,1.422,1.51
+poly3,False,154,4.201,1.725,10.431
+poly3,True,2,1.403,1.402,1.404
+svm,False,154,3.927,1.579,10.198
+svm,True,2,0.931,0.929,0.932
+measured (no model),False,77,4.023,1.599,10.042
+measured (no model),True,1,0.568,0.568,0.568

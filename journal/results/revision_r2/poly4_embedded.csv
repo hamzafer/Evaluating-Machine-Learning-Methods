@@ -1,0 +1,5 @@
+model,dtype,n_terms_per_channel,coef_values,coef_kb,us_per_point_1t,mult_add_per_point,fold0_test_median,fold0_test_max,max_abs_de_diff_vs_sklearn
+poly4,float64,330,990,7.73,0.295,1319,2.0056,51.8555,7.46513961758e-12
+poly4,float32,330,990,3.87,0.14,1319,2.0056,51.8562,0.00157535386946
+poly4_cbrt,float64,330,990,7.73,0.345,1319,0.2661,18.6118,7.39075467493e-13
+poly4_cbrt,float32,330,990,3.87,0.187,1319,0.2661,18.6118,0.00016533959085
