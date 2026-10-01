@@ -205,7 +205,7 @@ def cmd_ifra_pairs(args):
     the raw file headers (chart, instrument, creation date) and the file names
     (one newspaper title per run, one title, TagesA, present twice).
 
-    Writes journal/results/revision_r2/ifra/
+    Writes journal/results/revision_r2/newsprint/
       runs.csv         run, title, created, instrument, chart, print_conditions
       measured_pairs.csv  model-free: DE00 between the two runs' MEASURED colors, per pair
       model_pairs.csv  condition (B) cross-run DE00 split into same-title vs different-title
@@ -213,7 +213,7 @@ def cmd_ifra_pairs(args):
     import re
     import zipfile
     from itertools import combinations
-    out = ROOT / 'revision_r2' / 'ifra'
+    out = ROOT / 'revision_r2' / 'newsprint'
     out.mkdir(parents=True, exist_ok=True)
     raw = ROOT.parent / 'data' / 'raw' / 'Ifra-wb.zip'
     runs = []
