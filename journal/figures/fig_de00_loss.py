@@ -24,6 +24,12 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from decimal import ROUND_HALF_UP, Decimal
+
+
+def _half_up(v):
+    """Round half up from the CSV's decimal string (6.795 -> 6.80, not float 6.79)."""
+    return str(Decimal(str(v)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -83,7 +89,7 @@ def make_figure(data: pd.DataFrame, out_path: str) -> None:
             linewidth=0.8, zorder=3,
         )
         for xi, v in zip(xs, sub["max"]):
-            ax.text(xi, v + 0.12, f"{v:.2f}", ha="center", va="bottom",
+            ax.text(xi, v + 0.12, _half_up(v), ha="center", va="bottom",
                     fontsize=FS_ANNOT, color=INK_PRIMARY)
 
     # Worst-case reduction annotation (computed live, not hand-entered) above each dataset group.

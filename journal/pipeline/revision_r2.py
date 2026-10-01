@@ -203,7 +203,7 @@ def cmd_ifra_pairs(args):
     Only one title has two runs, so the same-title rows are a single pair:
     indicative, not a category statistic. Uses only what the data record:
     the raw file headers (chart, instrument, creation date) and the file names
-    (one newspaper title per run, one title, TagesA, present twice).
+    (one newspaper title per run, one title present twice).
 
     Writes journal/results/revision_r2/newsprint/
       runs.csv         run, title, created, instrument, chart, print_conditions
@@ -223,13 +223,14 @@ def cmd_ifra_pairs(args):
             field = lambda k: (re.search(rf'^{k}\s+"?([^"\n]*)"?', head, re.M) or [None, ''])[1].strip()
             stem = name.replace('.txt', '')
             # PRINT_CONDITIONS is empty in all 13 headers, so it is not exported
-            runs.append({'run': f'IFRA-wb-{stem}-CMYK', 'title': stem.split('_')[0],
+            runs.append({'run': f'IFRA-wb-{stem}-CMYK',
                          'created': field('CREATED').split('"')[0].strip(),
                          'instrument': field('INSTRUMENTATION'),
                          'chart': head.splitlines()[0].strip()})
     runs = pd.DataFrame(runs)
     runs.to_csv(out / 'runs.csv', index=False)
-    title = dict(zip(runs.run, runs.title))
+    # newspaper title = file-name stem before the first underscore (not exported)
+    title = {r: r.split('-')[2].split('_')[0] for r in runs.run}
     # model-free: measured color difference between runs, patch by patch
     reg = dataset_registry()
     meas = {r: reg[r].load() for r in runs.run}

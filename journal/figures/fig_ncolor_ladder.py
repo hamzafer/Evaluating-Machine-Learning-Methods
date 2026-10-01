@@ -216,7 +216,7 @@ def make_figure(df: pd.DataFrame, lin_lo: float, lin_hi: float, out_path: str) -
                label="dashed, open: CMYKOGB-7 (second 7-ink set)"),
         Line2D([], [], color=INK_PRIMARY, marker="D", markersize=4.8,
                markerfacecolor=DIAMOND_FACE, markeredgewidth=0.8, linestyle="none",
-               label="corrected polynomial (4th order, CIELAB fit)"),
+               label="corrected polynomial (4th order, cube-root fit)"),
     ]
     # Lower right is empty of data (below every curve at n >= 5).
     ax.legend(handles=legend_handles, loc="lower right", bbox_to_anchor=(1.0, 0.0),

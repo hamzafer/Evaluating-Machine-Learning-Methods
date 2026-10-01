@@ -56,7 +56,7 @@ MODEL_STYLE = {
                               color="#D55E00", marker="s", hatch="////", facecolor="#fbe3d4"),
     # Corrected classical baseline (degree 4, cube-root/CIELAB fit): yellow
     # diamonds with a dark edge (the caption refers to "yellow diamonds").
-    "poly4_cbrt": dict(label="Polynomial (4th order, CIELAB fit)", color="#F0E442", marker="D", hatch=""),
+    "poly4_cbrt": dict(label="Polynomial (4th order, cube-root fit)", color="#F0E442", marker="D", hatch=""),
 }
 
 METRIC = r"CIEDE2000 $\Delta E_{00}$"
