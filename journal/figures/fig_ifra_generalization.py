@@ -31,6 +31,12 @@ import os
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from decimal import ROUND_HALF_UP, Decimal
+
+
+def _half_up(v):
+    """Round half up from the CSV value (3.625 -> 3.63, as the table prints it)."""
+    return str(Decimal(str(v)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
 from matplotlib.ticker import MultipleLocator
 import pandas as pd
 
@@ -98,7 +104,7 @@ def make_figure(agg: pd.DataFrame, cross_overall: float, loo_overall: float, out
         for xi, v in zip(xs, vals):
             if pd.isna(v):
                 continue
-            ax.text(xi, v + 0.06, f"{v:.2f}", ha="center", va="bottom",
+            ax.text(xi, v + 0.06, _half_up(v), ha="center", va="bottom",
                     fontsize=FS_ANNOT - 0.5, color=INK_PRIMARY)
 
     ax.set_xticks(x)
