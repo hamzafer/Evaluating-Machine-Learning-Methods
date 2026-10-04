@@ -24,23 +24,27 @@ OUT_PATH = os.path.join(HERE, "fig_n3_vs_n4.png")
 CMY_PATH = os.path.join(RESULTS_DIR, "PC10-CMY", "summary.csv")
 CMYK_PATH = os.path.join(RESULTS_DIR, "PC10-CMYK", "summary.csv")
 
-# Fixed categorical color order (Okabe-Ito palette, CVD-safe): baseline (n=3)
-# first, then the n=4 comparison point.
-COLOR_N3 = "#0072B2"  # blue
-COLOR_N4 = "#D55E00"  # vermillion
+from _style import (FIG_W_075, FS_ANNOT, INK_MUTED, INK_PRIMARY, INK_SECONDARY,
+                    METRIC, MODEL_STYLE, SURFACE, apply_style, save)
+
+# n = 3 vs n = 4 is told apart by marker fill (open vs filled) in neutral ink, so
+# the two ink counts never borrow a model's fixed color. The connecting segment
+# of the two highlighted models wears that model's fixed color.
+N3_FACE = SURFACE
+N4_FACE = INK_PRIMARY
 
 MODEL_DISPLAY_NAMES = {
-    "gaussian_process": "Gaussian Process",
+    "gaussian_process": "Gaussian process",
     "poly3": "Polynomial (3rd order)",
     "svm": "SVM",
-    "gradient_boost": "Gradient Boosting",
-    "mlp_deep": "MLP (Deep)",
-    "mlp_shallow": "MLP (Shallow)",
-    "random_forest": "Random Forest",
+    "gradient_boost": "Gradient boosting",
+    "mlp_deep": "MLP (deep)",
+    "mlp_shallow": "MLP (shallow)",
+    "random_forest": "Random forest",
     "knn": "k-NN",
-    "decision_tree": "Decision Tree",
+    "decision_tree": "Decision tree",
     "lasso": "Lasso",
-    "elastic": "Elastic Net",
+    "elastic": "Elastic net",
     "ridge": "Ridge",
     "pcr": "PCR",
     "plsr": "PLSR",
@@ -51,7 +55,7 @@ MODEL_DISPLAY_NAMES = {
 
 # Models whose n=3 -> n=4 shift gets a direct callout label (selective labeling,
 # not a number on every point).
-HIGHLIGHT_MODELS = {"poly3", "gaussian_process"}
+HIGHLIGHT_MODELS = ["gaussian_process", "poly3"]
 
 
 def load_comparison() -> pd.DataFrame:
@@ -70,18 +74,21 @@ def make_figure(df: pd.DataFrame, out_path: str) -> None:
     n = len(models)
     y = list(range(n))
 
-    plt.style.use("seaborn-v0_8-whitegrid")
-    fig, ax = plt.subplots(figsize=(9.2, 7.2))
+    apply_style()
+    fig, ax = plt.subplots(figsize=(FIG_W_075, 3.35))
 
     for yy, model in zip(y, models):
         v3 = df.loc[model, "n3"]
         v4 = df.loc[model, "n4"]
-        ax.plot([v3, v4], [yy, yy], color="#9a9a9a", linewidth=2, zorder=2, solid_capstyle="round")
+        hl = model in HIGHLIGHT_MODELS
+        ax.plot([v3, v4], [yy, yy],
+                color=MODEL_STYLE[model]["color"] if hl else "#c4c4c4",
+                linewidth=2.2 if hl else 1.4, zorder=2, solid_capstyle="butt")
 
-    ax.scatter(df["n3"], y, s=90, color=COLOR_N3, edgecolor="#3a3a3a", linewidth=0.6,
-               zorder=3, label="n = 3 (CMY)")
-    ax.scatter(df["n4"], y, s=90, color=COLOR_N4, edgecolor="#3a3a3a", linewidth=0.6,
-               zorder=3, label="n = 4 (CMYK)")
+    ax.scatter(df["n3"], y, s=22, facecolor=N3_FACE, edgecolor=INK_PRIMARY, linewidth=0.8,
+               zorder=3, label="$n$ = 3 (CMY)")
+    ax.scatter(df["n4"], y, s=22, facecolor=N4_FACE, edgecolor=INK_PRIMARY, linewidth=0.8,
+               zorder=3, label="$n$ = 4 (CMYK)")
 
     # Selective direct callouts for the two highlighted models.
     for model in HIGHLIGHT_MODELS:
@@ -90,33 +97,36 @@ def make_figure(df: pd.DataFrame, out_path: str) -> None:
         v4 = df.loc[model, "n4"]
         ratio = v4 / v3
         label = f"{v3:.3f} → {v4:.3f}  (×{ratio:.1f})"
-        x_text = max(v3, v4) * 1.35
         ax.annotate(
             label,
-            xy=(max(v3, v4), yy), xytext=(x_text, yy),
-            va="center", ha="left", fontsize=8.8, color="#2a2a2a",
-            arrowprops=dict(arrowstyle="-", color="#7a7a7a", linewidth=0.8),
+            xy=(max(v3, v4), yy), xytext=(6, 0), textcoords="offset points",
+            va="center", ha="left", fontsize=FS_ANNOT, color=INK_PRIMARY,
         )
 
     ax.set_yticks(y)
-    ax.set_yticklabels([MODEL_DISPLAY_NAMES.get(m, m) for m in models], fontsize=10)
+    ax.set_yticklabels([MODEL_DISPLAY_NAMES.get(m, m) for m in models])
+    for tick, model in zip(ax.get_yticklabels(), models):
+        tick.set_color(INK_PRIMARY if model in HIGHLIGHT_MODELS else INK_SECONDARY)
+        if model in HIGHLIGHT_MODELS:
+            tick.set_fontweight("bold")
+    ax.tick_params(axis="y", length=0)
     ax.set_ylim(-0.7, n - 0.3)
 
     ax.set_xscale("log")
     ax.set_xlim(0.03, 40)
     ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:g}"))
-    ax.set_xlabel(r"Median $\Delta E_{00}$ (log scale)")
+    ax.xaxis.set_minor_formatter(mticker.NullFormatter())
+    ax.set_xlabel(f"Median {METRIC} (log scale)")
 
-    ax.grid(axis="y", visible=False)
-    ax.grid(axis="x", which="both", linestyle="--", alpha=0.35, zorder=0)
-    ax.set_axisbelow(True)
+    ax.grid(axis="x", which="major")
+    ax.spines["left"].set_visible(False)
 
-    ax.legend(loc="lower right", frameon=True, framealpha=0.95, fontsize=9)
+    ax.legend(loc="center right", bbox_to_anchor=(1.0, 0.64), handletextpad=0.3,
+              labelcolor=INK_SECONDARY)
 
-    fig.tight_layout()
-    fig.savefig(out_path, dpi=320)
+    fig.tight_layout(pad=0.3)
+    save(fig, out_path)
     plt.close(fig)
-    print(f"Wrote: {out_path}")
 
 
 def main() -> None:

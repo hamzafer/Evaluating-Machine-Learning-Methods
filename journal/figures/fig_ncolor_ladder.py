@@ -44,29 +44,32 @@ RUNGS = [
     ("CMYKOGB-7", X_OGB),
 ]
 
+from _style import (FIG_W_080, FS_ANNOT, FS_LABEL, FS_LEGEND, FS_SMALL, FS_TICK,
+                    GRID, INK_MUTED, INK_PRIMARY, INK_SECONDARY, METRIC, MODEL_STYLE,
+                    SURFACE, apply_style, save)
+
 # Curated model subset. Highlighted trajectories carry the story; context
-# lines show the subset isn't cherry-picked. Categorical hues in fixed order
-# (validated: CVD-safe adjacent pairs; sub-3:1-contrast hues get direct labels).
+# lines show the subset isn't cherry-picked. Colors and markers are the fixed
+# per-model identities from _style (same model, same color, every figure).
 MODELS = [
-    # key, display name, color, highlighted?
-    ("gaussian_process", "Gaussian Process", "#2a78d6", True),
-    ("poly3", "Polynomial (3rd order)", "#eb6834", True),
-    ("svm", "SVM", "#1baf7a", False),
-    ("mlp_deep", "MLP (deep)", "#4a3aa7", False),
-    ("random_forest", "Random Forest", "#e87ba4", False),
+    # key, highlighted?
+    ("gaussian_process", True),
+    ("poly3", True),
+    ("svm", False),
+    ("mlp_deep", False),
+    ("random_forest", False),
 ]
+MODELS = [(k, MODEL_STYLE[k]["label"], MODEL_STYLE[k]["color"], hl) for k, hl in MODELS]
 LINEAR_FAMILY = ["ridge", "lasso", "elastic", "pcr", "plsr"]
 # Revision R1 (Reviewer 2, minor 2): discrete markers for the CORRECTED classical
 # baseline (degree 4, fitted in cube-root/CIELAB space), so the degree-3 XYZ
 # curve cannot be misread as the best the polynomial can do. Markers only, no
 # line: it is a reference, not one of the uncorrected trajectories.
 CORRECTED = "poly4_cbrt"
+DIAMOND_FACE = MODEL_STYLE[CORRECTED]["color"]
 
-INK_PRIMARY = "#0b0b0b"
-INK_SECONDARY = "#52514e"
-INK_MUTED = "#898781"
-GRID = "#e1e0d9"
-SURFACE = "#fcfcfb"
+# Text behind which a curve may pass gets a small surface-colored backing.
+LABEL_BOX = dict(boxstyle="square,pad=0.08", facecolor=SURFACE, edgecolor="none", alpha=0.85)
 
 
 def load_medians() -> tuple[pd.DataFrame, float, float]:
@@ -101,125 +104,132 @@ def make_figure(df: pd.DataFrame, lin_lo: float, lin_hi: float, out_path: str) -
     xs = [x for _, x in RUNGS]
     datasets = [d for d, _ in RUNGS]
 
-    fig, ax = plt.subplots(figsize=(9.6, 6.4))
-    fig.patch.set_facecolor(SURFACE)
-    ax.set_facecolor(SURFACE)
+    apply_style()
+    fig, ax = plt.subplots(figsize=(FIG_W_080, 3.25))
 
-    # Recessive hairline grid, y only (log decades + halves).
-    ax.grid(axis="y", which="major", color=GRID, linewidth=0.8, zorder=0)
-    ax.grid(axis="x", visible=False)
-    ax.set_axisbelow(True)
+    # Recessive hairline grid, y only (log decades).
+    ax.grid(axis="y", which="major", color=GRID)
 
     for key, name, color, highlighted in MODELS:
         vals = [df.loc[key, d] for d in datasets]
-        lw = 2.4 if highlighted else 1.6
-        alpha = 1.0 if highlighted else 0.55
-        ms = 8 if highlighted else 6
+        marker = MODEL_STYLE[key]["marker"]
+        lw = 1.8 if highlighted else 1.0
+        alpha = 1.0 if highlighted else 0.75
+        ms = 5.0 if highlighted else 3.8
+        z = 4 if highlighted else 3
         # Solid trajectory through n = 3, 4, 5 and on to the OGV 7-ink system...
         ax.plot(xs[:4], vals[:4], color=color, linewidth=lw, alpha=alpha,
-                solid_capstyle="round", solid_joinstyle="round", zorder=3)
+                solid_capstyle="round", solid_joinstyle="round", zorder=z)
         # ...and a dashed branch from n = 5 to the second, independent 7-ink system.
         ax.plot([xs[2], xs[4]], [vals[2], vals[4]], color=color, linewidth=lw,
-                alpha=alpha, linestyle=(0, (4, 3)), zorder=3)
+                alpha=alpha, linestyle=(0, (3.5, 2.5)), zorder=z)
         # Markers: filled everywhere; the OGB system open (surface-filled) so the
         # two 7-ink points stay tellable-apart beyond the x-offset.
-        ax.plot(xs[:4], vals[:4], "o", color=color, markersize=ms, alpha=alpha,
-                markeredgecolor=SURFACE, markeredgewidth=1.4, linestyle="none", zorder=4)
-        ax.plot([xs[4]], [vals[4]], "o", markerfacecolor=SURFACE, markersize=ms,
-                alpha=alpha, markeredgecolor=color, markeredgewidth=1.8,
-                linestyle="none", zorder=4)
+        ax.plot(xs[:4], vals[:4], marker, color=color, markersize=ms, alpha=alpha,
+                markeredgecolor=SURFACE, markeredgewidth=0.7, linestyle="none", zorder=z + 0.5)
+        ax.plot([xs[4]], [vals[4]], marker, markerfacecolor=SURFACE, markersize=ms,
+                alpha=alpha, markeredgecolor=color, markeredgewidth=1.1,
+                linestyle="none", zorder=z + 0.5)
 
-    # Corrected polynomial: discrete diamond markers at every rung.
+    # Corrected polynomial: discrete diamond markers at every rung,
+    # offset slightly right of each rung so a diamond never hides a curve's dot.
     corr = [df.loc[CORRECTED, d] for d in datasets]
-    # offset slightly right of each rung so a diamond never hides a curve's dot,
-    # value label beside it (not above/below, where curve labels sit)
-    xd = [x + 0.12 for x in xs]
-    ax.plot(xd, corr, "D", color=INK_PRIMARY, markersize=7.5, markerfacecolor="#ffd23f",
-            markeredgewidth=1.3, linestyle="none", zorder=6)
-    for x, v in zip(xd, corr):
-        ax.annotate(f"{v:.2f}", xy=(x, v), xytext=(7, 0), textcoords="offset points",
-                    va="center", ha="left", fontsize=8, color=INK_PRIMARY, zorder=6)
+    xd = [x + 0.17 for x in xs]
+    ax.plot(xd, corr, "D", color=INK_PRIMARY, markersize=4.8, markerfacecolor=DIAMOND_FACE,
+            markeredgewidth=0.8, linestyle="none", zorder=6)
+    # Value label beside each diamond (not above/below, where curve labels sit);
+    # on the last rung it goes below, clear of the end labels.
+    for i, (x, v) in enumerate(zip(xd, corr)):
+        last = i == len(xd) - 1
+        ax.annotate(f"{v:.2f}", xy=(x, v),
+                    xytext=(0, -6) if last else (5, 0), textcoords="offset points",
+                    va="top" if last else "center", ha="center" if last else "left",
+                    fontsize=FS_ANNOT - 0.5, color=INK_PRIMARY, bbox=LABEL_BOX, zorder=7)
 
     # Direct end labels for every series (relief for sub-3:1 hues), spread to
     # avoid collisions, in text ink with the colored line as the identity mark.
     # Highlighted labels carry their CMYKOGB endpoint value inline.
     end_vals = [df.loc[key, "CMYKOGB-7"] for key, *_ in MODELS]
-    label_ys = spread_labels(end_vals)
+    # The GP label is anchored a little above its endpoint so its leader line
+    # slopes up, away from the corrected-baseline diamond just below it
+    # (label position only; the plotted values are untouched).
+    anchor_ys = [v * (1.12 if key == "gaussian_process" else 1.0)
+                 for (key, *_), v in zip(MODELS, end_vals)]
+    label_ys = spread_labels(anchor_ys, min_gap_log=0.095)
     for (key, name, color, highlighted), y_end, y_lab in zip(MODELS, end_vals, label_ys):
         text = f"{name}  {y_end:.2f}" if highlighted else name
         ax.annotate(
             text,
-            xy=(X_OGB, y_end), xytext=(X_OGB + 0.28, y_lab),
+            xy=(X_OGB, y_end), xytext=(X_OGB + 0.5, y_lab),
             va="center", ha="left",
-            fontsize=9.5 if highlighted else 8.5,
+            fontsize=FS_ANNOT,
             fontweight="bold" if highlighted else "normal",
             color=INK_PRIMARY if highlighted else INK_SECONDARY,
-            arrowprops=dict(arrowstyle="-", color=INK_MUTED, linewidth=0.7,
-                            shrinkA=2, shrinkB=4),
+            arrowprops=dict(arrowstyle="-", color=INK_MUTED, linewidth=0.5,
+                            shrinkA=1.5, shrinkB=3.5),
             zorder=5,
         )
 
     # Selective value callouts on the two highlighted trajectories only.
     for key in ("gaussian_process", "poly3"):
         v3 = df.loc[key, "PC10-CMY"]
-        ax.annotate(f"{v3:.2f}", xy=(3.0, v3), xytext=(-10, 0),
+        ax.annotate(f"{v3:.2f}", xy=(3.0, v3), xytext=(-6, 0),
                     textcoords="offset points", va="center", ha="right",
-                    fontsize=8.5, color=INK_SECONDARY, zorder=5)
+                    fontsize=FS_ANNOT - 0.5, color=INK_SECONDARY, zorder=5)
         v_ogv = df.loc[key, "CMYKOGV-7"]
-        ax.annotate(f"{v_ogv:.2f}", xy=(X_OGV, v_ogv), xytext=(0, 9),
-                    textcoords="offset points", va="bottom", ha="center",
-                    fontsize=8.5, color=INK_SECONDARY, zorder=5)
+        # GP's CMYKOGV label goes below its dot, clear of the adjacent diamond.
+        below = key == "gaussian_process"
+        ax.annotate(f"{v_ogv:.2f}", xy=(X_OGV, v_ogv), xytext=(-2, -6 if below else 6),
+                    textcoords="offset points", va="top" if below else "bottom",
+                    ha="center", fontsize=FS_ANNOT - 0.5, color=INK_SECONDARY, zorder=5)
 
     # Axes.
     ax.set_yscale("log")
     ax.set_ylim(0.03, 12)
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:g}"))
     ax.yaxis.set_minor_formatter(mticker.NullFormatter())
-    ax.set_ylabel(r"Median $\Delta E_{00}$ (log scale)", fontsize=10.5, color=INK_PRIMARY)
+    ax.set_ylabel(f"Median {METRIC} (log scale)")
 
-    ax.set_xlim(2.55, 9.45)
+    ax.set_xlim(2.7, 10.0)
     ax.set_xticks([3, 4, 5, 7])
-    ax.set_xticklabels(["3", "4", "5", "7"], fontsize=11, color=INK_PRIMARY)
-    ax.set_xlabel("Number of inks  $n$", fontsize=10.5, color=INK_PRIMARY, labelpad=20)
-    # Dataset name under each rung — the honesty channel on the axis itself.
-    for x, label, ha, dx in [(3, "PC10 CMY", "center", 0), (4, "PC10 CMYK", "center", 0),
-                             (5, "KCMYG", "center", 0),
-                             (X_OGV, "CMYKOGV", "right", -4), (X_OGB, "CMYKOGB", "left", 4)]:
+    ax.set_xticklabels(["3", "4", "5", "7"], color=INK_PRIMARY)
+    ax.set_xlabel("Number of inks $n$", labelpad=13)
+    ax.spines["bottom"].set_bounds(2.7, 7.6)
+    # Dataset name under each rung, as named in the paper: the honesty channel
+    # on the axis itself.
+    for x, label, ha, dx in [(3, "PC10", "center", 0), (4, "PC10", "center", 0),
+                             (5, "KCMYG-5", "center", 0),
+                             (X_OGV, "CMYKOGV-7", "right", -1), (X_OGB, "CMYKOGB-7", "left", 1)]:
         ax.annotate(label, xy=(x, 0), xycoords=("data", "axes fraction"),
-                    xytext=(dx, -18), textcoords="offset points",
-                    ha=ha, va="top", fontsize=7.5, color=INK_MUTED)
+                    xytext=(dx, -13), textcoords="offset points",
+                    ha=ha, va="top", fontsize=FS_SMALL, color=INK_MUTED)
 
-    ax.tick_params(axis="both", colors=INK_MUTED, labelcolor=INK_SECONDARY, labelsize=9)
-    for spine in ("top", "right"):
-        ax.spines[spine].set_visible(False)
-    for spine in ("left", "bottom"):
-        ax.spines[spine].set_color("#c3c2b7")
-        ax.spines[spine].set_linewidth(0.8)
-
-    # Legend: the two 7-ink marker styles (series identity is direct-labeled).
+    # Legend: the two 7-ink line/marker styles and the corrected-baseline
+    # diamond (series identity is direct-labeled at the line ends).
     legend_handles = [
-        Line2D([], [], color=INK_SECONDARY, marker="o", markersize=7,
-               markeredgecolor=SURFACE, markeredgewidth=1.2, linestyle="-",
-               linewidth=1.6, label="solid, filled: single system per rung (7 = CMYKOGV)"),
-        Line2D([], [], color=INK_SECONDARY, marker="o", markersize=7,
+        Line2D([], [], color=INK_SECONDARY, marker="o", markersize=4,
+               markeredgecolor=SURFACE, markeredgewidth=0.7, linestyle="-",
+               linewidth=1.2, label="solid, filled: $n$ = 3, 4, 5 and CMYKOGV-7"),
+        Line2D([], [], color=INK_SECONDARY, marker="o", markersize=4,
                markerfacecolor=SURFACE, markeredgecolor=INK_SECONDARY,
-               markeredgewidth=1.5, linestyle=(0, (4, 3)), linewidth=1.6,
-               label="dashed, open: second 7-ink system (CMYKOGB)"),
-        Line2D([], [], color=INK_PRIMARY, marker="D", markersize=7.5, markerfacecolor="#ffd23f",
-               markeredgewidth=1.3, linestyle="none",
-               label="corrected polynomial (degree 4, CIELAB fit), for reference"),
+               markeredgewidth=1.0, linestyle=(0, (3.5, 2.5)), linewidth=1.2,
+               label="dashed, open: CMYKOGB-7 (second 7-ink set)"),
+        Line2D([], [], color=INK_PRIMARY, marker="D", markersize=4.8,
+               markerfacecolor=DIAMOND_FACE, markeredgewidth=0.8, linestyle="none",
+               label="corrected polynomial (4th order, cube-root fit)"),
     ]
-    ax.legend(handles=legend_handles, loc="upper left", frameon=False,
-              fontsize=8, labelcolor=INK_SECONDARY, handlelength=2.6)
+    # Lower right is empty of data (below every curve at n >= 5).
+    ax.legend(handles=legend_handles, loc="lower right", bbox_to_anchor=(1.0, 0.0),
+              fontsize=FS_LEGEND - 0.5, labelcolor=INK_SECONDARY, handlelength=2.4,
+              labelspacing=0.3)
 
     # No in-figure title, subtitle or footnote: the independent-rungs caveat and
     # the linear-family omission are stated in the paper's caption, and the old
     # title asserted a reading ("the Gaussian process holds") that Section 4.7's
     # corrected comparison does not support.
-    fig.subplots_adjust(left=0.075, right=0.985, top=0.97, bottom=0.155)
-    fig.savefig(out_path, dpi=320, facecolor=SURFACE)
+    fig.tight_layout(pad=0.3)
+    save(fig, out_path)
     plt.close(fig)
-    print(f"Wrote: {out_path}")
 
 
 def main() -> None:

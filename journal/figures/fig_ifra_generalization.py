@@ -31,33 +31,25 @@ import os
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MultipleLocator
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS_DIR = os.path.join(HERE, "..", "results", "ifra")
 OUT_PATH = os.path.join(HERE, "fig_ifra_generalization.png")
 
-MODELS = ["poly3", "svm", "mlp_deep", "gaussian_process"]
-MODEL_DISPLAY_NAMES = {
-    "poly3": "Polynomial (3rd order)",
-    "svm": "SVM",
-    "mlp_deep": "MLP (Deep)",
-    "gaussian_process": "Gaussian Process",
-}
+from _style import (FIG_W_075, FS_ANNOT, INK_PRIMARY, INK_SECONDARY, METRIC,
+                    MODEL_STYLE, apply_style, save)
 
-# Fixed categorical color order (Okabe-Ito CVD-safe palette), assigned once per model.
-MODEL_COLORS = {
-    "poly3": "#0072B2",             # blue
-    "svm": "#E69F00",               # orange
-    "mlp_deep": "#009E73",          # bluish green
-    "gaussian_process": "#D55E00",  # vermillion
-}
+MODELS = ["poly3", "svm", "mlp_deep", "gaussian_process"]
+# Fixed per-model color + hatch from the shared style (same identity as in
+# every other figure: Gaussian process blue, polynomial vermillion, ...).
 
 REGIMES = ["within_run", "cross_run", "leave_one_out"]
 REGIME_LABELS = {
     "within_run": "Within-run\n(train & test,\nsame press run)",
     "cross_run": "Cross-run\n(train 1 run,\ntest another)",
-    "leave_one_out": "Leave-one-out\n(train 12 runs pooled,\ntest held-out run)",
+    "leave_one_out": "Leave-one-run-out\n(train 12 runs pooled,\ntest held-out run)",
 }
 
 def load_regime_medians() -> pd.DataFrame:
@@ -84,48 +76,53 @@ def load_regime_medians() -> pd.DataFrame:
 def make_figure(agg: pd.DataFrame, cross_overall: float, loo_overall: float, out_path: str) -> None:
     n_models = len(MODELS)
     n_regimes = len(REGIMES)
-    bar_w = 0.19
-    group_gap = bar_w * 0.15
+    bar_w = 0.2
     x = list(range(n_regimes))
 
-    plt.style.use("seaborn-v0_8-whitegrid")
-    fig, ax = plt.subplots(figsize=(10.0, 6.6))
+    apply_style()
+    fig, ax = plt.subplots(figsize=(FIG_W_075, 3.0))
 
-    offsets = [(i - (n_models - 1) / 2) * (bar_w + group_gap) for i in range(n_models)]
+    offsets = [(i - (n_models - 1) / 2) * bar_w for i in range(n_models)]
 
     for model, off in zip(MODELS, offsets):
+        st = MODEL_STYLE[model]
         vals = agg.loc[model, REGIMES].to_numpy(dtype=float)
         xs = [xi + off for xi in x]
-        bars = ax.bar(
+        # White edge = the surface gap between adjacent bars; the hatch is
+        # drawn in the edge color, so it shows as white texture on the fill.
+        ax.bar(
             xs, vals, width=bar_w,
-            label=MODEL_DISPLAY_NAMES[model],
-            color=MODEL_COLORS[model],
-            edgecolor="#3a3a3a", linewidth=0.4, zorder=3,
+            label=st["label"], color=st["color"], hatch=st["hatch"] or None,
+            edgecolor="white", linewidth=0.8, zorder=3,
         )
         for xi, v in zip(xs, vals):
             if pd.isna(v):
                 continue
-            ax.text(xi, v + 0.35, f"{v:.2f}", ha="center", va="bottom", fontsize=8.2, color="#333333")
+            ax.text(xi, v + 0.06, f"{v:.2f}", ha="center", va="bottom",
+                    fontsize=FS_ANNOT - 0.5, color=INK_PRIMARY)
 
     ax.set_xticks(x)
-    ax.set_xticklabels([REGIME_LABELS[r] for r in REGIMES], fontsize=9.5)
-    ax.set_ylabel(r"Median-of-medians $\Delta E_{00}$")
+    ax.set_xticklabels([REGIME_LABELS[r] for r in REGIMES], color=INK_PRIMARY,
+                       linespacing=1.15)
+    ax.tick_params(axis="x", length=0, pad=3)
+    ax.set_ylabel(f"Median-of-medians {METRIC}")
     all_vals = agg[REGIMES].to_numpy(dtype=float).flatten()
     ymax = all_vals[~pd.isna(all_vals)].max()
-    ax.set_ylim(0, ymax * 1.2)
+    ax.set_ylim(0, ymax * 1.08)
+    ax.yaxis.set_major_locator(MultipleLocator(1))
+    ax.grid(axis="y")
 
-    ax.grid(axis="x", visible=False)
-    ax.grid(axis="y", linestyle="--", alpha=0.35, zorder=0)
-    ax.set_axisbelow(True)
-
-    ax.legend(loc="upper left", frameon=True, framealpha=0.95, fontsize=9, title="Model", ncol=2)
+    # Legend above the axes (outside the data), one row per two models.
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(0.5, 1.0), ncol=2,
+               labelcolor=INK_SECONDARY, columnspacing=1.4, handlelength=1.8,
+               handleheight=0.9)
 
     # No in-figure title or history footnote: the press-variation narrative and
     # the GP kernel-initialization history are stated in the paper's text.
-    fig.tight_layout()
-    fig.savefig(out_path, dpi=320)
+    fig.tight_layout(pad=0.3, rect=(0, 0, 1, 0.88))
+    save(fig, out_path)
     plt.close(fig)
-    print(f"Wrote: {out_path}")
 
 
 def main() -> None:
