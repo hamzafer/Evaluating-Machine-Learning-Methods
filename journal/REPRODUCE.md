@@ -92,6 +92,22 @@ the rebuilt value, prints matched and mismatched cells per table with the CSV pa
 expected value, and exits non-zero on any mismatch. It also confirms that every CSV it read is
 tracked by git.
 
+The round-3 nested cross-validation (Supplementary Table S7: degree and fitting space chosen
+inside each training fold, for the polynomial and the Gaussian process) is
+`journal.pipeline.revision_r3_nested`. It needs the raw data; the KCMYG-5 and CMYKOGB-7 jobs need
+the restricted sets. The 54 jobs took about 5.7 CPU-hours (about 50 minutes with 7 in parallel):
+
+```
+python -m journal.pipeline.revision_r3_nested jobs > jobs.txt   # 45 GP jobs + 9 polynomial jobs
+tr '\n' '\0' < jobs.txt | xargs -0 -P 7 -I{} sh -c 'journal/results/revision_r3/nested_cv/runjob.sh {}'
+python -m journal.pipeline.revision_r3_nested merge
+python -m journal.pipeline.revision_r3_nested controls   # must pass: exits 1 on any failed check
+python -m journal.pipeline.revision_r3_nested paired     # must pass: exits 1 if Table 11 is not reproduced
+python -m journal.pipeline.revision_r3_nested latex      # tables/nested_cv.tex
+```
+
+Outputs are in `journal/results/revision_r3/nested_cv/` (see its `README.md`).
+
 The round-3 degree sweep itself is rerun with `python -m journal.pipeline.revision_r3 sweep`
 (see `journal/results/revision_r3/README.md`).
 
