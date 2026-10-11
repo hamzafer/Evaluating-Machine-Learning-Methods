@@ -49,22 +49,25 @@ experiments (section 4) needs them; rebuilding the tables and figures (section 5
   https://registry.color.org/cmyk-registry/aptec_ccnb): `APTEC_PC10_CardBoard_2023_v1.txt`
   and `APTEC_PC11_CCNB_2023_v1.txt`;
 - FOGRA51 from Fogra (https://fogra.org/en/downloads/work-tools/characterisation-data):
-  the FOGRA51 characterization data file (CMYK and Lab, 1,617 patches), saved as `FOGRA51.txt`.
+  download `F51-52.zip` and take `FOGRA51.txt` (CMYK and Lab, 1,617 patches) from it.
 
 These files hold CMYK and Lab only. Put them in `data/` (any folder works) and run
 
 ```
+mkdir -p data
 python -m journal.pipeline.ingest_coated data/APTEC_PC10_CardBoard_2023_v1.txt \
     data/APTEC_PC11_CCNB_2023_v1.txt data/FOGRA51.txt
 ```
 
 It adds XYZ (0-100, from the measured Lab with the ICC D50 white X, Y, Z = 0.96422, 1, 0.82521)
 and writes `data/cleaned/<same name>.csv`, the files the loader reads. Keep the file names as
-above: the output name is the input name with `.csv`.
+above: the output name is the input name with `.csv`. The recomputed XYZ agrees with the files used
+for the paper to within 3e-14, not bit for bit; section 4 says what this changes.
 
 **APTEC CMYKOGV (n=7).** Download `APTEC_CMYKOGV_Coated_LinearCTV_2025_M1.txt` from
 https://registry.color.org/cmyk-registry/aptec_cmykogvcoated, save it as
-`journal/data/raw/ncolor/APTEC_CMYKOGV_7clr_xyzlab.txt` (the name `ingest_ncolor` expects), and run
+`journal/data/raw/ncolor/APTEC_CMYKOGV_7clr_xyzlab.txt` (the name `ingest_ncolor` expects; create
+the folder first with `mkdir -p journal/data/raw/ncolor`), and run
 
 ```
 python -m journal.pipeline.ingest_ncolor
@@ -96,6 +99,8 @@ The exact fold of every analyzed row is published in `journal/results/revision_r
 (`idx` = row position after filtering and deduplication, and `fold`; for the publicly available
 datasets also `SAMPLE_ID`, and `recipe_group` where folds are grouped). Regenerate them with
 `python -m journal.pipeline.revision_r2 folds`, which asserts that its rows match the dataset loader.
+It needs the seven public datasets; a restricted set whose data are absent (KCMYG-5, CMYKOGB-7) is
+skipped with a note and its published fold file is left unchanged.
 
 ## 4. Rerunning the experiments
 
@@ -121,8 +126,19 @@ cd journal/figures && python fig_de00_loss.py          # likewise the other figu
 `seeds` writes to `journal/results/revision_r2/seeds/`; set `R2_SEEDS_DIR=seeds_laptop` to write
 elsewhere (the six coated datasets were run on the laptop, the canonical platform, into
 `seeds_laptop/`; the full sweep ran on a second machine into `seeds/`). Timings are
-machine-specific. On the same platform (macOS/arm64) everything else reproduces to the precision
-reported. Across platforms, a re-run on Linux/x86-64 with the same pinned environment matched 58 of
+machine-specific.
+
+On the same platform (macOS/arm64), reruns from the data files used for the paper reproduce the
+reported values exactly. `ingest_ncolor` rebuilds the CMYKOGV-7 file byte for byte. The coated files
+rebuilt by `ingest_coated` differ from the paper's only in the last digit of XYZ (at most 3e-14).
+With them, the polynomials, linear models, k-NN, gradient boosting and the Gaussian process give the
+reported values (one Gaussian process maximum differs by 0.001). The iterative and stochastic models
+do not: in our check (20 models on the six coated conditions), 34 of 120 cells moved. SVM, the
+MLPs, the decision tree and the random forest moved by up to 0.143 ΔE00 in a median and 11.118 in
+a maximum (both from the MLPs), and the Powell-refined polynomial by up to 0.009 in a median and
+2.644 in a maximum.
+
+Across platforms, a re-run on Linux/x86-64 with the same pinned environment matched 58 of
 96 model/dataset cells exactly and 76 of 96 to within 0.01 ΔE00, with a worst case of 0.108 ΔE00;
 the largest differences are in the iteratively optimized neural nets (see the paper's
 Reproducibility paragraph).
@@ -156,7 +172,8 @@ from the tracked one. The fragments hold the table rows as printed in the paper.
 `tab:stats`, `tab:timing`, the "This paper" rows of `tab:prior`, and Appendix A `tab:appbest`)
 from the per-dataset `summary.csv` files and the `revision_r1/`, `revision_r2/` and `revision_r3/`
 CSVs. Values are read as CSV strings and rounded half up, as the paper prints them. `--write` puts
-the rows of each table (between `\midrule` and `\bottomrule`) in `journal/results/tables/<label>.tex`.
+the rows of each table (between `\midrule` and `\bottomrule`) in `journal/results/tables/`, one file
+per label with the colon replaced by an underscore (`tab:n3` is `tab_n3.tex`).
 `--check` parses each table of the manuscript by its `\label`, compares every numeric cell with
 the rebuilt value, prints matched and mismatched cells per table with the CSV path of each
 expected value, and exits non-zero on any mismatch. It also confirms that every CSV it read is
