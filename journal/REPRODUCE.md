@@ -93,7 +93,9 @@ expected value, and exits non-zero on any mismatch. It also confirms that every 
 tracked by git.
 
 The round-3 degree sweep itself is rerun with `python -m journal.pipeline.revision_r3 sweep`
-(see `journal/results/revision_r3/README.md`).
+(see `journal/results/revision_r3/README.md`). Its fold-seed check (degree 5 against the
+Gaussian process under shuffle seeds 0/1/2/3/42) is `journal.pipeline.revision_r3_seeds`
+(`jobs`, `run`, `merge`; see `journal/results/revision_r3/seeds/README.md`).
 
 Figures, each generated from the results CSVs (the source CSVs are named in each script's header):
 

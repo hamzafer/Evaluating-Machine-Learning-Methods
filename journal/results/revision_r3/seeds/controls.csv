@@ -1,0 +1,427 @@
+dataset,model,check,published,this_run,pass
+CMYKOGV-7,poly2,median vs revision_r3/degree_sweep_train_vs_heldout.csv,9.953,9.953,True
+CMYKOGV-7,poly2,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,29.749,29.749,True
+CMYKOGV-7,poly2,max vs revision_r3/degree_sweep_train_vs_heldout.csv,78.244,78.244,True
+CMYKOGV-7,poly2,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,poly2_cbrt,median vs revision_r3/degree_sweep_train_vs_heldout.csv,2.656,2.656,True
+CMYKOGV-7,poly2_cbrt,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,8.149,8.149,True
+CMYKOGV-7,poly2_cbrt,max vs revision_r3/degree_sweep_train_vs_heldout.csv,48.535,48.535,True
+CMYKOGV-7,poly2_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,poly3,median vs CMYKOGV-7/summary.csv,5.386,5.386,True
+CMYKOGV-7,poly3,p95 vs CMYKOGV-7/summary.csv,25.15,25.15,True
+CMYKOGV-7,poly3,max vs CMYKOGV-7/summary.csv,59.833,59.833,True
+CMYKOGV-7,poly3,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,poly3_cbrt,median vs CMYKOGV-7/summary.csv,0.83,0.83,True
+CMYKOGV-7,poly3_cbrt,p95 vs CMYKOGV-7/summary.csv,2.982,2.982,True
+CMYKOGV-7,poly3_cbrt,max vs CMYKOGV-7/summary.csv,27.979,27.979,True
+CMYKOGV-7,poly3_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,poly4,median vs CMYKOGV-7/summary.csv,2.08,2.08,True
+CMYKOGV-7,poly4,p95 vs CMYKOGV-7/summary.csv,13.8,13.8,True
+CMYKOGV-7,poly4,max vs CMYKOGV-7/summary.csv,57.988,57.988,True
+CMYKOGV-7,poly4,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,poly4_cbrt,median vs CMYKOGV-7/summary.csv,0.272,0.272,True
+CMYKOGV-7,poly4_cbrt,p95 vs CMYKOGV-7/summary.csv,1.189,1.189,True
+CMYKOGV-7,poly4_cbrt,max vs CMYKOGV-7/summary.csv,18.612,18.612,True
+CMYKOGV-7,poly4_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,poly5,median vs revision_r3/degree_sweep_train_vs_heldout.csv,0.506,0.506,True
+CMYKOGV-7,poly5,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,7.155,7.155,True
+CMYKOGV-7,poly5,max vs revision_r3/degree_sweep_train_vs_heldout.csv,49.724,49.724,True
+CMYKOGV-7,poly5,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,poly5_cbrt,median vs revision_r3/degree_sweep_train_vs_heldout.csv,0.126,0.126,True
+CMYKOGV-7,poly5_cbrt,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,0.663,0.663,True
+CMYKOGV-7,poly5_cbrt,max vs revision_r3/degree_sweep_train_vs_heldout.csv,12.038,12.038,True
+CMYKOGV-7,poly5_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,ridge,median vs CMYKOGV-7/summary.csv,15.009,15.009,True
+CMYKOGV-7,ridge,p95 vs CMYKOGV-7/summary.csv,27.53,27.53,True
+CMYKOGV-7,ridge,max vs CMYKOGV-7/summary.csv,44.107,44.107,True
+CMYKOGV-7,lasso,median vs CMYKOGV-7/summary.csv,14.937,14.937,True
+CMYKOGV-7,lasso,p95 vs CMYKOGV-7/summary.csv,27.875,27.875,True
+CMYKOGV-7,lasso,max vs CMYKOGV-7/summary.csv,50.41,50.41,True
+CMYKOGV-7,elastic,median vs CMYKOGV-7/summary.csv,14.967,14.967,True
+CMYKOGV-7,elastic,p95 vs CMYKOGV-7/summary.csv,27.829,27.829,True
+CMYKOGV-7,elastic,max vs CMYKOGV-7/summary.csv,48.606,48.606,True
+CMYKOGV-7,pcr,median vs CMYKOGV-7/summary.csv,15.009,15.009,True
+CMYKOGV-7,pcr,p95 vs CMYKOGV-7/summary.csv,27.53,27.53,True
+CMYKOGV-7,pcr,max vs CMYKOGV-7/summary.csv,44.107,44.107,True
+CMYKOGV-7,plsr,median vs CMYKOGV-7/summary.csv,18.327,18.327,True
+CMYKOGV-7,plsr,p95 vs CMYKOGV-7/summary.csv,37.555,37.555,True
+CMYKOGV-7,plsr,max vs CMYKOGV-7/summary.csv,63.53,63.53,True
+CMYKOGV-7,knn,median vs CMYKOGV-7/summary.csv,3.669,3.669,True
+CMYKOGV-7,knn,p95 vs CMYKOGV-7/summary.csv,9.213,9.213,True
+CMYKOGV-7,knn,max vs CMYKOGV-7/summary.csv,28.874,28.874,True
+CMYKOGV-7,svm,median vs CMYKOGV-7/summary.csv,2.138,2.138,True
+CMYKOGV-7,svm,p95 vs CMYKOGV-7/summary.csv,11.259,11.259,True
+CMYKOGV-7,svm,max vs CMYKOGV-7/summary.csv,27.735,27.735,True
+CMYKOGV-7,svm,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,decision_tree,median vs CMYKOGV-7/summary.csv,5.337,5.337,True
+CMYKOGV-7,decision_tree,p95 vs CMYKOGV-7/summary.csv,15.833,15.833,True
+CMYKOGV-7,decision_tree,max vs CMYKOGV-7/summary.csv,38.032,38.032,True
+CMYKOGV-7,random_forest,median vs CMYKOGV-7/summary.csv,3.774,3.774,True
+CMYKOGV-7,random_forest,p95 vs CMYKOGV-7/summary.csv,9.512,9.512,True
+CMYKOGV-7,random_forest,max vs CMYKOGV-7/summary.csv,29.535,29.535,True
+CMYKOGV-7,gradient_boost,median vs CMYKOGV-7/summary.csv,3.828,3.828,True
+CMYKOGV-7,gradient_boost,p95 vs CMYKOGV-7/summary.csv,16.099,16.099,True
+CMYKOGV-7,gradient_boost,max vs CMYKOGV-7/summary.csv,35.012,35.012,True
+CMYKOGV-7,mlp_shallow,median vs CMYKOGV-7/summary.csv,3.38,3.38,True
+CMYKOGV-7,mlp_shallow,p95 vs CMYKOGV-7/summary.csv,14.761,14.761,True
+CMYKOGV-7,mlp_shallow,max vs CMYKOGV-7/summary.csv,43.884,43.884,True
+CMYKOGV-7,mlp_deep,median vs CMYKOGV-7/summary.csv,3.579,3.579,True
+CMYKOGV-7,mlp_deep,p95 vs CMYKOGV-7/summary.csv,14.126,14.126,True
+CMYKOGV-7,mlp_deep,max vs CMYKOGV-7/summary.csv,38.548,38.548,True
+CMYKOGV-7,mlp_deep,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,ridge_cbrt,median vs revision_r1/summary/CMYKOGV-7__ridge_cbrt.csv,8.342,8.342,True
+CMYKOGV-7,ridge_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__ridge_cbrt.csv,18.26,18.26,True
+CMYKOGV-7,ridge_cbrt,max vs revision_r1/summary/CMYKOGV-7__ridge_cbrt.csv,34.064,34.064,True
+CMYKOGV-7,ridge_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,lasso_cbrt,median vs revision_r1/summary/CMYKOGV-7__lasso_cbrt.csv,8.561,8.561,True
+CMYKOGV-7,lasso_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__lasso_cbrt.csv,19.101,19.101,True
+CMYKOGV-7,lasso_cbrt,max vs revision_r1/summary/CMYKOGV-7__lasso_cbrt.csv,35.094,35.094,True
+CMYKOGV-7,lasso_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,elastic_cbrt,median vs revision_r1/summary/CMYKOGV-7__elastic_cbrt.csv,8.486,8.486,True
+CMYKOGV-7,elastic_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__elastic_cbrt.csv,18.739,18.739,True
+CMYKOGV-7,elastic_cbrt,max vs revision_r1/summary/CMYKOGV-7__elastic_cbrt.csv,34.604,34.604,True
+CMYKOGV-7,elastic_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,pcr_cbrt,median vs revision_r1/summary/CMYKOGV-7__pcr_cbrt.csv,8.342,8.342,True
+CMYKOGV-7,pcr_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__pcr_cbrt.csv,18.26,18.26,True
+CMYKOGV-7,pcr_cbrt,max vs revision_r1/summary/CMYKOGV-7__pcr_cbrt.csv,34.064,34.064,True
+CMYKOGV-7,pcr_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,plsr_cbrt,median vs revision_r1/summary/CMYKOGV-7__plsr_cbrt.csv,13.292,13.292,True
+CMYKOGV-7,plsr_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__plsr_cbrt.csv,30.776,30.776,True
+CMYKOGV-7,plsr_cbrt,max vs revision_r1/summary/CMYKOGV-7__plsr_cbrt.csv,48.885,48.885,True
+CMYKOGV-7,plsr_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,knn_cbrt,median vs revision_r1/summary/CMYKOGV-7__knn_cbrt.csv,3.308,3.308,True
+CMYKOGV-7,knn_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__knn_cbrt.csv,8.782,8.782,True
+CMYKOGV-7,knn_cbrt,max vs revision_r1/summary/CMYKOGV-7__knn_cbrt.csv,28.985,28.985,True
+CMYKOGV-7,knn_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,svm_cbrt,median vs revision_r1/summary/CMYKOGV-7__svm_cbrt.csv,0.842,0.842,True
+CMYKOGV-7,svm_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__svm_cbrt.csv,2.324,2.324,True
+CMYKOGV-7,svm_cbrt,max vs revision_r1/summary/CMYKOGV-7__svm_cbrt.csv,6.382,6.382,True
+CMYKOGV-7,svm_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,decision_tree_cbrt,median vs revision_r1/summary/CMYKOGV-7__decision_tree_cbrt.csv,5.004,5.004,True
+CMYKOGV-7,decision_tree_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__decision_tree_cbrt.csv,14.565,14.565,True
+CMYKOGV-7,decision_tree_cbrt,max vs revision_r1/summary/CMYKOGV-7__decision_tree_cbrt.csv,30.523,30.523,True
+CMYKOGV-7,decision_tree_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,random_forest_cbrt,median vs revision_r1/summary/CMYKOGV-7__random_forest_cbrt.csv,3.097,3.097,True
+CMYKOGV-7,random_forest_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__random_forest_cbrt.csv,7.813,7.813,True
+CMYKOGV-7,random_forest_cbrt,max vs revision_r1/summary/CMYKOGV-7__random_forest_cbrt.csv,19.731,19.731,True
+CMYKOGV-7,random_forest_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,gradient_boost_cbrt,median vs revision_r1/summary/CMYKOGV-7__gradient_boost_cbrt.csv,2.331,2.331,True
+CMYKOGV-7,gradient_boost_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__gradient_boost_cbrt.csv,7.509,7.509,True
+CMYKOGV-7,gradient_boost_cbrt,max vs revision_r1/summary/CMYKOGV-7__gradient_boost_cbrt.csv,24.049,24.049,True
+CMYKOGV-7,gradient_boost_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,mlp_shallow_cbrt,median vs revision_r1/summary/CMYKOGV-7__mlp_shallow_cbrt.csv,1.769,1.769,True
+CMYKOGV-7,mlp_shallow_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__mlp_shallow_cbrt.csv,5.341,5.341,True
+CMYKOGV-7,mlp_shallow_cbrt,max vs revision_r1/summary/CMYKOGV-7__mlp_shallow_cbrt.csv,13.987,13.987,True
+CMYKOGV-7,mlp_shallow_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,mlp_deep_cbrt,median vs revision_r1/summary/CMYKOGV-7__mlp_deep_cbrt.csv,1.619,1.619,True
+CMYKOGV-7,mlp_deep_cbrt,p95 vs revision_r1/summary/CMYKOGV-7__mlp_deep_cbrt.csv,4.955,4.955,True
+CMYKOGV-7,mlp_deep_cbrt,max vs revision_r1/summary/CMYKOGV-7__mlp_deep_cbrt.csv,14.1,14.1,True
+CMYKOGV-7,mlp_deep_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,gaussian_process_cbrt,median vs CMYKOGV-7/summary.csv,0.16,0.16,True
+CMYKOGV-7,gaussian_process_cbrt,p95 vs CMYKOGV-7/summary.csv,0.677,0.677,True
+CMYKOGV-7,gaussian_process_cbrt,max vs CMYKOGV-7/summary.csv,5.713,5.713,True
+CMYKOGV-7,gaussian_process_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,poly2,median vs revision_r3/degree_sweep_train_vs_heldout.csv,4.098,4.098,True
+KCMYG-5,poly2,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,19.183,19.183,True
+KCMYG-5,poly2,max vs revision_r3/degree_sweep_train_vs_heldout.csv,70.512,70.512,True
+KCMYG-5,poly2,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,poly2_cbrt,median vs revision_r3/degree_sweep_train_vs_heldout.csv,1.649,1.649,True
+KCMYG-5,poly2_cbrt,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,4.189,4.189,True
+KCMYG-5,poly2_cbrt,max vs revision_r3/degree_sweep_train_vs_heldout.csv,25.729,25.729,True
+KCMYG-5,poly2_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,poly3,median vs KCMYG-5/summary.csv,1.457,1.457,True
+KCMYG-5,poly3,p95 vs KCMYG-5/summary.csv,7.928,7.928,True
+KCMYG-5,poly3,max vs KCMYG-5/summary.csv,65.742,65.742,True
+KCMYG-5,poly3,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,poly3_cbrt,median vs KCMYG-5/summary.csv,1.024,1.024,True
+KCMYG-5,poly3_cbrt,p95 vs KCMYG-5/summary.csv,2.389,2.389,True
+KCMYG-5,poly3_cbrt,max vs KCMYG-5/summary.csv,29.23,29.23,True
+KCMYG-5,poly3_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,poly4,median vs KCMYG-5/summary.csv,1.057,1.057,True
+KCMYG-5,poly4,p95 vs KCMYG-5/summary.csv,3.289,3.289,True
+KCMYG-5,poly4,max vs KCMYG-5/summary.csv,55.86,55.86,True
+KCMYG-5,poly4,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,poly4_cbrt,median vs KCMYG-5/summary.csv,0.853,0.853,True
+KCMYG-5,poly4_cbrt,p95 vs KCMYG-5/summary.csv,2.118,2.118,True
+KCMYG-5,poly4_cbrt,max vs KCMYG-5/summary.csv,39.488,39.488,True
+KCMYG-5,poly4_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,poly5,median vs revision_r3/degree_sweep_train_vs_heldout.csv,0.875,0.875,True
+KCMYG-5,poly5,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,2.732,2.732,True
+KCMYG-5,poly5,max vs revision_r3/degree_sweep_train_vs_heldout.csv,113.425,113.425,True
+KCMYG-5,poly5,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,poly5_cbrt,median vs revision_r3/degree_sweep_train_vs_heldout.csv,0.742,0.742,True
+KCMYG-5,poly5_cbrt,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,2.059,2.059,True
+KCMYG-5,poly5_cbrt,max vs revision_r3/degree_sweep_train_vs_heldout.csv,136.611,136.611,True
+KCMYG-5,poly5_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,ridge,median vs KCMYG-5/summary.csv,10.73,10.73,True
+KCMYG-5,ridge,p95 vs KCMYG-5/summary.csv,24.982,24.982,True
+KCMYG-5,ridge,max vs KCMYG-5/summary.csv,50.271,50.271,True
+KCMYG-5,lasso,median vs KCMYG-5/summary.csv,10.681,10.681,True
+KCMYG-5,lasso,p95 vs KCMYG-5/summary.csv,26.169,26.169,True
+KCMYG-5,lasso,max vs KCMYG-5/summary.csv,50.045,50.045,True
+KCMYG-5,elastic,median vs KCMYG-5/summary.csv,10.709,10.709,True
+KCMYG-5,elastic,p95 vs KCMYG-5/summary.csv,25.476,25.476,True
+KCMYG-5,elastic,max vs KCMYG-5/summary.csv,50.057,50.057,True
+KCMYG-5,pcr,median vs KCMYG-5/summary.csv,10.73,10.73,True
+KCMYG-5,pcr,p95 vs KCMYG-5/summary.csv,24.982,24.982,True
+KCMYG-5,pcr,max vs KCMYG-5/summary.csv,50.271,50.271,True
+KCMYG-5,plsr,median vs KCMYG-5/summary.csv,13.572,13.572,True
+KCMYG-5,plsr,p95 vs KCMYG-5/summary.csv,31.858,31.858,True
+KCMYG-5,plsr,max vs KCMYG-5/summary.csv,52.912,52.912,True
+KCMYG-5,knn,median vs KCMYG-5/summary.csv,1.871,1.871,True
+KCMYG-5,knn,p95 vs KCMYG-5/summary.csv,4.935,4.935,True
+KCMYG-5,knn,max vs KCMYG-5/summary.csv,54.927,54.927,True
+KCMYG-5,svm,median vs KCMYG-5/summary.csv,1.185,1.185,True
+KCMYG-5,svm,p95 vs KCMYG-5/summary.csv,6.275,6.275,True
+KCMYG-5,svm,max vs KCMYG-5/summary.csv,38.741,38.741,True
+KCMYG-5,svm,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,decision_tree,median vs KCMYG-5/summary.csv,4.78,4.78,True
+KCMYG-5,decision_tree,p95 vs KCMYG-5/summary.csv,14.196,14.196,True
+KCMYG-5,decision_tree,max vs KCMYG-5/summary.csv,40.78,40.78,True
+KCMYG-5,random_forest,median vs KCMYG-5/summary.csv,2.237,2.237,True
+KCMYG-5,random_forest,p95 vs KCMYG-5/summary.csv,6.925,6.925,True
+KCMYG-5,random_forest,max vs KCMYG-5/summary.csv,37.295,37.295,True
+KCMYG-5,gradient_boost,median vs KCMYG-5/summary.csv,2.825,2.825,True
+KCMYG-5,gradient_boost,p95 vs KCMYG-5/summary.csv,9.941,9.941,True
+KCMYG-5,gradient_boost,max vs KCMYG-5/summary.csv,40.629,40.629,True
+KCMYG-5,mlp_shallow,median vs KCMYG-5/summary.csv,2.013,2.013,True
+KCMYG-5,mlp_shallow,p95 vs KCMYG-5/summary.csv,11.52,11.52,True
+KCMYG-5,mlp_shallow,max vs KCMYG-5/summary.csv,34.424,34.424,True
+KCMYG-5,mlp_deep,median vs KCMYG-5/summary.csv,1.97,1.97,True
+KCMYG-5,mlp_deep,p95 vs KCMYG-5/summary.csv,9.03,9.03,True
+KCMYG-5,mlp_deep,max vs KCMYG-5/summary.csv,35.677,35.677,True
+KCMYG-5,mlp_deep,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,ridge_cbrt,median vs revision_r1/summary/KCMYG-5__ridge_cbrt.csv,5.495,5.495,True
+KCMYG-5,ridge_cbrt,p95 vs revision_r1/summary/KCMYG-5__ridge_cbrt.csv,11.558,11.558,True
+KCMYG-5,ridge_cbrt,max vs revision_r1/summary/KCMYG-5__ridge_cbrt.csv,28.853,28.853,True
+KCMYG-5,ridge_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,lasso_cbrt,median vs revision_r1/summary/KCMYG-5__lasso_cbrt.csv,5.823,5.823,True
+KCMYG-5,lasso_cbrt,p95 vs revision_r1/summary/KCMYG-5__lasso_cbrt.csv,12.155,12.155,True
+KCMYG-5,lasso_cbrt,max vs revision_r1/summary/KCMYG-5__lasso_cbrt.csv,27.381,27.381,True
+KCMYG-5,lasso_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,elastic_cbrt,median vs revision_r1/summary/KCMYG-5__elastic_cbrt.csv,5.681,5.681,True
+KCMYG-5,elastic_cbrt,p95 vs revision_r1/summary/KCMYG-5__elastic_cbrt.csv,11.95,11.95,True
+KCMYG-5,elastic_cbrt,max vs revision_r1/summary/KCMYG-5__elastic_cbrt.csv,28.045,28.045,True
+KCMYG-5,elastic_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,pcr_cbrt,median vs revision_r1/summary/KCMYG-5__pcr_cbrt.csv,5.495,5.495,True
+KCMYG-5,pcr_cbrt,p95 vs revision_r1/summary/KCMYG-5__pcr_cbrt.csv,11.558,11.558,True
+KCMYG-5,pcr_cbrt,max vs revision_r1/summary/KCMYG-5__pcr_cbrt.csv,28.853,28.853,True
+KCMYG-5,pcr_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,plsr_cbrt,median vs revision_r1/summary/KCMYG-5__plsr_cbrt.csv,8.554,8.554,True
+KCMYG-5,plsr_cbrt,p95 vs revision_r1/summary/KCMYG-5__plsr_cbrt.csv,22.917,22.917,True
+KCMYG-5,plsr_cbrt,max vs revision_r1/summary/KCMYG-5__plsr_cbrt.csv,55.742,55.742,True
+KCMYG-5,plsr_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,knn_cbrt,median vs revision_r1/summary/KCMYG-5__knn_cbrt.csv,1.834,1.834,True
+KCMYG-5,knn_cbrt,p95 vs revision_r1/summary/KCMYG-5__knn_cbrt.csv,4.868,4.868,True
+KCMYG-5,knn_cbrt,max vs revision_r1/summary/KCMYG-5__knn_cbrt.csv,51.215,51.215,True
+KCMYG-5,knn_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,svm_cbrt,median vs revision_r1/summary/KCMYG-5__svm_cbrt.csv,0.854,0.854,True
+KCMYG-5,svm_cbrt,p95 vs revision_r1/summary/KCMYG-5__svm_cbrt.csv,2.169,2.169,True
+KCMYG-5,svm_cbrt,max vs revision_r1/summary/KCMYG-5__svm_cbrt.csv,23.056,23.056,True
+KCMYG-5,svm_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,decision_tree_cbrt,median vs revision_r1/summary/KCMYG-5__decision_tree_cbrt.csv,4.744,4.744,True
+KCMYG-5,decision_tree_cbrt,p95 vs revision_r1/summary/KCMYG-5__decision_tree_cbrt.csv,14.452,14.452,True
+KCMYG-5,decision_tree_cbrt,max vs revision_r1/summary/KCMYG-5__decision_tree_cbrt.csv,64.062,64.062,True
+KCMYG-5,decision_tree_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,random_forest_cbrt,median vs revision_r1/summary/KCMYG-5__random_forest_cbrt.csv,2.212,2.212,True
+KCMYG-5,random_forest_cbrt,p95 vs revision_r1/summary/KCMYG-5__random_forest_cbrt.csv,5.966,5.966,True
+KCMYG-5,random_forest_cbrt,max vs revision_r1/summary/KCMYG-5__random_forest_cbrt.csv,61.957,61.957,True
+KCMYG-5,random_forest_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,gradient_boost_cbrt,median vs revision_r1/summary/KCMYG-5__gradient_boost_cbrt.csv,2.451,2.451,True
+KCMYG-5,gradient_boost_cbrt,p95 vs revision_r1/summary/KCMYG-5__gradient_boost_cbrt.csv,8.195,8.195,True
+KCMYG-5,gradient_boost_cbrt,max vs revision_r1/summary/KCMYG-5__gradient_boost_cbrt.csv,33.155,33.155,True
+KCMYG-5,gradient_boost_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,mlp_shallow_cbrt,median vs revision_r1/summary/KCMYG-5__mlp_shallow_cbrt.csv,1.722,1.722,True
+KCMYG-5,mlp_shallow_cbrt,p95 vs revision_r1/summary/KCMYG-5__mlp_shallow_cbrt.csv,4.486,4.486,True
+KCMYG-5,mlp_shallow_cbrt,max vs revision_r1/summary/KCMYG-5__mlp_shallow_cbrt.csv,19.981,19.981,True
+KCMYG-5,mlp_shallow_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,mlp_deep_cbrt,median vs revision_r1/summary/KCMYG-5__mlp_deep_cbrt.csv,1.552,1.552,True
+KCMYG-5,mlp_deep_cbrt,p95 vs revision_r1/summary/KCMYG-5__mlp_deep_cbrt.csv,4.056,4.056,True
+KCMYG-5,mlp_deep_cbrt,max vs revision_r1/summary/KCMYG-5__mlp_deep_cbrt.csv,31.306,31.306,True
+KCMYG-5,mlp_deep_cbrt,per-sample max|diff|,0.0,0.0,True
+KCMYG-5,gaussian_process_cbrt,median vs KCMYG-5/summary.csv,0.764,0.764,True
+KCMYG-5,gaussian_process_cbrt,p95 vs KCMYG-5/summary.csv,2.067,2.067,True
+KCMYG-5,gaussian_process_cbrt,max vs KCMYG-5/summary.csv,16.172,16.172,True
+KCMYG-5,gaussian_process_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,poly2,median vs revision_r3/degree_sweep_train_vs_heldout.csv,6.924,6.924,True
+CMYKOGB-7,poly2,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,30.564,30.564,True
+CMYKOGB-7,poly2,max vs revision_r3/degree_sweep_train_vs_heldout.csv,55.798,55.798,True
+CMYKOGB-7,poly2,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,poly2_cbrt,median vs revision_r3/degree_sweep_train_vs_heldout.csv,3.346,3.346,True
+CMYKOGB-7,poly2_cbrt,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,12.271,12.271,True
+CMYKOGB-7,poly2_cbrt,max vs revision_r3/degree_sweep_train_vs_heldout.csv,33.672,33.672,True
+CMYKOGB-7,poly2_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,poly3,median vs CMYKOGB-7/summary.csv,3.332,3.332,True
+CMYKOGB-7,poly3,p95 vs CMYKOGB-7/summary.csv,24.845,24.845,True
+CMYKOGB-7,poly3,max vs CMYKOGB-7/summary.csv,48.974,48.974,True
+CMYKOGB-7,poly3,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,poly3_cbrt,median vs CMYKOGB-7/summary.csv,1.611,1.611,True
+CMYKOGB-7,poly3_cbrt,p95 vs CMYKOGB-7/summary.csv,7.091,7.091,True
+CMYKOGB-7,poly3_cbrt,max vs CMYKOGB-7/summary.csv,30.274,30.274,True
+CMYKOGB-7,poly3_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,poly4,median vs CMYKOGB-7/summary.csv,1.698,1.698,True
+CMYKOGB-7,poly4,p95 vs CMYKOGB-7/summary.csv,19.662,19.662,True
+CMYKOGB-7,poly4,max vs CMYKOGB-7/summary.csv,48.974,48.974,True
+CMYKOGB-7,poly4,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,poly4_cbrt,median vs CMYKOGB-7/summary.csv,1.132,1.132,True
+CMYKOGB-7,poly4_cbrt,p95 vs CMYKOGB-7/summary.csv,3.843,3.843,True
+CMYKOGB-7,poly4_cbrt,max vs CMYKOGB-7/summary.csv,24.096,24.096,True
+CMYKOGB-7,poly4_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,poly5,median vs revision_r3/degree_sweep_train_vs_heldout.csv,1.738,1.738,True
+CMYKOGB-7,poly5,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,21.467,21.467,True
+CMYKOGB-7,poly5,max vs revision_r3/degree_sweep_train_vs_heldout.csv,136.329,136.329,True
+CMYKOGB-7,poly5,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,poly5_cbrt,median vs revision_r3/degree_sweep_train_vs_heldout.csv,1.192,1.192,True
+CMYKOGB-7,poly5_cbrt,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,9.143,9.143,True
+CMYKOGB-7,poly5_cbrt,max vs revision_r3/degree_sweep_train_vs_heldout.csv,140.306,140.306,True
+CMYKOGB-7,poly5_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,ridge,median vs CMYKOGB-7/summary.csv,11.244,11.244,True
+CMYKOGB-7,ridge,p95 vs CMYKOGB-7/summary.csv,31.188,31.188,True
+CMYKOGB-7,ridge,max vs CMYKOGB-7/summary.csv,50.696,50.696,True
+CMYKOGB-7,lasso,median vs CMYKOGB-7/summary.csv,11.529,11.529,True
+CMYKOGB-7,lasso,p95 vs CMYKOGB-7/summary.csv,30.845,30.845,True
+CMYKOGB-7,lasso,max vs CMYKOGB-7/summary.csv,49.111,49.111,True
+CMYKOGB-7,elastic,median vs CMYKOGB-7/summary.csv,11.44,11.44,True
+CMYKOGB-7,elastic,p95 vs CMYKOGB-7/summary.csv,31.143,31.143,True
+CMYKOGB-7,elastic,max vs CMYKOGB-7/summary.csv,49.817,49.817,True
+CMYKOGB-7,pcr,median vs CMYKOGB-7/summary.csv,11.244,11.244,True
+CMYKOGB-7,pcr,p95 vs CMYKOGB-7/summary.csv,31.188,31.188,True
+CMYKOGB-7,pcr,max vs CMYKOGB-7/summary.csv,50.696,50.696,True
+CMYKOGB-7,plsr,median vs CMYKOGB-7/summary.csv,17.615,17.615,True
+CMYKOGB-7,plsr,p95 vs CMYKOGB-7/summary.csv,37.903,37.903,True
+CMYKOGB-7,plsr,max vs CMYKOGB-7/summary.csv,59.849,59.849,True
+CMYKOGB-7,knn,median vs CMYKOGB-7/summary.csv,2.56,2.56,True
+CMYKOGB-7,knn,p95 vs CMYKOGB-7/summary.csv,8.022,8.022,True
+CMYKOGB-7,knn,max vs CMYKOGB-7/summary.csv,42.641,42.641,True
+CMYKOGB-7,svm,median vs CMYKOGB-7/summary.csv,1.776,1.776,True
+CMYKOGB-7,svm,p95 vs CMYKOGB-7/summary.csv,13.228,13.228,True
+CMYKOGB-7,svm,max vs CMYKOGB-7/summary.csv,42.827,42.827,True
+CMYKOGB-7,svm,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,decision_tree,median vs CMYKOGB-7/summary.csv,5.038,5.038,True
+CMYKOGB-7,decision_tree,p95 vs CMYKOGB-7/summary.csv,15.471,15.471,True
+CMYKOGB-7,decision_tree,max vs CMYKOGB-7/summary.csv,85.477,85.477,True
+CMYKOGB-7,random_forest,median vs CMYKOGB-7/summary.csv,2.322,2.322,True
+CMYKOGB-7,random_forest,p95 vs CMYKOGB-7/summary.csv,8.197,8.197,True
+CMYKOGB-7,random_forest,max vs CMYKOGB-7/summary.csv,69.308,69.308,True
+CMYKOGB-7,gradient_boost,median vs CMYKOGB-7/summary.csv,3.916,3.916,True
+CMYKOGB-7,gradient_boost,p95 vs CMYKOGB-7/summary.csv,16.899,16.899,True
+CMYKOGB-7,gradient_boost,max vs CMYKOGB-7/summary.csv,44.962,44.962,True
+CMYKOGB-7,mlp_shallow,median vs CMYKOGB-7/summary.csv,2.985,2.985,True
+CMYKOGB-7,mlp_shallow,p95 vs CMYKOGB-7/summary.csv,18.08,18.08,True
+CMYKOGB-7,mlp_shallow,max vs CMYKOGB-7/summary.csv,37.836,37.836,True
+CMYKOGB-7,mlp_deep,median vs CMYKOGB-7/summary.csv,2.536,2.536,True
+CMYKOGB-7,mlp_deep,p95 vs CMYKOGB-7/summary.csv,15.106,15.106,True
+CMYKOGB-7,mlp_deep,max vs CMYKOGB-7/summary.csv,39.321,39.321,True
+CMYKOGB-7,mlp_deep,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,ridge_cbrt,median vs revision_r1/summary/CMYKOGB-7__ridge_cbrt.csv,7.415,7.415,True
+CMYKOGB-7,ridge_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__ridge_cbrt.csv,21.037,21.037,True
+CMYKOGB-7,ridge_cbrt,max vs revision_r1/summary/CMYKOGB-7__ridge_cbrt.csv,44.537,44.537,True
+CMYKOGB-7,ridge_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,lasso_cbrt,median vs revision_r1/summary/CMYKOGB-7__lasso_cbrt.csv,7.631,7.631,True
+CMYKOGB-7,lasso_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__lasso_cbrt.csv,21.359,21.359,True
+CMYKOGB-7,lasso_cbrt,max vs revision_r1/summary/CMYKOGB-7__lasso_cbrt.csv,43.623,43.623,True
+CMYKOGB-7,lasso_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,elastic_cbrt,median vs revision_r1/summary/CMYKOGB-7__elastic_cbrt.csv,7.534,7.534,True
+CMYKOGB-7,elastic_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__elastic_cbrt.csv,21.341,21.341,True
+CMYKOGB-7,elastic_cbrt,max vs revision_r1/summary/CMYKOGB-7__elastic_cbrt.csv,43.863,43.863,True
+CMYKOGB-7,elastic_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,pcr_cbrt,median vs revision_r1/summary/CMYKOGB-7__pcr_cbrt.csv,7.415,7.415,True
+CMYKOGB-7,pcr_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__pcr_cbrt.csv,21.037,21.037,True
+CMYKOGB-7,pcr_cbrt,max vs revision_r1/summary/CMYKOGB-7__pcr_cbrt.csv,44.537,44.537,True
+CMYKOGB-7,pcr_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,plsr_cbrt,median vs revision_r1/summary/CMYKOGB-7__plsr_cbrt.csv,15.702,15.702,True
+CMYKOGB-7,plsr_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__plsr_cbrt.csv,31.116,31.116,True
+CMYKOGB-7,plsr_cbrt,max vs revision_r1/summary/CMYKOGB-7__plsr_cbrt.csv,46.509,46.509,True
+CMYKOGB-7,plsr_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,knn_cbrt,median vs revision_r1/summary/CMYKOGB-7__knn_cbrt.csv,2.472,2.472,True
+CMYKOGB-7,knn_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__knn_cbrt.csv,7.066,7.066,True
+CMYKOGB-7,knn_cbrt,max vs revision_r1/summary/CMYKOGB-7__knn_cbrt.csv,39.982,39.982,True
+CMYKOGB-7,knn_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,svm_cbrt,median vs revision_r1/summary/CMYKOGB-7__svm_cbrt.csv,1.173,1.173,True
+CMYKOGB-7,svm_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__svm_cbrt.csv,3.756,3.756,True
+CMYKOGB-7,svm_cbrt,max vs revision_r1/summary/CMYKOGB-7__svm_cbrt.csv,17.984,17.984,True
+CMYKOGB-7,svm_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,decision_tree_cbrt,median vs revision_r1/summary/CMYKOGB-7__decision_tree_cbrt.csv,4.707,4.707,True
+CMYKOGB-7,decision_tree_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__decision_tree_cbrt.csv,15.76,15.76,True
+CMYKOGB-7,decision_tree_cbrt,max vs revision_r1/summary/CMYKOGB-7__decision_tree_cbrt.csv,52.201,52.201,True
+CMYKOGB-7,decision_tree_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,random_forest_cbrt,median vs revision_r1/summary/CMYKOGB-7__random_forest_cbrt.csv,2.098,2.098,True
+CMYKOGB-7,random_forest_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__random_forest_cbrt.csv,6.426,6.426,True
+CMYKOGB-7,random_forest_cbrt,max vs revision_r1/summary/CMYKOGB-7__random_forest_cbrt.csv,37.867,37.867,True
+CMYKOGB-7,random_forest_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,gradient_boost_cbrt,median vs revision_r1/summary/CMYKOGB-7__gradient_boost_cbrt.csv,2.654,2.654,True
+CMYKOGB-7,gradient_boost_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__gradient_boost_cbrt.csv,9.601,9.601,True
+CMYKOGB-7,gradient_boost_cbrt,max vs revision_r1/summary/CMYKOGB-7__gradient_boost_cbrt.csv,28.339,28.339,True
+CMYKOGB-7,gradient_boost_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,mlp_shallow_cbrt,median vs revision_r1/summary/CMYKOGB-7__mlp_shallow_cbrt.csv,2.008,2.008,True
+CMYKOGB-7,mlp_shallow_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__mlp_shallow_cbrt.csv,7.176,7.176,True
+CMYKOGB-7,mlp_shallow_cbrt,max vs revision_r1/summary/CMYKOGB-7__mlp_shallow_cbrt.csv,25.278,25.278,True
+CMYKOGB-7,mlp_shallow_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,mlp_deep_cbrt,median vs revision_r1/summary/CMYKOGB-7__mlp_deep_cbrt.csv,1.821,1.821,True
+CMYKOGB-7,mlp_deep_cbrt,p95 vs revision_r1/summary/CMYKOGB-7__mlp_deep_cbrt.csv,5.992,5.992,True
+CMYKOGB-7,mlp_deep_cbrt,max vs revision_r1/summary/CMYKOGB-7__mlp_deep_cbrt.csv,23.037,23.037,True
+CMYKOGB-7,mlp_deep_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGB-7,gaussian_process_cbrt,median vs CMYKOGB-7/summary.csv,0.977,0.977,True
+CMYKOGB-7,gaussian_process_cbrt,p95 vs CMYKOGB-7/summary.csv,2.996,2.996,True
+CMYKOGB-7,gaussian_process_cbrt,max vs CMYKOGB-7/summary.csv,14.27,14.27,True
+CMYKOGB-7,gaussian_process_cbrt,per-sample max|diff|,0.0,0.0,True
+PC10-CMYK,gaussian_process_cbrt,median vs PC10-CMYK/summary.csv,0.05,0.05,True
+PC10-CMYK,gaussian_process_cbrt,p95 vs PC10-CMYK/summary.csv,0.229,0.229,True
+PC10-CMYK,gaussian_process_cbrt,max vs PC10-CMYK/summary.csv,2.723,2.723,True
+PC10-CMYK,gaussian_process_cbrt,per-sample max|diff|,0.0,0.0,True
+PC10-CMYK,poly2,median vs revision_r3/degree_sweep_train_vs_heldout.csv,3.462,3.462,True
+PC10-CMYK,poly2,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,23.067,23.067,True
+PC10-CMYK,poly2,max vs revision_r3/degree_sweep_train_vs_heldout.csv,55.806,55.806,True
+PC10-CMYK,poly2,per-sample max|diff|,0.0,0.0,True
+PC10-CMYK,poly2_cbrt,median vs revision_r3/degree_sweep_train_vs_heldout.csv,0.786,0.786,True
+PC10-CMYK,poly2_cbrt,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,3.259,3.259,True
+PC10-CMYK,poly2_cbrt,max vs revision_r3/degree_sweep_train_vs_heldout.csv,12.315,12.315,True
+PC10-CMYK,poly2_cbrt,per-sample max|diff|,0.0,0.0,True
+PC10-CMYK,poly3,median vs PC10-CMYK/summary.csv,0.942,0.942,True
+PC10-CMYK,poly3,p95 vs PC10-CMYK/summary.csv,8.31,8.31,True
+PC10-CMYK,poly3,max vs PC10-CMYK/summary.csv,33.978,33.978,True
+PC10-CMYK,poly3,per-sample max|diff|,0.0,0.0,True
+PC10-CMYK,poly3_cbrt,median vs PC10-CMYK/summary.csv,0.219,0.219,True
+PC10-CMYK,poly3_cbrt,p95 vs PC10-CMYK/summary.csv,0.759,0.759,True
+PC10-CMYK,poly3_cbrt,max vs PC10-CMYK/summary.csv,3.506,3.506,True
+PC10-CMYK,poly3_cbrt,per-sample max|diff|,0.0,0.0,True
+PC10-CMYK,poly4,median vs PC10-CMYK/summary.csv,0.246,0.246,True
+PC10-CMYK,poly4,p95 vs PC10-CMYK/summary.csv,2.811,2.811,True
+PC10-CMYK,poly4,max vs PC10-CMYK/summary.csv,25.385,25.385,True
+PC10-CMYK,poly4,per-sample max|diff|,0.0,0.0,True
+PC10-CMYK,poly4_cbrt,median vs PC10-CMYK/summary.csv,0.112,0.112,True
+PC10-CMYK,poly4_cbrt,p95 vs PC10-CMYK/summary.csv,0.387,0.387,True
+PC10-CMYK,poly4_cbrt,max vs PC10-CMYK/summary.csv,2.625,2.625,True
+PC10-CMYK,poly4_cbrt,per-sample max|diff|,0.0,0.0,True
+PC10-CMYK,poly5,median vs revision_r3/degree_sweep_train_vs_heldout.csv,0.104,0.104,True
+PC10-CMYK,poly5,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,0.899,0.899,True
+PC10-CMYK,poly5,max vs revision_r3/degree_sweep_train_vs_heldout.csv,14.065,14.065,True
+PC10-CMYK,poly5,per-sample max|diff|,0.0,0.0,True
+PC10-CMYK,poly5_cbrt,median vs revision_r3/degree_sweep_train_vs_heldout.csv,0.084,0.084,True
+PC10-CMYK,poly5_cbrt,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,0.323,0.323,True
+PC10-CMYK,poly5_cbrt,max vs revision_r3/degree_sweep_train_vs_heldout.csv,2.116,2.116,True
+PC10-CMYK,poly5_cbrt,per-sample max|diff|,0.0,0.0,True
+CMYKOGV-7,poly5_cbrt vs GP,paired median_diff vs paired_poly5cbrt_vs_gpcbrt.csv,-0.0336485,-0.0336485,True
+CMYKOGV-7,poly5_cbrt vs GP,paired median_diff_lo vs paired_poly5cbrt_vs_gpcbrt.csv,-0.038810075,-0.038810075,True
+CMYKOGV-7,poly5_cbrt vs GP,paired median_diff_hi vs paired_poly5cbrt_vs_gpcbrt.csv,-0.028985975,-0.028985975,True
+CMYKOGV-7,poly5_cbrt vs GP,paired frac_a_better vs paired_poly5cbrt_vs_gpcbrt.csv,0.629921259843,0.629921259843,True
+CMYKOGV-7,poly5_cbrt vs GP,paired p vs paired_poly5cbrt_vs_gpcbrt.csv,6.73064994016e-45,6.73064994016e-45,True
+CMYKOGV-7,poly5_cbrt vs GP,paired p_holm vs paired_poly5cbrt_vs_gpcbrt.csv,1.34612998803e-44,1.34612998803e-44,True
+KCMYG-5,poly5_cbrt vs GP,paired median_diff vs paired_poly5cbrt_vs_gpcbrt.csv,-0.021635,-0.021635,True
+KCMYG-5,poly5_cbrt vs GP,paired median_diff_lo vs paired_poly5cbrt_vs_gpcbrt.csv,-0.04218885,-0.04218885,True
+KCMYG-5,poly5_cbrt vs GP,paired median_diff_hi vs paired_poly5cbrt_vs_gpcbrt.csv,0.0004864625,0.0004864625,True
+KCMYG-5,poly5_cbrt vs GP,paired frac_a_better vs paired_poly5cbrt_vs_gpcbrt.csv,0.542457091238,0.542457091238,True
+KCMYG-5,poly5_cbrt vs GP,paired p vs paired_poly5cbrt_vs_gpcbrt.csv,0.000188086403802,0.000188086403802,True
+KCMYG-5,poly5_cbrt vs GP,paired p_holm vs paired_poly5cbrt_vs_gpcbrt.csv,0.000188086403802,0.000188086403802,True
+CMYKOGB-7,poly5_cbrt vs GP,paired median_diff vs paired_poly5cbrt_vs_gpcbrt.csv,0.214882,0.214882,True
+CMYKOGB-7,poly5_cbrt vs GP,paired median_diff_lo vs paired_poly5cbrt_vs_gpcbrt.csv,0.1602761,0.1602761,True
+CMYKOGB-7,poly5_cbrt vs GP,paired median_diff_hi vs paired_poly5cbrt_vs_gpcbrt.csv,0.259901225,0.259901225,True
+CMYKOGB-7,poly5_cbrt vs GP,paired frac_a_better vs paired_poly5cbrt_vs_gpcbrt.csv,0.396,0.396,True
+CMYKOGB-7,poly5_cbrt vs GP,paired p vs paired_poly5cbrt_vs_gpcbrt.csv,3.85351040425e-49,3.85351040425e-49,True
+CMYKOGB-7,poly5_cbrt vs GP,paired p_holm vs paired_poly5cbrt_vs_gpcbrt.csv,1.15605312128e-48,1.15605312128e-48,True
+PC10-CMYK,poly5_cbrt vs GP,paired median_diff vs paired_poly5cbrt_vs_gpcbrt.csv,0.034125,0.034125,True
+PC10-CMYK,poly5_cbrt vs GP,paired median_diff_lo vs paired_poly5cbrt_vs_gpcbrt.csv,0.0314265,0.0314265,True
+PC10-CMYK,poly5_cbrt vs GP,paired median_diff_hi vs paired_poly5cbrt_vs_gpcbrt.csv,0.0366102,0.0366102,True
+PC10-CMYK,poly5_cbrt vs GP,paired frac_a_better vs paired_poly5cbrt_vs_gpcbrt.csv,0.217884130982,0.217884130982,True
+PC10-CMYK,poly5_cbrt vs GP,paired p vs paired_poly5cbrt_vs_gpcbrt.csv,1.11680657654e-124,1.11680657654e-124,True
+PC10-CMYK,poly5_cbrt vs GP,paired p_holm vs paired_poly5cbrt_vs_gpcbrt.csv,4.46722630615e-124,4.46722630615e-124,True
