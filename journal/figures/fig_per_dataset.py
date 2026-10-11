@@ -21,7 +21,9 @@ Encoding: the marker is the median, the thin bar runs from the median to the
 95th percentile (P95), closed by a short tick. Filled markers are models fitted
 on XYZ; hollow markers are fitted in cube-root space, added after the XYZ
 results had been obtained (post hoc). The 4th-order polynomial is post hoc in
-both spaces, so the legend states only the fit space. Color is the
+both spaces, so the legend states only the fit space. One boxed "How to read"
+key in the empty sixth cell gives all three encodings, and every panel carries
+its own x-axis label. Color is the
 model family (Gaussian process blue, polynomial vermillion, as in _style);
 marker shape tells the polynomial degrees apart.
 
@@ -41,6 +43,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
+from matplotlib.legend_handler import HandlerBase
 from matplotlib.lines import Line2D
 import pandas as pd
 
@@ -141,6 +144,22 @@ def draw_panel(ax, df: pd.DataFrame, title: str, show_labels: bool) -> None:
     ax.set_title(title, fontsize=FS_LABEL, color=INK_PRIMARY, loc="left", pad=3)
 
 
+class _KeyHandler(HandlerBase):
+    """Legend glyph for one row: dot (median), bar, end tick (P95)."""
+
+    def create_artists(self, legend, orig_handle, xdescent, ydescent, width,
+                       height, fontsize, trans):
+        y = height / 2 - ydescent
+        x0, x1 = -xdescent, width - xdescent
+        bar = Line2D([x0, x1], [y, y], color=INK_SECONDARY, linewidth=1.0,
+                     transform=trans)
+        tick = Line2D([x1], [y], marker="|", markersize=6, markeredgewidth=1.1,
+                      color=INK_SECONDARY, linestyle="none", transform=trans)
+        dot = Line2D([x0], [y], marker="o", markersize=5.2, color=INK_SECONDARY,
+                     markeredgewidth=0.6, linestyle="none", transform=trans)
+        return [bar, tick, dot]
+
+
 def make_figure(data: dict[str, pd.DataFrame]) -> None:
     apply_style()
     fig, axes = plt.subplots(3, 2, figsize=(LINEWIDTH_IN, 6.9), sharex=True)
@@ -149,13 +168,13 @@ def make_figure(data: dict[str, pd.DataFrame]) -> None:
         draw_panel(flat[i], data[ds], title, show_labels=(i % 2 == 0))
     for ax in flat[:5]:
         ax.xaxis.set_tick_params(labelbottom=True)
-    for ax in (flat[4], flat[3]):
         ax.set_xlabel(f"{METRIC} (log scale)")
 
-    # Sixth slot: the legend (encoding only; model names are on the rows).
+    # Sixth slot: one boxed key (encoding only; model names are on the rows).
     leg_ax = flat[5]
     leg_ax.axis("off")
     handles = [
+        Line2D([], [], color=INK_SECONDARY, label="Dot: median;\nbar end: 95th percentile"),
         Line2D([], [], color=INK_SECONDARY, marker="o", markersize=5.2,
                markerfacecolor=INK_SECONDARY, markeredgewidth=0.6, linestyle="none",
                label="Filled: fitted in XYZ"),
@@ -163,20 +182,16 @@ def make_figure(data: dict[str, pd.DataFrame]) -> None:
                markerfacecolor=SURFACE, markeredgewidth=1.2, linestyle="none",
                label="Hollow: fitted in cube root"),
     ]
-    leg_ax.legend(handles=handles, loc="upper left", bbox_to_anchor=(0.0, 0.92),
-                  fontsize=FS_LEGEND, labelcolor=INK_PRIMARY, handlelength=1.2,
-                  labelspacing=0.7, borderaxespad=0)
-    # Key glyph: one example row, labeled, in axes coordinates.
-    gy, gx0, gx1 = 0.30, 0.12, 0.55
-    leg_ax.plot([gx0, gx1], [gy, gy], color=INK_SECONDARY, linewidth=1.0,
-                transform=leg_ax.transAxes, clip_on=False)
-    leg_ax.plot([gx1], [gy], marker="|", markersize=6, markeredgewidth=1.1,
-                color=INK_SECONDARY, transform=leg_ax.transAxes, clip_on=False)
-    leg_ax.plot([gx0], [gy], marker="o", markersize=5.2, color=INK_SECONDARY,
-                markeredgewidth=0.6, transform=leg_ax.transAxes, clip_on=False)
-    for x, text in ((gx0, "median"), (gx1, "95th percentile")):
-        leg_ax.text(x, gy - 0.08, text, transform=leg_ax.transAxes, ha="center",
-                    va="top", fontsize=FS_LEGEND, color=INK_PRIMARY)
+    leg = leg_ax.legend(handles=handles, handler_map={handles[0]: _KeyHandler()},
+                        title="How to read", loc="center left",
+                        bbox_to_anchor=(0.04, 0.5), fontsize=FS_LEGEND,
+                        title_fontsize=FS_LEGEND, labelcolor=INK_PRIMARY,
+                        handlelength=2.6, labelspacing=0.8, borderpad=0.8,
+                        frameon=True, alignment="left")
+    leg.get_frame().set_edgecolor(INK_MUTED)
+    leg.get_frame().set_linewidth(0.6)
+    leg.get_title().set_color(INK_PRIMARY)
+    leg.set_in_layout(False)   # keep the five panels the same size as before
 
     fig.tight_layout(pad=0.3, h_pad=0.9, w_pad=0.6)
     save(fig, OUT_PNG)
