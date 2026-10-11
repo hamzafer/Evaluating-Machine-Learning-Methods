@@ -130,12 +130,14 @@ machine-specific.
 
 On the same platform (macOS/arm64), reruns reproduce the reported values exactly, also from the
 public files rebuilt as in section 2 (the CMYKOGV-7 file is rebuilt byte for byte; for the coated
-files, all 20 models on the six conditions, 120 model/dataset cells, matched in our check). The
-iterative and stochastic models (SVM, the MLPs, the tree models and the Powell-refined polynomial)
-depend on the data down to the last digit. An earlier
+files, all 20 models on the six conditions, 120 model/dataset cells, matched in our check).
+SVM, the MLPs, the tree models and the Powell-refined polynomial depend on the data down to the
+last digit (the Gaussian process, in one maximum, by 0.001). An earlier
 version of `ingest_coated`, whose XYZ differed from the paper's files by at most 3e-14, moved 34 of
 these 120 cells, by up to 0.143 ΔE00 in a median and 11.118 in a maximum (the MLPs). Data prepared
-in any other way can move these models by similar amounts.
+in any other way can move these models by similar amounts. A rerun also appends to
+`journal/results/run_log.tsv` and may swap the order of rows with equal medians in `summary.csv`;
+compare values, not file bytes.
 
 Across platforms, a re-run on Linux/x86-64 with the same pinned environment matched 58 of
 96 model/dataset cells exactly and 76 of 96 to within 0.01 ΔE00, with a worst case of 0.108 ΔE00;

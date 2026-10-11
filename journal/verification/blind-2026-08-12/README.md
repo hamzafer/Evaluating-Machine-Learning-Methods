@@ -19,9 +19,9 @@ PC10-CMYK, PC11-CMY and FOGRA51-CMY; the spec did not ask for PC11-CMYK or FOGRA
 rows as received. It is therefore compared with our results before duplicate removal, not with the
 current tables. On these four, its Gaussian process medians agree with ours to within 0.003 ΔE00
 (PC11-CMY exact) and its poly3 medians to within 0.001. On the five other conditions it ran
-(KCMYG-5, CMYKOGV-7, CMYKOGB-7 and two newsprint runs, all with its own recipe-grouped folds), its
-Gaussian process medians differ from ours by 0.003 to 0.053 ΔE00; on CMYKOGV-7 it kept all 3534
-rows, against our 3302 after duplicate removal. It wrote its own CGATS parser, Lab→XYZ and
+(KCMYG-5, CMYKOGV-7, CMYKOGB-7 and two newsprint runs), its Gaussian process medians differ from
+ours by 0.003 to 0.053 ΔE00; on CMYKOGV-7 it kept all 3534 rows, against our 3302 after duplicate
+removal. It used its own recipe-grouped folds throughout. It wrote its own CGATS parser, Lab→XYZ and
 spectral→XYZ conversions, CV, and ΔE00 path.
 
 **It endorsed our CMYKOGV-7 deduplication** after initially using all 3534 rows: repeated
