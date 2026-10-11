@@ -1,0 +1,17 @@
+\begin{tabular}{@{}lccccccccc@{}}
+\toprule
+ & \multicolumn{3}{c}{\textbf{Nested GP}} & \multicolumn{3}{c}{\textbf{Nested polynomial}} & \textbf{Difference} & \multicolumn{2}{c}{\textbf{Choice per outer fold}} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){9-10}
+\textbf{Dataset} & \textbf{Median} & \textbf{P95} & \textbf{Max} & \textbf{Median} & \textbf{P95} & \textbf{Max} & \textbf{of medians [95\% CI]} & \textbf{GP} & \textbf{Polynomial} \\
+\midrule
+PC10-CMY & 0.041 & 0.148 & 2.270 & 0.071 & 0.222 & 1.955 & $-$0.030 [$-$0.035, $-$0.026] & C C C C C & 5C 5C 5C 5C 5C \\
+PC11-CMY & 0.043 & 0.131 & 1.749 & 0.062 & 0.162 & 1.840 & $-$0.020 [$-$0.023, $-$0.016] & C C C C C & 5C 5C 5C 5C 5C \\
+FOGRA51-CMY & 0.055 & 0.175 & 0.679 & 0.080 & 0.244 & 0.825 & $-$0.025 [$-$0.030, $-$0.021] & C X C C X & 5C 5C 5X 5C 5X \\
+PC10-CMYK & 0.050 & 0.229 & 2.723 & 0.084 & 0.323 & 2.116 & $-$0.034 [$-$0.037, $-$0.031] & C C C C C & 5C 5C 5C 5C 5C \\
+PC11-CMYK & 0.052 & 0.216 & 1.766 & 0.083 & 0.276 & 1.795 & $-$0.032 [$-$0.035, $-$0.029] & C C C C C & 5C 5C 5C 5C 5C \\
+FOGRA51-CMYK & 0.069 & 0.217 & 2.106 & 0.096 & 0.287 & 2.531 & $-$0.027 [$-$0.030, $-$0.023] & C X C C C & 5C 5C 5C 5C 5C \\
+KCMYG-5 & 0.764 & 2.067 & 16.172 & 0.742 & 2.059 & 136.611 & 0.022 [$-$0.000, 0.042] & C C C C C & 5C 5C 5C 5C 5C \\
+CMYKOGV-7 & 0.160 & 0.677 & 5.713 & 0.126 & 0.663 & 12.038 & 0.034 [0.029, 0.039] & C C C C C & 5C 5C 5C 5C 5C \\
+CMYKOGB-7 & 0.977 & 2.996 & 14.270 & 1.132 & 3.843 & 24.096 & $-$0.154 [$-$0.189, $-$0.120] & C C C C C & 4C 4C 4C 4C 4C \\
+\bottomrule
+\end{tabular}

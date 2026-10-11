@@ -1,0 +1,20 @@
+{
+ "selected": "d5_cbrt",
+ "inner_median": {
+  "d5_cbrt": 0.09735026072424847,
+  "d5_xyz": 0.0987312230744081,
+  "d4_cbrt": 0.17112752906038764,
+  "d4_xyz": 0.20080815051306847,
+  "d3_cbrt": 0.43500671061785195,
+  "d3_xyz": 0.7792815210676678,
+  "d2_cbrt": 1.0061129246663103,
+  "d2_xyz": 3.1243746536343213
+ },
+ "seconds_fixed": 0.1,
+ "seconds_inner": 0.3,
+ "innertuned_same_choice": true,
+ "innertuned_max_abs_diff": 0.0,
+ "dataset": "FOGRA51-CMYK",
+ "family": "poly",
+ "fold": 4
+}

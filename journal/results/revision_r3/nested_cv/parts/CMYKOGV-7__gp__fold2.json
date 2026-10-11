@@ -1,0 +1,12 @@
+{
+ "selected": "gp_cbrt",
+ "inner_median": {
+  "gp_cbrt": 0.16445914975428508,
+  "gp_xyz": 0.2524707898599389
+ },
+ "seconds_fixed": 434.1,
+ "seconds_inner": 1298.2,
+ "dataset": "CMYKOGV-7",
+ "family": "gp",
+ "fold": 2
+}

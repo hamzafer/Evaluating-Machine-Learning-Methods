@@ -1,0 +1,20 @@
+{
+ "selected": "d5_cbrt",
+ "inner_median": {
+  "d5_cbrt": 0.06626193223800461,
+  "d5_xyz": 0.06949145484747607,
+  "d4_cbrt": 0.08612473946475632,
+  "d4_xyz": 0.10366964162546426,
+  "d3_cbrt": 0.14380874715511055,
+  "d3_xyz": 0.24160574957731906,
+  "d2_cbrt": 0.4519739809401243,
+  "d2_xyz": 1.5456794413943378
+ },
+ "seconds_fixed": 0.0,
+ "seconds_inner": 0.0,
+ "innertuned_same_choice": true,
+ "innertuned_max_abs_diff": 0.0,
+ "dataset": "PC11-CMY",
+ "family": "poly",
+ "fold": 3
+}
