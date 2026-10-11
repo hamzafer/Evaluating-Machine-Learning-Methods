@@ -50,7 +50,9 @@ def main(paths) -> None:
             print(f'  note: the loader expects one of {sorted(expected)}; '
                   f'{out.name} will not be read unless renamed')
         df = convert(p)
-        df.to_csv(out, index=False)
+        # full precision: importing colour sets numpy's legacy print mode, which
+        # would otherwise write 12 significant digits
+        df.to_csv(out, index=False, float_format='%.17g')
         print(f'  {p.name}: {len(df)} rows -> {out}')
 
 
