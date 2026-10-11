@@ -1,0 +1,54 @@
+\begin{table}[H]
+\caption{Polynomial degree sweep, training against held-out $\Delta E_{00}$, degrees 2 to 5, fitted on XYZ and on $\sqrt[3]{\mathrm{XYZ}}$ (cbrt), with the folds of the main text. Training: the statistic over the training rows of each fold (the model scored on the data it was fitted to), averaged over the five folds. Held-out: the statistic of the pooled held-out errors, every sample predicted once (the convention of every table in the paper). Gap: held-out minus training statistic within each fold, averaged over the five folds. Because the held-out column is pooled and the training column is a fold mean, the gap is not exactly the difference of the two columns. A training fold is about four times larger than its held-out fold, so a maximum-based gap can be negative. Source: \texttt{journal/results/revision\_r3/degree\_sweep\_train\_vs\_heldout.csv}.\label{tab:s_degree_train_heldout}}
+\begin{adjustwidth}{-\extralength}{0cm}
+\centering
+\scriptsize
+\begin{tabular}{@{}llccccccccc@{}}
+\toprule
+& & \multicolumn{3}{c}{\textbf{Training}} & \multicolumn{3}{c}{\textbf{Held-out}} & \multicolumn{3}{c}{\textbf{Gap}} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}
+\textbf{Degree} & \textbf{Space} & \textbf{Median} & \textbf{P95} & \textbf{Max} & \textbf{Median} & \textbf{P95} & \textbf{Max} & \textbf{Median} & \textbf{P95} & \textbf{Max} \\
+\midrule
+\multicolumn{11}{@{}l}{\emph{CMYKOGV-7}} \\
+2 & XYZ & 9.975 & 29.461 & 75.460 & 9.953 & 29.749 & 78.244 & $+$0.038 & $+$0.367 & $-$7.274 \\
+2 & cbrt & 2.640 & 8.072 & 43.877 & 2.656 & 8.149 & 48.535 & $+$0.013 & $+$0.098 & $-$6.125 \\
+3 & XYZ & 5.212 & 23.877 & 57.004 & 5.386 & 25.150 & 59.833 & $+$0.121 & $+$0.831 & $-$4.399 \\
+3 & cbrt & 0.808 & 2.741 & 14.219 & 0.830 & 2.982 & 27.979 & $+$0.029 & $+$0.216 & $+$3.913 \\
+4 & XYZ & 1.842 & 10.854 & 37.678 & 2.080 & 13.800 & 57.988 & $+$0.226 & $+$3.159 & $+$9.947 \\
+4 & cbrt & 0.245 & 0.851 & 3.126 & 0.272 & 1.189 & 18.612 & $+$0.029 & $+$0.308 & $+$6.705 \\
+5 & XYZ & 0.373 & 2.935 & 10.774 & 0.506 & 7.155 & 49.724 & $+$0.133 & $+$4.110 & $+$32.737 \\
+5 & cbrt & 0.090 & 0.293 & 2.306 & 0.126 & 0.663 & 12.038 & $+$0.036 & $+$0.354 & $+$8.181 \\
+\midrule
+\multicolumn{11}{@{}l}{\emph{KCMYG-5}} \\
+2 & XYZ & 4.049 & 18.819 & 60.138 & 4.098 & 19.183 & 70.512 & $+$0.034 & $+$0.738 & $-$10.870 \\
+2 & cbrt & 1.641 & 4.107 & 21.497 & 1.649 & 4.189 & 25.729 & $+$0.019 & $+$0.045 & $-$4.007 \\
+3 & XYZ & 1.445 & 7.833 & 41.817 & 1.457 & 7.928 & 65.742 & $+$0.021 & $-$0.036 & $+$2.747 \\
+3 & cbrt & 1.000 & 2.296 & 5.457 & 1.024 & 2.389 & 29.230 & $+$0.024 & $+$0.069 & $+$8.961 \\
+4 & XYZ & 1.007 & 2.913 & 16.420 & 1.057 & 3.289 & 55.860 & $+$0.059 & $+$0.292 & $+$20.657 \\
+4 & cbrt & 0.797 & 1.917 & 3.865 & 0.853 & 2.118 & 39.488 & $+$0.060 & $+$0.201 & $+$17.450 \\
+5 & XYZ & 0.762 & 2.192 & 5.265 & 0.875 & 2.732 & 113.425 & $+$0.116 & $+$0.493 & $+$78.377 \\
+5 & cbrt & 0.631 & 1.763 & 3.404 & 0.742 & 2.059 & 136.611 & $+$0.113 & $+$0.280 & $+$94.602 \\
+\midrule
+\multicolumn{11}{@{}l}{\emph{CMYKOGB-7}} \\
+2 & XYZ & 6.779 & 29.719 & 53.029 & 6.924 & 30.564 & 55.798 & $+$0.235 & $+$0.452 & $-$2.455 \\
+2 & cbrt & 3.341 & 11.754 & 32.725 & 3.346 & 12.271 & 33.672 & $+$0.028 & $+$0.270 & $-$1.289 \\
+3 & XYZ & 3.189 & 22.926 & 47.001 & 3.332 & 24.845 & 48.974 & $+$0.124 & $+$1.376 & $-$0.741 \\
+3 & cbrt & 1.514 & 5.349 & 19.245 & 1.611 & 7.091 & 30.274 & $+$0.093 & $+$1.392 & $+$3.771 \\
+4 & XYZ & 1.461 & 14.300 & 34.082 & 1.698 & 19.662 & 48.974 & $+$0.242 & $+$5.355 & $+$9.707 \\
+4 & cbrt & 0.892 & 2.369 & 5.681 & 1.132 & 3.843 & 24.096 & $+$0.241 & $+$1.445 & $+$11.098 \\
+5 & XYZ & 0.755 & 4.841 & 17.304 & 1.738 & 21.467 & 136.329 & $+$0.994 & $+$16.717 & $+$92.151 \\
+5 & cbrt & 0.485 & 1.738 & 5.401 & 1.192 & 9.143 & 140.306 & $+$0.709 & $+$7.962 & $+$126.868 \\
+\midrule
+\multicolumn{11}{@{}l}{\emph{PC10-CMYK}} \\
+2 & XYZ & 3.406 & 22.528 & 53.420 & 3.462 & 23.067 & 55.806 & $+$0.042 & $+$1.462 & $-$4.856 \\
+2 & cbrt & 0.777 & 3.159 & 10.768 & 0.786 & 3.259 & 12.315 & $+$0.010 & $+$0.043 & $-$0.850 \\
+3 & XYZ & 0.930 & 7.512 & 28.559 & 0.942 & 8.310 & 33.978 & $+$0.013 & $+$0.835 & $-$1.336 \\
+3 & cbrt & 0.213 & 0.716 & 2.849 & 0.219 & 0.759 & 3.506 & $+$0.007 & $+$0.025 & $-$0.218 \\
+4 & XYZ & 0.235 & 2.318 & 20.688 & 0.246 & 2.811 & 25.385 & $+$0.012 & $+$0.355 & $-$0.443 \\
+4 & cbrt & 0.105 & 0.342 & 1.629 & 0.112 & 0.387 & 2.625 & $+$0.005 & $+$0.043 & $+$0.117 \\
+5 & XYZ & 0.098 & 0.683 & 5.523 & 0.104 & 0.899 & 14.065 & $+$0.007 & $+$0.271 & $+$5.046 \\
+5 & cbrt & 0.077 & 0.243 & 1.351 & 0.084 & 0.323 & 2.116 & $+$0.007 & $+$0.076 & $+$0.283 \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth}
+\end{table}
