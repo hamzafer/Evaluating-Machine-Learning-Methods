@@ -4,18 +4,24 @@ Figure (round-3 revision, replaces the n-colour ladder as Figure 4): median and
 95th-percentile CIEDE2000 error per model, one panel per dataset.
 
 Each panel is one dataset and printing system. No line joins different
-datasets, and every panel shows the same seven models in the same row order:
+datasets, and every panel shows the same nine models in the same row order:
 
     Gaussian process, XYZ             (pre-specified)
     Gaussian process, cube root       (post hoc)
     Polynomial, 3rd order, XYZ        (pre-specified)
+    Polynomial, 3rd order, cube root  (post hoc)
+    Polynomial, 4th order, XYZ        (post hoc)
     Polynomial, 4th order, cube root  (post hoc)
     SVM, MLP (deep), random forest, XYZ (pre-specified)
 
+The polynomial is shown as the full 2 x 2 of degree (3rd, 4th) and space (XYZ,
+cube root), so the effect of degree and the effect of space can be read apart.
+
 Encoding: the marker is the median, the thin bar runs from the median to the
 95th percentile (P95), closed by a short tick. Filled markers are models fitted
-on XYZ (the pre-specified comparison); hollow markers are fitted in cube-root
-space, added after the XYZ results had been obtained (post hoc). Color is the
+on XYZ; hollow markers are fitted in cube-root space, added after the XYZ
+results had been obtained (post hoc). The 4th-order polynomial is post hoc in
+both spaces, so the legend states only the fit space. Color is the
 model family (Gaussian process blue, polynomial vermillion, as in _style);
 marker shape tells the polynomial degrees apart.
 
@@ -28,6 +34,7 @@ CMYKOGV-7,CMYKOGB-7}/summary.csv
 Run with: .venv/bin/python journal/figures/fig_per_dataset.py
 Writes: journal/figures/fig_per_dataset.png (300 dpi) and .pdf
 """
+import csv
 import os
 
 import matplotlib
@@ -63,6 +70,8 @@ MODELS = [
     ("gaussian_process", "Gaussian process", BLUE, "o", False),
     ("gaussian_process_cbrt", "Gaussian process", BLUE, "o", True),
     ("poly3", "Polynomial, 3rd order", VERMILLION, "s", False),
+    ("poly3_cbrt", "Polynomial, 3rd order", VERMILLION, "s", True),
+    ("poly4", "Polynomial, 4th order", VERMILLION, "D", False),
     ("poly4_cbrt", "Polynomial, 4th order", VERMILLION, "D", True),
     ("svm", "SVM", MODEL_STYLE["svm"]["color"], MODEL_STYLE["svm"]["marker"], False),
     ("mlp_deep", "MLP (deep)", MODEL_STYLE["mlp_deep"]["color"],
@@ -84,6 +93,12 @@ def load() -> dict[str, pd.DataFrame]:
         if missing:
             raise SystemExit(f"{ds}: models missing from summary.csv: {missing}")
         sub = s.loc[keys, ["median", "p95"]]
+        # Every plotted value must equal the CSV text exactly (no rounding, no edits).
+        with open(os.path.join(RESULTS_DIR, ds, "summary.csv"), newline="") as fh:
+            raw = {r["model"]: r for r in csv.DictReader(fh)}
+        for k in keys:
+            for col in ("median", "p95"):
+                assert float(sub.loc[k, col]) == float(raw[k][col]), (ds, k, col)
         lo, hi = sub.min().min(), sub.max().max()
         if lo < X_LIM[0] or hi > X_LIM[1]:
             raise SystemExit(f"{ds}: values {lo}-{hi} fall outside the axis {X_LIM}")
@@ -128,7 +143,7 @@ def draw_panel(ax, df: pd.DataFrame, title: str, show_labels: bool) -> None:
 
 def make_figure(data: dict[str, pd.DataFrame]) -> None:
     apply_style()
-    fig, axes = plt.subplots(3, 2, figsize=(LINEWIDTH_IN, 5.6), sharex=True)
+    fig, axes = plt.subplots(3, 2, figsize=(LINEWIDTH_IN, 6.9), sharex=True)
     flat = axes.ravel()
     for i, (ds, title) in enumerate(DATASETS):
         draw_panel(flat[i], data[ds], title, show_labels=(i % 2 == 0))
@@ -143,10 +158,10 @@ def make_figure(data: dict[str, pd.DataFrame]) -> None:
     handles = [
         Line2D([], [], color=INK_SECONDARY, marker="o", markersize=5.2,
                markerfacecolor=INK_SECONDARY, markeredgewidth=0.6, linestyle="none",
-               label="Filled: XYZ fit (pre-specified)"),
+               label="Filled: fitted in XYZ"),
         Line2D([], [], color=INK_SECONDARY, marker="o", markersize=5.2,
                markerfacecolor=SURFACE, markeredgewidth=1.2, linestyle="none",
-               label="Hollow: cube-root fit (post hoc)"),
+               label="Hollow: fitted in cube root"),
     ]
     leg_ax.legend(handles=handles, loc="upper left", bbox_to_anchor=(0.0, 0.92),
                   fontsize=FS_LEGEND, labelcolor=INK_PRIMARY, handlelength=1.2,
