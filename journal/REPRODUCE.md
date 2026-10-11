@@ -102,7 +102,8 @@ cd journal/figures
 python fig_n3_model_comparison.py
 python fig_n3_vs_n4.py
 python fig_de00_loss.py
-python fig_ncolor_ladder.py
+python fig_per_dataset.py         # Figure 4 (one panel per dataset)
+python fig_ncolor_ladder.py       # former Figure 4 (R2 and earlier)
 python fig_vs_colourbill.py
 python fig_llm_vs_classical.py
 python fig_*_generalization.py   # the newsprint figure
