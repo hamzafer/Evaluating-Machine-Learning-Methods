@@ -318,8 +318,13 @@ def cmd_paired(args):
     if len(fx) == len(ref):
         cols = ['gp_median', 'poly_median', 'median_diff', 'median_diff_lo', 'median_diff_hi',
                 'frac_a_better', 'wilcoxon_W', 'p', 'p_holm']
-        dev = (fx[cols] - ref.loc[fx.index, cols]).abs().max().max()
+        dev = float((fx[cols] - ref.loc[fx.index, cols]).abs().to_numpy().max())
         print('fixed pair vs stats_gp_vs_poly4cbrt.csv, max abs deviation:', dev)
+        if not dev <= 1e-9:     # also fails on NaN
+            raise SystemExit('fixed pair does not reproduce stats_gp_vs_poly4cbrt.csv '
+                             f'(Table 11): max abs deviation {dev}')
+    else:
+        print('Table 11 reproduction check skipped: needs all nine datasets')
     cols = ['comparison', 'dataset', 'gp_median', 'poly_median', 'gp_p95', 'poly_p95', 'gp_max',
             'poly_max', 'median_diff', 'median_diff_lo', 'median_diff_hi', 'frac_a_better', 'p_holm']
     print(df[cols].round(4).to_string())
