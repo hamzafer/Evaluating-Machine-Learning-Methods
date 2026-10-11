@@ -201,8 +201,7 @@ def cmd_merge(args):
         X, _, _, fold = _load(name)
         if not all((PARTS / f'{name}__{f}__fold{i}.csv').exists()
                    for f in ('poly', 'gp') for i in range(5)):
-            print('incomplete, skipped:', name)
-            continue
+            raise SystemExit(f'incomplete job outputs for {name}: run its poly and gp jobs first')
         pol, pinfo = _family(name, 'poly', len(X))
         gp, ginfo = _family(name, 'gp', len(X))
         ps = pd.DataFrame({'idx': np.arange(len(X)), 'fold': fold,
@@ -231,8 +230,12 @@ def cmd_merge(args):
 
 
 def _ps(name):
+    # a requested dataset without merged output is an error, never a silent skip,
+    # so a partial run cannot pass the controls or enter the paired table
     p = OUT / 'persample' / f'{name}.csv'
-    return pd.read_csv(p) if p.exists() else None
+    if not p.exists():
+        raise SystemExit(f'no merged per-sample file for {name}: run merge first')
+    return pd.read_csv(p)
 
 
 def cmd_controls(args):
@@ -244,8 +247,6 @@ def cmd_controls(args):
     rows = []
     for name in args.datasets:
         ps = _ps(name)
-        if ps is None:
-            continue
         pairs = [('poly3', 'poly_d3_xyz'), ('poly3_cbrt', 'poly_d3_cbrt'),
                  ('poly4', 'poly_d4_xyz'), ('poly4_cbrt', 'poly_d4_cbrt'),
                  ('gaussian_process', 'gp_xyz'), ('gaussian_process_cbrt', 'gp_cbrt')]
@@ -294,8 +295,6 @@ def cmd_paired(args):
         rows = []
         for name in args.datasets:
             ps = _ps(name)
-            if ps is None:
-                continue
             gp, pol = ps[ga].to_numpy(), ps[pb].to_numpy()
             rng = np.random.default_rng(SEED)
             r = {'comparison': label, 'dataset': name, 'n': len(gp)}
