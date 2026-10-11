@@ -70,3 +70,40 @@ Per-sample ΔE00 for every (dataset, model) pair is in `journal/results/revision
 and the one-row summaries in `journal/results/revision_r1/summary/`; round-2 outputs are in
 `journal/results/revision_r2/`. Figures are generated from these CSVs by the scripts in
 `journal/figures/` (they use Arial; matplotlib falls back to its default font where it is absent).
+
+## 5. Rebuilding the tables and figures from the CSVs
+
+No raw data is needed for this step: it reads only the tracked results CSVs.
+
+```
+python -m journal.pipeline.build_tables --write journal/results/tables   # one fragment per table label
+python -m journal.pipeline.build_tables --check path/to/main.tex         # check every table cell of a manuscript
+python -m journal.pipeline.revision_r3_tables                            # round-3 degree tables (main + supplementary)
+```
+
+`build_tables` rebuilds every main-text table that holds model results (`tab:n3`, `tab:n4`,
+`tab:de00loss`, `tab:fitspace`, `tab:transforms`, `tab:degree`, `tab:newsprint`, `tab:n7`,
+`tab:stats`, `tab:timing`, the "This paper" rows of `tab:prior`, and Appendix A `tab:appbest`)
+from the per-dataset `summary.csv` files and the `revision_r1/`, `revision_r2/` and `revision_r3/`
+CSVs. Values are read as CSV strings and rounded half up, as the paper prints them. `--write` puts
+the rows of each table (between `\midrule` and `\bottomrule`) in `journal/results/tables/<label>.tex`.
+`--check` parses each table of the manuscript by its `\label`, compares every numeric cell with
+the rebuilt value, prints matched and mismatched cells per table with the CSV path of each
+expected value, and exits non-zero on any mismatch. It also confirms that every CSV it read is
+tracked by git.
+
+The round-3 degree sweep itself is rerun with `python -m journal.pipeline.revision_r3 sweep`
+(see `journal/results/revision_r3/README.md`).
+
+Figures, each generated from the results CSVs (the source CSVs are named in each script's header):
+
+```
+cd journal/figures
+python fig_n3_model_comparison.py
+python fig_n3_vs_n4.py
+python fig_de00_loss.py
+python fig_ncolor_ladder.py
+python fig_vs_colourbill.py
+python fig_llm_vs_classical.py
+python fig_*_generalization.py   # the newsprint figure
+```

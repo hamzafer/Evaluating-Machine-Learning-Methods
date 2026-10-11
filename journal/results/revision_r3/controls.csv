@@ -1,0 +1,81 @@
+dataset,check,published,this_run,pass
+CMYKOGV-7,summary.csv poly3 median,5.386,5.386,True
+CMYKOGV-7,summary.csv poly3 p95,25.15,25.15,True
+CMYKOGV-7,summary.csv poly3 max,59.833,59.833,True
+CMYKOGV-7,R1 persample poly3 max|diff|,0.0,0.0,True
+CMYKOGV-7,summary.csv poly3_cbrt median,0.83,0.83,True
+CMYKOGV-7,summary.csv poly3_cbrt p95,2.982,2.982,True
+CMYKOGV-7,summary.csv poly3_cbrt max,27.979,27.979,True
+CMYKOGV-7,R1 persample poly3_cbrt max|diff|,0.0,0.0,True
+CMYKOGV-7,summary.csv poly4 median,2.08,2.08,True
+CMYKOGV-7,summary.csv poly4 p95,13.8,13.8,True
+CMYKOGV-7,summary.csv poly4 max,57.988,57.988,True
+CMYKOGV-7,R1 persample poly4 max|diff|,0.0,0.0,True
+CMYKOGV-7,summary.csv poly4_cbrt median,0.272,0.272,True
+CMYKOGV-7,summary.csv poly4_cbrt p95,1.189,1.189,True
+CMYKOGV-7,summary.csv poly4_cbrt max,18.612,18.612,True
+CMYKOGV-7,R1 persample poly4_cbrt max|diff|,0.0,0.0,True
+KCMYG-5,summary.csv poly3 median,1.457,1.457,True
+KCMYG-5,summary.csv poly3 p95,7.928,7.928,True
+KCMYG-5,summary.csv poly3 max,65.742,65.742,True
+KCMYG-5,R1 persample poly3 max|diff|,0.0,0.0,True
+KCMYG-5,summary.csv poly3_cbrt median,1.024,1.024,True
+KCMYG-5,summary.csv poly3_cbrt p95,2.389,2.389,True
+KCMYG-5,summary.csv poly3_cbrt max,29.23,29.23,True
+KCMYG-5,R1 persample poly3_cbrt max|diff|,0.0,0.0,True
+KCMYG-5,summary.csv poly4 median,1.057,1.057,True
+KCMYG-5,summary.csv poly4 p95,3.289,3.289,True
+KCMYG-5,summary.csv poly4 max,55.86,55.86,True
+KCMYG-5,R1 persample poly4 max|diff|,0.0,0.0,True
+KCMYG-5,summary.csv poly4_cbrt median,0.853,0.853,True
+KCMYG-5,summary.csv poly4_cbrt p95,2.118,2.118,True
+KCMYG-5,summary.csv poly4_cbrt max,39.488,39.488,True
+KCMYG-5,R1 persample poly4_cbrt max|diff|,0.0,0.0,True
+CMYKOGB-7,summary.csv poly3 median,3.332,3.332,True
+CMYKOGB-7,summary.csv poly3 p95,24.845,24.845,True
+CMYKOGB-7,summary.csv poly3 max,48.974,48.974,True
+CMYKOGB-7,R1 persample poly3 max|diff|,0.0,0.0,True
+CMYKOGB-7,summary.csv poly3_cbrt median,1.611,1.611,True
+CMYKOGB-7,summary.csv poly3_cbrt p95,7.091,7.091,True
+CMYKOGB-7,summary.csv poly3_cbrt max,30.274,30.274,True
+CMYKOGB-7,R1 persample poly3_cbrt max|diff|,0.0,0.0,True
+CMYKOGB-7,summary.csv poly4 median,1.698,1.698,True
+CMYKOGB-7,summary.csv poly4 p95,19.662,19.662,True
+CMYKOGB-7,summary.csv poly4 max,48.974,48.974,True
+CMYKOGB-7,R1 persample poly4 max|diff|,0.0,0.0,True
+CMYKOGB-7,summary.csv poly4_cbrt median,1.132,1.132,True
+CMYKOGB-7,summary.csv poly4_cbrt p95,3.843,3.843,True
+CMYKOGB-7,summary.csv poly4_cbrt max,24.096,24.096,True
+CMYKOGB-7,R1 persample poly4_cbrt max|diff|,0.0,0.0,True
+PC10-CMYK,summary.csv poly3 median,0.942,0.942,True
+PC10-CMYK,summary.csv poly3 p95,8.31,8.31,True
+PC10-CMYK,summary.csv poly3 max,33.978,33.978,True
+PC10-CMYK,R1 persample poly3 max|diff|,0.0,0.0,True
+PC10-CMYK,summary.csv poly3_cbrt median,0.219,0.219,True
+PC10-CMYK,summary.csv poly3_cbrt p95,0.759,0.759,True
+PC10-CMYK,summary.csv poly3_cbrt max,3.506,3.506,True
+PC10-CMYK,R1 persample poly3_cbrt max|diff|,0.0,0.0,True
+PC10-CMYK,summary.csv poly4 median,0.246,0.246,True
+PC10-CMYK,summary.csv poly4 p95,2.811,2.811,True
+PC10-CMYK,summary.csv poly4 max,25.385,25.385,True
+PC10-CMYK,R1 persample poly4 max|diff|,0.0,0.0,True
+PC10-CMYK,summary.csv poly4_cbrt median,0.112,0.112,True
+PC10-CMYK,summary.csv poly4_cbrt p95,0.387,0.387,True
+PC10-CMYK,summary.csv poly4_cbrt max,2.625,2.625,True
+PC10-CMYK,R1 persample poly4_cbrt max|diff|,0.0,0.0,True
+CMYKOGV-7,degree_sweep.csv d2 median_xyz,9.953,9.953,True
+CMYKOGV-7,degree_sweep.csv d2 gap_xyz,0.038,0.038,True
+CMYKOGV-7,degree_sweep.csv d2 median_cbrt,2.656,2.656,True
+CMYKOGV-7,degree_sweep.csv d2 gap_cbrt,0.013,0.013,True
+CMYKOGV-7,degree_sweep.csv d3 median_xyz,5.386,5.386,True
+CMYKOGV-7,degree_sweep.csv d3 gap_xyz,0.121,0.121,True
+CMYKOGV-7,degree_sweep.csv d3 median_cbrt,0.83,0.83,True
+CMYKOGV-7,degree_sweep.csv d3 gap_cbrt,0.029,0.029,True
+CMYKOGV-7,degree_sweep.csv d4 median_xyz,2.08,2.08,True
+CMYKOGV-7,degree_sweep.csv d4 gap_xyz,0.226,0.226,True
+CMYKOGV-7,degree_sweep.csv d4 median_cbrt,0.272,0.272,True
+CMYKOGV-7,degree_sweep.csv d4 gap_cbrt,0.029,0.029,True
+CMYKOGV-7,degree_sweep.csv d5 median_xyz,0.506,0.506,True
+CMYKOGV-7,degree_sweep.csv d5 gap_xyz,0.133,0.133,True
+CMYKOGV-7,degree_sweep.csv d5 median_cbrt,0.126,0.126,True
+CMYKOGV-7,degree_sweep.csv d5 gap_cbrt,0.036,0.036,True

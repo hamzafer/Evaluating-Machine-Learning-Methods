@@ -1,0 +1,35 @@
+\begin{table}[H]
+\caption{Polynomial degree sweep on the three $n>4$ datasets. Held-out $\Delta E_{00}$ (median, 95th percentile and maximum) for degrees 2 to 5, fitted on XYZ and on $\sqrt[3]{\mathrm{XYZ}}$ (cbrt). All degrees are fitted with the same grouped 5-fold cross-validation folds, and every sample is predicted once, by the fold model that did not see it. Rows/coef.: mean training-fold size divided by the $3 \times$ terms-per-channel coefficients fitted. The Gaussian process rows (one fixed configuration, same folds) are for reference. Source: \texttt{journal/results/revision\_r3/degree\_sweep\_train\_vs\_heldout.csv}.\label{tab:degree}}
+\begin{adjustwidth}{-\extralength}{0cm}
+\centering
+\footnotesize
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+& & & \multicolumn{3}{c}{\textbf{XYZ}} & \multicolumn{3}{c}{\textbf{cbrt}} \\
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}
+\textbf{Degree} & \textbf{Terms/channel} & \textbf{Rows/coef.} & \textbf{Median} & \textbf{P95} & \textbf{Max} & \textbf{Median} & \textbf{P95} & \textbf{Max} \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{CMYKOGV-7}} \\
+2 & 36 & 24.5 & 9.953 & 29.749 & 78.244 & 2.656 & 8.149 & 48.535 \\
+3 & 120 & 7.3 & 5.386 & 25.150 & 59.833 & 0.830 & 2.982 & 27.979 \\
+4 & 330 & 2.7 & 2.080 & 13.800 & 57.988 & 0.272 & 1.189 & 18.612 \\
+5 & 792 & 1.1 & 0.506 & 7.155 & 49.724 & 0.126 & 0.663 & 12.038 \\
+Gaussian process & -- & -- & 0.249 & 4.497 & 49.757 & 0.160 & 0.677 & 5.713 \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{KCMYG-5}} \\
+2 & 21 & 28.1 & 4.098 & 19.183 & 70.512 & 1.649 & 4.189 & 25.729 \\
+3 & 56 & 10.5 & 1.457 & 7.928 & 65.742 & 1.024 & 2.389 & 29.230 \\
+4 & 126 & 4.7 & 1.057 & 3.289 & 55.860 & 0.853 & 2.118 & 39.488 \\
+5 & 252 & 2.3 & 0.875 & 2.732 & 113.425 & 0.742 & 2.059 & 136.611 \\
+Gaussian process & -- & -- & 0.867 & 2.267 & 31.738 & 0.764 & 2.067 & 16.172 \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{CMYKOGB-7}} \\
+2 & 36 & 14.8 & 6.924 & 30.564 & 55.798 & 3.346 & 12.271 & 33.672 \\
+3 & 120 & 4.4 & 3.332 & 24.845 & 48.974 & 1.611 & 7.091 & 30.274 \\
+4 & 330 & 1.6 & 1.698 & 19.662 & 48.974 & 1.132 & 3.843 & 24.096 \\
+5 & 792 & 0.7 & 1.738 & 21.467 & 136.329 & 1.192 & 9.143 & 140.306 \\
+Gaussian process & -- & -- & 1.280 & 8.066 & 44.305 & 0.977 & 2.996 & 14.270 \\
+\bottomrule
+\end{tabular}
+\end{adjustwidth}
+\end{table}
