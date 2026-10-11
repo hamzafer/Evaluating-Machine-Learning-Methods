@@ -18,7 +18,8 @@ compares every numeric cell, row by row, with the rebuilt value. It prints, per
 table, the number of numeric cells, how many match, and every mismatch with
 the paper value, the CSV value and the CSV path. Rows the paper has but no CSV
 explains (for example the literature rows of tab:prior) are listed as untraced.
-It exits non-zero if any cell mismatches.
+It exits non-zero if any cell or bold mark mismatches, a CSV row is missing
+from the paper, or a paper row outside tab:prior has no CSV source.
 """
 import argparse
 import csv
@@ -586,8 +587,9 @@ def check_table(table, prows):
                     src = bc.sources[k] if k < len(bc.sources) else '; '.join(bc.sources)
                     res.mismatches.append((where, col, a, b, src))
             if table.bold_checked and pbold != bbold:
-                res.notes.append(f'bold differs at {where}, column {col}: paper '
-                                 f'{"bold" if pbold else "plain"}, CSV rule {"bold" if bbold else "plain"}')
+                res.mismatches.append((where, col, f'{"bold" if pbold else "plain"}: {ptext}',
+                                       f'{"bold" if bbold else "plain"} (CSV best-value rule)',
+                                       '; '.join(bc.sources)))
     for (_, _), labels, r in built:
         if id(r) not in used:
             res.missing.append(' | '.join(labels))
@@ -669,6 +671,9 @@ def write(outdir):
         print(f'wrote {outdir / name}.tex')
 
 
+UNTRACED_OK = {'tab:prior'}
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--check', metavar='MAIN_TEX', help='check every table cell of a manuscript')
@@ -690,7 +695,10 @@ def main(argv=None):
             print('\n(git not available: tracked-file check skipped)')
         else:
             print(f'\nAll {len(READ)} CSVs read are tracked by git.')
-        if any(r.mismatches for r in results):
+        # Every paper row must be traced to a CSV, except the literature rows of the
+        # prior-work table (values read from the cited papers, as its caption says).
+        if any(r.mismatches or r.missing or (r.untraced and r.label not in UNTRACED_OK)
+               for r in results):
             status = 1
     return status
 

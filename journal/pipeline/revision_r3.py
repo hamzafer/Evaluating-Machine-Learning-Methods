@@ -206,6 +206,7 @@ def cmd_controls(args):
     df.to_csv(OUT / 'controls.csv', index=False)
     print(df.to_string())
     print('ALL PASS' if df['pass'].all() else 'CONTROL FAILURE')
+    return 0 if df['pass'].all() else 1
 
 
 def main():
@@ -213,8 +214,8 @@ def main():
     ap.add_argument('cmd', choices=('sweep', 'paired', 'controls'))
     ap.add_argument('--datasets', nargs='+', default=list(DATASETS))
     args = ap.parse_args()
-    {'sweep': cmd_sweep, 'paired': cmd_paired, 'controls': cmd_controls}[args.cmd](args)
+    return {'sweep': cmd_sweep, 'paired': cmd_paired, 'controls': cmd_controls}[args.cmd](args) or 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

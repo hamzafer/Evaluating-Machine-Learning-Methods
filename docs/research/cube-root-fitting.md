@@ -35,7 +35,7 @@ CIELAB's linear segment near black bites on Z ~ 0.45).
 
 Fitting characterization models in a perceptually uniform space is long-standing practice. The
 honest framing is therefore **"our baseline was handicapped"**, a baseline correction requiring
-prior-art citation, not a discovery. The LLM-provenance story stays out of the paper.
+prior-art citation, not a discovery.
 
 ### 2. The CIEDE2000-alignment explanation is wrong
 The original claim (least squares in cube-root space aligns with the metric) fails its control:

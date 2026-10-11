@@ -51,11 +51,10 @@ class FitSubsampled:
 class CubeRootPolynomial:
     """Polynomial fitted to the CUBE ROOT of physical XYZ, not to XYZ itself.
 
-    Motivation (surfaced by an LLM during the plan-09 equation experiment, then
-    tested here properly): CIELAB is defined through a cube root of XYZ, so
-    CIEDE2000 errors are roughly linear in cube-root space. Fitting there aligns
-    the least-squares objective with the metric the paper actually reports,
-    without any change to the evaluation protocol.
+    CIELAB is defined through a cube root of XYZ, so this is equivalent (up to
+    CIELAB's linear segment near black) to fitting the polynomial in CIELAB, a
+    long-standing practice. It was added after the XYZ results had been obtained
+    and is applied to every method. The evaluation protocol is unchanged.
 
     `evaluate.cross_validate` hands models MinMax-scaled targets, so this uses
     the existing `set_scaler` hook to recover physical XYZ before taking the
