@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import pytest
 
 from journal.pipeline.color import xyz_to_lab
 from journal.pipeline.datasets import DatasetSpec, registry
@@ -26,6 +27,14 @@ def _synth_csv(path):
     df[['LAB_L', 'LAB_A', 'LAB_B']] = lab
     df.to_csv(path, index=False)
     return path
+
+
+def _require(specs):
+    """Skip (not fail) when a third-party dataset is not present locally."""
+    missing = sorted({str(s.csv) for s in specs if not s.csv.exists()})
+    if missing:
+        pytest.skip('dataset not present (third-party data, see journal/REPRODUCE.md '
+                    'section 2): ' + ', '.join(missing))
 
 
 def _spec(csv, **kw):
@@ -69,7 +78,9 @@ def test_registry_ncolor_specs():
 
 def test_cmykogv_effective_rows():
     # CSV keeps all 3534 rows as received; exact dedup at load -> 3302.
-    X, Y = registry()['CMYKOGV-7'].load()
+    spec = registry()['CMYKOGV-7']
+    _require([spec])
+    X, Y = spec.load()
     assert X.shape == (3302, 7) and Y.shape == (3302, 3)
 
 
@@ -91,6 +102,7 @@ def _n_duplicate_recipes(X):
 
 def test_coated_specs_effective_row_counts():
     reg = registry()
+    _require([reg[f'{ds}-{v}'] for ds in COATED for v in COATED_ROWS])
     for ds in COATED:
         for variant, expected in COATED_ROWS.items():
             name = f'{ds}-{variant}'
@@ -101,6 +113,7 @@ def test_coated_specs_effective_row_counts():
 
 def test_coated_specs_have_no_duplicate_recipes():
     reg = registry()
+    _require([reg[f'{ds}-{v}'] for ds in COATED for v in COATED_ROWS])
     for ds in COATED:
         for variant in COATED_ROWS:
             name = f'{ds}-{variant}'
@@ -123,6 +136,8 @@ def test_ifra_specs_keep_their_duplicates():
     # so they must stay un-deduplicated at full 1485 rows.
     reg = registry()
     ifra = [n for n in reg if n.startswith('IFRA-')]
+    if not ifra:
+        pytest.skip('newsprint dataset not present (restricted data, see docs/DATA.md)')
     assert len(ifra) == 13
     for name in ifra:
         spec = reg[name]
