@@ -59,10 +59,10 @@ python -m journal.pipeline.ingest_coated data/APTEC_PC10_CardBoard_2023_v1.txt \
     data/APTEC_PC11_CCNB_2023_v1.txt data/FOGRA51.txt
 ```
 
-It adds XYZ (0-100, from the measured Lab with the ICC D50 white X, Y, Z = 0.96422, 1, 0.82521)
+It adds XYZ (0-100, from the measured Lab with the ICC D50 white X, Y, Z = 96.422, 100, 82.521)
 and writes `data/cleaned/<same name>.csv`, the files the loader reads. Keep the file names as
-above: the output name is the input name with `.csv`. The recomputed XYZ agrees with the files used
-for the paper to within 3e-14, not bit for bit; section 4 says what this changes.
+above: the output name is the input name with `.csv`. The rebuilt files load to exactly the values
+of the files used for the paper.
 
 **APTEC CMYKOGV (n=7).** Download `APTEC_CMYKOGV_Coated_LinearCTV_2025_M1.txt` from
 https://registry.color.org/cmyk-registry/aptec_cmykogvcoated, save it as
@@ -128,15 +128,14 @@ elsewhere (the six coated datasets were run on the laptop, the canonical platfor
 `seeds_laptop/`; the full sweep ran on a second machine into `seeds/`). Timings are
 machine-specific.
 
-On the same platform (macOS/arm64), reruns from the data files used for the paper reproduce the
-reported values exactly. `ingest_ncolor` rebuilds the CMYKOGV-7 file byte for byte. The coated files
-rebuilt by `ingest_coated` differ from the paper's only in the last digit of XYZ (at most 3e-14).
-With them, the polynomials, linear models, k-NN, gradient boosting and the Gaussian process give the
-reported values (one Gaussian process maximum differs by 0.001). The iterative and stochastic models
-do not: in our check (20 models on the six coated conditions), 34 of 120 cells moved. SVM, the
-MLPs, the decision tree and the random forest moved by up to 0.143 ΔE00 in a median and 11.118 in
-a maximum (both from the MLPs), and the Powell-refined polynomial by up to 0.009 in a median and
-2.644 in a maximum.
+On the same platform (macOS/arm64), reruns reproduce the reported values exactly, also from the
+public files rebuilt as in section 2 (the CMYKOGV-7 file is rebuilt byte for byte; for the coated
+files, all 20 models on the six conditions, 120 model/dataset cells, matched in our check). The
+iterative and stochastic models (SVM, the MLPs, the tree models and the Powell-refined polynomial)
+depend on the data down to the last digit. An earlier
+version of `ingest_coated`, whose XYZ differed from the paper's files by at most 3e-14, moved 34 of
+these 120 cells, by up to 0.143 ΔE00 in a median and 11.118 in a maximum (the MLPs). Data prepared
+in any other way can move these models by similar amounts.
 
 Across platforms, a re-run on Linux/x86-64 with the same pinned environment matched 58 of
 96 model/dataset cells exactly and 76 of 96 to within 0.01 ΔE00, with a worst case of 0.108 ΔE00;
