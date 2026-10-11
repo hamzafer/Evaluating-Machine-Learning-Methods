@@ -365,10 +365,6 @@ CMYKOGB-7,gaussian_process_cbrt,median vs CMYKOGB-7/summary.csv,0.977,0.977,True
 CMYKOGB-7,gaussian_process_cbrt,p95 vs CMYKOGB-7/summary.csv,2.996,2.996,True
 CMYKOGB-7,gaussian_process_cbrt,max vs CMYKOGB-7/summary.csv,14.27,14.27,True
 CMYKOGB-7,gaussian_process_cbrt,per-sample max|diff|,0.0,0.0,True
-PC10-CMYK,gaussian_process_cbrt,median vs PC10-CMYK/summary.csv,0.05,0.05,True
-PC10-CMYK,gaussian_process_cbrt,p95 vs PC10-CMYK/summary.csv,0.229,0.229,True
-PC10-CMYK,gaussian_process_cbrt,max vs PC10-CMYK/summary.csv,2.723,2.723,True
-PC10-CMYK,gaussian_process_cbrt,per-sample max|diff|,0.0,0.0,True
 PC10-CMYK,poly2,median vs revision_r3/degree_sweep_train_vs_heldout.csv,3.462,3.462,True
 PC10-CMYK,poly2,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,23.067,23.067,True
 PC10-CMYK,poly2,max vs revision_r3/degree_sweep_train_vs_heldout.csv,55.806,55.806,True
@@ -401,6 +397,10 @@ PC10-CMYK,poly5_cbrt,median vs revision_r3/degree_sweep_train_vs_heldout.csv,0.0
 PC10-CMYK,poly5_cbrt,p95 vs revision_r3/degree_sweep_train_vs_heldout.csv,0.323,0.323,True
 PC10-CMYK,poly5_cbrt,max vs revision_r3/degree_sweep_train_vs_heldout.csv,2.116,2.116,True
 PC10-CMYK,poly5_cbrt,per-sample max|diff|,0.0,0.0,True
+PC10-CMYK,gaussian_process_cbrt,median vs PC10-CMYK/summary.csv,0.05,0.05,True
+PC10-CMYK,gaussian_process_cbrt,p95 vs PC10-CMYK/summary.csv,0.229,0.229,True
+PC10-CMYK,gaussian_process_cbrt,max vs PC10-CMYK/summary.csv,2.723,2.723,True
+PC10-CMYK,gaussian_process_cbrt,per-sample max|diff|,0.0,0.0,True
 CMYKOGV-7,poly5_cbrt vs GP,paired median_diff vs paired_poly5cbrt_vs_gpcbrt.csv,-0.0336485,-0.0336485,True
 CMYKOGV-7,poly5_cbrt vs GP,paired median_diff_lo vs paired_poly5cbrt_vs_gpcbrt.csv,-0.038810075,-0.038810075,True
 CMYKOGV-7,poly5_cbrt vs GP,paired median_diff_hi vs paired_poly5cbrt_vs_gpcbrt.csv,-0.028985975,-0.028985975,True

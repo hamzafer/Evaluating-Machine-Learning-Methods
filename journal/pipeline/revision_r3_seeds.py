@@ -150,7 +150,7 @@ def job_path(name, tag, part):
 
 def cmd_jobs(args):
     for name in DATASETS:
-        parts = ('poly', 'gp') if name == 'PC10-CMYK' else ('cheap', 'gp')
+        parts = parts_for(name)
         for tag in TAGS:
             if name == 'PC10-CMYK' and tag == 's42':
                 continue
@@ -175,12 +175,24 @@ def cmd_run(args):
     p.with_suffix('.json').write_text(json.dumps(secs))
 
 
+def parts_for(name):
+    return ('poly', 'gp') if name == 'PC10-CMYK' else ('cheap', 'gp')
+
+
 def load_tag(name, tag):
-    """Wide per-sample frame of one dataset/tag (all parts), or None if incomplete."""
+    """Wide per-sample frame of one dataset/tag (all parts). Fails if a job output
+    is missing or lacks a model column, so merge never writes partial results."""
     src = 'published' if (name == 'PC10-CMYK' and tag == 's42') else tag
-    frames = [pd.read_csv(p) for p in sorted(JOBS.glob(f'{name}__{src}__*.csv'))]
-    if not frames:
-        return None
+    frames = []
+    for part in parts_for(name):
+        p = job_path(name, src, part)
+        if not p.exists():
+            raise SystemExit(f'missing job output {p.name}; run it before merging')
+        f = pd.read_csv(p)
+        absent = set(part_models(part)) - set(f.columns)
+        if absent:
+            raise SystemExit(f'{p.name} lacks {sorted(absent)}; rerun it')
+        frames.append(f)
     df = frames[0]
     for f in frames[1:]:
         assert (f.idx.values == df.idx.values).all() and (f.fold.values == df.fold.values).all()
@@ -223,9 +235,6 @@ def cmd_merge(args):
     for name in DATASETS:
         for tag in TAGS:
             df = load_tag(name, tag)
-            if df is None:
-                print('missing', name, tag)
-                continue
             models = [c for c in df.columns if c not in ('idx', 'fold')]
             for m in models:
                 v = df[m].to_numpy()
