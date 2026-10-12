@@ -12,7 +12,7 @@ claude -p "$(cat prompt.txt)" --model claude-fable-5 --output-format json --allo
 
 ## What came back
 An equation of the form `(cubic in c, m, y)**3` per channel, and it is the most accurate equation
-any model had produced at that point (later runs scored better; see the last section):
+any model had produced at that point (some later runs scored better; see the last section):
 
 | | median ΔE00 | p95 | max | terms | total degree | max per-variable exponent |
 |---|---|---|---|---|---|---|
