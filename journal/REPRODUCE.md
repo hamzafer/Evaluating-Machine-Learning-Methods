@@ -109,7 +109,9 @@ python -m journal.pipeline.revision_r3_nested latex      # tables/nested_cv.tex
 Outputs are in `journal/results/revision_r3/nested_cv/` (see its `README.md`).
 
 The round-3 degree sweep itself is rerun with `python -m journal.pipeline.revision_r3 sweep`
-(see `journal/results/revision_r3/README.md`).
+(see `journal/results/revision_r3/README.md`). Its fold-seed check (degree 5 against the
+Gaussian process under shuffle seeds 0/1/2/3/42) is `journal.pipeline.revision_r3_seeds`
+(`jobs`, `run`, `merge`; see `journal/results/revision_r3/seeds/README.md`).
 
 Figures, each generated from the results CSVs (the source CSVs are named in each script's header):
 
