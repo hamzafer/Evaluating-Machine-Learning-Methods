@@ -1,0 +1,5 @@
+source_file,model,channel,code_execution,n_terms,max_total_degree,max_var_exponent,median_de00,p95_de00,max_de00,mean_de00,n_test,n_clipped
+claude-fable-5_web_equations.txt,claude-fable-5,web app with code interpreter,True,2542,27,9,0.082,0.241,0.752,0.11,100,0
+claude-fable-5_claudecode_harness.txt,claude-fable-5,"CLI harness, attempt 1 (ran Bash)",True,660,9,9,0.215,0.41,1.108,0.236,100,0
+claude-opus-5_claudecode_tools-flag.txt,claude-opus-5,"CLI harness, attempt 2 (ran browser JavaScript)",True,2177,24,9,0.108,0.267,0.778,0.134,100,0
+claude-fable-5_claudecode_tools-flag.txt,claude-fable-5,"CLI harness, attempt 3 (called a deployed endpoint)",True,51,3,3,0.303,1.056,1.573,0.402,100,0

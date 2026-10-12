@@ -90,3 +90,11 @@ the agent, not the model, and cannot tell the difference.
 For the paper's comparison table this settles the channel question: the LLM rows come from raw API
 calls with a stated model id, temperature and provider. The harness runs are reported separately, as
 an observation about agentic scaffolding rather than as model capability.
+
+## Scores of all four archived tool-using answers
+
+`python -m journal.llm.score_harness` re-scores the four archived answers in
+`journal/llm/raw/equation_harness/` on the same 100 held-out patches and writes
+`harness_summary.csv`. The fourth answer is the web-app run (median 0.082), which was also
+produced with a code interpreter (commit 532c564). Three of the four beat the least-squares
+cubic (0.234): 0.082, 0.108 and 0.215.
