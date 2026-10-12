@@ -12,7 +12,7 @@ claude -p "$(cat prompt.txt)" --model claude-fable-5 --output-format json --allo
 
 ## What came back
 An equation of the form `(cubic in c, m, y)**3` per channel, and it is the most accurate equation
-any model produced:
+any model had produced at that point (later runs scored better; see the last section):
 
 | | median ΔE00 | p95 | max | terms | total degree | max per-variable exponent |
 |---|---|---|---|---|---|---|
@@ -95,6 +95,6 @@ an observation about agentic scaffolding rather than as model capability.
 
 `python -m journal.llm.score_harness` re-scores the four archived answers in
 `journal/llm/raw/equation_harness/` on the same 100 held-out patches and writes
-`harness_summary.csv`. The fourth answer is the web-app run (median 0.082), which was also
+`harness_summary.csv`. Besides the three CLI attempts, the archive holds a web-app run (median 0.082), which was also
 produced with a code interpreter (commit 532c564). Three of the four beat the least-squares
 cubic (0.234): 0.082, 0.108 and 0.215.
