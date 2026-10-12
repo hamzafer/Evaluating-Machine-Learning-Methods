@@ -7,17 +7,82 @@ and how to rerun it.
 ## 1. Environment
 
 Python 3.12.11 with the pinned set in `journal/requirements-frozen.txt`
-(scikit-learn 1.7.2, NumPy 2.3.3, SciPy 1.16.2). Version drift in scikit-learn moves
-results by roughly 0.01 to 0.05 ΔE00, so use the pins.
+(scikit-learn 1.7.2, NumPy 2.3.3, SciPy 1.16.2, colour-science 0.4.6). Version drift in
+scikit-learn moves results by roughly 0.01 to 0.05 ΔE00, so use the pins. From the repository
+root, with [uv](https://docs.astral.sh/uv/):
+
+```
+uv venv --python 3.12.11 .venv
+source .venv/bin/activate
+uv pip install -r journal/requirements-frozen.txt
+python -m pytest journal/pipeline/tests -q
+```
+
+or with plain pip (any Python 3.12.11 interpreter):
+
+```
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -r journal/requirements-frozen.txt
+python -m pytest journal/pipeline/tests -q
+```
+
+Run every command on this page from the repository root with this environment active (the figure
+scripts are run from `journal/figures/`, as shown in section 5). Without the datasets, the tests
+that load them are skipped with a reason; all other tests, the table builder and the figure scripts
+for the paper need no raw data.
+
+The LLM-as-color-predictor track (`journal/llm/`) needs a few more packages:
+`uv pip install -r journal/requirements-llm.txt` (this includes the core pins); its tests are
+`python -m pytest journal/llm/tests -q`.
 
 ## 2. Data
 
 The characterization data are third-party and are not redistributed here
-(see the paper's Data Availability statement and `docs/DATA.md`).
-Place the public sets at the paths in `docs/DATA.md` (FOGRA51 from Fogra; APTEC PC10,
-PC11 and CMYKOGV from the ICC characterization data registry), then run the ingest
-scripts for the sets that need conversion (`journal.pipeline.ingest_ncolor`,
-`journal.pipeline.ingest_ifra`).
+(see the paper's Data Availability statement and `docs/DATA.md`). Only rerunning the
+experiments (section 4) needs them; rebuilding the tables and figures (section 5) does not.
+
+**Coated sets (PC10, PC11, FOGRA51).** Download:
+
+- APTEC PC10 and PC11 from the ICC characterization data registry
+  (https://registry.color.org/cmyk-registry/aptec_coated_cardboard and
+  https://registry.color.org/cmyk-registry/aptec_ccnb): `APTEC_PC10_CardBoard_2023_v1.txt`
+  and `APTEC_PC11_CCNB_2023_v1.txt`;
+- FOGRA51 from Fogra (https://fogra.org/en/downloads/work-tools/characterisation-data):
+  download `F51-52.zip` and take `FOGRA51.txt` (CMYK and Lab, 1,617 patches) from it.
+
+These files hold CMYK and Lab only. Put them in `data/` (any folder works) and run
+
+```
+mkdir -p data
+python -m journal.pipeline.ingest_coated data/APTEC_PC10_CardBoard_2023_v1.txt \
+    data/APTEC_PC11_CCNB_2023_v1.txt data/FOGRA51.txt
+```
+
+It adds XYZ (0-100, from the measured Lab with the ICC D50 white X, Y, Z = 96.422, 100, 82.521)
+and writes `data/cleaned/<same name>.csv`, the files the loader reads. Keep the file names as
+above: the output name is the input name with `.csv`. The rebuilt files load to exactly the values
+of the files used for the paper.
+
+**APTEC CMYKOGV (n=7).** Download `APTEC_CMYKOGV_Coated_LinearCTV_2025_M1.txt` from
+https://registry.color.org/cmyk-registry/aptec_cmykogvcoated, save it as
+`journal/data/raw/ncolor/APTEC_CMYKOGV_7clr_xyzlab.txt` (the name `ingest_ncolor` expects; create
+the folder first with `mkdir -p journal/data/raw/ncolor`), and run
+
+```
+python -m journal.pipeline.ingest_ncolor
+```
+
+It writes `journal/data/processed/ncolor/CMYKOGV-7.csv`. The two restricted n>4 sets (KCMYG-5,
+CMYKOGB-7) are skipped with a note when their raw files are absent.
+
+**Restricted sets.** The newsprint runs (`journal.pipeline.ingest_ifra`), KCMYG-5 and CMYKOGB-7
+can only be used with their providers' permission (see the Data Availability statement).
+
+After filtering and deduplication the loader gives 795 rows for the CMY conditions, 1,588 for CMYK
+and 3,302 for CMYKOGV-7, the rows of the published fold files (`journal/results/revision_r2/folds/`).
+With the data in place, `python -m pytest journal/pipeline/tests -q` also
+runs the dataset tests that were skipped before.
 
 ## 3. Protocol, step by step
 
@@ -34,6 +99,8 @@ The exact fold of every analyzed row is published in `journal/results/revision_r
 (`idx` = row position after filtering and deduplication, and `fold`; for the publicly available
 datasets also `SAMPLE_ID`, and `recipe_group` where folds are grouped). Regenerate them with
 `python -m journal.pipeline.revision_r2 folds`, which asserts that its rows match the dataset loader.
+It needs the seven public datasets; a restricted set whose data are absent (KCMYG-5, CMYKOGB-7) is
+skipped with a note and its published fold file is left unchanged.
 
 ## 4. Rerunning the experiments
 
@@ -59,8 +126,23 @@ cd journal/figures && python fig_de00_loss.py          # likewise the other figu
 `seeds` writes to `journal/results/revision_r2/seeds/`; set `R2_SEEDS_DIR=seeds_laptop` to write
 elsewhere (the six coated datasets were run on the laptop, the canonical platform, into
 `seeds_laptop/`; the full sweep ran on a second machine into `seeds/`). Timings are
-machine-specific; everything else reproduces to the precision reported, with platform drift of up
-to about 0.2 ΔE00 for iteratively fitted models (see the paper's Reproducibility paragraph).
+machine-specific.
+
+On the same platform (macOS/arm64), reruns reproduce the reported values exactly, also from the
+public files rebuilt as in section 2 (the CMYKOGV-7 file is rebuilt byte for byte; for the coated
+files, all 20 models on the six conditions, 120 model/dataset cells, matched in our check).
+SVM, the MLPs, the tree models and the Powell-refined polynomial depend on the data down to the
+last digit (the Gaussian process, in one maximum, by 0.001). An earlier
+version of `ingest_coated`, whose XYZ differed from the paper's files by at most 3e-14, moved 34 of
+these 120 cells, by up to 0.143 ΔE00 in a median and 11.118 in a maximum (the MLPs). Data prepared
+in any other way can move these models by similar amounts. A rerun also appends to
+`journal/results/run_log.tsv` and may swap the order of rows with equal medians in `summary.csv`;
+compare values, not file bytes.
+
+Across platforms, a re-run on Linux/x86-64 with the same pinned environment matched 58 of
+96 model/dataset cells exactly and 76 of 96 to within 0.01 ΔE00, with a worst case of 0.108 ΔE00;
+the largest differences are in the iteratively optimized neural nets (see the paper's
+Reproducibility paragraph).
 
 The KCMYG-5 and CMYKOGB-7 experiments need the restricted datasets, so they can only be rerun
 with the providers' permission. Their per-row outputs here contain row positions, folds and errors
@@ -77,16 +159,22 @@ No raw data is needed for this step: it reads only the tracked results CSVs.
 
 ```
 python -m journal.pipeline.build_tables --write journal/results/tables   # one fragment per table label
-python -m journal.pipeline.build_tables --check path/to/main.tex         # check every table cell of a manuscript
+git diff --exit-code journal/results/tables                              # rebuilt tables equal the tracked ones
 python -m journal.pipeline.revision_r3_tables                            # round-3 degree tables (main + supplementary)
+python -m journal.pipeline.build_tables --check path/to/main.tex         # with the LaTeX source: check every table cell
 ```
+
+Without the LaTeX source, the first two lines are the check: `--write` rebuilds every table
+fragment from the CSVs, and `git diff --exit-code` exits non-zero if any rebuilt fragment differs
+from the tracked one. The fragments hold the table rows as printed in the paper.
 
 `build_tables` rebuilds every main-text table that holds model results (`tab:n3`, `tab:n4`,
 `tab:de00loss`, `tab:fitspace`, `tab:transforms`, `tab:degree`, `tab:newsprint`, `tab:n7`,
 `tab:stats`, `tab:timing`, the "This paper" rows of `tab:prior`, and Appendix A `tab:appbest`)
 from the per-dataset `summary.csv` files and the `revision_r1/`, `revision_r2/` and `revision_r3/`
 CSVs. Values are read as CSV strings and rounded half up, as the paper prints them. `--write` puts
-the rows of each table (between `\midrule` and `\bottomrule`) in `journal/results/tables/<label>.tex`.
+the rows of each table (between `\midrule` and `\bottomrule`) in `journal/results/tables/`, one file
+per label with the colon replaced by an underscore (`tab:n3` is `tab_n3.tex`).
 `--check` parses each table of the manuscript by its `\label`, compares every numeric cell with
 the rebuilt value, prints matched and mismatched cells per table with the CSV path of each
 expected value, and exits non-zero on any mismatch. It also confirms that every CSV it read is
@@ -113,16 +201,31 @@ The round-3 degree sweep itself is rerun with `python -m journal.pipeline.revisi
 Gaussian process under shuffle seeds 0/1/2/3/42) is `journal.pipeline.revision_r3_seeds`
 (`jobs`, `run`, `merge`; see `journal/results/revision_r3/seeds/README.md`).
 
-Figures, each generated from the results CSVs (the source CSVs are named in each script's header):
+Figures of the paper (there are no figures in the Supplementary Materials). Each is drawn from
+the results CSVs by its own script in `journal/figures/` (the source CSVs are named in each
+script's header) and needs no raw data:
+
+| Paper | Script | Output |
+|---|---|---|
+| Figure 1 (PC10, n=3 vs n=4, 14 methods) | `fig_n3_vs_n4.py` | `fig_n3_vs_n4.png` |
+| Figure 2 (direct ΔE00 loss, maximum error) | `fig_de00_loss.py` | `fig_de00_loss.png` |
+| Figure 3 (newsprint generalization) | `fig_ifra_generalization.py` | `fig_ifra_generalization.png` (the paper's `fig_newsprint_generalization.png`) |
+| Figure 4 (one panel per dataset) | `fig_per_dataset.py` | `fig_per_dataset.png`, `.pdf` |
 
 ```
 cd journal/figures
-python fig_n3_model_comparison.py
-python fig_n3_vs_n4.py
-python fig_de00_loss.py
-python fig_per_dataset.py         # Figure 4 (one panel per dataset)
-python fig_ncolor_ladder.py       # former Figure 4 (R2 and earlier)
-python fig_vs_colourbill.py
-python fig_llm_vs_classical.py
-python fig_*_generalization.py   # the newsprint figure
+python fig_n3_vs_n4.py            # Figure 1
+python fig_de00_loss.py           # Figure 2
+python fig_ifra_generalization.py # Figure 3 (newsprint)
+python fig_per_dataset.py         # Figure 4
+```
+
+On macOS/arm64 the PNGs match the paper's figure files byte for byte; the PDF differs only in its
+creation-date metadata. Other scripts in the folder draw figures that are not in the paper:
+
+```
+python fig_n3_model_comparison.py # CSV only
+python fig_ncolor_ladder.py       # CSV only; former Figure 4 (round 2 and earlier)
+python fig_llm_vs_classical.py    # CSV only
+python fig_vs_colourbill.py       # needs the PC10, PC11, FOGRA51 and CMYKOGV-7 data (section 2)
 ```

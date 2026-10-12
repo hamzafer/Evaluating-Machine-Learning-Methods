@@ -169,11 +169,16 @@ def cmd_folds(args):
     """Reviewer 2 point 5: publish the exact fold assignment of every analyzed row
     (after the K=0 filter and exact-duplicate removal), so the protocol can be
     checked against a copy of the source data. SAMPLE_ID is given for the public
-    datasets only; the restricted ones get the row position alone."""
+    datasets only; the restricted ones get the row position alone. A restricted
+    dataset whose CSV is absent is skipped with a note (its published fold file is
+    left as it is); an absent public dataset is still an error."""
     out = ROOT / 'revision_r2' / 'folds'
     out.mkdir(parents=True, exist_ok=True)
     for d in NINE:
         spec = dataset_registry()[d]
+        if d not in PUBLIC_IDS and not Path(spec.csv).exists():
+            print(f'{d:13s} skipped: restricted dataset, {spec.csv} not found', flush=True)
+            continue
         X, _ = spec.load()
         df = pd.read_csv(spec.csv)
         if spec.filter_k_zero:

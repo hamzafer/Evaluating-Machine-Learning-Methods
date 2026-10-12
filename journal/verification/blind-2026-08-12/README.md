@@ -1,7 +1,8 @@
 # Independent blind verification — 12 Aug 2026
 
-A Claude Sonnet agent re-implemented the pipeline **from scratch** on a second machine
-(colourlab, Linux x86_64) with access to the raw source files and a prose spec only — never to
+A Claude Sonnet 5 agent (model id `claude-sonnet-5`, run from Claude Code) re-implemented the
+pipeline **from scratch**, running its code on a second machine (colourlab, Linux x86_64), with
+access to the raw source files and a prose spec only, never to
 `journal/pipeline`, `docs/`, `.superpowers/`, or the git history. It wrote its own numbers to
 `blind_results.csv` before being allowed to read any of our result CSVs.
 
@@ -13,9 +14,15 @@ A Claude Sonnet agent re-implemented the pipeline **from scratch** on a second m
 
 ## Outcome
 
-**Pipeline validated.** Its independent implementation reproduces our Gaussian process medians to
-within 0.003 ΔE00 on all coated datasets (PC11-CMY exact) and our poly3 medians to within 0.001–0.006,
-having written its own CGATS parser, Lab→XYZ and spectral→XYZ conversions, CV, and ΔE00 path.
+**Pipeline validated, within this scope.** It ran four of the six coated conditions (PC10-CMY,
+PC10-CMYK, PC11-CMY and FOGRA51-CMY; the spec did not ask for PC11-CMYK or FOGRA51-CMYK) on all
+rows as received. It is therefore compared with our results before duplicate removal, not with the
+current tables. On these four, its Gaussian process medians agree with ours to within 0.003 ΔE00
+(PC11-CMY exact) and its poly3 medians to within 0.001. On the five other conditions it ran
+(KCMYG-5, CMYKOGV-7, CMYKOGB-7 and two newsprint runs), its Gaussian process medians differ from
+ours by 0.003 to 0.053 ΔE00; on CMYKOGV-7 it kept all 3534 rows, against our 3302 after duplicate
+removal. It used its own recipe-grouped folds throughout. It wrote its own CGATS parser, Lab→XYZ and
+spectral→XYZ conversions, CV, and ΔE00 path.
 
 **It endorsed our CMYKOGV-7 deduplication** after initially using all 3534 rows: repeated
 bit-identical patches double-count in a pooled median, and fold-grouping prevents leakage but not

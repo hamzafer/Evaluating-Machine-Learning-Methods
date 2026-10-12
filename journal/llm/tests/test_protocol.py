@@ -1,6 +1,14 @@
+import pytest
+
 from journal.llm.protocol import build_split, build_prompt, parse_xyz
+from journal.pipeline.datasets import registry
+
+needs_pc10 = pytest.mark.skipif(
+    not registry()['PC10-CMY'].csv.exists(),
+    reason='PC10 dataset not present (third-party data, see journal/REPRODUCE.md section 2)')
 
 
+@needs_pc10
 def test_split_disjoint_and_sized():
     tr, te, spec = build_split('PC10-CMY', n_train=200, n_test=50)
     assert len(tr) == 200 and len(te) == 50
@@ -8,6 +16,7 @@ def test_split_disjoint_and_sized():
     assert len(overlap) == 0
 
 
+@needs_pc10
 def test_prompt_contains_examples_and_query():
     tr, te, spec = build_split('PC10-CMY', 5, 1)
     p = build_prompt(tr, te.iloc[0], spec.input_cols)

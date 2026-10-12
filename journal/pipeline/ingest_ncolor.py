@@ -1,6 +1,6 @@
 """Ingest the three n>4 colorant datasets into standard-schema CSVs.
 
-Run: .venv/bin/python -m journal.pipeline.ingest_ncolor
+Run: python -m journal.pipeline.ingest_ncolor  (raw files that are absent are skipped)
 
 Raw files (journal/data/raw/ncolor/, see its README):
 
@@ -109,10 +109,19 @@ def standardize(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def ingest() -> dict:
-    """Ingest all three raw files; write OUT/<name>.csv; return {name: df}."""
+    """Ingest the raw files that are present; write OUT/<name>.csv; return {name: df}.
+
+    Only CMYKOGV-7 is public (ICC characterization data registry, saved as
+    APTEC_CMYKOGV_7clr_xyzlab.txt). KCMYG-5 and CMYKOGB-7 are restricted; a raw
+    file that is absent is skipped with a note, so the public set can be
+    ingested on its own.
+    """
     OUT.mkdir(parents=True, exist_ok=True)
     result = {}
     for name, (fname, n_inks, n_rows) in FILES.items():
+        if not (RAW / fname).exists():
+            print(f'  {name}: raw file {RAW / fname} not found, skipped')
+            continue
         raw = parse_cgats(RAW / fname)
         scale = _ink_scale(raw[ink_cols(raw)].to_numpy(dtype=float))
         df = standardize(raw)
@@ -138,4 +147,5 @@ def ingest() -> dict:
 
 
 if __name__ == '__main__':
-    ingest()
+    if not ingest():
+        raise SystemExit(f'No raw n>4 file found in {RAW}; see journal/REPRODUCE.md, section 2.')
