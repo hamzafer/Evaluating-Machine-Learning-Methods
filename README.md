@@ -8,6 +8,9 @@ table builder and the figure scripts are in [`journal/`](journal/). Start with
 [`journal/REPRODUCE.md`](journal/REPRODUCE.md): environment, data, and how to rebuild every table
 and figure. Dataset details are in [`docs/DATA.md`](docs/DATA.md).
 
+**License:** the code is MIT-licensed (see [`LICENSE`](LICENSE)). The datasets are not covered by
+it; their sources and terms are in [`docs/DATA.md`](docs/DATA.md).
+
 ## Historical note: AIC 2025 conference version
 
 The rest of this page describes the earlier conference version (code in `main/`, `input/` and
