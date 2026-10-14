@@ -78,9 +78,9 @@ def registry() -> dict:
             input_cols=('CMYK_C', 'CMYK_M', 'CMYK_Y', 'CMYK_K'), filter_k_zero=False,
             dedup_exact=True)
 
-    # IFRA 2005 newsprint (wb/bb kept separate per Phil). One DatasetSpec per
-    # press-run CSV produced by journal.pipeline.ingest_ifra.
-    # NOT deduplicated, deliberately: IFRA's duplicate recipes carry genuinely
+    # Newsprint press runs (white and black backing kept separate). One DatasetSpec
+    # per press-run CSV produced by journal.pipeline.ingest_ifra.
+    # NOT deduplicated, deliberately: the duplicate recipes carry genuinely
     # DIFFERING measurements (real press repeatability, ~0.6-0.8 dE00), which is
     # signal about the press, not an artifact. Dropping them would destroy it.
     ifra_root = REPO_ROOT / 'journal' / 'data' / 'processed' / 'ifra'
