@@ -1,56 +1,52 @@
-# Evaluating Machine Learning Methods
+# AI and Machine Learning Methods for n-Colorant Printer Characterization
 
-Code and results for regression models of printer color characterization (ink values to XYZ,
-evaluated with CIEDE2000).
+Code and data for the paper accepted in *Technologies* (MDPI), 2026.
 
-**Journal paper (MDPI Technologies, technologies-4564760):** the pipeline, every results CSV, the
-table builder and the figure scripts are in [`journal/`](journal/). Start with
-[`journal/REPRODUCE.md`](journal/REPRODUCE.md): environment, data, and how to rebuild every table
-and figure. Dataset details are in [`docs/DATA.md`](docs/DATA.md).
+## Summary
 
-**License:** the code is MIT-licensed (see [`LICENSE`](LICENSE)). The datasets are not covered by
-it; their sources and terms are in [`docs/DATA.md`](docs/DATA.md).
+We compare 13 machine learning methods with polynomial regression for printer color
+characterization (ink amounts to XYZ). We use nine datasets with three to seven colorants and 13
+newsprint press runs, and measure errors with CIEDE2000 (ΔE00).
+- **Main comparison (every model fitted in XYZ):** Gaussian process regression has the lowest
+  median error on all nine datasets.
+- **Fitted in a cube-root space:** a polynomial of degree 4 comes within a factor of 1.1 to 1.7 of
+  it on the five- and seven-ink sets.
+- **Overall:** the Gaussian process is the most reliable fixed configuration, but not always the
+  best.
 
-## Historical note: AIC 2025 conference version
+![Median, 95th percentile and maximum ΔE00 per model, one panel per dataset (Figure 4 of the paper)](journal/figures/fig_per_dataset.png)
 
-The rest of this page describes the earlier conference version (code in `main/`, `input/` and
-`utils/`). It is kept for reference and is not needed to reproduce the journal paper.
+*Figure 4 of the paper: median, 95th percentile and maximum ΔE00 per model, one panel per dataset.*
 
-### Publication
+## Reproduce
 
-Our research has been accepted for presentation at the **[16th Congress of the International Colour Association (AIC 2025)](https://www.aic2025.org/)**, taking place October 19-24, 2025, in Taipei, Taiwan. The conference theme "Color for the Future" aligns perfectly with our investigation into modern machine learning approaches for color prediction in printing processes.
+Start with [`journal/REPRODUCE.md`](journal/REPRODUCE.md). It covers the environment, the data,
+and how to rebuild every table and figure of the paper from the results CSVs.
 
-### Introduction
-This project investigates the effectiveness of various machine learning models in predicting XYZ color values from CMY input data, compared to traditional polynomial regression methods. Utilizing datasets such as FOGRA51, APTEC(PC10), and APTEC(PC11), the research explores the accuracy of machine learning techniques including Gradient Boosting and Random Forest.
+## What is where
 
-### Objectives
-- To bridge the gap in current literature by introducing a comparative analysis of modern printer datasets.
-- To systematically compare a suite of machine learning algorithms to polynomial regression in color characterization tasks.
+- [`journal/pipeline/`](journal/pipeline/): the pipeline (one code path for 3, 4, 5 and 7
+  colorants), including the table builder that checks every table cell against its CSV.
+- [`journal/results/`](journal/results/): every results CSV behind the paper's tables.
+- [`journal/figures/`](journal/figures/): the scripts that draw each figure from the CSVs.
+- [`docs/DATA.md`](docs/DATA.md): the datasets. PC10, PC11, FOGRA51 and CMYKOGV-7 are public. The
+  newsprint runs, KCMYG-5 and CMYKOGB-7 are restricted and are not in this repository.
+- `main/`, `input/`, `utils/`: the earlier conference version (see below).
 
-### Methodology
-- **Data Collection:** Utilized datasets from the International Color Consortium.
-- **Machine Learning Methods:** Bayesian Methods, Decision Trees, Deep Learning, Elastic Net, Gradient Boosting, k-Nearest Neighbors, Lasso Regression, Random Forest Regressor, Ridge Regression, Simple Multilayer Perceptron (MLP), and Support Vector Machine (SVM).
-- **Polynomial Regression:** Implemented for degrees ranging from 1 to 10.
-- **Evaluation:** Error metrics calculated using the CIEDE2000 formula.
+## Citation
 
-### Results
-Machine learning models demonstrated varying degrees of improvement in error metrics over polynomial regression. However, the improvements were relatively modest, suggesting that the benefits of machine learning must be carefully balanced against their complexity.
-<img width="905" alt="image" src="https://github.com/hamzafer/ColorProject/assets/45764331/66fc77f5-97fe-408a-941e-d314d541cdf5">
-<img width="905" alt="image" src="https://github.com/hamzafer/ColorProject/assets/45764331/2de89479-f5ad-4705-bc8a-4a95c2ac8b1f">
-<img width="905" alt="image" src="https://github.com/hamzafer/ColorProject/assets/45764331/ee480a9b-51db-42f6-948e-0a9479b18612">
+> M. H. Zafar and P. Green, "AI and Machine Learning Methods for n-Colorant Printer
+> Characterization", *Technologies* (MDPI), accepted 2026.
 
-### Conclusion
-The study highlights the potential of machine learning in enhancing color prediction accuracy in printing processes. Future research could further explore the transition from 3-channel LAB to 4-channel CMYK data for more comprehensive color mapping.
+The DOI will be added here when the paper is published.
 
-### Tools and Technologies Used
-- PyCharm
-- Python
-- Color Science Library
-- Scikit-learn (sklearn)
-- Additional Libraries: NumPy, Pandas, Matplotlib
+## License
 
-### Challenges and Solutions
-Faced challenges such as limited dataset size and model selection, addressed by experimenting with various settings and models.
+The code is MIT-licensed (see [`LICENSE`](LICENSE)). The datasets are not covered by it; their
+sources and terms are in [`docs/DATA.md`](docs/DATA.md).
 
-### Acknowledgments
-Thanks to all the datasets providers and the open-source community for making this research possible.
+## Earlier conference version
+
+An earlier version of this work was presented at AIC 2025. Its code is in `main/`, and its
+published state is the git tag [`aic2025-published`](../../tree/aic2025-published). The error
+values in that version were later corrected, and the journal paper is a new analysis.
