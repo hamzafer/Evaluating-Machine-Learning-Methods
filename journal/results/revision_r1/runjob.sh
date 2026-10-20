@@ -1,6 +1,6 @@
 #!/bin/bash
 # one queue job, single-threaded BLAS; log per job
-cd /Users/hamza/developer/thesis/Evaluating-Machine-Learning-Methods
+cd "$(dirname "$0")/../../.."
 export VECLIB_MAXIMUM_THREADS=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONWARNINGS=ignore
 tag=$(echo "$*" | tr ' /' '__' | cut -c1-150)
 start=$(date +%s)
