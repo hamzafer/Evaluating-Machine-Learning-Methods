@@ -4,7 +4,7 @@
 Claude Fable 5 failed to return an equation over four OpenRouter API attempts (reasoning tokens
 consumed the completion budget; one HTTP 400; one Bedrock content-filter false positive). Since
 Phil requires Claude to be tested, the **byte-identical prompt** (`journal/llm/raw/equation/prompt.txt`)
-was submitted through the Claude Code CLI on Hamza's subscription:
+was submitted through the Claude Code CLI:
 
 ```
 claude -p "$(cat prompt.txt)" --model claude-fable-5 --output-format json --allowed-tools ""

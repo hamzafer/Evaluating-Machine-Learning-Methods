@@ -36,3 +36,15 @@ main/*/paper/
 # Personal / process notes: local only, never pushed
 docs/LINKS.md
 docs/PAPER_GUIDE.md
+
+# kept local: contains personal paths/notes
+journal/results/logs/raw/run_ogb_powell.log
+journal/results/logs/raw/run_ogv_gp.log
+journal/results/logs/raw/run_ogv_nm.log
+journal/results/logs/raw/run_ogv_powell.log
+journal/results/logs/raw/stream1.log
+journal/results/logs/raw/stream2.log
+journal/results/logs/raw/stream3.log
+journal/results/logs/raw/verify_gp_rerun.log
+journal/results/revision_r1/joblogs/timing.log
+docs/TECH_DEBT.md

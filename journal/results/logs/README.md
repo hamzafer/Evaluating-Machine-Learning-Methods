@@ -32,6 +32,8 @@ awk -F'\t' '$4=="CMYKOGV-7"{print $14, $5, $6, $11}' journal/results/run_log.tsv
 ## `raw/` — verbatim stdout of the actual runs
 The console logs the numbers came from, kept as-is (including convergence warnings):
 
+Note: the raw logs are kept locally and not published; `../run_log.tsv` stays the public audit trail.
+
 | file | what |
 |---|---|
 | `stream{1,2,3}.log` | laptop plan-10 GP re-run streams (11–12 Aug) |
