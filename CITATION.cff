@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the article below."
+title: "AI and Machine Learning Methods for n-Colorant Printer Characterization (code and results)"
+authors:
+  - family-names: Zafar
+    given-names: Muhammad Hamza
+  - family-names: Green
+    given-names: Phil
+license: MIT
+repository-code: "https://github.com/hamzafer/Evaluating-Machine-Learning-Methods"
+preferred-citation:
+  type: article
+  title: "AI and Machine Learning Methods for n-Colorant Printer Characterization"
+  authors:
+    - family-names: Zafar
+      given-names: Muhammad Hamza
+    - family-names: Green
+      given-names: Phil
+  journal: "Technologies"
+  publisher:
+    name: MDPI
+  year: 2026
+  volume: 14
+  issue: 10
+  start: 684
+  doi: "10.3390/technologies14100684"
+  url: "https://www.mdpi.com/2227-7080/14/10/684"

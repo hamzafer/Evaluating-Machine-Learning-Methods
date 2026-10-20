@@ -11,11 +11,11 @@ Three distinct parts, three distinct rules:
 
 ## Project
 
-ML methods for printer color characterization (CMY(K)→XYZ regression, evaluated with CIEDE2000). Produced the AIC 2025 conference paper; now being extended into a journal paper.
+ML methods for printer color characterization (CMY(K)→XYZ regression, evaluated with CIEDE2000). Produced the AIC 2025 conference paper and the journal paper below.
 
-**Journal paper: ACCEPTED by MDPI Technologies on 14 Oct 2026** (technologies-4564760, special issue; submitted 30 Aug 2026, three revisions). Now in MDPI copyediting and proof approval: no new analysis, proof changes only. Accepted code state = git tag `technologies2026-accepted`. Original plan: `docs/plans/journal_roadmap.md`. Core questions (Phil Green): (a) can ML match/beat classical methods for n≤4 inks, (b) can AI handle n>4 (CMYKOGV). Supporting: multi-printer generalization (newsprint), direct ΔE00 loss, LLM-as-color-predictor.
+**Journal paper: PUBLISHED 20 Oct 2026**, *Technologies* 2026, 14(10), 684, doi 10.3390/technologies14100684 (https://www.mdpi.com/2227-7080/14/10/684). Manuscript technologies-4564760, special issue; submitted 30 Aug, accepted 14 Oct, three revisions. Done: no further analysis planned. Accepted code state = git tag `technologies2026-accepted`. Original plan: `docs/plans/journal_roadmap.md`. Core questions (Phil Green): (a) can ML match/beat classical methods for n≤4 inks, (b) can AI handle n>4 (CMYKOGV). Supporting: multi-printer generalization (newsprint), direct ΔE00 loss, LLM-as-color-predictor.
 
-## State of the repo (July 2026; journal status above is current as of Oct 2026)
+## State of the repo (July 2026; journal status above is current as of 20 Oct 2026)
 
 - `main/cmy2xyz/` + `input/` + `utils/` = the **legacy AIC pipeline (v1), now corrected**. Its original ΔE00 was computed on MinMax-normalized XYZ (~5× understatement; confirmed Jul 2026, acknowledged by Phil — no AIC erratum, journal = new analysis). The one-line fix (`scaler.inverse_transform` before `xyz2lab`) is applied and all results regenerated: HEAD results = the **corrected conference baseline**. The exact published state lives at git tag `aic2025-published`. Second v1 flaw left in place by design: it trains on all 1,617 rows with K dropped (paper text wrongly claims K=0 filtering) — v1 stays frozen as the reference; K is handled properly only in `journal/`.
 - An `experiments_v2/` pipeline existed briefly and was **deliberately deleted** (commit 3dbbc6e). Do not resurrect it: CMY-only, stale data paths. Its proper mode cross-verified the v1 fix (6-decimal agreement, Jul 2026); recoverable via `git show 636b056:experiments_v2/` if ever needed. The journal work gets a **fresh pipeline, built n-channel-generic** (a dataset declares its input channels: 3, 4, or 7 — one code path for all).
