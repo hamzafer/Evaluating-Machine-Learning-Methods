@@ -1,6 +1,8 @@
 # AI and Machine Learning Methods for n-Colorant Printer Characterization
 
-Code and data for the paper accepted in *Technologies* (MDPI), 2026.
+Code and data for the paper published in *Technologies* (MDPI), 2026:
+[doi.org/10.3390/technologies14100684](https://doi.org/10.3390/technologies14100684)
+(open access).
 
 ## Summary
 
@@ -35,10 +37,26 @@ and how to rebuild every table and figure of the paper from the results CSVs.
 
 ## Citation
 
-> M. H. Zafar and P. Green, "AI and Machine Learning Methods for n-Colorant Printer
-> Characterization", *Technologies* (MDPI), accepted 2026.
+> Zafar, M.H.; Green, P. AI and Machine Learning Methods for n-Colorant Printer
+> Characterization. *Technologies* **2026**, *14*, 684.
+> https://doi.org/10.3390/technologies14100684
 
-The DOI will be added here when the paper is published.
+```bibtex
+@article{zafar2026ncolorant,
+  author  = {Zafar, Muhammad Hamza and Green, Phil},
+  title   = {{AI} and Machine Learning Methods for $n$-Colorant Printer Characterization},
+  journal = {Technologies},
+  year    = {2026},
+  volume  = {14},
+  number  = {10},
+  pages   = {684},
+  doi     = {10.3390/technologies14100684},
+  url     = {https://www.mdpi.com/2227-7080/14/10/684}
+}
+```
+
+GitHub also offers a "Cite this repository" button (from [`CITATION.cff`](CITATION.cff)).
+The code state at acceptance is the tag `technologies2026-accepted`.
 
 ## License
 

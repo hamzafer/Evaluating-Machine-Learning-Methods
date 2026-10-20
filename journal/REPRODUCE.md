@@ -1,4 +1,8 @@
-# Reproducing the journal results (technologies-4564760)
+# Reproducing the journal results
+
+Paper: *Technologies* 2026, 14(10), 684,
+[doi.org/10.3390/technologies14100684](https://doi.org/10.3390/technologies14100684).
+Code state at acceptance: tag `technologies2026-accepted`.
 
 Everything in the paper's tables and figures comes from the code in `journal/pipeline/`
 and the CSVs in `journal/results/`. This page says where each protocol step lives
