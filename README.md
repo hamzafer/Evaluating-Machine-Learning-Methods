@@ -1,8 +1,8 @@
 # AI and Machine Learning Methods for n-Colorant Printer Characterization
 
-Code and data for the paper published in *Technologies* (MDPI), 2026:
-[doi.org/10.3390/technologies14100684](https://doi.org/10.3390/technologies14100684)
-(open access).
+Code and data for the paper published in *Technologies* (MDPI), 2026, open access:
+[mdpi.com/2227-7080/14/10/684](https://www.mdpi.com/2227-7080/14/10/684)
+(DOI 10.3390/technologies14100684).
 
 ## Summary
 

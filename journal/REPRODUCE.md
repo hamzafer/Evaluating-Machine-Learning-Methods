@@ -1,7 +1,8 @@
 # Reproducing the journal results
 
 Paper: *Technologies* 2026, 14(10), 684,
-[doi.org/10.3390/technologies14100684](https://doi.org/10.3390/technologies14100684).
+[mdpi.com/2227-7080/14/10/684](https://www.mdpi.com/2227-7080/14/10/684)
+(DOI 10.3390/technologies14100684).
 Code state at acceptance: tag `technologies2026-accepted`.
 
 Everything in the paper's tables and figures comes from the code in `journal/pipeline/`
