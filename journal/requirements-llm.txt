@@ -2,6 +2,7 @@
 # pipeline, tests, tables or figures. Installs the core pins too:
 #   uv pip install -r journal/requirements-llm.txt
 -r requirements-frozen.txt
+# Later security bump: certifi 2026.7.22 -> 2026.10.19 (Oct 2026).
 certifi==2026.10.19
 charset-normalizer==3.4.9
 idna==3.18
