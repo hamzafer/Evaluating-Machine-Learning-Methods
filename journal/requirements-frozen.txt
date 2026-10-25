@@ -1,6 +1,7 @@
 # Pinned environment for the journal pipeline: model fits, tests, tables and figures.
 # Python 3.12.11 (uv-managed). Versions are those of the environment that produced the results;
 # scikit-learn, NumPy, SciPy and colour-science must stay at these pins (see REPRODUCE.md).
+# Later security bumps (do not change results): pillow 12.3.0 -> 13.0.0 (Oct 2026).
 # Install from the repository root:
 #   uv pip install -r journal/requirements-frozen.txt     (or: pip install -r ...)
 # The LLM-as-color-predictor track (journal/llm/) needs a few more packages:
@@ -17,7 +18,7 @@ matplotlib==3.10.6
 numpy==2.3.3
 packaging==25.0
 pandas==2.3.2
-pillow==12.3.0
+pillow==13.0.0
 pluggy==1.6.0
 pygments==2.20.0
 pyparsing==3.3.2
